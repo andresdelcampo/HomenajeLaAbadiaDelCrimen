@@ -121,21 +121,14 @@ a:hover { color: var(--blue); }
   content: "";
   display: block;
   flex: 0 0 auto;
-  width: 2.2rem;
+  width: 2.35rem;
   aspect-ratio: 1;
-  border: 1px solid var(--gold);
-  transform: rotate(45deg);
+  border: 1px solid rgba(212,154,46,.85);
+  background: #0b1013 url("assets/legacy/correos-stamp-sheet.webp") 22% 27% / 470% auto no-repeat;
+  box-shadow: 0 0 0 3px rgba(212,154,46,.06);
 }
 .nav-mark::after {
-  content: "A";
-  position: absolute;
-  left: .48rem;
-  top: 50%;
-  width: 1.25rem;
-  translate: 0 -50%;
-  color: var(--gold);
-  font: 400 1.55rem/1 "Gregorian FLF", Georgia, serif;
-  text-align: center;
+  content: none;
 }
 .nav-mark span { display: inline-block; }
 .nav-links {
@@ -1230,7 +1223,26 @@ html[lang="en"] .character-panel[data-character="bernard"]::before { background-
 .site-footer a { color: var(--gold); }
 .project-credit { color: var(--white) !important; font: 700 .64rem/1.35 var(--mono) !important; letter-spacing: .08em; text-transform: uppercase; }
 .project-credit span { color: var(--gold); }
-.seal { width: 7rem; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font: 400 3rem/1 var(--display); transform: rotate(-8deg); }
+.footer-labyrinth {
+  width: 7.5rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(212,154,46,.82);
+  border-radius: 50%;
+  background: #070a0c;
+  box-shadow: inset 0 0 2rem rgba(212,154,46,.08), 0 0 0 5px rgba(212,154,46,.025);
+  transform: rotate(-4deg);
+}
+.footer-labyrinth img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  opacity: .78;
+  filter: invert(1) sepia(1) saturate(4.2) hue-rotate(350deg) brightness(.88) contrast(1.12);
+  transform: rotate(4deg);
+}
 
 .lightbox {
   position: fixed;
@@ -1314,8 +1326,13 @@ html[lang="en"] .character-panel[data-character="bernard"]::before { background-
 .gate-art .gate-stamp { position: absolute; z-index: 1; left: 2rem; bottom: 2rem; padding: .6rem .8rem; border: 1px solid var(--gold); color: var(--gold); font: 700 .7rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
 .gate-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 5vw, 5.5rem); }
 .gate-kicker { color: var(--gold); font: 700 .72rem/1 var(--mono); text-transform: uppercase; letter-spacing: .15em; }
-.gate-copy h1 { margin: .8rem 0 1.25rem; max-width: 900px; font: 400 clamp(3.9rem, 7vw, 7.5rem)/.78 var(--display); letter-spacing: -.065em; }
-.gate-copy h1 em { display: block; color: var(--gold); font-style: normal; }
+.gate-title-art {
+  width: min(100%, 42rem);
+  aspect-ratio: 917 / 355;
+  margin: .8rem 0 1.25rem;
+  background: url("assets/game/title-logo.png") center / contain no-repeat;
+  image-rendering: pixelated;
+}
 .gate-copy p { max-width: 560px; color: rgba(255,255,255,.7); }
 .gate-intro { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 760px; }
 .gate-intro p { margin: 0; font-size: .98rem; }
@@ -1436,7 +1453,7 @@ html[lang="en"] .character-panel[data-character="bernard"]::before { background-
   .legacy-timeline { grid-template-columns: 1fr 1fr; }
   .sources-grid { grid-template-columns: 1fr; }
   .site-footer { grid-template-columns: 1fr; }
-  .seal { display: none; }
+  .footer-labyrinth { display: none; }
   .language-gate { grid-template-columns: 1fr; }
   .gate-art { min-height: 45vh; }
   .gate-art::after { background: linear-gradient(0deg, var(--night), transparent 55%); }
@@ -1444,7 +1461,7 @@ html[lang="en"] .character-panel[data-character="bernard"]::before { background-
 }
 
 @media (max-width: 480px) {
-  .gate-copy h1 { font-size: clamp(3.25rem, 17vw, 4.5rem); }
+  .gate-title-art { width: 100%; }
   .gate-intro, .gate-options { grid-template-columns: 1fr; }
   .gate-intro p + p { padding: .75rem 0 0; border-left: 0; border-top: 1px solid rgba(212,154,46,.45); }
   .gate-heading { flex-wrap: wrap; }
