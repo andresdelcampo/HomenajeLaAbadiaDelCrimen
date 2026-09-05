@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-platform="cpc">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Elige la edición española o inglesa del homenaje interactivo a La Abadía del Crimen: historia, personajes, laberinto, siete días, versiones, sonido, revistas y legado.">
-  <title>La Abadía del Crimen — Elige tu edición · Choose your edition</title>
-  <link rel="stylesheet" href="styles.css?v=20260830-gate4">
+  <title>La Abadía del Crimen — Configura tu edición · Configure your edition</title>
+  <link rel="stylesheet" href="styles.css?v=20260905-gate-steps1">
 </head>
 <body>
   <main class="language-gate">
@@ -19,12 +19,31 @@
         <p lang="es">Siete días. Ocho sospechosos. Una biblioteca que no debería existir.</p>
         <p lang="en">Seven days. Eight suspects. A library that must not exist.</p>
       </div>
-      <div class="gate-heading">
-        <span lang="es">Elige tu edición</span>
+      <div class="gate-config-heading">
+        <span lang="es">Configura tu edición</span>
         <span aria-hidden="true">/</span>
-        <span lang="en">Choose your edition</span>
+        <span lang="en">Configure your edition</span>
       </div>
-      <div class="gate-options" aria-label="Selección de idioma · Language selection">
+      <div class="gate-step-heading" id="graphics-step">
+        <span class="gate-step-number">01</span>
+        <span lang="es">Elige los gráficos</span>
+        <span aria-hidden="true">/</span>
+        <span lang="en">Choose graphics</span>
+      </div>
+      <div class="platform-picker platform-picker--gate" role="group" aria-labelledby="graphics-step">
+        <button type="button" data-platform-choice="spectrum" aria-pressed="false">ZX</button>
+        <button type="button" data-platform-choice="msx" aria-pressed="false">MSX</button>
+        <button type="button" data-platform-choice="cpc" aria-pressed="true">CPC</button>
+        <button type="button" data-platform-choice="pc" aria-pressed="false">CGA</button>
+        <button type="button" data-platform-choice="vga" aria-pressed="false">VGA</button>
+      </div>
+      <div class="gate-step-heading" id="language-step">
+        <span class="gate-step-number">02</span>
+        <span lang="es">Elige el idioma y entra</span>
+        <span aria-hidden="true">/</span>
+        <span lang="en">Choose language and enter</span>
+      </div>
+      <div class="gate-options" aria-labelledby="language-step">
         <a class="gate-option" href="es/index.html" hreflang="es" lang="es" data-language="es">
           <span class="gate-option-number">ES · Edición española</span>
           <strong>Homenaje a<br>La Abadía del Crimen</strong>
@@ -43,6 +62,6 @@
       <p class="project-credit">Andrés del Campo Novales <span>with GPT 5.6 Sol</span></p>
     </section>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=20260905-platforms3"></script>
 </body>
 </html>

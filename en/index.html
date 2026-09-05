@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-platform="cpc">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="An interactive visual archive of La Abadía del Crimen: history, characters, the complete week, maps, ports, magazines, adverts, sound and legacy.">
   <title>Tribute to La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260905-board47">
+  <link rel="stylesheet" href="../styles.css?v=20260905-platforms3">
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to the story</a>
@@ -24,11 +24,19 @@
       <a href="#legacy">Legacy</a>
     </div>
     <div class="nav-actions">
+      <div class="platform-picker" role="group" aria-label="Screenshot graphics">
+        <span>Graphics</span>
+        <button type="button" data-platform-choice="spectrum" aria-pressed="false">ZX</button>
+        <button type="button" data-platform-choice="msx" aria-pressed="false">MSX</button>
+        <button type="button" data-platform-choice="cpc" aria-pressed="true">CPC</button>
+        <button type="button" data-platform-choice="pc" aria-pressed="false">CGA</button>
+        <button type="button" data-platform-choice="vga" aria-pressed="false">VGA</button>
+      </div>
       <a class="language-link" href="../es/index.html" lang="es" data-language="es" aria-label="Switch to Spanish">Language · ES</a>
     </div>
   </nav>
 
-  <header class="hero" id="start" style="--hero-image:url('assets/game/loading-color.webp')">
+  <header class="hero" id="start">
     <div class="hero-inner">
       <p class="eyebrow">Interactive tribute</p>
       <h1>The Abbey <em>of Crime</em></h1>
@@ -55,10 +63,11 @@
           <article class="case-note two"><b>THE METHOD</b>Watch routines, overhear conversations, and reach the places one is explicitly forbidden to enter.</article>
           <article class="case-note three"><b>THE RULE</b>Prime and vespers in church; sext in the refectory; compline in the cell. Obedience is also an energy bar.</article>
           <article class="case-note four"><b>THE DANGER</b>A book, blackened fingers, a mirror, a dwindling lamp, and a library designed to make visitors disappear.</article>
-          <figure class="case-art"><img src="../assets/game/loading-mono.webp" alt="Original monochrome loading screen"></figure>
+          <figure class="case-art"><img src="../assets/platforms/cpc/intro.png" data-platform-src-cpc="../assets/platforms/cpc/intro.png" data-platform-src-pc="../assets/platforms/pc/intro.png" data-platform-src-vga="../assets/platforms/vga/title-screen.png" data-platform-src-spectrum="../assets/platforms/spectrum/title-screen.png" data-platform-src-msx="../assets/platforms/msx/title-screen.png" data-platform-alt-cpc="Original Amstrad CPC prologue" data-platform-alt-pc="Original PC CGA prologue" data-platform-alt-vga="PC VGA remake title screen" data-platform-alt-spectrum="Original ZX Spectrum loading screen" data-platform-alt-msx="Original MSX loading screen" alt="Original Amstrad CPC prologue"></figure>
+          <figure class="case-evidence case-edition"><img src="../assets/ports/cpc-3.png" data-platform-src-cpc="../assets/ports/cpc-3.png" data-platform-src-pc="../assets/ports/pc-3.png" data-platform-src-vga="../assets/remake-vga/vga-remake-2.gif" data-platform-src-spectrum="../assets/ports/spectrum-3.png" data-platform-src-msx="../assets/ports/msx-3.png" data-platform-alt-cpc="Gameplay from the Amstrad CPC edition" data-platform-alt-pc="Gameplay from the PC CGA edition" data-platform-alt-vga="Gameplay from the VGA remake" data-platform-alt-spectrum="Gameplay from the ZX Spectrum edition" data-platform-alt-msx="Gameplay from the MSX edition" alt="Gameplay from the Amstrad CPC edition"><figcaption data-platform-text-cpc="CPC · THE EDITION" data-platform-text-pc="PC CGA · THE EDITION" data-platform-text-vga="VGA · THE REMAKE" data-platform-text-spectrum="SPECTRUM · THE EDITION" data-platform-text-msx="MSX · THE EDITION">CPC · THE EDITION</figcaption></figure>
           <figure class="case-evidence case-map-scrap"><img src="../assets/maps/abbey-map-general.jpg" alt="Fragment of the authentic abbey map"><figcaption>FORBIDDEN PLAN</figcaption></figure>
           <figure class="case-evidence case-suspect"><img src="../assets/characters/jorge.png" alt="Original portrait of Jorge"><figcaption>THE CENTRE?</figcaption></figure>
-          <div class="case-objects" aria-label="Clues: book, scroll, and key"><img src="../assets/items/libro.png" alt="Book"><img src="../assets/items/pergamino.png" alt="Scroll"><img src="../assets/items/llave.png" alt="Key"><span>BOOK · CODE · ACCESS</span></div>
+          <div class="case-objects" aria-label="Clues: book, scroll, and key"><img src="../assets/platforms/cpc/items/case-inventory.png" data-platform-src-cpc="../assets/platforms/cpc/items/case-inventory.png" data-platform-src-pc="../assets/platforms/pc/items/case-inventory.png" data-platform-src-vga="../assets/platforms/vga/items/case-inventory.png" data-platform-src-spectrum="../assets/platforms/spectrum/items/case-inventory.png" data-platform-src-msx="../assets/platforms/msx/items/case-inventory.png" data-platform-alt-cpc="Book, scroll, and key in the Amstrad CPC inventory" data-platform-alt-pc="Book, scroll, and key in the PC CGA inventory" data-platform-alt-vga="Book, scroll, and key in the VGA remake inventory" data-platform-alt-spectrum="Book, scroll, and key in the ZX Spectrum inventory" data-platform-alt-msx="Book, scroll, and key in the MSX inventory" alt="Book, scroll, and key in the Amstrad CPC inventory"><span>BOOK · CODE · ACCESS</span></div>
         </div>
         <div class="case-copy prose">
           <p>The premise takes the frame of <cite>The Name of the Rose</cite>: a rationalist Franciscan and his young novice arrive at an Italian abbey where an impossible death heralds more. William of Occam replaces the novel’s William of Baskerville; names change, pieces are compressed, and the huge theological argument becomes action, schedules, and architecture.</p>
@@ -185,16 +194,16 @@
 
     <section class="chapter" id="objects">
       <div class="chapter-header reveal"><div><span class="chapter-number">VI · Evidence locker</span><h2>Eight objects, no accidents</h2></div><p class="chapter-intro">The inventory is tiny and choreographed. Objects change hands, appear only on selected days, or open routes the game never explains.</p></div>
-      <p class="sprite-credit reveal">These icons belong to the VGA remake.</p>
+      <p class="sprite-credit reveal">Original Amstrad CPC patterns, shown in a real three-slot tray from the status panel.</p>
       <div class="object-grid reveal">
-        <article class="object-card" data-symbol="B"><img class="object-sprite" src="../assets/items/libro.png" alt="VGA sprite of the book"><small>01 · Fatal evidence</small><h3>Book</h3><p>The <cite>Coena Cypriani</cite>. It passes through several hands, kills anyone who moistens a finger, and triggers the finale.</p></article>
-        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="VGA sprite of the gloves"><small>02 · Protection</small><h3>Gloves</h3><p>They make the poisoned book safe to touch. Jorge cannot see them; Adso can.</p></article>
-        <article class="object-card" data-symbol="S"><img class="object-sprite" src="../assets/items/gafas.png" alt="VGA sprite of the spectacles"><small>03 · Reading</small><h3>Spectacles</h3><p>They make the scroll readable. They appear in the maze’s lit room and may vanish at dawn.</p></article>
-        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="VGA sprite of the scroll"><small>04 · Code</small><h3>Scroll</h3><p>Venantius’s manuscript contains the mirror clue. Berengar, Bernard, and the Abbot may take it away.</p></article>
-        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="VGA sprite of a key"><small>05 · Access</small><h3>Key I</h3><p>It passes through the altar; if not taken in time, it disappears. Stealing it may wake the Abbot.</p></article>
-        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="VGA sprite of a key"><small>06 · Access</small><h3>Key II</h3><p>Part of the nocturnal chain. Keys dynamically alter which doors the pathfinder considers passable.</p></article>
-        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="VGA sprite of a key"><small>07 · Access</small><h3>Key III</h3><p>Connected to Severinus’s room and Malachi’s desk—another object embedded in a monk’s schedule.</p></article>
-        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="VGA sprite of the lamp"><small>08 · Time</small><h3>Lamp</h3><p>Adso carries it. It burns only in dark rooms, warns before expiring, and may reappear in the kitchen on another day.</p></article>
+        <article class="object-card" data-symbol="B"><img class="object-sprite" src="../assets/items/libro.png" alt="CPC sprite of the book"><small>01 · Fatal evidence</small><h3>Book</h3><p>The <cite>Coena Cypriani</cite>. It passes through several hands, kills anyone who moistens a finger, and triggers the finale.</p></article>
+        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="CPC sprite of the gloves"><small>02 · Protection</small><h3>Gloves</h3><p>They make the poisoned book safe to touch. Jorge cannot see them; Adso can.</p></article>
+        <article class="object-card" data-symbol="S"><img class="object-sprite" src="../assets/items/gafas.png" alt="CPC sprite of the spectacles"><small>03 · Reading</small><h3>Spectacles</h3><p>They make the scroll readable. They appear in the maze’s lit room and may vanish at dawn.</p></article>
+        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="CPC sprite of the scroll"><small>04 · Code</small><h3>Scroll</h3><p>Venantius’s manuscript contains the mirror clue. Berengar, Bernard, and the Abbot may take it away.</p></article>
+        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>05 · Access</small><h3>Key I</h3><p>It passes through the altar; if not taken in time, it disappears. Stealing it may wake the Abbot.</p></article>
+        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>06 · Access</small><h3>Key II</h3><p>Part of the nocturnal chain. Keys dynamically alter which doors the pathfinder considers passable.</p></article>
+        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>07 · Access</small><h3>Key III</h3><p>Connected to Severinus’s room and Malachi’s desk—another object embedded in a monk’s schedule.</p></article>
+        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="CPC sprite of the lamp"><small>08 · Time</small><h3>Lamp</h3><p>Adso carries it. It burns only in dark rooms, warns before expiring, and may reappear in the kitchen on another day.</p></article>
       </div>
     </section>
 
@@ -303,6 +312,14 @@
             <figure><button type="button" data-lightbox="../assets/remake-vga/vga-remake-2.gif" data-alt="Second VGA remake screenshot" data-caption="La Abadía del Crimen Remake by Antonio Giner: 256-colour VGA graphics."><img src="../assets/remake-vga/vga-remake-2.gif" alt="William and the Abbot in the VGA remake" loading="lazy"></button><figcaption>VGA · capture 2</figcaption></figure>
             <figure><button type="button" data-lightbox="../assets/remake-vga/vga-remake-3.gif" data-alt="Third VGA remake screenshot" data-caption="La Abadía del Crimen Remake by Antonio Giner: 256-colour VGA graphics."><img src="../assets/remake-vga/vga-remake-3.gif" alt="Monks gathered in the VGA remake" loading="lazy"></button><figcaption>VGA · capture 3</figcaption></figure>
           </div>
+          <div class="vga-sprite-strip" aria-label="Preserved VGA remake sprites">
+            <span>Preserved VGA sprites</span>
+            <img src="../assets/platforms/vga/characters/guillermo.png" alt="William in the VGA remake" loading="lazy">
+            <img src="../assets/platforms/vga/characters/adso.png" alt="Adso in the VGA remake" loading="lazy">
+            <img src="../assets/platforms/vga/characters/jorge.png" alt="Jorge in the VGA remake" loading="lazy">
+            <img src="../assets/platforms/vga/items/libro.png" alt="Book in the VGA remake" loading="lazy">
+            <img src="../assets/platforms/vga/items/lampara.png" alt="Lamp in the VGA remake" loading="lazy">
+          </div>
           <p class="caption remake-credit">Screenshots preserved by Computer Emuzone and reused with attribution under its content policy.</p>
         </div>
       </div>
@@ -348,13 +365,13 @@
         <section class="source-group"><h3>Online archives</h3><ul><li><a href="https://computeremuzone.com/ficha/166/la-abadia-del-crimen">Computer Emuzone</a>: profile, captures, maps, adverts, credits, development, and its CPC, Spectrum, MSX, and PC DOS multiplatform archive.</li><li><strong>System records:</strong> <a href="https://www.cpc-power.com/index.php?page=detail&amp;num=222">CPC-Power</a>, <a href="https://worldofspectrum.org/archive/software/games/la-abadia-del-crimen-opera-soft-sa">World of Spectrum</a>, <a href="https://www.msxgamesworld.com/software.php?id=146">MSX Games World</a>, and <a href="https://www.mobygames.com/game/14113/la-abadia-del-crimen/">MobyGames</a>.</li><li><a href="https://pixelmaniacos.com/la-abadia-del-crimen-el-misterio-de-los-frailes/">Pixelmaniacos</a>: PC capture of mass in the church.</li><li><a href="https://retroinvaders.com/index.php/es/493/bocetos-de-desarrollo-de-la-abadia-del-crimen">Development sketches</a>: Juan Delcán’s squared-paper designs.</li><li><a href="https://retroinvaders.com/index.php/en/96374/entrevista-jose-ramon-fernandez-maquieira">José Ramón Fernández Maquieira interview</a>: his account of adapting the game from CPC to MSX.</li><li><a href="https://culturainformatica.es/entrevistas/entrevista-a-jose-antonio-morales-paco-suarez-y-paco-menendez-opera-soft/"><cite>Macedonia Magazine</cite> interview</a>: Paco Menéndez recalls the versions and his move to Opera.</li><li><a href="https://github.com/ibaca/la-abadia-del-crimen">Reconstructed source</a>: equivalent implementation reverse-engineered from the CPC original.</li><li><a href="https://www.elmundodelspectrum.com/la-abadia-del-crimen-1987-opera-soft/">El Mundo del Spectrum</a>: history and Spectrum version.</li><li><a href="https://www.elmundodelspectrum.com/el-contrato-de-la-abadia-del-crimen/">Rights-assignment contract</a>: historical document.</li><li><a href="https://computeremuzone.com/entrevista/11/juan-delcan-grafista-del-que-puede-considerarse-como-el-mejor-juego-espanol-para-8-bits-de-la-historia-una-entrevista-de-zemman-y-mandrake-el-mago">Juan Delcán interview</a>.</li><li><strong>Access and rights:</strong> Computer Emuzone states that the classic-game authors it has been able to contact authorized availability of their games. This tribute hosts no copies; use your own copy or a distribution expressly authorized by its provider.</li></ul></section>
         <section class="source-group"><h3>Legacy</h3><ul><li><a href="https://computeremuzone.com/ficha/106/la-abadia-del-crimen-remake">Antonio Giner’s VGA remake</a>, preserved record and downloads.</li><li><a href="https://store.steampowered.com/app/474030/The_Abbey_of_Crime_Extensum/">Extensum on Steam</a> and official images.</li><li><a href="https://www.devuego.es/codice/flibro/obsequium-un-relato-cultural-tecnologico-y-emocional-de-la-abadia-del-crimen"><cite>Obsequium</cite></a> bibliographical record.</li><li><a href="https://www.change.org/p/ayuntamiento-de-avil%C3%A9s-una-calle-para-paco-men%C3%A9ndez-creador-de-la-abad%C3%ADa-del-crimen">“A street for Paco Menéndez”</a>, José Manuel Braña Álvarez’s letter and the later civic petition.</li><li><a href="https://www.auic.es/historia-de-un-sello/index.htm">AUIC: “Historia de un sello”</a>, the primary source for the initiative, process, and contributors.</li><li><a href="https://www.auic.es/la-abadia-del-crimen-culminamos-su-trigesimo-aniversario/">AUIC: the permanent exhibition and stamp presentation</a>, with an account and photographs of the opening.</li><li><a href="https://www.market.correos.es/product/sello-la-abadia-del-crimen">Official Correos stamp</a>.</li><li><a href="https://www.henneomagazines.com/products/5413">Retro Gamer España 40</a> and <a href="https://www.henneomagazines.com/products/5430">Retro Gamer España 41</a>.</li><li>Academic study of its many versions.</li></ul></section>
       </div>
-      <p class="source-note reveal">Visual credits: pages and cartography from the magazines and guides preserved in the Revistas folder; screens, general map, and advertising collected by Computer Emuzone and reused with link and attribution under its content policy; PC church capture from Pixelmaniacos; commemorative miniature sheet from the official Correos listing; exhibition photograph, hexagonal stamp artwork, and preliminary concept from AUIC, reused under Creative Commons with attribution and direct permission; Extensum captures from its official Steam page. The loading screen and sounds come from preservation files and ports in this project; portraits and objects were extracted without redrawing from <code>GraficosVGA</code> in the local VIGASOCO reconstruction. The chapter initials use GregorianFLF, the typeface supplied with this project; the clock labels use the game's 8-bit dialogue typeface. The work, characters, graphics, and marks belong to their respective owners. Non-commercial site for documentation and tribute.</p>
+      <p class="source-note reveal">Visual credits: pages and cartography from the magazines and guides preserved in the Revistas folder; screens, general map, and advertising collected by Computer Emuzone and reused with link and attribution under its content policy; PC church capture from Pixelmaniacos; commemorative miniature sheet from the official Correos listing; exhibition photograph, hexagonal stamp artwork, and preliminary concept from AUIC, reused under Creative Commons with attribution and direct permission; Extensum captures from its official Steam page. Screens and sounds come from preservation files and ports in this project; the principal portraits and objects were extracted without redrawing from <code>GraficosCPC</code>. PC mode retains the character silhouettes and applies the daytime CGA palette documented in the screenshots; for the objects, each icon’s specific inks were verified directly against the PC memory dump. Their <code>GraficosVGA</code> counterparts remain preserved in the remake chapter. The chapter initials use GregorianFLF, the typeface supplied with this project; the clock labels use the game's 8-bit dialogue typeface. The work, characters, graphics, and marks belong to their respective owners. Non-commercial site for documentation and tribute.</p>
     </section>
   </main>
 
   <footer class="site-footer"><div><strong>Finis?</strong><p>Other routes remain: return at another hour, open a magazine, or listen to the bells again.</p><p><a href="#start">Back to the beginning</a> · <a href="../es/index.html" lang="es">Edición española</a></p><p class="project-credit">Andrés del Campo Novales <span>with GPT 5.6 Sol</span></p></div><div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div></footer>
 
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Archive viewer"><button class="lightbox-close" type="button">Close ×</button><img src="" alt=""><div class="lightbox-navigation" aria-label="Article pages" hidden><button class="lightbox-previous" type="button" aria-label="Previous page">← Previous</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Next page">Next →</button></div><p class="lightbox-caption"></p></div>
-  <script src="../app.js?v=20260830-board32"></script>
+  <script src="../app.js?v=20260905-platforms3"></script>
 </body>
 </html>

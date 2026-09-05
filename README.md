@@ -12,7 +12,7 @@ A bilingual, interactive visual archive devoted to the classic game by Paco Men�
 
 Este homenaje recorre la historia, los personajes y la arquitectura de *La Abadía del Crimen*, junto con sus siete jornadas, versiones, objetos, sonido, apariciones en prensa, desarrollo técnico y legado.
 
-La experiencia está construida como un archivo editorial navegable: incluye expedientes interactivos, control de spoilers, cartografía, comparaciones visuales entre plataformas, audio preservado y una selección de páginas históricas que pueden ampliarse dentro del propio sitio.
+La experiencia está construida como un archivo editorial navegable: incluye expedientes interactivos, control de spoilers, cartografía, comparaciones visuales entre plataformas, audio preservado y una selección de páginas históricas que pueden ampliarse dentro del propio sitio. La presentación utiliza los gráficos originales de CPC 6128 por defecto y permite elegir desde la cabecera las ediciones visuales CPC, PC CGA, remake PC VGA a 256 colores, ZX Spectrum y MSX.
 
 ![Apertura de la edición española](assets/readme/preview-es.png)
 
@@ -29,7 +29,7 @@ La experiencia está construida como un archivo editorial navegable: incluye exp
 
 This tribute explores the history, characters, and architecture of *La Abadía del Crimen*, together with its seven-day mystery, versions, objects, sound, contemporary press coverage, technical construction, and legacy.
 
-The experience is designed as a navigable editorial archive. It includes interactive dossiers, spoiler controls, cartography, visual platform comparisons, preserved audio, and a curated selection of historical pages that can be enlarged inside the site itself.
+The experience is designed as a navigable editorial archive. It includes interactive dossiers, spoiler controls, cartography, visual platform comparisons, preserved audio, and a curated selection of historical pages that can be enlarged inside the site itself. Presentation defaults to the original CPC 6128 graphics, while a header control offers CPC, PC CGA, the 256-colour PC VGA remake, ZX Spectrum, and MSX visual editions.
 
 ![The press archive in the English edition](assets/readme/preview-en.png)
 
@@ -65,4 +65,3 @@ Homenaje cultural no oficial y sin fines comerciales. Las fuentes y los crédito
 Unofficial, non-commercial cultural tribute. Detailed sources and credits appear at the end of both editions. Game graphics, screenshots, magazine pages, maps, audio, trademarks, and other third-party materials remain the property of their respective rights holders and are not covered by a repository-wide license.
 
 Consulta / See [RIGHTS.md](RIGHTS.md).
-

@@ -4,6 +4,103 @@
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
+  $$('img[src^="../assets/characters/"], img[src^="../assets/items/"]').forEach(image => {
+    const canonicalSource = image.getAttribute('src');
+    const cpcSource = canonicalSource
+      .replace('../assets/characters/', '../assets/platforms/cpc/characters/')
+      .replace('../assets/items/', '../assets/platforms/cpc/items/');
+    const pcSource = cpcSource.replace('/platforms/cpc/', '/platforms/pc/');
+    image.dataset.platformSrcCpc = cpcSource;
+    image.dataset.platformSrcPc = pcSource;
+    image.dataset.platformSrcVga = cpcSource.replace('/platforms/cpc/', '/platforms/vga/');
+    image.dataset.platformSrcSpectrum = cpcSource.replace('/platforms/cpc/', '/platforms/spectrum/');
+    image.dataset.platformSrcMsx = cpcSource.replace('/platforms/cpc/', '/platforms/msx/');
+    image.src = cpcSource;
+
+    const alt = image.getAttribute('alt');
+    if (alt && alt.includes('CPC')) {
+      image.dataset.platformAltCpc = alt;
+      image.dataset.platformAltPc = alt
+        .replace('Sprite original CPC de', 'Sprite con paleta PC CGA de')
+        .replace('CPC sprite of', 'PC CGA icon of')
+        .replace('Sprite CPC', 'Sprite PC CGA');
+      image.dataset.platformAltVga = alt
+        .replace('Sprite original CPC de', 'Sprite VGA de')
+        .replace('CPC sprite of', 'VGA sprite of')
+        .replace('Sprite CPC', 'Sprite VGA');
+      image.dataset.platformAltSpectrum = alt
+        .replace('Sprite original CPC de', 'Sprite Spectrum diurno de')
+        .replace('CPC sprite of', 'ZX Spectrum daytime sprite of')
+        .replace('Sprite CPC', 'Sprite Spectrum');
+      image.dataset.platformAltMsx = alt
+        .replace('Sprite original CPC de', 'Sprite MSX diurno de')
+        .replace('CPC sprite of', 'MSX daytime sprite of')
+        .replace('Sprite CPC', 'Sprite MSX');
+    }
+  });
+
+  $$('.character-art figcaption').forEach(caption => {
+    if (!caption.textContent.includes('CPC')) return;
+    caption.dataset.platformTextCpc = caption.textContent;
+    caption.dataset.platformTextPc = caption.textContent.replace('CPC · diseño original', 'PC CGA · conversión de paleta');
+    caption.dataset.platformTextVga = caption.textContent.replace('CPC · diseño original', 'VGA · redibujado a 256 colores');
+    caption.dataset.platformTextSpectrum = caption.textContent.replace('CPC · diseño original', 'ZX Spectrum · tinta diurna');
+    caption.dataset.platformTextMsx = caption.textContent.replace('CPC · diseño original', 'MSX · tinta diurna');
+  });
+
+  $$('.sprite-credit').forEach(credit => {
+    credit.dataset.platformTextCpc = credit.textContent;
+    credit.dataset.platformTextPc = document.documentElement.lang === 'es'
+      ? 'Patrones e tintas CGA verificados en el volcado PC, mostrados en una bandeja real de tres casillas del marcador.'
+      : 'CGA patterns and inks verified against the PC memory dump, shown in a real three-slot tray from the status panel.';
+    credit.dataset.platformTextVga = document.documentElement.lang === 'es'
+      ? 'Gráficos del remake VGA a 256 colores, mostrados en su bandeja real de tres casillas.'
+      : 'Graphics from the 256-colour VGA remake, shown in its real three-slot tray.';
+    credit.dataset.platformTextSpectrum = document.documentElement.lang === 'es'
+      ? 'Máscaras originales verificadas con la instantánea Spectrum de 128 KB, en tinta diurna amarilla y azul y dentro de su marcador real.'
+      : 'Original masks verified against the 128K Spectrum snapshot, using its yellow-and-blue daytime ink and real status-panel frame.';
+    credit.dataset.platformTextMsx = document.documentElement.lang === 'es'
+      ? 'Máscaras originales verificadas en capturas MSX, en tinta diurna negra y crema y dentro de su marcador real.'
+      : 'Original masks verified against MSX captures, using its black-and-cream daytime ink and real status-panel frame.';
+  });
+
+  const platformButtons = $$('[data-platform-choice]');
+  const platformImages = $$('[data-platform-src-cpc]');
+  const platformTexts = $$('[data-platform-text-cpc]');
+  const supportedPlatforms = new Set(['cpc', 'pc', 'vga', 'spectrum', 'msx']);
+  const platformSuffix = { cpc: 'Cpc', pc: 'Pc', vga: 'Vga', spectrum: 'Spectrum', msx: 'Msx' };
+  let rememberedPlatform = 'cpc';
+  try {
+    const storedPlatform = localStorage.getItem('reportaje-platform');
+    if (supportedPlatforms.has(storedPlatform)) rememberedPlatform = storedPlatform;
+  } catch (_) { /* local files may deny storage */ }
+
+  function setPlatform(platform, remember = true) {
+    const selected = supportedPlatforms.has(platform) ? platform : 'cpc';
+    document.documentElement.dataset.platform = selected;
+    platformButtons.forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.platformChoice === selected));
+    });
+    platformImages.forEach(image => {
+      const source = image.dataset[`platformSrc${platformSuffix[selected]}`];
+      const alt = image.dataset[`platformAlt${platformSuffix[selected]}`];
+      if (source) image.src = source;
+      if (alt) image.alt = alt;
+    });
+    platformTexts.forEach(element => {
+      const text = element.dataset[`platformText${platformSuffix[selected]}`];
+      if (text) element.textContent = text;
+    });
+    if (remember) {
+      try { localStorage.setItem('reportaje-platform', selected); } catch (_) { /* navigation still works */ }
+    }
+  }
+
+  platformButtons.forEach(button => button.addEventListener('click', () => {
+    setPlatform(button.dataset.platformChoice);
+  }));
+  setPlatform(rememberedPlatform, false);
+
   const languageLinks = $$('[data-language]');
   let rememberedLanguage = null;
   try { rememberedLanguage = localStorage.getItem('reportaje-language'); } catch (_) { /* local files may deny storage */ }
