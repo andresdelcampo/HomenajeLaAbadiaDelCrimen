@@ -85,7 +85,7 @@
   const hourButtons = $$('.hour-button');
   const gameClockLabels = new Set([
     'NOCHE', 'PRIMA', 'TERCIA', 'SEXTA', 'NONA', 'VISPERAS', 'COMPLETAS',
-    'NIGHT', 'MATINS', 'TERCE', 'SEXT', 'NONE', 'VESPERS', 'COMPLINE'
+    'NIGHT', 'PRIME', 'TERCE', 'SEXT', 'NONE', 'VESPERS', 'COMPLINE'
   ]);
   hourButtons.forEach(button => {
     const visibleText = button.textContent.trim();
