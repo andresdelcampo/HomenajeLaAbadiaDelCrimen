@@ -258,17 +258,61 @@
   const lightboxImage = lightbox ? $('img', lightbox) : null;
   const lightboxCaption = lightbox ? $('.lightbox-caption', lightbox) : null;
   const lightboxNavigation = lightbox ? $('.lightbox-navigation', lightbox) : null;
+  const lightboxStage = lightbox ? $('.lightbox-stage', lightbox) : null;
   const lightboxPrevious = lightbox ? $('.lightbox-previous', lightbox) : null;
   const lightboxNext = lightbox ? $('.lightbox-next', lightbox) : null;
   const lightboxPageCount = lightbox ? $('.lightbox-page-count', lightbox) : null;
+  const lightboxZoomOut = lightbox ? $('.lightbox-zoom-out', lightbox) : null;
+  const lightboxZoomIn = lightbox ? $('.lightbox-zoom-in', lightbox) : null;
+  const lightboxZoomFit = lightbox ? $('.lightbox-zoom-fit', lightbox) : null;
+  const lightboxZoomLevel = lightbox ? $('.lightbox-zoom-level', lightbox) : null;
   let lightboxPages = [];
   let lightboxPage = 0;
   let lightboxAlt = '';
   let lightboxBaseCaption = '';
   let lightboxTrigger = null;
+  let lightboxZoom = 1;
+  let lightboxFitWidth = 0;
+  let lightboxFitHeight = 0;
+  let lightboxOpenNative = false;
+  const lightboxMinZoom = 1;
+  const lightboxMaxZoom = 6;
+  const lightboxZoomStep = .25;
+  const setLightboxZoom = (zoom, focusPoint = null) => {
+    if (!lightbox || !lightboxImage || !lightboxFitWidth || !lightboxFitHeight) return;
+    const nextZoom = Math.min(lightboxMaxZoom, Math.max(lightboxMinZoom, Math.round(zoom * 100) / 100));
+    const imageRect = lightboxImage.getBoundingClientRect();
+    const focusX = focusPoint && imageRect.width ? (focusPoint.x - imageRect.left) / imageRect.width : .5;
+    const focusY = focusPoint && imageRect.height ? (focusPoint.y - imageRect.top) / imageRect.height : .5;
+    lightboxZoom = nextZoom;
+    lightboxImage.style.width = `${Math.round(lightboxFitWidth * lightboxZoom)}px`;
+    lightboxImage.style.height = `${Math.round(lightboxFitHeight * lightboxZoom)}px`;
+    lightbox.classList.toggle('is-zoomed', lightboxZoom > 1);
+    if (lightboxZoomLevel) lightboxZoomLevel.value = `${Math.round(lightboxZoom * 100)}%`;
+    if (lightboxZoomOut) lightboxZoomOut.disabled = lightboxZoom <= lightboxMinZoom;
+    if (lightboxZoomIn) lightboxZoomIn.disabled = lightboxZoom >= lightboxMaxZoom;
+    if (focusPoint) requestAnimationFrame(() => {
+      const nextRect = lightboxImage.getBoundingClientRect();
+      lightbox.scrollBy(nextRect.left + nextRect.width * focusX - focusPoint.x, nextRect.top + nextRect.height * focusY - focusPoint.y);
+    });
+  };
+  const prepareLightboxImage = () => {
+    if (!lightbox?.classList.contains('is-open') || !lightboxImage?.naturalWidth) return;
+    const availableWidth = Math.min(1100, Math.max(1, lightbox.clientWidth - 64));
+    const availableHeight = Math.max(1, lightbox.clientHeight - 148);
+    const fitScale = Math.min(1, availableWidth / lightboxImage.naturalWidth, availableHeight / lightboxImage.naturalHeight);
+    lightboxFitWidth = lightboxImage.naturalWidth * fitScale;
+    lightboxFitHeight = lightboxImage.naturalHeight * fitScale;
+    const nativeZoom = lightboxImage.naturalWidth / lightboxFitWidth;
+    setLightboxZoom(lightboxOpenNative ? nativeZoom : 1);
+    lightbox.scrollTo(0, 0);
+  };
   const showLightboxPage = page => {
     if (!lightbox || !lightboxImage || !lightboxPages.length) return;
     lightboxPage = Math.max(0, Math.min(page, lightboxPages.length - 1));
+    lightboxFitWidth = 0;
+    lightboxFitHeight = 0;
+    lightboxImage.removeAttribute('style');
     lightboxImage.src = lightboxPages[lightboxPage];
     lightboxImage.alt = lightboxPages.length > 1 ? `${lightboxAlt} ${lightboxPage + 1}/${lightboxPages.length}` : lightboxAlt;
     if (lightboxCaption) lightboxCaption.textContent = lightboxBaseCaption;
@@ -277,7 +321,9 @@
     if (lightboxPrevious) lightboxPrevious.disabled = lightboxPage === 0;
     if (lightboxNext) lightboxNext.disabled = lightboxPage === lightboxPages.length - 1;
     lightbox.scrollTo(0, 0);
+    if (lightboxImage.complete) requestAnimationFrame(prepareLightboxImage);
   };
+  lightboxImage?.addEventListener('load', prepareLightboxImage);
   const closeLightbox = () => {
     if (!lightbox) return;
     lightbox.classList.remove('is-open');
@@ -297,11 +343,12 @@
     lightboxAlt = button.dataset.alt || '';
     lightboxBaseCaption = button.dataset.caption || '';
     lightboxTrigger = button;
-    showLightboxPage(lightboxPage);
-    lightbox.classList.toggle('is-hires', button.hasAttribute('data-lightbox-hires'));
+    lightboxOpenNative = button.hasAttribute('data-lightbox-hires');
+    lightbox.classList.toggle('is-hires', lightboxOpenNative);
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    showLightboxPage(lightboxPage);
     lightbox.scrollTo(0, 0);
     const focusX = Number(button.dataset.lightboxFocusX);
     const focusY = Number(button.dataset.lightboxFocusY);
@@ -317,12 +364,26 @@
   }));
   lightboxPrevious?.addEventListener('click', () => showLightboxPage(lightboxPage - 1));
   lightboxNext?.addEventListener('click', () => showLightboxPage(lightboxPage + 1));
+  lightboxZoomOut?.addEventListener('click', () => setLightboxZoom(lightboxZoom - lightboxZoomStep));
+  lightboxZoomIn?.addEventListener('click', () => setLightboxZoom(lightboxZoom + lightboxZoomStep));
+  lightboxZoomFit?.addEventListener('click', () => setLightboxZoom(1));
+  lightboxImage?.addEventListener('dblclick', event => {
+    setLightboxZoom(lightboxZoom > 1 ? 1 : 2, { x: event.clientX, y: event.clientY });
+  });
+  lightbox?.addEventListener('wheel', event => {
+    if (!lightbox.classList.contains('is-open')) return;
+    event.preventDefault();
+    setLightboxZoom(lightboxZoom + (event.deltaY < 0 ? lightboxZoomStep : -lightboxZoomStep), { x: event.clientX, y: event.clientY });
+  }, { passive: false });
   $('.lightbox-close')?.addEventListener('click', closeLightbox);
-  lightbox?.addEventListener('click', event => { if (event.target === lightbox) closeLightbox(); });
+  lightbox?.addEventListener('click', event => { if (event.target === lightbox || event.target === lightboxStage) closeLightbox(); });
   addEventListener('keydown', event => {
     if (event.key === 'Escape') closeLightbox();
-    if (!lightbox?.classList.contains('is-open') || lightboxPages.length < 2) return;
-    if (event.key === 'ArrowLeft') showLightboxPage(lightboxPage - 1);
-    if (event.key === 'ArrowRight') showLightboxPage(lightboxPage + 1);
+    if (!lightbox?.classList.contains('is-open')) return;
+    if (event.key === '+' || event.key === '=') { event.preventDefault(); setLightboxZoom(lightboxZoom + lightboxZoomStep); }
+    if (event.key === '-') { event.preventDefault(); setLightboxZoom(lightboxZoom - lightboxZoomStep); }
+    if (event.key === '0') { event.preventDefault(); setLightboxZoom(1); }
+    if (lightboxPages.length > 1 && event.key === 'ArrowLeft') showLightboxPage(lightboxPage - 1);
+    if (lightboxPages.length > 1 && event.key === 'ArrowRight') showLightboxPage(lightboxPage + 1);
   });
 })();
