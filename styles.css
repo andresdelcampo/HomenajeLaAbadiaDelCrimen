@@ -121,11 +121,11 @@ a:hover { color: var(--blue); }
   content: "";
   display: block;
   flex: 0 0 auto;
-  width: 2.35rem;
+  width: 3rem;
   aspect-ratio: 1;
-  border: 1px solid rgba(212,154,46,.85);
-  background: #0b1013 url("assets/legacy/correos-stamp-sheet.webp") 22% 27% / 470% auto no-repeat;
-  box-shadow: 0 0 0 3px rgba(212,154,46,.06);
+  border: 0;
+  background: transparent url("assets/legacy/auic-hexagonal-stamp-icon.png") center / contain no-repeat;
+  box-shadow: none;
 }
 .nav-mark::after {
   content: none;
@@ -1187,11 +1187,23 @@ html[lang="en"] .character-panel[data-character="bernard"]::before { background-
 .extensum-gallery img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; image-rendering: pixelated; }
 .legacy-coda { margin-top: 5rem; align-items: start; }
 .legacy-coda h3 { margin: 0 0 1rem; font: 400 clamp(2.1rem, 4vw, 4rem)/.95 var(--display); }
+.stamp-gallery { display: grid; gap: 1.8rem; align-content: start; }
 .stamp-feature { margin: 0; padding: .55rem; background: #dedede; box-shadow: 0 18px 38px rgba(45,31,18,.24); }
 .stamp-feature button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .stamp-feature img { display: block; width: 100%; height: auto; }
 .stamp-feature figcaption { padding: .65rem .35rem .15rem; color: var(--ink-soft); font: 700 .61rem/1.35 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+.stamp-concept { width: min(40%, 150px); margin: -.7rem 0 0 43%; padding: .4rem; background: #e7dfcf; box-shadow: 0 12px 24px rgba(45,31,18,.18); transform: rotate(-3deg); transform-origin: 50% 20%; }
+.stamp-concept button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.stamp-concept img { display: block; width: 100%; height: auto; }
+.stamp-concept figcaption { padding: .6rem .3rem .18rem; color: var(--ink-soft); font: 700 .58rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .035em; }
+.stamp-concept figcaption strong { display: block; color: var(--red); font-size: .64rem; }
 .legacy-coda .pullquote { margin: 2rem 0 0; font-size: clamp(1.3rem, 2.25vw, 2rem); }
+.museum-feature { margin-top: clamp(3.5rem, 7vw, 7rem); align-items: center; }
+.museum-feature .prose h3 { margin: 0 0 1rem; font: 400 clamp(2.1rem, 4vw, 4rem)/.95 var(--display); }
+.exhibition-feature { margin: 0; padding: .55rem; background: #dedede; box-shadow: 0 18px 38px rgba(45,31,18,.24); }
+.exhibition-feature button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.exhibition-feature img { display: block; width: 100%; height: auto; }
+.exhibition-feature figcaption { padding: .65rem .35rem .15rem; color: var(--ink-soft); font: 700 .61rem/1.35 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
 
 .legacy-timeline { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 3rem; }
 .legacy-timeline::before { content: ""; position: absolute; left: 0; right: 0; top: 2.1rem; height: 2px; background: var(--ink); }

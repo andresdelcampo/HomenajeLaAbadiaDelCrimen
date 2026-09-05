@@ -10,6 +10,8 @@ El código de presentación y los textos originales permanecen protegidos por lo
 
 Las fuentes y atribuciones específicas se detallan al final de las ediciones española e inglesa del sitio.
 
+Las fotografías y elementos gráficos procedentes de la Asociación de Usuarios de Informática Clásica (AUIC) se reutilizan bajo Creative Commons con atribución y con autorización directa de la Asociación. Su procedencia se enlaza y acredita junto a cada uso y en la sección de fuentes.
+
 ## English
 
 This repository contains an unofficial, non-commercial cultural tribute to *La Abadía del Crimen*.
@@ -20,3 +22,4 @@ Original presentation code and writing remain protected by their author's copyri
 
 Specific sources and attributions are documented at the end of the site's Spanish and English editions.
 
+Photographs and graphic elements sourced from the Association of Classic Computer Users (AUIC) are reused under Creative Commons with attribution and with the Association's direct permission. Their source is linked and credited beside each use and in the sources section.
