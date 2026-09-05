@@ -1357,7 +1357,7 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 .site-footer p { max-width: 720px; font-size: .83rem; }
 .site-footer a { color: var(--gold); }
 .project-credit { color: var(--white) !important; font: 700 .64rem/1.35 var(--mono) !important; letter-spacing: .08em; text-transform: uppercase; }
-.project-credit span { color: var(--gold); }
+.project-credit span { color: inherit; }
 .footer-labyrinth {
   width: 7.5rem;
   aspect-ratio: 1;
@@ -1461,7 +1461,8 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 }
 .gate-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 55%, var(--night)), linear-gradient(0deg, rgba(10,14,18,.72), transparent 45%); }
 .gate-art .gate-stamp { position: absolute; z-index: 1; left: 2rem; bottom: 2rem; padding: .6rem .8rem; border: 1px solid var(--gold); color: var(--gold); font: 700 .7rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
-.gate-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 5vw, 5.5rem); }
+.gate-copy { display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: clamp(2rem, 5vw, 5.5rem); padding-bottom: 2rem; }
+.gate-content { align-self: center; }
 .gate-kicker { color: var(--gold); font: 700 .72rem/1 var(--mono); text-transform: uppercase; letter-spacing: .15em; }
 .gate-title-art {
   width: min(100%, 42rem);
@@ -1515,9 +1516,16 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
 .gate-option[data-last-language] .gate-option-number::after { content: " · última visita / last viewed"; color: rgba(255,255,255,.55); }
 .gate-note { margin: 1rem 0 0; font-size: .78rem; }
 .gate-note span + span::before { content: " · "; color: var(--gold); }
-.gate-credit { margin-top: .7rem; font-size: .68rem; }
+.gate-credits { margin-top: 7.2rem; padding-top: .8rem; border-top: 1px solid rgba(212,154,46,.28); }
+.gate-credit { margin: 0; font-size: .68rem; }
 .gate-credit span + span::before { content: " / "; color: var(--gold); }
-.gate-copy > .project-credit { margin: .2rem 0 0; }
+.gate-credits > .project-credit { margin: .7rem 0 0; }
+.project-credit .credit-role { color: var(--gold); }
+.project-credit .credit-role > span + span::before { content: " / "; }
+.project-credit .technical-reviewers { display: inline; color: var(--white); }
+.project-credit .technical-reviewers::before { content: " · "; color: var(--gold); }
+.site-footer .technical-reviewers { display: block; margin-top: .35rem; }
+.site-footer .technical-reviewers::before { content: none; }
 
 @media (max-width: 1050px) {
   body { font-size: 17px; }
