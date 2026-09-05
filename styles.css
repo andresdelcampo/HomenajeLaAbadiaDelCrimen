@@ -738,23 +738,23 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 }
 .obsequium-screen--cpc {
   background-image: url("assets/ports/cpc-3.png");
-  background-size: 600% auto;
-  background-position: 80% 81.25%;
+  background-size: 400% auto;
+  background-position: 100% 100%;
 }
 .obsequium-screen--pc {
   background-image: url("assets/ports/pc-3.png");
-  background-size: 500% auto;
-  background-position: 87.5% 95.238%;
+  background-size: 400% auto;
+  background-position: 100% 100%;
 }
 .obsequium-screen--spectrum {
   background-image: url("assets/ports/spectrum-3.png");
-  background-size: 485.714% auto;
-  background-position: 96.759% 94.444%;
+  background-size: 457.143% auto;
+  background-position: 100.5% 98.78%;
 }
 .obsequium-screen--msx {
   background-image: url("assets/ports/msx-3.png");
-  background-size: 571.429% auto;
-  background-position: 89.394% 87.264%;
+  background-size: 457.143% auto;
+  background-position: 102% 98.171%;
 }
 .obsequium-version > span { color: rgba(255,255,255,.6); font: 700 .52rem/1.2 var(--mono); text-align: center; text-transform: uppercase; letter-spacing: .06em; }
 .obsequium figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem .2rem .1rem; font: 700 .62rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .07em; }
@@ -914,8 +914,8 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 }
 .atlas-heading h3 { margin: .65rem 0 .35rem; font: 400 clamp(2rem, 4vw, 4rem)/.92 var(--display); }
 .atlas-heading p { max-width: 740px; color: rgba(255,255,255,.62); }
-.screen-atlas figure { position: relative; margin: 0; overflow: hidden; background: #000; }
-.screen-atlas img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; image-rendering: pixelated; transition: transform .25s; }
+.screen-atlas figure { position: relative; margin: 0; padding: clamp(.5rem, 1vw, .85rem); overflow: hidden; background: #000; }
+.screen-atlas img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; image-rendering: pixelated; transition: transform .25s; }
 .screen-atlas figure:hover img { transform: scale(1.08); }
 .screen-atlas figcaption { position: absolute; left: .4rem; bottom: .4rem; padding: .3rem .45rem; color: var(--white); background: rgba(0,0,0,.78); font: 700 .58rem/1 var(--mono); text-transform: uppercase; }
 
