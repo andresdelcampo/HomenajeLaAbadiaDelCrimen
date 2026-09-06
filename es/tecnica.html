@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es" data-platform="cpc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Versiones, sonido e ingeniería inversa: el pequeño laboratorio técnico del homenaje, preparado para crecer.">
+  <title>Cómo piensa la abadía · La Abadía del Crimen</title>
+  <link rel="stylesheet" href="../styles.css?v=20260906-pages3">
+</head>
+<body data-page="technology">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress-rail" aria-label="Progreso de lectura"><span></span></div>
+
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a class="nav-mark" href="index.html"><span>Homenaje a La Abadía del Crimen</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menú</button>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Historia</a>
+      <a href="juego.html">El juego</a>
+      <a href="tecnica.html" aria-current="page">Programación</a>
+      <a href="prensa.html">Prensa y anuncios</a>
+      <a href="legado.html">Legado</a>
+    </div>
+    <div class="nav-actions">
+      <div class="platform-picker" role="group" aria-label="Gráficos de las capturas">
+        <span>Gráficos</span>
+        <button type="button" data-platform-choice="spectrum" aria-pressed="false">ZX</button>
+        <button type="button" data-platform-choice="msx" aria-pressed="false">MSX</button>
+        <button type="button" data-platform-choice="cpc" aria-pressed="true">CPC</button>
+        <button type="button" data-platform-choice="pc" aria-pressed="false">CGA</button>
+        <button type="button" data-platform-choice="vga" aria-pressed="false">VGA</button>
+      </div>
+      <a class="language-link" href="../en/technology.html" lang="en" data-language="en" aria-label="Cambiar al inglés">Idioma · EN</a>
+    </div>
+  </nav>
+  <header class="page-masthead" id="inicio">
+    <div class="page-masthead-inner">
+      <p class="eyebrow">Homenaje interactivo · Ruta 3 de 5</p>
+      <h1>Cómo piensa la abadía</h1>
+      <p>Versiones, sonido e ingeniería inversa: el pequeño laboratorio técnico del homenaje, preparado para crecer.</p>
+      <a class="page-cue" href="#versiones">Entrar en el capítulo ↓</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="chapter dark" id="versiones">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">VIII · Cinco máquinas y un remake</span>
+          <h2>La misma piedra, otras paletas</h2>
+        </div>
+        <p class="chapter-intro">Las cinco versiones históricas mantienen la planta y los sprites reconocibles, aunque cada máquina introduce diferencias que van más allá del color. La última pestaña muestra cómo quedó esa misma arquitectura en el remake VGA posterior.</p>
+      </div>
+      <div class="systems-layout reveal">
+        <div class="system-tabs" role="tablist" aria-label="Versiones del juego">
+          <button class="system-tab is-active" type="button" role="tab" aria-selected="true" data-system="cpc6128">CPC 6128</button>
+          <button class="system-tab" type="button" role="tab" aria-selected="false" data-system="cpc64">CPC 464 / 664</button>
+          <button class="system-tab" type="button" role="tab" aria-selected="false" data-system="spectrum">ZX Spectrum 128</button>
+          <button class="system-tab" type="button" role="tab" aria-selected="false" data-system="msx">MSX</button>
+          <button class="system-tab" type="button" role="tab" aria-selected="false" data-system="dos">PC DOS</button>
+          <button class="system-tab" type="button" role="tab" aria-selected="false" data-system="vga">Remake VGA</button>
+        </div>
+        <div>
+          <article class="system-panel is-active" data-system="cpc6128">
+            <div class="system-score"><div><strong>4</strong><span>colores de la versión matriz</span></div><img src="../assets/ports/cpc-3.png" alt="Captura CPC 6128" loading="lazy"></div>
+            <div class="system-copy"><h3>La versión original</h3><p>Se desarrolló primero para el CPC 6128, cuyo modo gráfico facilitaba diseñar con cuatro colores y después reducir el resultado para otras máquinas. Es la edición de referencia: mapa completo, detalle arquitectónico y paleta azul turquesa, naranja, crema y negro.</p><ul><li>128 KB y disquete.</li><li>Planta completa, incluidos pasillos sin función argumental.</li><li>Detalles como cruces en ventanales y ornamento que desaparecerían en 64 KB.</li><li>Música de inicio y efectos mediante el hardware del CPC.</li></ul></div>
+          </article>
+          <article class="system-panel" data-system="cpc64">
+            <div class="system-score"><div><strong>64</strong><span>KB obligan a reformar el edificio</span></div><img src="../assets/ports/cpc-5.png" alt="Captura de la arquitectura CPC" loading="lazy"></div>
+            <div class="system-copy"><h3>Una abadía recortada</h3><p>Las versiones para CPC 464 en cinta y 664 en disco no podían alojar todo el diseño del 6128. Se eliminaron habitaciones y pasillos que no afectaban directamente a la trama y se simplificaron elementos gráficos.</p><ul><li>El misterio esencial y las rutas necesarias permanecen.</li><li>Menos barroquismo: algunos ventanales pierden las cruces.</li><li>La reducción de memoria obligó a recortar tanto el código como la arquitectura.</li></ul></div>
+          </article>
+          <article class="system-panel" data-system="spectrum">
+            <div class="system-score"><div><strong>2</strong><span>colores dominantes por escena</span></div><img src="../assets/ports/spectrum-3.png" alt="Captura ZX Spectrum" loading="lazy"></div>
+            <div class="system-copy"><h3>Azul, amarillo y 128 K</h3><p>Paco intentó hacerlo caber en un Spectrum menor, pero el juego sólo apareció para 128 KB. La geometría se conserva con una paleta de dos colores que da a la abadía un aspecto más abstracto y, a veces, más severo.</p><ul><li>Sin versión oficial de 48 KB.</li><li>Prácticamente la misma estructura y lógica principal.</li><li>Ralentizaciones ocasionales cuando coinciden varios personajes.</li><li>La reducción cromática afecta la separación de planos, pero no vuelve ilegible el escenario.</li></ul></div>
+          </article>
+          <article class="system-panel" data-system="msx">
+            <div class="system-score"><div><strong>2</strong><span>paletas según soporte</span></div><img src="../assets/ports/msx-3.png" alt="Captura MSX" loading="lazy"></div>
+            <div class="system-copy"><h3>Dos MSX que suelen confundirse</h3><p>Fernández Maquieira participó en una adaptación cuyo resultado deriva visualmente de Spectrum. La cinta original usa negro y amarillo; la edición en disco conserva azul y amarillo. Por eso las capturas de MSX parecen contradecirse entre sí.</p><ul><li>64 KB.</li><li>Gráficos y planta muy próximos a Spectrum.</li><li>La revista <cite>Input MSX</cite> elogió la atmósfera, pero señaló falta de sonido, ralentizaciones y bloqueos.</li><li>Décadas después, MSX2 recibiría una remasterización a 16 colores y paletas diurnas.</li></ul></div>
+          </article>
+          <article class="system-panel" data-system="dos">
+            <div class="system-score"><div><strong>CGA</strong><span>color o monocromo, más voz digital</span></div><img src="../assets/ports/pc-3.png" alt="Captura PC DOS CGA" loading="lazy"></div>
+            <div class="system-copy"><h3>Rojo, verde y un ordenador que canta</h3><p>La versión PC se reescribió para la arquitectura Intel. Ofrece CGA en color y modo monocromo; visualmente resulta más áspera que CPC, pero añade la sorpresa sonora más recordada.</p><ul><li><cite>Ave Maria</cite> digitalizada por el altavoz interno.</li><li>En copias detectadas como no originales, la muestra se sustituía por una voz que decía «pirata».</li><li>Reediciones posteriores circularon sin esos datos digitales, de ahí que muchos jugadores nunca los oyeran.</li><li>El proyecto local conserva y reconstruye ambas rutinas de reproducción por temporizador.</li></ul></div>
+          </article>
+          <article class="system-panel" data-system="vga">
+            <div class="system-score"><div><strong>VGA</strong><span>256 colores · adaptación 32 bits</span></div><img src="../assets/remake-vga/vga-remake-2.gif" alt="Captura del remake VGA de Antonio Giner" loading="lazy"></div>
+            <div class="system-copy"><h3>La piedra, redibujada</h3><p>El proyecto de Antonio Giner llegó después de las conversiones originales. Partió del programa para PC reconstruido mediante ingeniería inversa y conservó su edificio, sus horarios y su lógica, pero volvió a dibujar la abadía en 256 colores.</p><ul><li>Una versión VGA para DOS circuló desde 2001.</li><li>La adaptación para Windows añadió ejecución en 32 bits, sonido y varios idiomas.</li><li>También permite alternar los gráficos VGA con los modos CPC en color y monocromo.</li><li>Su historia completa continúa en el capítulo XIII, antes de <cite>Extensum</cite>.</li></ul></div>
+          </article>
+        </div>
+      </div>
+      <p class="caption credit-line">Capturas de las versiones originales y del remake VGA: Computer Emuzone, reutilizadas con atribución conforme a su política de contenidos.</p>
+    </section>
+
+    <section class="chapter dark sound-chapter" id="sonido">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">IX · La cámara sonora</span>
+          <h2><cite>Ave María</cite> y los sonidos de la abadía</h2>
+        </div>
+        <p class="chapter-intro">La versión digitalizada del <cite>Ave María</cite> ocupa el lugar principal de este archivo sonoro. La acompañan las campanas, los pasos, la música de inicio, el sonido ambiental y la insólita acusación antipiratería.</p>
+      </div>
+      <div class="waveform" aria-hidden="true"></div>
+      <div class="audio-console reveal">
+        <button class="audio-button audio-button--feature pc-digital" type="button"><img class="audio-scene audio-scene--blur" src="../assets/ports/pc-church.jpg" alt="" aria-hidden="true" loading="lazy"><img class="audio-scene audio-scene--main" src="../assets/ports/pc-church.jpg" alt="" loading="lazy"><span class="audio-icon">✝</span><b>Ave María</b><small>PC · muestra digital original · iglesia</small><audio preload="none" src="../assets/audio/ave-maria-pc.wav"></audio></button>
+        <button class="audio-button" type="button"><span class="audio-icon">◉</span><b>Campanas</b><small>Cambio de oficio</small><audio preload="none" src="../assets/audio/campanas.wav"></audio></button>
+        <button class="audio-button" type="button"><span class="audio-icon">⋮</span><b>Pasos</b><small>Movimiento isométrico</small><audio preload="none" src="../assets/audio/pasos.wav"></audio></button>
+        <button class="audio-button" type="button"><span class="audio-icon">♪</span><b>Inicio</b><small>Tema de apertura</small><audio preload="none" src="../assets/audio/inicio.wav"></audio></button>
+        <button class="audio-button" type="button"><span class="audio-icon">∞</span><b>Fondo</b><small>Atmósfera reconstruida</small><audio preload="none" src="../assets/audio/fondo.wav"></audio></button>
+        <button class="audio-button pc-digital" type="button"><span class="audio-icon">!</span><b>«Pirata, pirata»</b><small>PC · aviso anticopia original</small><audio preload="none" src="../assets/audio/pirata-pc.wav"></audio></button>
+      </div>
+      <div class="creator-grid audio-story reveal">
+        <div class="prose"><h3>El truco del altavoz</h3><p>El PC speaker estaba pensado para pitidos, no para reproducir voces. La versión DOS manipula el temporizador programable a gran velocidad: cada cambio convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos y dos reconstrucciones en ensamblador: una para el <cite>Ave Maria</cite> y otra para la advertencia antipiratería. Las notas de ingeniería sitúan ambos bloques dentro del ejecutable original.</p></div>
+        <blockquote class="pullquote">La protección anticopia tenía un castigo muy concreto: sustituía el <cite>Ave María</cite> por una voz que decía «pirata».</blockquote>
+      </div>
+    </section>
+
+    <section class="chapter dark" id="maquina">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">XII · Dentro del programa</span><h2>Cómo piensa la abadía</h2></div>
+        <p class="chapter-intro">El código fuente original no se conservó. Años de ingeniería inversa permitieron describir el Z80 línea a línea y crear implementaciones equivalentes en lenguajes modernos.</p>
+      </div>
+      <div class="tech-diagram reveal">
+        <article class="tech-node"><small>01</small><h3>Rejilla y altura</h3><p>Cada personaje ocupa una casilla y un nivel de altura. Al llegar a una escalera o a un desnivel, el programa decide si debe subir, bajar o avanzar.</p></article>
+        <article class="tech-node"><small>02</small><h3>Puertas y objetos</h3><p>Las llaves modifican la tabla de conexiones. El buscador de rutas sabe a qué habitaciones puede entrar cada personaje.</p></article>
+        <article class="tech-node"><small>03</small><h3>Estados</h3><p>Cada monje es una pequeña máquina: trabajando, advirtiendo, siguiendo, denunciando, durmiendo o muriendo.</p></article>
+        <article class="tech-node"><small>04</small><h3>Rutas</h3><p>Los personajes calculan trayectos a puntos predefinidos. Adso añade prioridades laterales para no bloquear a Guillermo.</p></article>
+        <article class="tech-node"><small>05</small><h3>Cámara</h3><p>Si el jugador se queda quieto, la vista puede abandonar a Guillermo y mostrar una acción significativa en otra habitación.</p></article>
+      </div>
+      <div class="creator-grid machine-copy reveal"><div class="prose"><h3>La cámara indiscreta</h3><p>La cámara puede abandonar a Guillermo para mostrar a Berengario, Bernardo, Malaquías, Severino o el Abad cuando están a punto de hacer algo importante. Así da la sensación de que la abadía sigue funcionando por su cuenta, aunque cada cambio de vista responde a un estado concreto del programa.</p><p>En las reconstrucciones modernas, nombres como <code>momentoDia</code>, <code>objetos</code>, <code>seBuscaRuta</code> y <code>obsequium</code> describen conceptos que el original guardaba en registros y direcciones. Al leer el código se puede reconocer la regla que organiza cada escena.</p></div><blockquote class="pullquote">Con unas pocas reglas para cada monje, el programa consigue que parezca que la abadía recuerda lo ocurrido.</blockquote></div>
+    </section>
+  </main>
+
+  <nav class="page-pagination" aria-label="Continuar leyendo">
+    <a class="page-previous" href="juego.html"><span>Ruta anterior</span><strong>← El juego</strong></a>
+    <a class="page-next" href="prensa.html"><span>Siguiente ruta</span><strong>Prensa y anuncios →</strong></a>
+  </nav>
+
+  <footer class="site-footer">
+    <div><strong>Finis?</strong><p>La investigación continúa por otras rutas del homenaje.</p><p><a href="#inicio">Volver arriba</a> · <a href="../en/technology.html" lang="en">English edition</a></p><p class="project-credit"><span class="credit-role">Autor</span>: Andrés del Campo Novales <span>with GPT 5.6 Sol</span><span class="technical-reviewers"><span class="credit-role">Revisión técnica</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
+    <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
+  </footer>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Visor de archivo">
+    <button class="lightbox-close" type="button">Cerrar ×</button>
+    <div class="lightbox-zoom" aria-label="Ampliación"><button class="lightbox-zoom-out" type="button" aria-label="Alejar">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Acercar">+</button><button class="lightbox-zoom-fit" type="button">Ajustar</button></div>
+    <div class="lightbox-stage"><img src="" alt=""></div>
+    <div class="lightbox-navigation" aria-label="Páginas del artículo" hidden><button class="lightbox-previous" type="button" aria-label="Página anterior">← Anterior</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Página siguiente">Siguiente →</button></div>
+    <p class="lightbox-caption"></p>
+  </div>
+  <script src="../app.js?v=20260906-pages1"></script>
+</body>
+</html>

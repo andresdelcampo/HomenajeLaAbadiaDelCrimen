@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es" data-platform="cpc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
+  <title>El juego · La Abadía del Crimen</title>
+  <link rel="stylesheet" href="../styles.css?v=20260906-pages3">
+</head>
+<body data-page="game">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="progress-rail" aria-label="Progreso de lectura"><span></span></div>
+
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a class="nav-mark" href="index.html"><span>Homenaje a La Abadía del Crimen</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menú</button>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Historia</a>
+      <a href="juego.html" aria-current="page">El juego</a>
+      <a href="tecnica.html">Programación</a>
+      <a href="prensa.html">Prensa y anuncios</a>
+      <a href="legado.html">Legado</a>
+    </div>
+    <div class="nav-actions">
+      <div class="platform-picker" role="group" aria-label="Gráficos de las capturas">
+        <span>Gráficos</span>
+        <button type="button" data-platform-choice="spectrum" aria-pressed="false">ZX</button>
+        <button type="button" data-platform-choice="msx" aria-pressed="false">MSX</button>
+        <button type="button" data-platform-choice="cpc" aria-pressed="true">CPC</button>
+        <button type="button" data-platform-choice="pc" aria-pressed="false">CGA</button>
+        <button type="button" data-platform-choice="vga" aria-pressed="false">VGA</button>
+      </div>
+      <a class="language-link" href="../en/game.html" lang="en" data-language="en" aria-label="Cambiar al inglés">Idioma · EN</a>
+    </div>
+  </nav>
+  <header class="page-masthead" id="inicio">
+    <div class="page-masthead-inner">
+      <p class="eyebrow">Homenaje interactivo · Ruta 2 de 5</p>
+      <h1>El juego</h1>
+      <p>Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.</p>
+      <a class="page-cue" href="#personajes">Entrar en el capítulo ↓</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="chapter dark" id="personajes">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">III · Los personajes</span>
+          <h2>Ocho vidas, siete días</h2>
+        </div>
+        <p class="chapter-intro">Selecciona un retrato. Cada ficha combina lo que se ve durante la partida con las rutinas que describe el código reconstruido. Esta sección contiene revelaciones argumentales.</p>
+      </div>
+
+      <div class="character-layout reveal">
+        <div class="character-list" role="tablist" aria-label="Personajes">
+          <button class="character-button is-active" type="button" role="tab" aria-selected="true" data-character="guillermo"><img src="../assets/characters/guillermo.png" alt="" aria-hidden="true"><small>Investigador</small><b>Guillermo</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="adso"><img src="../assets/characters/adso.png" alt="" aria-hidden="true"><small>Novicio</small><b>Adso</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="abad"><img src="../assets/characters/abad.png" alt="" aria-hidden="true"><small>Autoridad</small><b>El Abad</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="malaquias"><img src="../assets/characters/malaquias.png" alt="" aria-hidden="true"><small>Bibliotecario</small><b>Malaquías</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="berengario"><img src="../assets/characters/berengario.png" alt="" aria-hidden="true"><small>Ayudante</small><b>Berengario</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="severino"><img src="../assets/characters/severino.png" alt="" aria-hidden="true"><small>Herbolario</small><b>Severino</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="jorge"><img src="../assets/characters/jorge.png" alt="" aria-hidden="true"><small>Anciano</small><b>Jorge</b></button>
+          <button class="character-button" type="button" role="tab" aria-selected="false" data-character="bernardo"><img src="../assets/characters/bernardo.png" alt="" aria-hidden="true"><small>Inquisidor</small><b>Bernardo</b></button>
+        </div>
+
+        <div class="character-dossier" data-seal="G">
+          <article class="character-panel is-active" data-character="guillermo">
+            <figure class="character-art"><img src="../assets/characters/guillermo.png" alt="Sprite original CPC de Guillermo"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Fray Guillermo de Occam · La razón bajo vigilancia</p>
+            <h3>Guillermo</h3>
+            <p>Es el único personaje cuyas acciones dependen de nosotros, pero la abadía lo trata como una pieza más. Puede cargar seis objetos, abrir puertas según las llaves que posea, leer el pergamino si encuentra las gafas y morir si hojea el libro envenenado sin guantes.</p>
+            <blockquote>«Temo que uno de los monjes ha cometido un crimen.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Investigar sin faltar a prima, sexta, vísperas ni completas; abandonar la celda sólo cuando el Abad duerme.</span></div>
+            <div class="stat-line"><b>Semana</b><span>Día 1: recibe la misión. Días 2–3: scriptorium, pergamino y primeras pistas. Día 4: Bernardo clausura oficialmente el caso. Días 5–6: llaves, lámpara, gafas y biblioteca. Día 7: la última oportunidad.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>El porcentaje final tiene en cuenta la resolución del crimen, los objetos, las zonas visitadas y los hallazgos opcionales.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="adso">
+            <figure class="character-art"><img src="../assets/characters/adso.png" alt="Sprite original CPC de Adso"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Adso de Melk · Compañero, brújula y portador de la luz</p>
+            <h3>Adso</h3>
+            <p>Su aparente torpeza oculta una compleja lógica de seguimiento. Busca rutas hacia Guillermo, prueba orientaciones alternativas, se aparta si bloquea el paso y puede ser controlado directamente para recoger determinados objetos. En el ciclo diario se separa de su maestro para acudir a sus obligaciones.</p>
+            <blockquote>«¿Dormimos, maestro?»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Va a la iglesia en prima y vísperas, al refectorio en sexta y a la celda en completas. De noche pregunta si dormir; si la respuesta es no, vuelve a seguir a Guillermo.</span></div>
+            <div class="stat-line"><b>Semana</b><span>Advierte cuándo amanece, cuándo falta una lámpara y cuándo su aceite se agota. En la biblioteca enciende la luz; fuera la apaga. Si quedan atrapados a oscuras, cuenta el tiempo hasta la derrota.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>En el desenlace ve lo que Jorge no puede: los guantes de Guillermo. Gracias a su aviso, Guillermo evita una muerte segura y Jorge emprende la huida.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="abad">
+            <figure class="character-art"><img src="../assets/characters/abad.png" alt="Sprite original CPC del Abad"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Abad · Orden, horarios y castigos</p>
+            <h3>El Abad</h3>
+            <p>Marca el pulso del juego. Espera a que los monjes estén en sus puestos antes de iniciar misa o comida, conduce a Guillermo a su celda, cierra la puerta por la noche y patrulla para castigar intrusiones. Sus órdenes deciden cuándo puede avanzar la jornada.</p>
+            <blockquote>«Debéis respetar mis órdenes y las de la abadía.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Oficia prima y vísperas, preside sexta, escolta a Guillermo en completas y duerme con un contador que puede despertarlo. Durante el día pasea y atiende las denuncias de otros monjes.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D1 encarga el caso; D2 declara secreta la biblioteca; D3 presenta a Jorge; D4 ordena detener la investigación; D5 conduce a la celda de Severino; D6 anuncia la expulsión; D7 la ejecuta en tercia si el misterio sigue abierto.</span></div>
+            <div class="stat-line"><b>Castigo</b><span>Expulsa por entrar en su celda, visitar la biblioteca de día, invadir el ala izquierda el primer día o durante prima, o desobedecer repetidamente.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="malaquias">
+            <figure class="character-art"><img src="../assets/characters/malaquias.png" alt="Sprite original CPC de Malaquías"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Malaquías · Guardián del scriptorium</p>
+            <h3>Malaquías</h3>
+            <p>Pasa gran parte del día en su mesa, junto al acceso prohibido. Guarda una llave, bloquea la subida a la biblioteca y denuncia a Guillermo si permanece demasiado tiempo en el scriptorium. Por la tarde cierra el ala occidental; no lo hará hasta que Berengario —y más tarde Bernardo— hayan salido.</p>
+            <blockquote>«Lo siento, venerable hermano: no podéis subir a la biblioteca.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Prima en la iglesia; trabajo y vigilancia en el scriptorium; vísperas en la iglesia; completas y noche en su celda. Al retirarse cierra puertas y pasa por la cocina, frente al pasadizo secreto.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D2 permite que Berengario muestre el scriptorium. D5, durante tercia, se dirige a la celda de Severino y lo mata; después vuelve a su mesa. En vísperas llega a la iglesia y sucumbe al veneno.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>Su muerte forma parte del horario. El Abad espera su llegada a misa y, al detectar su agonía, anuncia lo ocurrido y permite que comience la siguiente fase.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="berengario">
+            <figure class="character-art"><img src="../assets/characters/berengario.png" alt="Sprite original CPC de Berengario"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Berengario · El testigo que también vigila</p>
+            <h3>Berengario</h3>
+            <p>Trabaja en el scriptorium y actúa como guía el segundo día: presume de los copistas y señala el puesto de Venancio. Pero protege el pergamino. Si Guillermo lo toma, exige que lo deje; si insiste o abandona la pantalla, va a buscar al Abad.</p>
+            <blockquote>«Dejad el manuscrito de Venancio o advertiré al Abad.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Prima y vísperas en la iglesia, sexta en el refectorio, trabajo en el scriptorium y completas en la celda común.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D1–2 controla el manuscrito. Noche del D3: se cubre con una capucha, sale de la celda, va a por el libro y lo lleva a la celda de Severino. Allí muere, dejando una pista crucial en su lengua y dedos.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>En vísperas del D2 puede quedarse inmóvil protegiendo el pergamino hasta que Malaquías baje del scriptorium: dos rutinas se sincronizan sin intervención del jugador.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="severino">
+            <figure class="character-art"><img src="../assets/characters/severino.png" alt="Sprite original CPC de Severino"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Severino · Herbolario y voz de la duda</p>
+            <h3>Severino</h3>
+            <p>Se presenta a partir del segundo día y expresa con claridad una de las ideas del juego: alguien decide qué pueden saber los monjes. Examina el cadáver de Berengario y observa las manchas negras que relacionan las muertes con el libro.</p>
+            <blockquote>«Alguien no quiere que los monjes decidan por sí solos lo que deben saber.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Prima en la iglesia, sexta en el refectorio, completas y noche en su celda. Entre tercia y nona alterna su celda con una habitación adyacente y busca a Guillermo para conversar.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D2 se presenta. D4, en tercia, busca a Guillermo y le pide que espere antes de revelar las manchas. D5 encuentra un extraño libro en su celda e intenta avisarlo; Malaquías llega antes o después y lo asesina.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>Su ruta depende de si ya se presentó, de la posición de Guillermo y de si otra frase está sonando. El encuentro parece casual porque el programa comprueba todas esas condiciones antes de iniciarlo.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="jorge">
+            <figure class="character-art"><img src="../assets/characters/jorge.png" alt="Sprite original CPC de Jorge"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Jorge de Burgos · El centro inmóvil del laberinto</p>
+            <h3>Jorge</h3>
+            <p>Durante gran parte de la partida ni siquiera está activo. Sólo aparece en una escena cuidadosamente preparada y luego desaparece hasta el desenlace. Casi no lo vemos, pero todo acaba conduciendo hasta él.</p>
+            <blockquote>«Las vías del Anticristo son lentas y tortuosas.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>D3: permanece quieto en prima; en tercia el Abad presenta a Guillermo y Jorge advierte sobre los últimos días; en sexta vuelve a la celda común y se desactiva.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D3 oculta el libro. D6–7 espera tras el espejo, ofrece el <cite>Coena Cypriani</cite> y confía en su veneno. Si descubre los guantes, huye con el volumen por el laberinto hasta la habitación iluminada.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>El código cambia la cámara para seguirlo durante la conversación final, oscurece el área de juego, retira el libro del inventario y hace que la revelación termine en una fuga.</span></div>
+          </article>
+
+          <article class="character-panel" data-character="bernardo">
+            <figure class="character-art"><img src="../assets/characters/bernardo.png" alt="Sprite original CPC de Bernardo Gui"><figcaption>Sprite CPC · diseño original</figcaption></figure>
+            <p class="role">Bernardo Gui · La investigación como persecución</p>
+            <h3>Bernardo</h3>
+            <p>Aparece en las escaleras el cuarto día para recuperar el manuscrito, no para descubrir al asesino. Si Guillermo lo lleva, lo persigue, exige que se lo entregue y reduce el Obsequium hasta arrebatárselo; después se lo lleva al Abad.</p>
+            <blockquote>«Dadme el manuscrito, fray Guillermo.»</blockquote>
+            <div class="stat-line"><b>Rutina</b><span>Asiste a prima, sexta y vísperas; duerme en la celda común. Cuando termina su tarea, recorre destinos aleatorios por la abadía.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D4 entra, localiza el pergamino o sigue a Guillermo, lo entrega al Abad y obliga a guardarlo en su celda. D5 abandona la abadía por las escaleras.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>Su llegada altera también a Malaquías: el bibliotecario espera a que Bernardo salga del ala izquierda antes de cerrar las puertas.</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter paper-light" id="horas">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">IV · La regla</span>
+          <h2>Las campanas mandan</h2>
+        </div>
+        <p class="chapter-intro">Aquí el día se mide en prima, tercia, sexta, nona, vísperas y completas. Selecciona una fase y observa cómo una campanada pone en movimiento a toda la comunidad.</p>
+      </div>
+      <div class="clock-shell reveal">
+        <div class="clock-face" aria-label="Reloj de las horas canónicas">
+          <button class="hour-button" type="button" data-title="Noche" data-text="La puerta se cierra. Adso pregunta si dormimos. El Abad duerme, se despierta y patrulla. Es la única ventana para la biblioteca.">Noche</button>
+          <button class="hour-button is-active" type="button" data-title="Prima" data-text="Misa al amanecer. El Abad espera a los monjes previstos para ese día y pronuncia una frase distinta según las ausencias y muertes.">Prima</button>
+          <button class="hour-button" type="button" data-title="Tercia" data-text="La gran hora de la investigación: presentaciones, confidencias, asesinatos y órdenes. El Abad llama a Guillermo después de misa.">Tercia</button>
+          <button class="hour-button" type="button" data-title="Sexta" data-text="Todos al refectorio. El Abad sólo permite avanzar cuando los comensales correctos ocupan sus lugares.">Sexta</button>
+          <button class="hour-button" type="button" data-title="Nona" data-text="Tiempo de tránsito y pesquisa. El primer día contiene el largo paseo de bienvenida; el quinto, el hallazgo de Severino.">Nona</button>
+          <button class="hour-button" type="button" data-title="Vísperas" data-text="La comunidad vuelve a la iglesia. Malaquías cierra el ala izquierda antes de acudir. El quinto día muere durante el rito.">Vísperas</button>
+          <button class="hour-button" type="button" data-title="Completas" data-text="El Abad ordena ir a las celdas, escolta a Guillermo, espera que entre y cierra la puerta que comunica con la iglesia.">Completas</button>
+          <div class="clock-center"><small>Ahora</small><strong data-clock-title>Prima</strong><span data-clock-text>Misa al amanecer. El Abad espera a los monjes previstos para ese día y pronuncia una frase distinta según las ausencias y muertes.</span></div>
+        </div>
+        <div class="clock-copy prose">
+          <h3>El horario es el nivel</h3>
+          <p>Aquí el paso del tiempo obliga a respetar las normas. Hay que interrumpir la investigación, encontrar la iglesia o el refectorio y ocupar el lugar exacto. Durante cada ceremonia, el programa comprueba qué personajes siguen vivos y decide qué fase puede comenzar.</p>
+          <div class="rule-box rule-box--obsequium">
+            <div class="rule-box-copy"><b>La orden del Abad:</b><span>asistir a oficios y comida; estar en la celda de noche; no entrar en la biblioteca; no explorar donde no se ha concedido permiso.</span></div>
+            <figure class="obsequium" aria-label="Indicador de Obsequium de la versión gráfica seleccionada">
+              <div class="obsequium-focus">
+                <img class="obsequium-screen" src="../assets/game/obsequium-cpc-current.png" data-platform-src-cpc="../assets/game/obsequium-cpc-current.png" data-platform-src-pc="../assets/game/obsequium-pc-current.png" data-platform-src-vga="../assets/game/obsequium-vga-current.png" data-platform-src-spectrum="../assets/game/obsequium-spectrum-current.png" data-platform-src-msx="../assets/game/obsequium-msx-current.png?v=3" data-platform-alt-cpc="Indicador de Obsequium de Amstrad CPC" data-platform-alt-pc="Indicador de Obsequium de PC CGA" data-platform-alt-vga="Indicador de Obsequium del remake VGA" data-platform-alt-spectrum="Indicador de Obsequium de ZX Spectrum" data-platform-alt-msx="Indicador de Obsequium de MSX" alt="Indicador de Obsequium de Amstrad CPC">
+              </div>
+              <figcaption><span>Captura real · Sigue el selector superior</span><b>Obsequium visible</b></figcaption>
+            </figure>
+            <p class="caption">El valor interno va de 0 a 31. Cada reprimenda lo reduce y, al agotarse, Guillermo es expulsado. El marcador hace visible cuánto está tensando la paciencia del Abad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter dark" id="laberinto">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">V · El laberinto</span>
+          <h2>La abadía como sospechoso</h2>
+        </div>
+        <p class="chapter-intro">La perspectiva isométrica oculta puertas tras los muros, confunde el sentido de la orientación y obliga a recordar los desniveles. Aquí perderse también forma parte de la investigación.</p>
+      </div>
+
+      <div class="labyrinth-layout reveal">
+        <div class="map-frame" aria-label="Mapa de Retro Gamer España con localizaciones interactivas">
+          <img class="map-source" src="../assets/maps/interactive-retrogamer-map.jpg" alt="Mapa de la abadía publicado en Retro Gamer España 41" loading="lazy">
+          <a class="map-zoom-trigger" href="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox-hires data-alt="Mapa completo de la abadía publicado en Retro Gamer España 41" data-caption="Mapa completo publicado por Retro Gamer España 41, con la planta principal, el scriptorium y el laberinto." aria-label="Ampliar el mapa completo"></a>
+          <button class="map-hotspot is-active" type="button" aria-label="Iglesia" data-title="Iglesia" data-text="Centro del orden. Prima y vísperas sincronizan a los personajes; el altar llega a custodiar una llave crucial."></button>
+          <button class="map-hotspot" type="button" aria-label="Celda de fray Guillermo" data-title="Celda de fray Guillermo y Adso" data-text="La habitación asignada a Guillermo y Adso. El Abad los escolta aquí tras completas; desde ella comienzan las salidas nocturnas."></button>
+          <button class="map-hotspot" type="button" aria-label="Scriptorium" data-title="Scriptorium" data-text="Lugar de trabajo de Malaquías y Berengario. Aquí aparece el pergamino de Venancio y comienza la cadena de denuncias."></button>
+          <button class="map-hotspot" type="button" aria-label="Biblioteca" data-title="Biblioteca" data-text="Una planta superior prohibida, organizada como laberinto. Sin lámpara, el juego oscurece la vista y activa una cuenta atrás."></button>
+          <button class="map-hotspot" type="button" aria-label="Refectorio" data-title="Refectorio" data-text="A sexta, el reparto ocupa lugares fijos. La comida funciona como comprobación de presencia y avance del reloj."></button>
+          <button class="map-hotspot" type="button" aria-label="Espejo" data-title="Habitación del espejo" data-text="El pergamino y las gafas revelan una instrucción. La combinación correcta abre el espejo; la equivocada abre una trampa."></button>
+          <button class="map-hotspot" type="button" aria-label="Celda del Abad" data-title="Celda del Abad" data-text="El Abad duerme aquí, guarda el manuscrito y castiga cualquier intrusión. Entrar sin permiso reduce el Obsequium."></button>
+          <button class="map-hotspot" type="button" aria-label="Cocina" data-title="Cocina" data-text="Aquí se encuentra la lámpara de aceite. La estancia también comunica con el pasadizo secreto usado para cerrar el ala occidental."></button>
+          <button class="map-hotspot" type="button" aria-label="Celda de Severino" data-title="Celda de Severino" data-text="La celda del herbolario: Berengario muere aquí, Severino encuentra el libro y después es asesinado. Más tarde se obtienen los guantes."></button>
+          <button class="map-hotspot" type="button" aria-label="Habitación iluminada" data-title="Habitación iluminada" data-text="La sala del laberinto donde aparecen las gafas. En el desenlace, Jorge huye hacia ella con el libro envenenado."></button>
+        </div>
+        <aside class="map-panel">
+          <small>Localización seleccionada</small>
+          <h3 data-map-title>Iglesia</h3>
+          <p data-map-text>Centro del orden. Prima y vísperas sincronizan a los personajes; el altar llega a custodiar una llave crucial.</p>
+          <p class="map-tip">Los puntos están superpuestos al mapa publicado por Retro Gamer España 41, que reproduce y amplía la cartografía clásica de MicroHobby. Debajo están los documentos completos.</p>
+        </aside>
+      </div>
+
+      <div class="map-evidence reveal">
+        <div class="map-plan-grid">
+          <figure class="map-document map-document--plan">
+            <button type="button" data-lightbox="../assets/maps/main-floor-plan.webp" data-lightbox-hires data-alt="Plano independiente de la planta principal" data-caption="Planta principal en una copia web de 1278 × 960 píxeles, sin el escalado de la página impresa."><img src="../assets/maps/main-floor-plan.webp" alt="Plano de la planta principal" loading="lazy"></button>
+            <figcaption><strong>Planta principal</strong><span>El nivel inferior completo, separado y ampliable.</span></figcaption>
+          </figure>
+          <figure class="map-document map-document--plan">
+            <button type="button" data-lightbox="../assets/maps/scriptorium-plan.webp" data-lightbox-hires data-alt="Plano independiente del scriptorium" data-caption="Scriptorium en una copia web de 1278 × 960 píxeles, sin el escalado de la página impresa."><img src="../assets/maps/scriptorium-plan.webp" alt="Plano del scriptorium" loading="lazy"></button>
+            <figcaption><strong>Scriptorium</strong><span>Mesa de Venancio y escaleras hacia la biblioteca.</span></figcaption>
+          </figure>
+          <figure class="map-document map-document--plan">
+            <button type="button" data-lightbox="../assets/maps/library-labyrinth-plan.png" data-lightbox-hires data-alt="Plano independiente del laberinto de la biblioteca" data-caption="Plano clásico del laberinto conservado a 470 × 470 píxeles y normalizado en blanco y negro para acompañar los planos de la guía."><img src="../assets/maps/library-labyrinth-plan.png" alt="Plano del laberinto de la biblioteca" loading="lazy"></button>
+            <figcaption><strong>Biblioteca</strong><span>El laberinto superior como plano independiente.</span></figcaption>
+          </figure>
+        </div>
+        <figure class="map-document map-document--spread">
+          <div class="magazine-map-spread">
+            <button type="button" data-lightbox="../assets/magazines/mm33-guide-2.webp" data-alt="Primera página del mapa publicado por Micromanía 33" data-caption="Micromanía nº 33: primera mitad del mapa ilustrado de La Abadía del Crimen."><img src="../assets/magazines/mm33-guide-2.webp" alt="Primera página del mapa de Micromanía 33" loading="lazy"></button>
+            <button type="button" data-lightbox="../assets/magazines/mm33-guide-3.webp" data-alt="Segunda página del mapa publicado por Micromanía 33" data-caption="Micromanía nº 33: segunda mitad del mapa ilustrado de La Abadía del Crimen."><img src="../assets/magazines/mm33-guide-3.webp" alt="Segunda página del mapa de Micromanía 33" loading="lazy"></button>
+          </div>
+          <figcaption><strong>La cartografía de Micromanía</strong><span>El desplegable completo de dos páginas, publicado dos páginas después del comienzo de la guía.</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="stitched-atlas reveal">
+        <div class="stitched-heading">
+          <span class="source-tag">Cartografía de pantallas</span>
+          <h3>La abadía, reconstruida pantalla a pantalla</h3>
+          <p>Los mapas y recorridos que aparecen aquí fueron realizados hace años por Manuel Pazos para su página <a href="https://msxcartridgeshop.com/VientoSur/abadia/index.html"><cite>Viento Sur</cite></a>. Las <a href="../assets/guide/guide-p01.jpg" data-lightbox="../assets/guide/guide-p01.jpg" data-lightbox-pages="../assets/guide/guide-p01.jpg|../assets/guide/guide-p02.jpg|../assets/guide/guide-p04.jpg|../assets/guide/guide-p06.jpg|../assets/guide/guide-p07.jpg|../assets/guide/guide-p08.jpg|../assets/guide/guide-p09.jpg" data-page-label="7 páginas" data-alt="Selección de la guía ilustrada posterior para completar La Abadía del Crimen" data-caption="Siete páginas seleccionadas de la guía posterior basada en los mapas y recorridos originales de Manuel Pazos; se omiten las reproducciones sin cambios de los mapas de Micromanía ya mostrados en el reportaje.">siete páginas seleccionadas para este homenaje</a> pertenecen a <a href="https://x.com/EnriqueBCN/status/1550762568150618113"><cite>La Abadía del Crimen: guía para completar la aventura</cite></a>, una obra posterior basada en aquel trabajo; no son la guía original de <cite>Viento Sur</cite>. Se han omitido sus reproducciones sin cambios de los mapas de <cite>Micromanía</cite>, ya mostrados arriba desde las páginas originales de la revista. Los montajes reúnen pantallas reales de la versión CPC; la numeración identifica cada estancia y permite seguir el recorrido necesario para terminar el juego.</p>
+        </div>
+        <div class="stitched-grid">
+          <figure><button type="button" data-lightbox="../assets/guide/guide-p02.jpg" data-alt="Planta principal recompuesta con 61 pantallas del juego" data-caption="Guía para completar la aventura: planta principal formada con las 61 pantallas CPC, con accesos, celdas y pasadizos señalados."><img src="../assets/guide/guide-p02.jpg" alt="Mapa de la planta principal cosido con pantallas CPC" loading="lazy"></button><figcaption><strong>La planta principal completa</strong><span>61 habitaciones, desde la entrada hasta la celda de Guillermo y Adso.</span></figcaption></figure>
+          <figure><button type="button" data-lightbox="../assets/guide/guide-p06.jpg" data-alt="Scriptorium recompuesto con pantallas del juego" data-caption="Guía para completar la aventura: las dieciséis pantallas del scriptorium, incluidos los accesos a la biblioteca."><img src="../assets/guide/guide-p06.jpg" alt="Mapa del scriptorium cosido con pantallas CPC" loading="lazy"></button><figcaption><strong>El scriptorium</strong><span>Mesas, escaleras y accesos secretos reunidos en una sola imagen.</span></figcaption></figure>
+          <figure><button type="button" data-lightbox="../assets/guide/guide-p08.jpg" data-alt="Recorrido visual de la entrada a la celda y a la iglesia" data-caption="Guía para completar la aventura: recorrido visual numerado desde la entrada hasta la celda y desde la celda hasta la iglesia."><img src="../assets/guide/guide-p08.jpg" alt="Ruta cosida con pantallas desde la entrada a la celda" loading="lazy"></button><figcaption><strong>Aprender el camino</strong><span>La ruta de llegada recompuesta tal como se ve al caminarla.</span></figcaption></figure>
+        </div>
+        <p class="guide-link">Esta selección conserva las reconstrucciones, las anotaciones y la solución ilustrada día por día; los planos reproducidos sin cambios pueden consultarse arriba en las páginas originales de <cite>Micromanía</cite>.</p>
+      </div>
+
+      <div class="screen-atlas reveal">
+        <div class="atlas-heading"><span class="source-tag">Atlas de pantallas</span><h3>Piedra por piedra, máquina por máquina</h3><p>Ocho habitaciones alineadas para comparar geometría, color y legibilidad. Juntas muestran los arcos, muros y suelos con los que el juego construye una abadía reconocible.</p></div>
+        <figure><img src="../assets/ports/cpc-3.png" alt="Pantalla Amstrad CPC" loading="lazy"><figcaption>CPC · exterior</figcaption></figure>
+        <figure><img src="../assets/ports/cpc-5.png" alt="Pantalla Amstrad CPC en interior" loading="lazy"><figcaption>CPC · interior</figcaption></figure>
+        <figure><img src="../assets/ports/spectrum-3.png" alt="Pantalla ZX Spectrum" loading="lazy"><figcaption>Spectrum · exterior</figcaption></figure>
+        <figure><img src="../assets/ports/spectrum-5.png" alt="Pantalla ZX Spectrum en interior" loading="lazy"><figcaption>Spectrum · interior</figcaption></figure>
+        <figure><img src="../assets/ports/msx-3.png" alt="Pantalla MSX" loading="lazy"><figcaption>MSX · exterior</figcaption></figure>
+        <figure><img src="../assets/ports/msx-5.png" alt="Pantalla MSX en interior" loading="lazy"><figcaption>MSX · interior</figcaption></figure>
+        <figure><img src="../assets/ports/pc-3.png" alt="Pantalla DOS" loading="lazy"><figcaption>DOS · exterior</figcaption></figure>
+        <figure><img src="../assets/ports/pc-5.png" alt="Pantalla DOS en interior" loading="lazy"><figcaption>DOS · interior</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="chapter" id="objetos">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">VI · El armario de pruebas</span>
+          <h2>Ocho objetos, ninguna casualidad</h2>
+        </div>
+        <p class="chapter-intro">El inventario es pequeño, pero cada objeto tiene su momento. Cambian de dueño, aparecen sólo ciertos días o abren rutas que el juego nunca explica directamente.</p>
+      </div>
+      <p class="sprite-credit reveal">Patrones originales de Amstrad CPC, mostrados en una bandeja real de tres casillas del marcador.</p>
+      <div class="object-grid reveal">
+        <article class="object-card" data-symbol="L"><img class="object-sprite" src="../assets/items/libro.png" alt="Sprite CPC del libro"><small>01 · Prueba mortal</small><h3>Libro</h3><p>El <cite>Coena Cypriani</cite>. Pasa por varias manos, mata a quien humedece los dedos y desencadena el final.</p></article>
+        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="Sprite CPC de los guantes"><small>02 · Protección</small><h3>Guantes</h3><p>Permiten tocar el libro envenenado. Jorge no puede verlos; Adso sí.</p></article>
+        <article class="object-card" data-symbol="O"><img class="object-sprite" src="../assets/items/gafas.png" alt="Sprite CPC de las gafas"><small>03 · Lectura</small><h3>Gafas</h3><p>Hacen legible el pergamino. Aparecen en la habitación iluminada del laberinto y pueden desaparecer al amanecer.</p></article>
+        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="Sprite CPC del pergamino"><small>04 · Código</small><h3>Pergamino</h3><p>El manuscrito de Venancio contiene la pista del espejo. Berengario, Bernardo y el Abad pueden quitárnoslo.</p></article>
+        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>05 · Acceso</small><h3>Llave I</h3><p>Pasa por el altar; si no se obtiene a tiempo desaparece. Robarla puede despertar al Abad.</p></article>
+        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>06 · Acceso</small><h3>Llave II</h3><p>Abre una de las puertas necesarias durante las incursiones nocturnas. Cada llave modifica las puertas que el buscador de rutas considera accesibles.</p></article>
+        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>07 · Acceso</small><h3>Llave III</h3><p>Está relacionada con la habitación de Severino y la mesa de Malaquías; su ubicación también depende de los movimientos de un monje.</p></article>
+        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="Sprite CPC de la lámpara"><small>08 · Tiempo</small><h3>Lámpara</h3><p>La lleva Adso. Se consume sólo en zonas oscuras, avisa antes de agotarse y puede reaparecer en la cocina otro día.</p></article>
+      </div>
+    </section>
+
+    <section class="chapter paper-light" id="semana">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">VII · La semana</span>
+          <h2>Siete días hacia el <em>Finis Africae</em></h2>
+        </div>
+        <p class="chapter-intro">Las primeras tarjetas evitan revelar a los culpables. Si quieres conocer todos los detalles, despliega después los textos ocultos. En pantallas pequeñas, las tarjetas se desplazan horizontalmente.</p>
+      </div>
+      <div class="days-control reveal">
+        <p class="caption">Las tramas ocultas están difuminadas.</p>
+        <button class="spoiler-button" type="button" aria-pressed="false" data-show="Revelar todos los secretos" data-hide="Ocultar los secretos">Revelar todos los secretos</button>
+      </div>
+      <div class="days-grid reveal">
+        <article class="day-card"><span class="day-no">Día I</span><h3>La llegada</h3><p>El Abad nos guía, explica el crimen y fija las normas. El ala izquierda está prohibida.</p><p class="spoiler-text" data-cover="Secreto del día">La arquitectura y la rutina se aprenden mientras el caso parece todavía controlable.</p></article>
+        <article class="day-card"><span class="day-no">Día II</span><h3>El scriptorium</h3><p>Severino se presenta. Malaquías permite que Berengario muestre el lugar de trabajo.</p><p class="spoiler-text" data-cover="Secreto del día">El pergamino de Venancio puede ser tomado; Berengario amenaza con avisar al Abad y Malaquías vigila la biblioteca.</p></article>
+        <article class="day-card"><span class="day-no">Día III</span><h3>El anciano</h3><p>El Abad presenta a Jorge, que habla del Anticristo y de los últimos días.</p><p class="spoiler-text" data-cover="Secreto del día">De noche, Berengario encapuchado roba el libro, lo lleva a la celda de Severino y muere. Jorge lo oculta al amanecer.</p></article>
+        <article class="day-card"><span class="day-no">Día IV</span><h3>La Inquisición</h3><p>Llega Bernardo. El Abad ordena abandonar la investigación.</p><p class="spoiler-text" data-cover="Secreto del día">Bernardo persigue el pergamino y lo entrega al Abad. Severino revela las manchas negras de Berengario.</p></article>
+        <article class="day-card"><span class="day-no">Día V</span><h3>Mil escorpiones</h3><p>Bernardo abandona la abadía. Severino encuentra un extraño libro en su celda.</p><p class="spoiler-text" data-cover="Secreto del día">Malaquías asesina a Severino en tercia. En vísperas muere en la iglesia, alcanzado por el mismo veneno.</p></article>
+          <article class="day-card"><span class="day-no">Día VI</span><h3>La biblioteca</h3><p>El Abad anuncia que mañana habrá que partir. Ya es posible reunir las pistas necesarias para abrir el espejo.</p><p class="spoiler-text" data-cover="Secreto del día">Llaves, gafas, pergamino y lámpara permiten atravesar la biblioteca y abrir la habitación tras el espejo.</p></article>
+          <article class="day-card"><span class="day-no">Día VII</span><h3>El libro</h3><p>La expulsión es inminente. Al llegar tercia, se acaba el tiempo.</p><p class="spoiler-text" data-cover="Secreto del día">Jorge ofrece el libro envenenado. Los guantes frustran su plan; huye hacia el laberinto y la investigación concluye.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <nav class="page-pagination" aria-label="Continuar leyendo">
+    <a class="page-previous" href="index.html"><span>Ruta anterior</span><strong>← Historia</strong></a>
+    <a class="page-next" href="tecnica.html"><span>Siguiente ruta</span><strong>Programación →</strong></a>
+  </nav>
+
+  <footer class="site-footer">
+    <div><strong>Finis?</strong><p>La investigación continúa por otras rutas del homenaje.</p><p><a href="#inicio">Volver arriba</a> · <a href="../en/game.html" lang="en">English edition</a></p><p class="project-credit"><span class="credit-role">Autor</span>: Andrés del Campo Novales <span>with GPT 5.6 Sol</span><span class="technical-reviewers"><span class="credit-role">Revisión técnica</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
+    <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
+  </footer>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Visor de archivo">
+    <button class="lightbox-close" type="button">Cerrar ×</button>
+    <div class="lightbox-zoom" aria-label="Ampliación"><button class="lightbox-zoom-out" type="button" aria-label="Alejar">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Acercar">+</button><button class="lightbox-zoom-fit" type="button">Ajustar</button></div>
+    <div class="lightbox-stage"><img src="" alt=""></div>
+    <div class="lightbox-navigation" aria-label="Páginas del artículo" hidden><button class="lightbox-previous" type="button" aria-label="Página anterior">← Anterior</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Página siguiente">Siguiente →</button></div>
+    <p class="lightbox-caption"></p>
+  </div>
+  <script src="../app.js?v=20260906-pages1"></script>
+</body>
+</html>

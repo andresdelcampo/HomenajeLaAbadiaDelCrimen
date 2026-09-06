@@ -12,7 +12,7 @@ A bilingual, interactive visual archive devoted to the classic game by Paco Men�
 
 Este homenaje recorre la historia, los personajes y la arquitectura de *La Abadía del Crimen*, junto con sus siete jornadas, versiones, objetos, sonido, apariciones en prensa, desarrollo técnico y legado.
 
-La experiencia está construida como un archivo editorial navegable: incluye expedientes interactivos, control de spoilers, cartografía, comparaciones visuales entre plataformas, audio preservado y una selección de páginas históricas que pueden abrirse y examinarse con controles de zoom dentro del propio sitio. La presentación utiliza los gráficos originales de CPC 6128 por defecto y permite elegir desde la cabecera las ediciones visuales CPC, PC CGA, remake PC VGA a 256 colores, ZX Spectrum y MSX.
+La experiencia está construida como un archivo editorial de cinco rutas —Historia, El juego, Programación, Prensa y anuncios, y Legado— conectadas por una navegación persistente. Incluye expedientes interactivos, control de spoilers, cartografía, comparaciones visuales entre plataformas, audio preservado y una selección de páginas históricas que pueden abrirse y examinarse con controles de zoom dentro del propio sitio. La presentación utiliza los gráficos originales de CPC 6128 por defecto y permite elegir desde la cabecera las ediciones visuales CPC, PC CGA, remake PC VGA a 256 colores, ZX Spectrum y MSX.
 
 ![Apertura de la edición española](assets/readme/preview-es.png)
 
@@ -29,7 +29,7 @@ La experiencia está construida como un archivo editorial navegable: incluye exp
 
 This tribute explores the history, characters, and architecture of *La Abadía del Crimen*, together with its seven-day mystery, versions, objects, sound, contemporary press coverage, technical construction, and legacy.
 
-The experience is designed as a navigable editorial archive. It includes interactive dossiers, spoiler controls, cartography, visual platform comparisons, preserved audio, and a curated selection of historical pages that can be opened and examined with zoom controls inside the site itself. Presentation defaults to the original CPC 6128 graphics, while a header control offers CPC, PC CGA, the 256-colour PC VGA remake, ZX Spectrum, and MSX visual editions.
+The experience is designed as an editorial archive with five routes—History, The game, Programming, Press & adverts, and Legacy—connected by persistent navigation. It includes interactive dossiers, spoiler controls, cartography, visual platform comparisons, preserved audio, and a curated selection of historical pages that can be opened and examined with zoom controls inside the site itself. Presentation defaults to the original CPC 6128 graphics, while a header control offers CPC, PC CGA, the 256-colour PC VGA remake, ZX Spectrum, and MSX visual editions.
 
 ![The press archive in the English edition](assets/readme/preview-en.png)
 

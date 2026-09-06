@@ -5,7 +5,11 @@ import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = [ROOT / "index.html", ROOT / "es" / "index.html", ROOT / "en" / "index.html"]
+PAGES = [
+    ROOT / "index.html",
+    *(ROOT / "es" / name for name in ("index.html", "juego.html", "tecnica.html", "prensa.html", "legado.html")),
+    *(ROOT / "en" / name for name in ("index.html", "game.html", "technology.html", "press.html", "legacy.html")),
+]
 PLATFORMS = ("cpc", "pc", "vga", "spectrum", "msx")
 CHARACTERS = ("guillermo", "adso", "abad", "malaquias", "berengario", "severino", "jorge", "bernardo")
 ITEMS = ("libro", "guantes", "gafas", "pergamino", "llave", "lampara")
@@ -44,7 +48,7 @@ def main() -> None:
     print(f"MISSING_LOCAL: {missing or 'None'}")
     print(f"LIGHTBOXES: {lightboxes}")
     print(f"PLATFORM_CONTROLS: {platform_controls}")
-    if missing or platform_controls != [5, 5, 5]:
+    if missing or platform_controls != [5] * len(PAGES):
         raise SystemExit(1)
 
 
