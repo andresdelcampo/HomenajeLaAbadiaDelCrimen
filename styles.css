@@ -161,7 +161,7 @@ a:hover { color: var(--blue); }
   background: linear-gradient(90deg, var(--red-bright), var(--gold));
   box-shadow: 0 0 8px rgba(219,75,52,.55);
 }
-.nav-actions { display: flex; flex: 0 0 auto; align-items: center; gap: .5rem; }
+.nav-actions { display: flex; flex: 0 0 auto; align-items: stretch; gap: .5rem; }
 .platform-picker {
   display: inline-flex;
   align-items: center;
@@ -172,19 +172,19 @@ a:hover { color: var(--blue); }
 }
 .platform-picker > span {
   padding: 0 .45rem;
-  color: rgba(255,255,255,.56);
-  font: 700 .56rem/1 var(--mono);
+  color: var(--white);
+  font: 700 .72rem/1 var(--mono);
   letter-spacing: .08em;
   text-transform: uppercase;
 }
 .platform-picker button {
-  min-height: 1.8rem;
-  padding: .38rem .5rem;
+  min-height: 1.35rem;
+  padding: .2rem .5rem;
   border: 0;
   color: rgba(255,255,255,.64);
   background: transparent;
   cursor: pointer;
-  font: 700 .62rem/1 var(--mono);
+  font: 700 .72rem/1 var(--mono);
   letter-spacing: .06em;
   text-transform: uppercase;
 }
@@ -202,6 +202,7 @@ a:hover { color: var(--blue); }
   text-transform: uppercase;
 }
 .language-link:hover, .nav-toggle:hover { border-color: var(--gold); color: var(--gold); }
+.language-link { display: inline-flex; align-items: center; justify-content: center; padding-block: .25rem; white-space: nowrap; }
 .nav-toggle { display: none; }
 
 html[data-platform="cpc"] .hero { --hero-image: url("assets/platforms/cpc/title-screen.png"); }
@@ -299,6 +300,9 @@ html[data-platform="msx"] .hero { --hero-image: url("assets/platforms/msx/title-
   letter-spacing: .1em;
   writing-mode: vertical-rl;
 }
+
+/* Route illustrations belong to the optional editorial presentation. */
+.editorial-plate { display: none; }
 
 .page-masthead {
   position: relative;
@@ -1626,7 +1630,8 @@ html[data-platform="pc"] .gate-title-art { background-image: url("assets/platfor
 html[data-platform="vga"] .gate-title-art { background-image: url("assets/platforms/vga/title-logo.png"); }
 html[data-platform="spectrum"] .gate-title-art { background-image: url("assets/platforms/spectrum/title-logo.png"); }
 html[data-platform="msx"] .gate-title-art { background-image: url("assets/platforms/msx/title-logo.png"); }
-.platform-picker--gate { width: max-content; margin: .65rem 0 .25rem; }
+.platform-picker--gate { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(.25rem, 1vw, 1rem); width: 100%; margin: 1rem 0 2rem; }
+.platform-picker--gate button { padding-inline: .25rem; font-size: .72rem; white-space: nowrap; }
 .gate-copy p { max-width: 560px; color: rgba(255,255,255,.7); }
 .gate-intro { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 760px; }
 .gate-intro p { margin: 0; font-size: .98rem; }
@@ -1634,6 +1639,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
 .gate-config-heading { display: flex; gap: .65rem; margin-top: 2rem; color: var(--white); font: 700 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 .gate-config-heading span:nth-child(2) { color: var(--gold); }
 .gate-step-heading { display: flex; align-items: baseline; gap: .55rem; margin-top: 1.25rem; color: rgba(255,255,255,.68); font: 700 .62rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+#graphics-step { font-size: .72rem; }
 .gate-step-heading [aria-hidden="true"] { color: var(--gold); }
 .gate-step-number { color: var(--gold); font-size: .82rem; letter-spacing: .06em; }
 .gate-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: .75rem; }
@@ -1791,7 +1797,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .vga-remake-gallery { grid-template-columns: 1fr; }
   .vga-sprite-strip { grid-template-columns: repeat(5, 1fr); }
   .vga-sprite-strip > span { grid-column: 1 / -1; }
-  .language-link { padding: .48rem .55rem; }
+  .language-link { padding: .25rem .55rem; }
   .clock-copy .rule-box--obsequium { grid-template-columns: 1fr; }
   .hero-meta { font-size: .65rem; }
   .character-list { grid-template-columns: 1fr 1fr; }

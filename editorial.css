@@ -1,0 +1,182 @@
+/* Selected refinements retained after visual review. */
+
+/* Calmer, two-row route navigation on laptop and desktop widths. */
+.site-nav { background: #191c1a; backdrop-filter: none; border-bottom-color: #686b60; }
+.nav-links a {
+  font-family: Arial, sans-serif;
+  font-size: .76rem;
+  letter-spacing: .015em;
+  text-transform: none;
+}
+.nav-links a[aria-current="page"]::after { background: var(--gold); box-shadow: none; }
+.platform-picker { background: transparent; }
+.platform-picker > span { font-size: .72rem; }
+.platform-picker button { font-size: .72rem; }
+
+/* Keep the opening artwork clear beneath the taller two-row navigation. */
+body[data-page="history"] .hero::before {
+  inset: 1.5rem 0 0;
+  background-position: center top;
+  transform: none;
+}
+
+/* Programming opening selected during review. */
+body[data-page="technology"] .page-masthead {
+  min-height: 460px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem max(2.5rem, calc((100vw - var(--max)) / 2));
+  color: #242522;
+  background-color: #dde3d8;
+  background-image:
+    linear-gradient(#233b2710 1px, transparent 1px),
+    linear-gradient(90deg, #233b2710 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-bottom: 1px solid #b9b8ab;
+}
+body[data-page="technology"] .page-masthead::before,
+body[data-page="technology"] .page-masthead::after { display: none; }
+body[data-page="technology"] .page-masthead-inner { width: 100%; padding: 0; }
+body[data-page="technology"] .page-masthead h1 {
+  font-family: var(--mono);
+  font-size: clamp(2.7rem, 4.5vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -.06em;
+  text-shadow: none;
+  text-wrap: initial;
+}
+body[data-page="technology"] .page-masthead .eyebrow { color: #943b29; letter-spacing: .06em; }
+body[data-page="technology"] .page-masthead .eyebrow::before { display: none; }
+body[data-page="technology"] .page-masthead-inner > p:not(.eyebrow) {
+  max-width: 34rem;
+  color: #55554d;
+}
+body[data-page="technology"] .page-cue {
+  color: #943b29;
+  border-bottom: 1px solid;
+  padding-bottom: .45rem;
+}
+body[data-page="technology"] .page-cue:hover { color: #242522; }
+body[data-page="technology"] .editorial-plate { display: block; margin: 0; min-width: 0; }
+body[data-page="technology"] .editorial-plate img {
+  width: 100%;
+  max-height: 330px;
+  object-fit: contain;
+}
+body[data-page="technology"] .editorial-plate figcaption {
+  margin-top: .8rem;
+  padding-top: .6rem;
+  border-top: 1px solid;
+  font: .65rem/1.5 var(--mono);
+}
+
+/* Shorter route navigation. */
+.page-pagination { border-top: 1px solid rgba(212,154,46,.34); }
+.page-pagination a {
+  min-height: 6.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.page-pagination strong { font-size: clamp(1.55rem, 2.6vw, 2.55rem); }
+
+/* Compact closing colophon; the seal shares the title row instead of adding height. */
+.site-footer {
+  position: relative;
+  display: block;
+  padding-top: 1.35rem;
+  padding-bottom: 1.25rem;
+}
+.site-footer > div:first-child { padding-right: 0; }
+.site-footer strong,
+.site-footer strong + p,
+.site-footer strong + p + p { max-width: calc(100% - 6.5rem); }
+.site-footer strong { font-size: clamp(2rem, 3vw, 3rem); }
+.site-footer strong + p { margin: .4rem 0 0; }
+.site-footer p + p { margin: .22rem 0 0; }
+.site-footer .project-credit { max-width: none; margin-top: .65rem; margin-bottom: 0; }
+.site-footer .technical-reviewers { margin-top: .15rem; }
+.footer-labyrinth {
+  position: absolute;
+  top: 1rem;
+  right: max(1rem, calc((100vw - var(--max)) / 2));
+  width: 5.25rem;
+}
+
+@media (max-width: 1320px) and (min-width: 761px) {
+  .site-nav { grid-template-columns: 1fr auto; row-gap: .75rem; }
+  .nav-toggle { display: none; }
+  .nav-actions { grid-column: 2; grid-row: 1; }
+  .nav-links,
+  .nav-links.is-open {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    justify-self: stretch;
+    gap: 2rem;
+    padding: .65rem 0 .3rem;
+    border: 0;
+    border-top: 1px solid #464c42;
+    background: transparent;
+  }
+  .nav-links a[aria-current="page"]::after {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: -.35rem;
+    width: auto;
+    height: 2px;
+  }
+  html { scroll-padding-top: 8rem; }
+}
+
+@media (max-width: 760px) {
+  .site-nav { grid-template-columns: 1fr auto; row-gap: .5rem; }
+  .nav-mark span { display: inline; white-space: normal; max-width: 16rem; }
+  .nav-mark::before { width: 2.3rem; }
+  .nav-toggle { grid-column: 2; grid-row: 1; }
+  .nav-actions {
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    justify-self: stretch;
+  }
+  .nav-links { position: absolute; top: 100%; }
+  html { scroll-padding-top: 8.5rem; }
+  body[data-page="technology"] .page-masthead {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem;
+  }
+  body[data-page="technology"] .page-masthead h1 { font-size: clamp(3rem, 11vw, 4.8rem); }
+  body[data-page="technology"] .editorial-plate { width: 100%; max-width: 34rem; }
+  body[data-page="technology"] .editorial-plate img { max-height: 290px; }
+  .page-pagination a {
+    min-height: 5.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .site-footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .site-footer strong,
+  .site-footer strong + p,
+  .site-footer strong + p + p { max-width: calc(100% - 4.6rem); }
+  .site-footer strong { font-size: 2.2rem; }
+  .site-footer strong + p { margin-top: .3rem; }
+  .site-footer .project-credit { margin-top: .55rem; }
+  .site-footer .project-credit {
+    font-size: .56rem !important;
+    line-height: 1.25 !important;
+    letter-spacing: .045em;
+  }
+  .footer-labyrinth {
+    display: grid;
+    top: .8rem;
+    right: 1rem;
+    width: 3.75rem;
+  }
+}
