@@ -430,6 +430,164 @@ main { overflow: clip; }
   line-height: .76;
 }
 
+/* The Game route opens with the original CPC parchment renderer. */
+.parchment-chapter {
+  color: var(--white);
+  background:
+    radial-gradient(circle at 76% 18%, rgba(163,45,39,.22), transparent 26rem),
+    radial-gradient(circle at 18% 82%, rgba(212,154,46,.13), transparent 30rem),
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(255,255,255,.018) 80px),
+    #090c0f;
+}
+.parchment-chapter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .18;
+  background: linear-gradient(135deg, transparent 48%, rgba(212,154,46,.25) 49%, transparent 50%) 0 0 / 9rem 9rem;
+}
+.parchment-chapter .chapter-number { color: var(--gold); }
+.parchment-chapter .chapter-intro { color: rgba(255,250,240,.76); }
+.parchment-experience {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(19rem, .72fr);
+  gap: clamp(1.4rem, 4vw, 4rem);
+  align-items: start;
+}
+.parchment-stage {
+  position: relative;
+  padding: clamp(.55rem, 1.3vw, 1rem);
+  background: #050607;
+  border: 1px solid rgba(212,154,46,.5);
+  box-shadow: 0 2rem 5rem rgba(0,0,0,.52), 0 0 0 .35rem rgba(0,0,0,.38);
+}
+.parchment-stage::before,
+.parchment-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-color: var(--gold);
+  pointer-events: none;
+}
+.parchment-stage::before { inset: -.35rem auto auto -.35rem; border-left: 1px solid; border-top: 1px solid; }
+.parchment-stage::after { inset: auto -.35rem -.35rem auto; border-right: 1px solid; border-bottom: 1px solid; }
+.parchment-stage canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  background: #000;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+.parchment-edition {
+  position: absolute;
+  right: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  padding: .36rem .55rem;
+  color: rgba(255,250,240,.78);
+  background: rgba(5,6,7,.82);
+  border: 1px solid rgba(212,154,46,.42);
+  font: 700 .58rem/1 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.parchment-console {
+  position: sticky;
+  top: 6rem;
+  padding: clamp(1.3rem, 3vw, 2.2rem);
+  background: rgba(20,25,29,.92);
+  border-top: 3px solid var(--red-bright);
+  box-shadow: 0 1.3rem 3rem rgba(0,0,0,.3);
+}
+.parchment-console .eyebrow { margin: 0 0 1rem; color: var(--gold); }
+.parchment-console h3 { margin: 0; font: 400 clamp(2rem, 4vw, 3.7rem)/.92 var(--display); letter-spacing: -.04em; }
+.parchment-console > p:not(.eyebrow, .parchment-status) { margin: 1.2rem 0 0; color: rgba(255,250,240,.7); font-size: .95rem; line-height: 1.55; }
+.parchment-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .55rem;
+  margin-top: 1.5rem;
+}
+.parchment-controls button {
+  min-height: 2.8rem;
+  padding: .65rem .75rem;
+  color: var(--white);
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(212,154,46,.42);
+  cursor: pointer;
+  font: 700 .65rem/1.15 var(--mono);
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.parchment-controls button:first-child { color: var(--night); background: var(--gold); border-color: var(--gold); }
+.parchment-controls button:hover,
+.parchment-controls button:focus-visible { color: var(--night); background: var(--white); border-color: var(--white); }
+.parchment-status {
+  margin: .85rem 0 0;
+  color: rgba(255,250,240,.5);
+  font: 700 .64rem/1.2 var(--mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.parchment-soundtrack {
+  min-width: 0;
+  margin: 1.35rem 0 0;
+  padding: 1rem 0 0;
+  border: 0;
+  border-top: 1px solid rgba(103,197,193,.25);
+}
+.parchment-soundtrack legend {
+  padding: 0;
+  color: var(--cyan);
+  font: 700 .62rem/1.3 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.parchment-soundtrack > div { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+.parchment-soundtrack button {
+  min-height: 2.25rem;
+  padding: .5rem .7rem;
+  color: rgba(255,250,240,.78);
+  background: rgba(103,197,193,.04);
+  border: 1px solid rgba(103,197,193,.35);
+  cursor: pointer;
+  font: 700 .62rem/1 var(--mono);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.parchment-soundtrack button:hover:not(:disabled),
+.parchment-soundtrack button:focus-visible,
+.parchment-soundtrack button[aria-pressed="true"] { color: var(--night); background: var(--cyan); border-color: var(--cyan); }
+.parchment-soundtrack button:disabled { opacity: .32; cursor: default; }
+.parchment-soundtrack > span {
+  display: block;
+  margin-top: .55rem;
+  color: rgba(255,250,240,.45);
+  font: .6rem/1.3 var(--mono);
+}
+.parchment-transcript { margin-top: 1.5rem; border-top: 1px solid rgba(212,154,46,.28); }
+.parchment-transcript summary {
+  padding: 1rem 0 0;
+  color: var(--gold);
+  cursor: pointer;
+  font: 700 .68rem/1.3 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.parchment-transcript > div {
+  max-height: 28rem;
+  margin-top: 1rem;
+  padding-right: .7rem;
+  overflow: auto;
+  scrollbar-color: var(--gold) rgba(255,255,255,.06);
+}
+.parchment-transcript p { margin: 0 0 1rem; color: rgba(255,250,240,.76); font-size: .88rem; line-height: 1.58; }
+
 .wide-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(1.2rem, 2.5vw, 2.4rem); }
 .prose { max-width: 760px; }
 .prose p:first-child { margin-top: 0; }
@@ -1711,6 +1869,8 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .legacy-timeline::before { display: none; }
   .legacy-event { padding-top: 2rem; }
   .legacy-event::before { top: .45rem; }
+  .parchment-experience { grid-template-columns: 1fr; }
+  .parchment-console { position: relative; top: 0; }
 }
 
 @media (max-width: 760px) {
@@ -1851,6 +2011,9 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .clock-center strong.is-long { font-size: clamp(1.45rem, 8vw, 2.15rem); }
   .clock-center span { font-size: .68rem; line-height: 1.2; }
   .hour-button { width: 4.6rem; min-height: 1.9rem; padding: .3rem .35rem; font-size: .47rem; }
+  .parchment-stage { margin-inline: -.55rem; padding: .35rem; }
+  .parchment-edition { right: .75rem; bottom: .75rem; }
+  .parchment-controls { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

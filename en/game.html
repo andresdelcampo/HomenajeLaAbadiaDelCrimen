@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-controls3">
+  <link rel="stylesheet" href="../styles.css?v=20260906-parchment1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -39,11 +39,51 @@
       <p class="eyebrow">Interactive tribute · Route 2 of 5</p>
       <h1>The game</h1>
       <p>Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.</p>
-      <a class="page-cue" href="#characters">Enter the chapter ↓</a>
+      <a class="page-cue" href="#manuscript">Open the manuscript ↓</a>
     </div>
   </header>
 
   <main id="contenido">
+    <section class="chapter parchment-chapter" id="manuscript">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">II · The manuscript</span><h2>Memory awakens</h2></div>
+        <p class="chapter-intro">Before entering the abbey, Adso writes down what he witnessed in 1327. This is not a font being revealed: every letter forms pixel by pixel, following the strokes and pauses of the Amstrad CPC game.</p>
+      </div>
+      <div class="parchment-experience reveal" data-parchment data-parchment-language="en" data-parchment-platform="cpc">
+        <div class="parchment-stage">
+          <canvas width="320" height="200" data-parchment-canvas role="img" aria-label="The opening manuscript of La Abadía del Crimen being written with the original Amstrad CPC strokes">Your browser cannot display the manuscript animation.</canvas>
+          <span class="parchment-edition">Amstrad CPC · 1987</span>
+        </div>
+        <div class="parchment-console">
+          <p class="eyebrow">The threshold of the game</p>
+          <h3>Adso's testimony</h3>
+          <p>The reproduction preserves the original 320 × 200 canvas, palette, point order, pauses between lines, and page turn. Let it unfold at its own pace or accelerate the reading.</p>
+          <div class="parchment-controls" aria-label="Manuscript controls">
+            <button type="button" data-parchment-action="play">Play</button>
+            <button type="button" data-parchment-action="speed">Speed · 1×</button>
+            <button type="button" data-parchment-action="page">Complete page</button>
+            <button type="button" data-parchment-action="restart">Restart</button>
+          </div>
+          <p class="parchment-status" data-parchment-status aria-live="polite">Page 1</p>
+          <fieldset class="parchment-soundtrack">
+            <legend>Opening music · optional loop</legend>
+            <div>
+              <button type="button" data-parchment-sound="cpc" aria-pressed="false">♪ CPC</button>
+              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ PC</button>
+              <button type="button" data-parchment-sound="stop" disabled>Silence</button>
+            </div>
+            <span data-parchment-sound-status aria-live="polite">No music</span>
+            <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/inicio.wav"></audio>
+            <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+          </fieldset>
+          <details class="parchment-transcript">
+            <summary>Read the complete transcript</summary>
+            <div data-parchment-transcript></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="chapter dark" id="characters">
       <div class="chapter-header reveal">
         <div><span class="chapter-number">III · The characters</span><h2>Eight lives, seven days</h2></div>
@@ -183,6 +223,8 @@
   </footer>
 
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Archive viewer"><button class="lightbox-close" type="button">Close ×</button><div class="lightbox-zoom" aria-label="Zoom"><button class="lightbox-zoom-out" type="button" aria-label="Zoom out">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Zoom in">+</button><button class="lightbox-zoom-fit" type="button">Fit</button></div><div class="lightbox-stage"><img src="" alt=""></div><div class="lightbox-navigation" aria-label="Article pages" hidden><button class="lightbox-previous" type="button" aria-label="Previous page">← Previous</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Next page">Next →</button></div><p class="lightbox-caption"></p></div>
+  <script src="../assets/game/parchment-data.js?v=20260906-parchment1"></script>
+  <script src="../parchment.js?v=20260906-parchment1"></script>
   <script src="../app.js?v=20260906-pages1"></script>
 </body>
 </html>

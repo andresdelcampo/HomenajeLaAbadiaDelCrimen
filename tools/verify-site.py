@@ -22,11 +22,14 @@ def main() -> None:
     missing: list[tuple[str, str]] = []
     lightboxes = 0
     platform_controls: list[int] = []
+    parchment_pages: list[str] = []
 
     for page in PAGES:
         html = page.read_text(encoding="utf-8")
         platform_controls.append(html.count("data-platform-choice"))
         lightboxes += html.count("data-lightbox=")
+        if "data-parchment " in html:
+            parchment_pages.append(page.relative_to(ROOT).as_posix())
         for reference in ATTRIBUTES.findall(html):
             if reference.startswith(("http:", "https:", "mailto:")):
                 continue
@@ -48,7 +51,9 @@ def main() -> None:
     print(f"MISSING_LOCAL: {missing or 'None'}")
     print(f"LIGHTBOXES: {lightboxes}")
     print(f"PLATFORM_CONTROLS: {platform_controls}")
-    if missing or platform_controls != [5] * len(PAGES):
+    print(f"PARCHMENT_PAGES: {parchment_pages}")
+    expected_parchment_pages = ["es/juego.html", "en/game.html"]
+    if missing or platform_controls != [5] * len(PAGES) or parchment_pages != expected_parchment_pages:
         raise SystemExit(1)
 
 

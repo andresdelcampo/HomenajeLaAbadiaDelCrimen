@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-controls3">
+  <link rel="stylesheet" href="../styles.css?v=20260906-parchment1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -39,11 +39,55 @@
       <p class="eyebrow">Homenaje interactivo · Ruta 2 de 5</p>
       <h1>El juego</h1>
       <p>Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.</p>
-      <a class="page-cue" href="#personajes">Entrar en el capítulo ↓</a>
+      <a class="page-cue" href="#manuscrito">Abrir el manuscrito ↓</a>
     </div>
   </header>
 
   <main id="contenido">
+    <section class="chapter parchment-chapter" id="manuscrito">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">II · El manuscrito</span>
+          <h2>La memoria despierta</h2>
+        </div>
+        <p class="chapter-intro">Antes de entrar en la abadía, Adso vuelve a escribir lo que presenció en 1327. No es una tipografía que aparece: cada letra se forma, píxel a píxel, siguiendo los trazos y pausas del juego de Amstrad CPC.</p>
+      </div>
+
+      <div class="parchment-experience reveal" data-parchment data-parchment-language="es" data-parchment-platform="cpc">
+        <div class="parchment-stage">
+          <canvas width="320" height="200" data-parchment-canvas role="img" aria-label="Manuscrito inicial de La Abadía del Crimen escribiéndose con los trazos originales de Amstrad CPC">Tu navegador no puede mostrar la animación del manuscrito.</canvas>
+          <span class="parchment-edition">Amstrad CPC · 1987</span>
+        </div>
+        <div class="parchment-console">
+          <p class="eyebrow">El umbral del juego</p>
+          <h3>El testimonio de Adso</h3>
+          <p>La reproducción respeta el lienzo de 320 × 200, la paleta, el orden de los puntos, las pausas entre líneas y el paso de página originales. Puedes dejarla avanzar a su ritmo o acelerar la lectura.</p>
+          <div class="parchment-controls" aria-label="Controles del manuscrito">
+            <button type="button" data-parchment-action="play">Reproducir</button>
+            <button type="button" data-parchment-action="speed">Velocidad · 1×</button>
+            <button type="button" data-parchment-action="page">Completar página</button>
+            <button type="button" data-parchment-action="restart">Reiniciar</button>
+          </div>
+          <p class="parchment-status" data-parchment-status aria-live="polite">Página 1</p>
+          <fieldset class="parchment-soundtrack">
+            <legend>Música de apertura · bucle opcional</legend>
+            <div>
+              <button type="button" data-parchment-sound="cpc" aria-pressed="false">♪ CPC</button>
+              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ PC</button>
+              <button type="button" data-parchment-sound="stop" disabled>Silencio</button>
+            </div>
+            <span data-parchment-sound-status aria-live="polite">Sin música</span>
+            <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/inicio.wav"></audio>
+            <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+          </fieldset>
+          <details class="parchment-transcript">
+            <summary>Leer la transcripción completa</summary>
+            <div data-parchment-transcript></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="chapter dark" id="personajes">
       <div class="chapter-header reveal">
         <div>
@@ -338,6 +382,8 @@
     <div class="lightbox-navigation" aria-label="Páginas del artículo" hidden><button class="lightbox-previous" type="button" aria-label="Página anterior">← Anterior</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Página siguiente">Siguiente →</button></div>
     <p class="lightbox-caption"></p>
   </div>
+  <script src="../assets/game/parchment-data.js?v=20260906-parchment1"></script>
+  <script src="../parchment.js?v=20260906-parchment1"></script>
   <script src="../app.js?v=20260906-pages1"></script>
 </body>
 </html>
