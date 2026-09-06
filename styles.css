@@ -1108,10 +1108,19 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 
 .audio-console {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: clamp(2.8rem, 6vw, 5.5rem);
   margin-top: 2rem;
 }
+.audio-platform { min-width: 0; }
+.audio-platform + .audio-platform { padding-top: clamp(2rem, 4vw, 3.5rem); border-top: 1px solid rgba(255,255,255,.15); }
+.audio-platform-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, .62fr); gap: 2rem; margin-bottom: 1.2rem; align-items: end; }
+.audio-platform-heading span { display: block; margin-bottom: .55rem; color: var(--gold); font: 700 .67rem/1 var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+.audio-platform--cpc .audio-platform-heading span { color: var(--cyan); }
+.audio-platform-heading h3 { margin: 0; font: 400 clamp(2.5rem, 5vw, 4.8rem)/.88 var(--display); }
+.audio-platform-heading p { max-width: 34rem; margin: 0; color: rgba(255,255,255,.62); }
+.audio-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.audio-grid--pc .audio-button--feature { grid-column: 1 / -1; min-height: 0; aspect-ratio: 8 / 5; }
 .audio-button {
   position: relative;
   display: flex;
@@ -1153,8 +1162,6 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 .audio-button b { display: block; font: 400 1.55rem/1 var(--display); }
 .audio-button small { color: rgba(255,255,255,.55); font: .65rem/1.3 var(--mono); text-transform: uppercase; }
 .audio-button--feature {
-  grid-column: span 2;
-  grid-row: span 2;
   min-height: 356px;
   padding: clamp(1.6rem, 3vw, 2.5rem);
   border-color: rgba(212,154,46,.72);
@@ -1698,7 +1705,6 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .case-board { grid-column: 1 / 8; }
   .case-copy { grid-column: 8 / -1; }
   .object-grid { grid-template-columns: repeat(2, 1fr); }
-  .audio-console { grid-template-columns: repeat(2, 1fr); }
   .tech-diagram { grid-template-columns: repeat(3, 1fr); }
   .tech-node:nth-child(3)::after { display: none; }
   .legacy-timeline { grid-template-columns: repeat(3, 1fr); }
@@ -1809,7 +1815,9 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .character-button img { width: 5rem; max-height: 7rem; }
   .character-button b { font-size: 1.05rem; }
   .object-grid, .audio-console, .press-grid, .foreign-press-grid, .legacy-timeline, .gate-options { grid-template-columns: 1fr; }
-  .audio-button--feature { grid-column: auto; grid-row: auto; min-height: 280px; }
+  .audio-platform-heading { grid-template-columns: 1fr; gap: .8rem; }
+  .audio-grid { grid-template-columns: 1fr; }
+  .audio-grid--pc .audio-button--feature { grid-column: auto; min-height: 380px; aspect-ratio: auto; }
   .foreign-card:nth-child(n) { transform: none; }
   .reader-letter::before { display: none; }
   .reader-letter-header, .reader-letter footer { padding-left: 1.15rem; padding-right: 1.15rem; }

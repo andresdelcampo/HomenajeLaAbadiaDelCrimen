@@ -64,7 +64,7 @@
         </div>
         <div>
           <article class="system-panel is-active" data-system="cpc6128">
-            <div class="system-score"><div><strong>4</strong><span>colores de la versión matriz</span></div><img src="../assets/ports/cpc-3.png" alt="Captura CPC 6128" loading="lazy"></div>
+            <div class="system-score"><div><strong>4</strong><span>colores de la versión original</span></div><img src="../assets/ports/cpc-3.png" alt="Captura CPC 6128" loading="lazy"></div>
             <div class="system-copy"><h3>La versión original</h3><p>Se desarrolló primero para el CPC 6128, cuyo modo gráfico facilitaba diseñar con cuatro colores y después reducir el resultado para otras máquinas. Es la edición de referencia: mapa completo, detalle arquitectónico y paleta azul turquesa, naranja, crema y negro.</p><ul><li>128 KB y disquete.</li><li>Planta completa, incluidos pasillos sin función argumental.</li><li>Detalles como cruces en ventanales y ornamento que desaparecerían en 64 KB.</li><li>Música de inicio y efectos mediante el hardware del CPC.</li></ul></div>
           </article>
           <article class="system-panel" data-system="cpc64">
@@ -98,19 +98,32 @@
           <span class="chapter-number">IX · La cámara sonora</span>
           <h2><cite>Ave María</cite> y los sonidos de la abadía</h2>
         </div>
-        <p class="chapter-intro">La versión digitalizada del <cite>Ave María</cite> ocupa el lugar principal de este archivo sonoro. La acompañan las campanas, los pasos, la música de inicio, el sonido ambiental y la insólita acusación antipiratería.</p>
+        <p class="chapter-intro">El <cite>Ave María</cite> digitalizado —exclusivo de la versión original para PC— ocupa el lugar principal. La acusación «pirata» y las melodías de apertura y fondo para PC proceden de esa versión; las demás pistas visibles son recreaciones en WAV del sonido del Amstrad CPC usadas por Vigasoco, no grabaciones comunes a todas las conversiones.</p>
       </div>
       <div class="waveform" aria-hidden="true"></div>
       <div class="audio-console reveal">
-        <button class="audio-button audio-button--feature pc-digital" type="button"><img class="audio-scene audio-scene--blur" src="../assets/ports/pc-church.jpg" alt="" aria-hidden="true" loading="lazy"><img class="audio-scene audio-scene--main" src="../assets/ports/pc-church.jpg" alt="" loading="lazy"><span class="audio-icon">✝</span><b>Ave María</b><small>PC · muestra digital original · iglesia</small><audio preload="none" src="../assets/audio/ave-maria-pc.wav"></audio></button>
-        <button class="audio-button" type="button"><span class="audio-icon">◉</span><b>Campanas</b><small>Cambio de oficio</small><audio preload="none" src="../assets/audio/campanas.wav"></audio></button>
-        <button class="audio-button" type="button"><span class="audio-icon">⋮</span><b>Pasos</b><small>Movimiento isométrico</small><audio preload="none" src="../assets/audio/pasos.wav"></audio></button>
-        <button class="audio-button" type="button"><span class="audio-icon">♪</span><b>Inicio</b><small>Tema de apertura</small><audio preload="none" src="../assets/audio/inicio.wav"></audio></button>
-        <button class="audio-button" type="button"><span class="audio-icon">∞</span><b>Fondo</b><small>Atmósfera reconstruida</small><audio preload="none" src="../assets/audio/fondo.wav"></audio></button>
-        <button class="audio-button pc-digital" type="button"><span class="audio-icon">!</span><b>«Pirata, pirata»</b><small>PC · aviso anticopia original</small><audio preload="none" src="../assets/audio/pirata-pc.wav"></audio></button>
+        <section class="audio-platform audio-platform--pc" aria-labelledby="audio-pc-title-es">
+          <div class="audio-platform-heading"><div><span>PC · altavoz interno</span><h3 id="audio-pc-title-es">La abadía canta</h3></div><p>Muestras originales y melodías reconstruidas desde la tabla del ejecutable DOS.</p></div>
+          <div class="audio-grid audio-grid--pc">
+            <button class="audio-button audio-button--feature pc-digital" type="button"><img class="audio-scene audio-scene--blur" src="../assets/ports/pc-church.jpg" alt="" aria-hidden="true" loading="lazy"><img class="audio-scene audio-scene--main" src="../assets/ports/pc-church.jpg" alt="" loading="lazy"><span class="audio-icon">✝</span><b>Ave María</b><small>PC · muestra digital original · iglesia</small><audio preload="none" src="../assets/audio/ave-maria-pc.wav"></audio></button>
+            <button class="audio-button pc-digital" type="button"><span class="audio-icon">♫</span><b>Inicio</b><small>PC · reconstrucción desde la tabla original</small><audio preload="none" src="../assets/audio/inicio-pc.wav"></audio></button>
+            <button class="audio-button pc-digital" type="button"><span class="audio-icon">♬</span><b>Fondo</b><small>PC · reconstrucción desde la tabla original</small><audio preload="none" src="../assets/audio/fondo-pc.wav"></audio></button>
+            <button class="audio-button pc-digital" type="button"><span class="audio-icon">⋮</span><b>Pasos</b><small>PC · seis pulsos del efecto original</small><audio preload="none" src="../assets/audio/pasos-pc-secuencia.wav"></audio></button>
+            <button class="audio-button pc-digital" type="button"><span class="audio-icon">!</span><b>«Pirata, pirata»</b><small>PC · secuencia original ×10 · tono descendente</small><audio preload="none" src="../assets/audio/pirata-pc-original.wav"></audio></button>
+          </div>
+        </section>
+        <section class="audio-platform audio-platform--cpc" aria-labelledby="audio-cpc-title-es">
+          <div class="audio-platform-heading"><div><span>Amstrad CPC · Vigasoco</span><h3 id="audio-cpc-title-es">El sonido de la versión original</h3></div><p>Recreaciones WAV del PSG del CPC, conservadas por el proyecto Vigasoco.</p></div>
+          <div class="audio-grid">
+            <button class="audio-button" type="button"><span class="audio-icon">♪</span><b>Inicio</b><small>CPC · recreación Vigasoco · tema de apertura</small><audio preload="none" src="../assets/audio/inicio.wav"></audio></button>
+            <button class="audio-button" type="button"><span class="audio-icon">∞</span><b>Fondo</b><small>CPC · recreación Vigasoco · ambiente</small><audio preload="none" src="../assets/audio/fondo.wav"></audio></button>
+            <button class="audio-button" type="button"><span class="audio-icon">⋮</span><b>Pasos</b><small>CPC · seis pulsos de la recreación Vigasoco</small><audio preload="none" src="../assets/audio/pasos-cpc-secuencia.wav"></audio></button>
+            <button class="audio-button" type="button"><span class="audio-icon">◉</span><b>Campanas</b><small>CPC · recreación Vigasoco · cambio de oficio</small><audio preload="none" src="../assets/audio/campanas.wav"></audio></button>
+          </div>
+        </section>
       </div>
       <div class="creator-grid audio-story reveal">
-        <div class="prose"><h3>El truco del altavoz</h3><p>El PC speaker estaba pensado para pitidos, no para reproducir voces. La versión DOS manipula el temporizador programable a gran velocidad: cada cambio convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos y dos reconstrucciones en ensamblador: una para el <cite>Ave Maria</cite> y otra para la advertencia antipiratería. Las notas de ingeniería sitúan ambos bloques dentro del ejecutable original.</p></div>
+        <div class="prose"><h3>El truco del altavoz</h3><p>El PC speaker estaba pensado para pitidos, no para reproducir voces. La versión DOS manipula el temporizador programable a gran velocidad: cada cambio convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos digitales y dos reconstrucciones en ensamblador: una para el <cite>Ave María</cite> y otra para el aviso antipiratería. Las notas de ingeniería sitúan ambos bloques dentro del ejecutable original y permiten además reconstruir sus distintas melodías de apertura y fondo.</p></div>
         <blockquote class="pullquote">La protección anticopia tenía un castigo muy concreto: sustituía el <cite>Ave María</cite> por una voz que decía «pirata».</blockquote>
       </div>
     </section>
