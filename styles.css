@@ -726,6 +726,10 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 .rule-box-copy { display: grid; gap: .55rem; line-height: 1.62; }
 .rule-box-copy b { font: 400 clamp(1.35rem, 2.5vw, 1.8rem)/1 var(--display); }
 .rule-box-copy span { display: block; }
+.rule-box--obsequium > .caption {
+  grid-column: 1 / -1;
+  margin: 0;
+}
 .obsequium {
   width: 100%;
   margin: 0;
