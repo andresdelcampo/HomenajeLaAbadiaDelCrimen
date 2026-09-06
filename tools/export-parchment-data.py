@@ -1,4 +1,4 @@
-"""Export the original CPC parchment frame, glyph strokes, and opening texts."""
+"""Export the original CPC parchment frame, glyph strokes, and opening/ending texts."""
 
 from __future__ import annotations
 
@@ -47,8 +47,8 @@ def read_original_spanish(memory: dict[int, int]) -> str:
     return bytes(values).decode("ascii").replace("w", "ñ")
 
 
-def read_english_translation(source: str) -> str:
-    start = source.index("const unsigned char * Pergamino::pergaminoInicio[8]")
+def read_cpp_text(source: str, collection: str, language_index: int) -> str:
+    start = source.index(f"const unsigned char * Pergamino::{collection}[8]")
     end = source.index("};", start)
     block = source[start:end]
     entries = re.findall(
@@ -56,9 +56,9 @@ def read_english_translation(source: str) -> str:
         block,
         re.DOTALL,
     )
-    if len(entries) < 2:
-        raise RuntimeError("The English Vigasoco parchment text was not found")
-    fragments = re.findall(r'\"(?:\\.|[^\"\\])*\"', entries[1])
+    if len(entries) <= language_index:
+        raise RuntimeError(f"Parchment text {collection}[{language_index}] was not found")
+    fragments = re.findall(r'\"(?:\\.|[^\"\\])*\"', entries[language_index])
     return "".join(ast.literal_eval(fragment) for fragment in fragments)
 
 
@@ -114,18 +114,26 @@ def main() -> None:
     cpp_glyphs = CPP_GLYPHS.read_text(encoding="cp1252")
     memory = read_memory(asm)
     texts = {
-        "es": read_original_spanish(memory),
-        "en": read_english_translation(cpp_texts),
+        "opening": {
+            "es": read_original_spanish(memory),
+            "en": read_cpp_text(cpp_texts, "pergaminoInicio", 1),
+        },
+        "ending": {
+            "es": read_cpp_text(cpp_texts, "pergaminoFinal", 0),
+            "en": read_cpp_text(cpp_texts, "pergaminoFinal", 1),
+        },
     }
 
     glyphs = read_asm_glyphs(asm)
-    required = set("".join(texts.values())) - {" ", "\r", "\n", "\x1a"}
+    required = set("".join(text for collection in texts.values() for text in collection.values())) - {
+        " ", "\r", "\n", "\x1a"
+    }
     for character in sorted(required):
         if character not in glyphs:
             glyphs[character] = read_reconstructed_glyph(character, cpp_glyphs)
 
     data = {
-        "version": 2,
+        "version": 3,
         "width": 320,
         "height": 200,
         "editions": {

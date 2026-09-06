@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-player7">
+  <link rel="stylesheet" href="../styles.css?v=20260906-ending13">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -58,13 +58,13 @@
           <div class="parchment-playerbar">
             <div class="parchment-controls" aria-label="Manuscript controls">
               <button class="parchment-icon-control" type="button" data-parchment-action="play" aria-label="Play" title="Play"><span data-parchment-play-icon aria-hidden="true">▶</span></button>
+              <button class="parchment-page-control" type="button" data-parchment-action="page">Complete<br>page</button>
+              <button class="parchment-icon-control" type="button" data-parchment-action="restart" aria-label="Restart" title="Restart"><span aria-hidden="true">↻</span></button>
               <div class="parchment-speed" role="group" aria-label="Speed">
                 <button type="button" data-parchment-speed="1" aria-pressed="true">1×</button>
                 <button type="button" data-parchment-speed="2" aria-pressed="false">2×</button>
                 <button type="button" data-parchment-speed="4" aria-pressed="false">4×</button>
               </div>
-              <button class="parchment-page-control" type="button" data-parchment-action="page">Complete<br>page</button>
-              <button class="parchment-icon-control" type="button" data-parchment-action="restart" aria-label="Restart" title="Restart"><span aria-hidden="true">↻</span></button>
             </div>
             <p class="parchment-status" data-parchment-status aria-live="polite">Page 1</p>
             <div class="parchment-soundtrack" role="group" aria-label="Optional looping opening music">
@@ -217,6 +217,57 @@
         <article class="day-card"><span class="day-no">Day VII</span><h3>The book</h3><p>Expulsion is imminent. Terce is the final limit.</p><p class="spoiler-text" data-cover="Secret of the day">Jorge offers the poisoned book. Gloves frustrate the plan; he flees towards the maze, and the investigation concludes.</p></article>
       </div>
     </section>
+
+    <section class="chapter parchment-chapter parchment-ending" id="ending-manuscript">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">VIII · The ending</span><h2>The final pages</h2></div>
+        <p class="chapter-intro">When the investigation is complete, the game returns to the parchment so Adso can close his account. Its text reveals the entire ending.</p>
+      </div>
+
+      <details class="ending-spoiler reveal">
+        <summary><span>Warning · full game-ending spoilers</span><strong>Reveal the ending manuscript</strong></summary>
+        <div class="parchment-experience" data-parchment data-parchment-language="en" data-parchment-platform="cpc" data-parchment-text="ending">
+          <div class="parchment-player">
+            <div class="parchment-stage">
+              <canvas width="320" height="200" data-parchment-canvas role="img" aria-label="The ending manuscript of La Abadía del Crimen being written stroke by stroke in the selected graphics palette">Your browser cannot display the manuscript animation.</canvas>
+              <span class="parchment-edition" data-parchment-edition>Amstrad CPC · 1987</span>
+            </div>
+            <div class="parchment-playerbar">
+              <div class="parchment-controls" aria-label="Ending manuscript controls">
+                <button class="parchment-icon-control" type="button" data-parchment-action="play" aria-label="Play" title="Play"><span data-parchment-play-icon aria-hidden="true">▶</span></button>
+                <button class="parchment-page-control" type="button" data-parchment-action="page">Complete<br>page</button>
+                <button class="parchment-icon-control" type="button" data-parchment-action="restart" aria-label="Restart" title="Restart"><span aria-hidden="true">↻</span></button>
+                <div class="parchment-speed" role="group" aria-label="Speed">
+                  <button type="button" data-parchment-speed="1" aria-pressed="true">1×</button>
+                  <button type="button" data-parchment-speed="2" aria-pressed="false">2×</button>
+                  <button type="button" data-parchment-speed="4" aria-pressed="false">4×</button>
+                </div>
+              </div>
+              <p class="parchment-status" data-parchment-status aria-live="polite">Page 1</p>
+              <div class="parchment-soundtrack" role="group" aria-label="Optional looping ending music">
+                <span class="parchment-sound-label" aria-hidden="true">Music</span>
+                <button type="button" data-parchment-sound="ending" aria-pressed="false">♪ CPC ending</button>
+                <button type="button" data-parchment-sound="ending-pc" aria-pressed="false">♪ PC ending</button>
+                <button type="button" data-parchment-sound="stop" disabled>Silence</button>
+                <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">No music</span>
+                <audio data-parchment-audio="ending" preload="none" loop src="../assets/audio/final.wav"></audio>
+                <audio data-parchment-audio="ending-pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+              </div>
+            </div>
+          </div>
+          <div class="parchment-console">
+            <p class="eyebrow">The original ending</p>
+            <h3>What Adso left in writing</h3>
+            <p>The complete ending manuscript, reproduced with the same strokes, pauses, and page turn as the opening.</p>
+            <p class="caption">The graphics selector remains active. On PC, the game repeats its opening theme at the ending; both tracks are optional and stop if you play music from the other manuscript.</p>
+            <details class="parchment-transcript">
+              <summary>Read the complete transcript</summary>
+              <div data-parchment-transcript></div>
+            </details>
+          </div>
+        </div>
+      </details>
+    </section>
   </main>
 
   <nav class="page-pagination" aria-label="Continue reading">
@@ -230,8 +281,8 @@
   </footer>
 
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Archive viewer"><button class="lightbox-close" type="button">Close ×</button><div class="lightbox-zoom" aria-label="Zoom"><button class="lightbox-zoom-out" type="button" aria-label="Zoom out">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Zoom in">+</button><button class="lightbox-zoom-fit" type="button">Fit</button></div><div class="lightbox-stage"><img src="" alt=""></div><div class="lightbox-navigation" aria-label="Article pages" hidden><button class="lightbox-previous" type="button" aria-label="Previous page">← Previous</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Next page">Next →</button></div><p class="lightbox-caption"></p></div>
-  <script src="../assets/game/parchment-data.js?v=20260906-palettes3"></script>
-  <script src="../parchment.js?v=20260906-player8"></script>
+  <script src="../assets/game/parchment-data.js?v=20260906-ending9"></script>
+  <script src="../parchment.js?v=20260906-ending12"></script>
   <script src="../app.js?v=20260906-palettes1"></script>
 </body>
 </html>

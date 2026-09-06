@@ -16,6 +16,8 @@ La experiencia está construida como un archivo editorial de cinco rutas —Hist
 
 La presentación utiliza los gráficos originales de CPC 6128 por defecto y permite elegir desde la cabecera las ediciones visuales CPC, ZX Spectrum, MSX, PC CGA y remake PC VGA a 256 colores. La elección se conserva entre rutas y transforma los elementos vinculados —pantallas, personajes, objetos e indicador de Obsequium—. El recorrido histórico incorpora un expediente sobre los creadores y las adaptaciones, mientras que el archivo de prensa reúne ahora las dos entregas de *Retro Gamer España* dedicadas a Paco Menéndez (números 40 y 41), junto con la recepción británica y la prensa original.
 
+La ruta El juego se abre y se cierra con los dos pergaminos completos: las letras se trazan píxel a píxel, el desenlace permanece tras una advertencia de spoilers y ambos conservan música opcional.
+
 ![Apertura de la edición española](assets/readme/preview-es.png)
 
 ### Contenido destacado
@@ -35,6 +37,8 @@ This tribute explores the history, characters, and architecture of *La Abadía d
 The experience is designed as an editorial archive with five routes—History, The game, Programming, Press & adverts, and Legacy—connected by persistent navigation. It includes interactive dossiers, spoiler controls, cartography, visual platform comparisons, preserved audio, and a curated selection of historical pages that can be opened and examined with zoom controls inside the site itself.
 
 Presentation defaults to the original CPC 6128 graphics, while a header control offers CPC, ZX Spectrum, MSX, PC CGA, and the 256-colour PC VGA remake. The choice persists between routes and transforms linked material—screens, characters, objects, and the Obsequium display. The history route now includes a builders and adaptations dossier, while the press archive brings together both *Retro Gamer España* features on Paco Menéndez (issues 40 and 41), the British rediscovery, and original coverage.
+
+The Game route opens and closes with both complete manuscripts: letters are drawn pixel by pixel, the ending remains behind a spoiler warning, and both retain optional music.
 
 ![The press route in the English edition](assets/readme/preview-en.png)
 

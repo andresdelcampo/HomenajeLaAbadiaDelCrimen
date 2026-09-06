@@ -9,11 +9,13 @@
 
   document.querySelectorAll('[data-parchment]').forEach(root => {
     const language = root.dataset.parchmentLanguage || document.documentElement.lang || 'es';
+    const textKey = root.dataset.parchmentText || 'opening';
     root.dataset.parchmentDataVersion = String(data.version);
     const baseEdition = data.editions.cpc;
     let editionKey = document.documentElement.dataset.platform || root.dataset.parchmentPlatform || 'cpc';
     let edition = data.editions[editionKey] || baseEdition;
-    const text = data.texts[language] || data.texts.es;
+    const localizedTexts = data.texts[textKey] || data.texts.opening;
+    const text = localizedTexts[language] || localizedTexts.es;
     const canvas = root.querySelector('[data-parchment-canvas]');
     const playButton = root.querySelector('[data-parchment-action="play"]');
     const playIcon = root.querySelector('[data-parchment-play-icon]');
@@ -62,12 +64,16 @@
       play: 'Reproducir', pause: 'Pausar', continue: 'Continuar',
       pageStatus: 'Página', of: 'de', complete: 'Manuscrito completo',
       noMusic: 'Sin música', cpcMusic: 'CPC · tema de apertura en bucle',
-      pcMusic: 'PC · tema de apertura en bucle', audioError: 'No se ha podido reproducir la pista'
+      pcMusic: 'PC · tema de apertura en bucle', endingMusic: 'CPC · tema final en bucle',
+      pcEndingMusic: 'PC · tema de apertura repetido al final',
+      audioError: 'No se ha podido reproducir la pista'
     } : {
       play: 'Play', pause: 'Pause', continue: 'Continue',
       pageStatus: 'Page', of: 'of', complete: 'Manuscript complete',
       noMusic: 'No music', cpcMusic: 'CPC · opening theme looping',
-      pcMusic: 'PC · opening theme looping', audioError: 'The track could not be played'
+      pcMusic: 'PC · opening theme looping', endingMusic: 'CPC · ending theme looping',
+      pcEndingMusic: 'PC · opening theme repeated at the ending',
+      audioError: 'The track could not be played'
     };
 
     function setPixel(x, y, color) {
@@ -165,6 +171,7 @@
       return source
         .replace(/\x1a/g, '')
         .replace(/\n/g, '\r\r')
+        .replace(/\r (?=\S)/g, '\r\r')
         .split(/\r{2,}/)
         .map(paragraph => paragraph.replace(/-\r/g, '').replace(/\r/g, ' ').replace(/\s+/g, ' ').trim())
         .filter(Boolean);
@@ -434,6 +441,10 @@
       if (soundStatus) soundStatus.textContent = labels.noMusic;
     }
 
+    window.addEventListener('reportaje:parchmentaudio', event => {
+      if (event.detail?.source !== root && activeSound) stopSound();
+    });
+
     soundButtons.forEach(button => button.addEventListener('click', async () => {
       const choice = button.dataset.parchmentSound;
       if (choice === 'stop' || choice === activeSound) {
@@ -445,12 +456,21 @@
       if (!track) return;
       try {
         await track.play();
+        window.dispatchEvent(new CustomEvent('reportaje:parchmentaudio', { detail: { source: root } }));
         activeSound = choice;
         soundButtons.forEach(item => {
           if (item.dataset.parchmentSound !== 'stop') item.setAttribute('aria-pressed', String(item === button));
           else item.disabled = false;
         });
-        if (soundStatus) soundStatus.textContent = choice === 'pc' ? labels.pcMusic : labels.cpcMusic;
+        if (soundStatus) {
+          const soundLabels = {
+            cpc: labels.cpcMusic,
+            pc: labels.pcMusic,
+            ending: labels.endingMusic,
+            'ending-pc': labels.pcEndingMusic
+          };
+          soundStatus.textContent = soundLabels[choice] || labels.cpcMusic;
+        }
       } catch (_) {
         stopSound();
         if (soundStatus) soundStatus.textContent = labels.audioError;

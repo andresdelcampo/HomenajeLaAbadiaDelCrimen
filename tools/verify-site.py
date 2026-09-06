@@ -23,15 +23,20 @@ def main() -> None:
     lightboxes = 0
     platform_controls: list[int] = []
     parchment_pages: list[str] = []
+    parchment_instances: dict[str, int] = {}
     parchment_data = (ROOT / "assets" / "game" / "parchment-data.js").read_text(encoding="utf-8")
     parchment_editions = [platform for platform in PLATFORMS if f'"{platform}":{{' in parchment_data]
+    parchment_texts = [text for text in ("opening", "ending") if f'"{text}":{{' in parchment_data]
 
     for page in PAGES:
         html = page.read_text(encoding="utf-8")
         platform_controls.append(html.count("data-platform-choice"))
         lightboxes += html.count("data-lightbox=")
-        if "data-parchment " in html:
-            parchment_pages.append(page.relative_to(ROOT).as_posix())
+        parchment_count = html.count("data-parchment ")
+        if parchment_count:
+            relative_page = page.relative_to(ROOT).as_posix()
+            parchment_pages.append(relative_page)
+            parchment_instances[relative_page] = parchment_count
         for reference in ATTRIBUTES.findall(html):
             if reference.startswith(("http:", "https:", "mailto:")):
                 continue
@@ -54,13 +59,18 @@ def main() -> None:
     print(f"LIGHTBOXES: {lightboxes}")
     print(f"PLATFORM_CONTROLS: {platform_controls}")
     print(f"PARCHMENT_PAGES: {parchment_pages}")
+    print(f"PARCHMENT_INSTANCES: {parchment_instances}")
     print(f"PARCHMENT_EDITIONS: {parchment_editions}")
+    print(f"PARCHMENT_TEXTS: {parchment_texts}")
     expected_parchment_pages = ["es/juego.html", "en/game.html"]
+    expected_parchment_instances = {"es/juego.html": 2, "en/game.html": 2}
     if (
         missing
         or platform_controls != [5] * len(PAGES)
         or parchment_pages != expected_parchment_pages
+        or parchment_instances != expected_parchment_instances
         or parchment_editions != list(PLATFORMS)
+        or parchment_texts != ["opening", "ending"]
     ):
         raise SystemExit(1)
 
