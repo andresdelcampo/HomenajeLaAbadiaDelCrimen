@@ -103,6 +103,125 @@ body[data-page="technology"] .editorial-plate figcaption {
   width: 5.25rem;
 }
 
+/* The builders as a four-stage construction dossier. */
+body[data-page="history"] .creator-grid {
+  grid-template-columns: minmax(0, 1.22fr) minmax(18rem, .78fr);
+  align-items: start;
+}
+body[data-page="history"] .creator-cards {
+  position: relative;
+  gap: 1.2rem;
+  padding-left: 2.6rem;
+}
+body[data-page="history"] .creator-cards::before {
+  content: "";
+  position: absolute;
+  left: 1.05rem;
+  top: 1.3rem;
+  bottom: 1.3rem;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--red) 0 8px, transparent 8px 15px);
+  opacity: .55;
+}
+body[data-page="history"] .creator-card {
+  position: relative;
+  padding: 1.45rem 1.65rem 1.25rem;
+  overflow: visible;
+  background:
+    linear-gradient(90deg, rgba(163,45,39,.08), transparent 22%),
+    rgba(255,252,243,.66);
+  border: 0;
+  border-left: 3px solid var(--red);
+  box-shadow: 0 8px 22px rgba(55,38,20,.1);
+}
+body[data-page="history"] .creator-card:nth-child(even) { margin-left: 1.4rem; }
+body[data-page="history"] .creator-card::before {
+  content: attr(data-stage);
+  position: absolute;
+  left: -3.25rem;
+  top: 1.1rem;
+  display: grid;
+  width: 2.15rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: var(--paper-light);
+  background: var(--red);
+  border: 4px solid var(--paper);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--red);
+  font: 700 .66rem/1 var(--mono);
+  letter-spacing: .04em;
+}
+body[data-page="history"] .creator-card h3 {
+  max-width: 46rem;
+  margin-bottom: .65rem;
+  font-size: clamp(1.75rem, 2.25vw, 2.55rem);
+  line-height: 1.02;
+}
+body[data-page="history"] .creator-card > p:not(.creator-role, .creator-fact) {
+  margin-top: 0;
+  color: var(--ink-soft);
+}
+body[data-page="history"] .creator-fact {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0 0;
+  padding-top: .72rem;
+  border-top: 1px dashed rgba(76,68,56,.35);
+  font-family: var(--mono);
+}
+body[data-page="history"] .creator-fact strong {
+  color: var(--red);
+  font-size: .88rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+body[data-page="history"] .creator-fact span {
+  color: var(--ink-soft);
+  font-size: .62rem;
+  letter-spacing: .07em;
+  text-align: right;
+  text-transform: uppercase;
+}
+body[data-page="history"] .magazine-photo {
+  position: sticky;
+  top: 9.5rem;
+  padding: .8rem .8rem 2rem;
+  transform: rotate(1deg);
+}
+body[data-page="history"] .magazine-photo::before {
+  content: "ARCHIVO · 1988";
+  position: absolute;
+  z-index: 2;
+  top: -.7rem;
+  left: 50%;
+  padding: .35rem 1.1rem;
+  color: #5a4932;
+  background: rgba(225,202,154,.88);
+  box-shadow: 0 2px 5px rgba(55,38,20,.16);
+  transform: translateX(-50%) rotate(-2deg);
+  font: 700 .57rem/1 var(--mono);
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+html[lang="en"] body[data-page="history"] .magazine-photo::before { content: "ARCHIVE · 1988"; }
+body[data-page="history"] .magazine-photo button {
+  aspect-ratio: 945 / 1300;
+  overflow: hidden;
+  background: #efe1bd;
+}
+body[data-page="history"] .magazine-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.09);
+  transition: transform .35s ease;
+}
+body[data-page="history"] .magazine-photo button:hover img,
+body[data-page="history"] .magazine-photo button:focus-visible img { transform: scale(1.115); }
+
 @media (max-width: 1320px) and (min-width: 761px) {
   .site-nav { grid-template-columns: 1fr auto; row-gap: .75rem; }
   .nav-toggle { display: none; }
@@ -153,6 +272,17 @@ body[data-page="technology"] .editorial-plate figcaption {
   body[data-page="technology"] .page-masthead h1 { font-size: clamp(3rem, 11vw, 4.8rem); }
   body[data-page="technology"] .editorial-plate { width: 100%; max-width: 34rem; }
   body[data-page="technology"] .editorial-plate img { max-height: 290px; }
+  body[data-page="history"] .creator-grid { grid-template-columns: 1fr; gap: 2.75rem; }
+  body[data-page="history"] .creator-cards { padding-left: 2.15rem; }
+  body[data-page="history"] .creator-card,
+  body[data-page="history"] .creator-card:nth-child(even) { margin-left: 0; }
+  body[data-page="history"] .creator-card::before { left: -2.8rem; }
+  body[data-page="history"] .magazine-photo {
+    position: relative;
+    top: auto;
+    width: min(100%, 30rem);
+    margin: 0 auto;
+  }
   .page-pagination a {
     min-height: 5.5rem;
     padding-top: 1rem;
@@ -179,4 +309,11 @@ body[data-page="technology"] .editorial-plate figcaption {
     right: 1rem;
     width: 3.75rem;
   }
+}
+
+@media (max-width: 480px) {
+  body[data-page="history"] .creator-card { padding: 1.25rem 1.1rem 1.1rem; }
+  body[data-page="history"] .creator-card h3 { font-size: 1.85rem; }
+  body[data-page="history"] .creator-fact { align-items: flex-start; flex-direction: column; gap: .3rem; }
+  body[data-page="history"] .creator-fact span { text-align: left; }
 }
