@@ -716,47 +716,44 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 .hour-button:nth-of-type(7) { left: 21%; top: 25%; translate: -50% -50%; }
 .clock-copy h3 { margin: 0 0 1rem; font: 400 clamp(2.2rem, 4vw, 4rem)/.95 var(--display); }
 .clock-copy .rule-box { margin-top: 2rem; padding: 1.3rem; border: 1px solid var(--red); background: rgba(163,45,39,.06); }
+.clock-copy .rule-box--obsequium {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1.1fr) minmax(13rem, .9fr);
+  gap: clamp(1rem, 2.5vw, 1.7rem);
+  align-items: center;
+  padding: 1.1rem;
+}
+.rule-box-copy { display: grid; gap: .55rem; line-height: 1.62; }
+.rule-box-copy b { font: 400 clamp(1.35rem, 2.5vw, 1.8rem)/1 var(--display); }
+.rule-box-copy span { display: block; }
 .obsequium {
-  width: min(100%, 32rem);
-  margin-top: 2.2rem;
-  padding: .75rem;
+  width: 100%;
+  margin: 0;
+  padding: .7rem;
   color: var(--white);
   background: var(--night);
   border: 1px solid rgba(212,154,46,.5);
+  box-shadow: 0 18px 38px rgba(16,12,7,.2);
 }
-.obsequium-comparison { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .825rem; }
-.obsequium-version { display: grid; gap: .45rem; min-width: 0; }
+.obsequium-focus {
+  position: relative;
+  padding: .7rem;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(212,154,46,.09) 1px, transparent 1px) 0 0 / 1.2rem 1.2rem,
+    linear-gradient(rgba(212,154,46,.09) 1px, transparent 1px) 0 0 / 1.2rem 1.2rem,
+    #050708;
+  border: 1px solid rgba(255,255,255,.11);
+}
 .obsequium-screen {
   display: block;
   width: 100%;
-  max-width: 8rem;
-  margin: 0 auto;
-  aspect-ratio: 2 / 1;
+  height: auto;
   background-color: #000;
-  background-repeat: no-repeat;
   image-rendering: pixelated;
+  border: 1px solid rgba(212,154,46,.38);
+  box-shadow: 0 10px 24px rgba(0,0,0,.5);
 }
-.obsequium-screen--cpc {
-  background-image: url("assets/ports/cpc-3.png");
-  background-size: 400% auto;
-  background-position: 100% 100%;
-}
-.obsequium-screen--pc {
-  background-image: url("assets/ports/pc-3.png");
-  background-size: 400% auto;
-  background-position: 100% 100%;
-}
-.obsequium-screen--spectrum {
-  background-image: url("assets/ports/spectrum-3.png");
-  background-size: 457.143% auto;
-  background-position: 100.5% 98.78%;
-}
-.obsequium-screen--msx {
-  background-image: url("assets/ports/msx-3.png");
-  background-size: 457.143% auto;
-  background-position: 102% 98.171%;
-}
-.obsequium-version > span { color: rgba(255,255,255,.6); font: 700 .52rem/1.2 var(--mono); text-align: center; text-transform: uppercase; letter-spacing: .06em; }
 .obsequium figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem .2rem .1rem; font: 700 .62rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .07em; }
 .obsequium figcaption span { color: rgba(255,255,255,.55); }
 .obsequium figcaption b { color: var(--gold); }
@@ -1676,7 +1673,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .vga-sprite-strip { grid-template-columns: repeat(5, 1fr); }
   .vga-sprite-strip > span { grid-column: 1 / -1; }
   .language-link { padding: .48rem .55rem; }
-  .obsequium-comparison { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clock-copy .rule-box--obsequium { grid-template-columns: 1fr; }
   .hero-meta { font-size: .65rem; }
   .character-list { grid-template-columns: 1fr 1fr; }
   .character-button { min-height: 7.2rem; padding: .8rem 4.7rem .8rem .8rem; }
