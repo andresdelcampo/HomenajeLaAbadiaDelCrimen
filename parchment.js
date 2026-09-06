@@ -9,42 +9,62 @@
 
   document.querySelectorAll('[data-parchment]').forEach(root => {
     const language = root.dataset.parchmentLanguage || document.documentElement.lang || 'es';
-    const edition = data.editions[root.dataset.parchmentPlatform || 'cpc'] || data.editions.cpc;
+    root.dataset.parchmentDataVersion = String(data.version);
+    const baseEdition = data.editions.cpc;
+    let editionKey = document.documentElement.dataset.platform || root.dataset.parchmentPlatform || 'cpc';
+    let edition = data.editions[editionKey] || baseEdition;
     const text = data.texts[language] || data.texts.es;
     const canvas = root.querySelector('[data-parchment-canvas]');
     const playButton = root.querySelector('[data-parchment-action="play"]');
+    const playIcon = root.querySelector('[data-parchment-play-icon]');
     const pageButton = root.querySelector('[data-parchment-action="page"]');
     const restartButton = root.querySelector('[data-parchment-action="restart"]');
-    const speedButton = root.querySelector('[data-parchment-action="speed"]');
+    const speedButtons = Array.from(root.querySelectorAll('[data-parchment-speed]'));
     const status = root.querySelector('[data-parchment-status]');
     const transcript = root.querySelector('[data-parchment-transcript]');
     const soundButtons = Array.from(root.querySelectorAll('[data-parchment-sound]'));
     const soundTracks = Array.from(root.querySelectorAll('[data-parchment-audio]'));
     const soundStatus = root.querySelector('[data-parchment-sound-status]');
+    const editionLabel = root.querySelector('[data-parchment-edition]');
     if (!canvas) return;
 
     const context = canvas.getContext('2d', { alpha: false });
     if (!context) return;
     context.imageSmoothingEnabled = false;
 
-    const palette = edition.palette.map(hex => [
-      parseInt(hex.slice(1, 3), 16),
-      parseInt(hex.slice(3, 5), 16),
-      parseInt(hex.slice(5, 7), 16)
-    ]);
+    function unpackPalette(source) {
+      return source.map(hex => [
+        parseInt(hex.slice(1, 3), 16),
+        parseInt(hex.slice(3, 5), 16),
+        parseInt(hex.slice(5, 7), 16)
+      ]);
+    }
+
+    let palette = unpackPalette(edition.palette);
     const pixels = new Uint8Array(data.width * data.height);
     const basePixels = new Uint8Array(data.width * data.height);
     const image = context.createImageData(data.width, data.height);
 
+    function editionPart(name) {
+      return edition[name] || baseEdition[name];
+    }
+
+    function applyEdition(platform) {
+      editionKey = data.editions[platform] ? platform : 'cpc';
+      edition = data.editions[editionKey];
+      palette = unpackPalette(edition.palette);
+      root.dataset.parchmentPlatform = editionKey;
+      if (editionLabel) editionLabel.textContent = edition.label[language] || edition.label.es;
+      dirty = true;
+    }
+
     const labels = language === 'es' ? {
       play: 'Reproducir', pause: 'Pausar', continue: 'Continuar',
-      page: 'Completar página', speed: 'Velocidad',
       pageStatus: 'Página', of: 'de', complete: 'Manuscrito completo',
       noMusic: 'Sin música', cpcMusic: 'CPC · tema de apertura en bucle',
       pcMusic: 'PC · tema de apertura en bucle', audioError: 'No se ha podido reproducir la pista'
     } : {
       play: 'Play', pause: 'Pause', continue: 'Continue',
-      page: 'Complete page', speed: 'Speed',
       pageStatus: 'Page', of: 'of', complete: 'Manuscript complete',
       noMusic: 'No music', cpcMusic: 'CPC · opening theme looping',
       pcMusic: 'PC · opening theme looping', audioError: 'The track could not be played'
@@ -95,10 +115,11 @@
       fillRect(0, 0, 64, 200, 1);
       fillRect(256, 0, 64, 200, 1);
       fillRect(0, 192, 320, 8, 1);
-      drawHorizontal(0, edition.frame.top);
-      drawVertical(248, edition.frame.right);
-      drawVertical(64, edition.frame.left);
-      drawHorizontal(184, edition.frame.bottom);
+      const frame = editionPart('frame');
+      drawHorizontal(0, frame.top);
+      drawVertical(248, frame.right);
+      drawVertical(64, frame.left);
+      drawHorizontal(184, frame.bottom);
       basePixels.set(pixels);
     }
 
@@ -165,9 +186,15 @@
     let previousTime = performance.now();
 
     function updateControls(continuation = false) {
-      if (playButton) playButton.textContent = paused ? (continuation ? labels.continue : labels.play) : labels.pause;
-      if (pageButton) pageButton.textContent = labels.page;
-      if (speedButton) speedButton.textContent = `${labels.speed} · ${speedSteps[speedIndex]}×`;
+      if (playButton) {
+        const playLabel = paused ? (continuation ? labels.continue : labels.play) : labels.pause;
+        playButton.setAttribute('aria-label', playLabel);
+        playButton.title = playLabel;
+      }
+      if (playIcon) playIcon.textContent = paused ? '▶' : '⏸';
+      speedButtons.forEach(button => {
+        button.setAttribute('aria-pressed', String(Number(button.dataset.parchmentSpeed) === speedSteps[speedIndex]));
+      });
       if (status) status.textContent = finished
         ? labels.complete
         : `${labels.pageStatus} ${pageIndex + 1} ${labels.of} ${pages.length}`;
@@ -179,7 +206,8 @@
     }
 
     function glyphFor(character) {
-      return edition.glyphs[character] || edition.glyphs.z;
+      const glyphs = editionPart('glyphs');
+      return glyphs[character] || glyphs.z;
     }
 
     function drawGlyph(character, x, y) {
@@ -375,13 +403,24 @@
       }
     });
     pageButton?.addEventListener('click', drawPageInstantly);
-    restartButton?.addEventListener('click', () => reset(true));
-    speedButton?.addEventListener('click', () => {
-      speedIndex = (speedIndex + 1) % speedSteps.length;
-      updateControls(paused && characterIndex >= pages[pageIndex].text.length);
+    restartButton?.addEventListener('click', () => {
+      reset(true);
+      restartActiveSound();
     });
+    speedButtons.forEach(button => button.addEventListener('click', () => {
+      const requestedSpeed = Number(button.dataset.parchmentSpeed);
+      const requestedIndex = speedSteps.indexOf(requestedSpeed);
+      if (requestedIndex !== -1) speedIndex = requestedIndex;
+      updateControls(paused && characterIndex >= pages[pageIndex].text.length);
+    }));
 
     let activeSound = null;
+    function restartActiveSound() {
+      if (!activeSound) return;
+      const track = soundTracks.find(audio => audio.dataset.parchmentAudio === activeSound);
+      if (track && !track.paused) track.currentTime = 0;
+    }
+
     function stopSound(reset = true) {
       soundTracks.forEach(track => {
         track.pause();
@@ -418,6 +457,10 @@
       }
     }));
 
+    window.addEventListener('reportaje:platformchange', event => {
+      applyEdition(event.detail?.platform || 'cpc');
+    });
+
     if (transcript) {
       readableTranscript(text).forEach(paragraph => {
         const element = document.createElement('p');
@@ -427,6 +470,7 @@
     }
 
     buildFrame();
+    applyEdition(editionKey);
     reset(false);
     render();
     requestAnimationFrame(tick);

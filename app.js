@@ -91,6 +91,9 @@
       const text = element.dataset[`platformText${platformSuffix[selected]}`];
       if (text) element.textContent = text;
     });
+    window.dispatchEvent(new CustomEvent('reportaje:platformchange', {
+      detail: { platform: selected }
+    }));
     if (remember) {
       try { localStorage.setItem('reportaje-platform', selected); } catch (_) { /* navigation still works */ }
     }

@@ -125,11 +125,12 @@ def main() -> None:
             glyphs[character] = read_reconstructed_glyph(character, cpp_glyphs)
 
     data = {
-        "version": 1,
+        "version": 2,
         "width": 320,
         "height": 200,
         "editions": {
             "cpc": {
+                "label": {"es": "Amstrad CPC · 1987", "en": "Amstrad CPC · 1987"},
                 "palette": ["#ff8080", "#800000", "#000000", "#ff0000"],
                 "frame": {
                     "top": memory_span(memory, 0x788A, 384),
@@ -138,7 +139,29 @@ def main() -> None:
                     "bottom": memory_span(memory, 0x7D0A, 384),
                 },
                 "glyphs": {character: glyphs[character] for character in sorted(required)},
-            }
+            },
+            # The remaining editions deliberately inherit the original CPC
+            # frame and stroke geometry. Only their display palette changes.
+            "pc": {
+                "label": {"es": "PC CGA · 1988", "en": "PC CGA · 1988"},
+                "inherits": "cpc",
+                "palette": ["#ffff55", "#000000", "#000000", "#ff5555"],
+            },
+            "vga": {
+                "label": {"es": "Remake PC VGA · 256 colores", "en": "PC VGA remake · 256 colours"},
+                "inherits": "cpc",
+                "palette": ["#f7e39f", "#1f1b0b", "#000000", "#a70000"],
+            },
+            "spectrum": {
+                "label": {"es": "ZX Spectrum · paleta adaptada", "en": "ZX Spectrum · adapted palette"},
+                "inherits": "cpc",
+                "palette": ["#ffff00", "#0000cd", "#0000cd", "#0000cd"],
+            },
+            "msx": {
+                "label": {"es": "MSX · paleta adaptada", "en": "MSX · adapted palette"},
+                "inherits": "cpc",
+                "palette": ["#dcdc9c", "#000000", "#000000", "#000000"],
+            },
         },
         "texts": texts,
     }

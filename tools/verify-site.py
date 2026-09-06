@@ -23,6 +23,8 @@ def main() -> None:
     lightboxes = 0
     platform_controls: list[int] = []
     parchment_pages: list[str] = []
+    parchment_data = (ROOT / "assets" / "game" / "parchment-data.js").read_text(encoding="utf-8")
+    parchment_editions = [platform for platform in PLATFORMS if f'"{platform}":{{' in parchment_data]
 
     for page in PAGES:
         html = page.read_text(encoding="utf-8")
@@ -52,8 +54,14 @@ def main() -> None:
     print(f"LIGHTBOXES: {lightboxes}")
     print(f"PLATFORM_CONTROLS: {platform_controls}")
     print(f"PARCHMENT_PAGES: {parchment_pages}")
+    print(f"PARCHMENT_EDITIONS: {parchment_editions}")
     expected_parchment_pages = ["es/juego.html", "en/game.html"]
-    if missing or platform_controls != [5] * len(PAGES) or parchment_pages != expected_parchment_pages:
+    if (
+        missing
+        or platform_controls != [5] * len(PAGES)
+        or parchment_pages != expected_parchment_pages
+        or parchment_editions != list(PLATFORMS)
+    ):
         raise SystemExit(1)
 
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-parchment1">
+  <link rel="stylesheet" href="../styles.css?v=20260906-player7">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -50,36 +50,43 @@
           <span class="chapter-number">II · El manuscrito</span>
           <h2>La memoria despierta</h2>
         </div>
-        <p class="chapter-intro">Antes de entrar en la abadía, Adso vuelve a escribir lo que presenció en 1327. No es una tipografía que aparece: cada letra se forma, píxel a píxel, siguiendo los trazos y pausas del juego de Amstrad CPC.</p>
+        <p class="chapter-intro">Antes de entrar en la abadía, Adso vuelve a escribir lo que presenció en 1327. No es una tipografía que aparece: cada letra se forma, píxel a píxel, como en el manuscrito del juego. El selector de gráficos cambia también su aspecto.</p>
       </div>
 
       <div class="parchment-experience reveal" data-parchment data-parchment-language="es" data-parchment-platform="cpc">
-        <div class="parchment-stage">
-          <canvas width="320" height="200" data-parchment-canvas role="img" aria-label="Manuscrito inicial de La Abadía del Crimen escribiéndose con los trazos originales de Amstrad CPC">Tu navegador no puede mostrar la animación del manuscrito.</canvas>
-          <span class="parchment-edition">Amstrad CPC · 1987</span>
+        <div class="parchment-player">
+          <div class="parchment-stage">
+            <canvas width="320" height="200" data-parchment-canvas role="img" aria-label="Manuscrito inicial de La Abadía del Crimen escribiéndose trazo a trazo con la paleta gráfica seleccionada">Tu navegador no puede mostrar la animación del manuscrito.</canvas>
+            <span class="parchment-edition" data-parchment-edition>Amstrad CPC · 1987</span>
+          </div>
+          <div class="parchment-playerbar">
+            <div class="parchment-controls" aria-label="Controles del manuscrito">
+              <button class="parchment-icon-control" type="button" data-parchment-action="play" aria-label="Reproducir" title="Reproducir"><span data-parchment-play-icon aria-hidden="true">▶</span></button>
+              <div class="parchment-speed" role="group" aria-label="Velocidad">
+                <button type="button" data-parchment-speed="1" aria-pressed="true">1×</button>
+                <button type="button" data-parchment-speed="2" aria-pressed="false">2×</button>
+                <button type="button" data-parchment-speed="4" aria-pressed="false">4×</button>
+              </div>
+              <button class="parchment-page-control" type="button" data-parchment-action="page">Completar<br>página</button>
+              <button class="parchment-icon-control" type="button" data-parchment-action="restart" aria-label="Reiniciar" title="Reiniciar"><span aria-hidden="true">↻</span></button>
+            </div>
+            <p class="parchment-status" data-parchment-status aria-live="polite">Página 1</p>
+            <div class="parchment-soundtrack" role="group" aria-label="Música de apertura en bucle opcional">
+              <span class="parchment-sound-label" aria-hidden="true">Música</span>
+              <button type="button" data-parchment-sound="cpc" aria-pressed="false">♪ CPC</button>
+              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ PC</button>
+              <button type="button" data-parchment-sound="stop" disabled>Silencio</button>
+              <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">Sin música</span>
+              <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/inicio.wav"></audio>
+              <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+            </div>
+          </div>
         </div>
         <div class="parchment-console">
           <p class="eyebrow">El umbral del juego</p>
           <h3>El testimonio de Adso</h3>
-          <p>La reproducción respeta el lienzo de 320 × 200, la paleta, el orden de los puntos, las pausas entre líneas y el paso de página originales. Puedes dejarla avanzar a su ritmo o acelerar la lectura.</p>
-          <div class="parchment-controls" aria-label="Controles del manuscrito">
-            <button type="button" data-parchment-action="play">Reproducir</button>
-            <button type="button" data-parchment-action="speed">Velocidad · 1×</button>
-            <button type="button" data-parchment-action="page">Completar página</button>
-            <button type="button" data-parchment-action="restart">Reiniciar</button>
-          </div>
-          <p class="parchment-status" data-parchment-status aria-live="polite">Página 1</p>
-          <fieldset class="parchment-soundtrack">
-            <legend>Música de apertura · bucle opcional</legend>
-            <div>
-              <button type="button" data-parchment-sound="cpc" aria-pressed="false">♪ CPC</button>
-              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ PC</button>
-              <button type="button" data-parchment-sound="stop" disabled>Silencio</button>
-            </div>
-            <span data-parchment-sound-status aria-live="polite">Sin música</span>
-            <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/inicio.wav"></audio>
-            <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
-          </fieldset>
+          <p>La animación reproduce el manuscrito como lo veía el jugador: lienzo de 320 × 200, letras trazadas poco a poco, pausas deliberadas y el paso de página original. Puedes dejarla avanzar a su ritmo o acelerar la lectura.</p>
+          <p class="caption">Color según versión: CPC, CGA y VGA recrean sus paletas documentadas; ZX y MSX adaptan el manuscrito original a sus colores característicos.</p>
           <details class="parchment-transcript">
             <summary>Leer la transcripción completa</summary>
             <div data-parchment-transcript></div>
@@ -382,8 +389,8 @@
     <div class="lightbox-navigation" aria-label="Páginas del artículo" hidden><button class="lightbox-previous" type="button" aria-label="Página anterior">← Anterior</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Página siguiente">Siguiente →</button></div>
     <p class="lightbox-caption"></p>
   </div>
-  <script src="../assets/game/parchment-data.js?v=20260906-parchment1"></script>
-  <script src="../parchment.js?v=20260906-parchment1"></script>
-  <script src="../app.js?v=20260906-pages1"></script>
+  <script src="../assets/game/parchment-data.js?v=20260906-palettes3"></script>
+  <script src="../parchment.js?v=20260906-player8"></script>
+  <script src="../app.js?v=20260906-palettes1"></script>
 </body>
 </html>
