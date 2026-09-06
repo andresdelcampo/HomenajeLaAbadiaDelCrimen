@@ -1260,6 +1260,10 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 .retro-es-page button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .retro-es-page img { display: block; width: 100%; height: auto; }
 .retro-es-page figcaption { padding: .55rem .35rem .2rem; font: 700 .58rem/1.35 var(--mono); text-transform: uppercase; }
+.retro-es-feature--compact .retro-es-gallery { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.retro-es-feature--compact .retro-es-page:first-child { grid-column: 1; grid-row: 1 / span 2; }
+.retro-es-feature--compact .retro-es-page:nth-child(2) { grid-column: 2; grid-row: 1; }
+.retro-es-feature--compact .retro-es-page:nth-child(3) { grid-column: 2; grid-row: 2; transform: none; }
 .international-heading { display: grid; grid-template-columns: minmax(0, .9fr) minmax(260px, 1.1fr); gap: 1.5rem 4rem; align-items: end; margin-bottom: 2.5rem; }
 .international-heading .source-tag { grid-column: 1 / -1; justify-self: start; }
 .international-heading h3 { margin: 0; font: 400 clamp(2.5rem, 5vw, 5.2rem)/.87 var(--display); }
@@ -1815,6 +1819,10 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .retro-es-gallery { grid-template-columns: 1fr 1fr; }
   .retro-es-page:first-child { grid-column: 1 / -1; grid-row: auto; }
   .retro-es-page:nth-child(n) { transform: none; }
+  .retro-es-feature--compact .retro-es-gallery { grid-template-columns: 1fr 1fr; }
+  .retro-es-feature--compact .retro-es-page:first-child { grid-column: 1 / -1; grid-row: auto; }
+  .retro-es-feature--compact .retro-es-page:nth-child(2),
+  .retro-es-feature--compact .retro-es-page:nth-child(3) { grid-column: auto; grid-row: auto; }
   .screen-atlas { grid-template-columns: 1fr; }
   .magazine-map-spread { grid-template-columns: 1fr; }
   .audio-button { min-height: 150px; }
