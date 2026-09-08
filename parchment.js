@@ -96,15 +96,21 @@
       play: 'Reproducir', pause: 'Pausar', continue: 'Continuar',
       pageStatus: 'Página', of: 'de', complete: 'Manuscrito completo',
       noMusic: 'Sin música', cpcMusic: 'CPC · tema de apertura en bucle',
-      pcMusic: 'PC · tema de apertura en bucle', endingMusic: 'CPC · tema final en bucle',
-      pcEndingMusic: 'PC · tema de apertura repetido al final',
+      pcMusic: 'PC CGA original · tema de apertura en bucle',
+      vgaMusic: 'Remake VGA · tema de apertura en bucle',
+      endingMusic: 'CPC · tema final en bucle',
+      pcEndingMusic: 'PC CGA original · tema de apertura repetido al final',
+      vgaEndingMusic: 'Remake VGA · tema final en bucle',
       audioError: 'No se ha podido reproducir la pista'
     } : {
       play: 'Play', pause: 'Pause', continue: 'Continue',
       pageStatus: 'Page', of: 'of', complete: 'Manuscript complete',
       noMusic: 'No music', cpcMusic: 'CPC · opening theme looping',
-      pcMusic: 'PC · opening theme looping', endingMusic: 'CPC · ending theme looping',
-      pcEndingMusic: 'PC · opening theme repeated at the ending',
+      pcMusic: 'Original PC CGA · opening theme looping',
+      vgaMusic: 'VGA remake · opening theme looping',
+      endingMusic: 'CPC · ending theme looping',
+      pcEndingMusic: 'Original PC CGA · opening theme repeated at the ending',
+      vgaEndingMusic: 'VGA remake · ending theme looping',
       audioError: 'The track could not be played'
     };
 
@@ -508,8 +514,10 @@
           const soundLabels = {
             cpc: labels.cpcMusic,
             pc: labels.pcMusic,
+            vga: labels.vgaMusic,
             ending: labels.endingMusic,
-            'ending-pc': labels.pcEndingMusic
+            'ending-pc': labels.pcEndingMusic,
+            'ending-vga': labels.vgaEndingMusic
           };
           soundStatus.textContent = soundLabels[choice] || labels.cpcMusic;
         }

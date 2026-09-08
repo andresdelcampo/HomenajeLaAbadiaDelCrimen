@@ -2169,9 +2169,9 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .parchment-speed button { min-width: 2.2rem; padding-inline: .35rem; }
   .parchment-page-control { min-width: 0; flex: 1; padding-inline: .35rem; font-size: .64rem; }
   .parchment-soundtrack { grid-column: 1; grid-row: 2; justify-content: flex-start; padding: .7rem 0 0; border-left: 0; border-top: 1px solid rgba(103,197,193,.25); }
-  .parchment-ending .parchment-sound-label { display: none; }
-  .parchment-ending .parchment-soundtrack { min-width: 0; width: 100%; }
-  .parchment-ending .parchment-soundtrack button { min-width: 0; flex: 1; padding-inline: .25rem; }
+  .parchment-sound-label { display: none; }
+  .parchment-soundtrack { min-width: 0; width: 100%; }
+  .parchment-soundtrack button { min-width: 0; flex: 1; padding-inline: .2rem; }
   .parchment-status { grid-row: 3; margin-top: .1rem; }
   .ending-spoiler > summary { grid-template-columns: 1fr; }
 }

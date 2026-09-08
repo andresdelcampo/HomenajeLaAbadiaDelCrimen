@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260908-abbeymap3">
+  <link rel="stylesheet" href="../styles.css?v=20260908-audio1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -70,11 +70,13 @@
             <div class="parchment-soundtrack" role="group" aria-label="Optional looping opening music">
               <span class="parchment-sound-label" aria-hidden="true">Music</span>
               <button type="button" data-parchment-sound="cpc" aria-pressed="false">♪ CPC</button>
-              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ PC</button>
+              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ CGA</button>
+              <button type="button" data-parchment-sound="vga" aria-pressed="false">♫ VGA</button>
               <button type="button" data-parchment-sound="stop" disabled>Silence</button>
               <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">No music</span>
               <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/inicio.wav"></audio>
               <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+              <audio data-parchment-audio="vga" preload="none" loop src="../assets/audio/inicio-vga.mp3"></audio>
             </div>
           </div>
         </div>
@@ -249,12 +251,14 @@
               <p class="parchment-status" data-parchment-status aria-live="polite">Page 1</p>
               <div class="parchment-soundtrack" role="group" aria-label="Optional looping ending music">
                 <span class="parchment-sound-label" aria-hidden="true">Music</span>
-                <button type="button" data-parchment-sound="ending" aria-pressed="false">♪ CPC ending</button>
-                <button type="button" data-parchment-sound="ending-pc" aria-pressed="false">♪ PC ending</button>
+                <button type="button" data-parchment-sound="ending" aria-pressed="false">♪ CPC</button>
+                <button type="button" data-parchment-sound="ending-pc" aria-pressed="false">♫ CGA</button>
+                <button type="button" data-parchment-sound="ending-vga" aria-pressed="false">♫ VGA</button>
                 <button type="button" data-parchment-sound="stop" disabled>Silence</button>
                 <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">No music</span>
                 <audio data-parchment-audio="ending" preload="none" loop src="../assets/audio/final.wav"></audio>
                 <audio data-parchment-audio="ending-pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+                <audio data-parchment-audio="ending-vga" preload="none" loop src="../assets/audio/final-vga.mp3"></audio>
               </div>
             </div>
           </div>
@@ -262,7 +266,7 @@
             <p class="eyebrow">The original ending</p>
             <h3>What Adso left in writing</h3>
             <p>The complete ending manuscript, reproduced with the same strokes, pauses, and page turn as the opening.</p>
-            <p class="caption">The graphics selector remains active. On PC, the game repeats its opening theme at the ending; both tracks are optional and stop if you play music from the other manuscript.</p>
+            <p class="caption">The graphics selector remains active. The original PC CGA game repeats its opening theme at the ending; the VGA remake has distinct music for the two manuscripts. All tracks are optional and stop if you play music from the other manuscript.</p>
             <details class="parchment-transcript">
               <summary>Read the complete transcript</summary>
               <div data-parchment-transcript></div>
@@ -285,7 +289,7 @@
 
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Archive viewer"><button class="lightbox-close" type="button">Close ×</button><div class="lightbox-zoom" aria-label="Zoom"><button class="lightbox-zoom-out" type="button" aria-label="Zoom out">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Zoom in">+</button><button class="lightbox-zoom-fit" type="button">Fit</button></div><div class="lightbox-stage"><img src="" alt=""></div><div class="lightbox-navigation" aria-label="Article pages" hidden><button class="lightbox-previous" type="button" aria-label="Previous page">← Previous</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Next page">Next →</button></div><p class="lightbox-caption"></p></div>
   <script src="../assets/game/parchment-data.js?v=20260908-w1"></script>
-  <script src="../parchment.js?v=20260908-vga6"></script>
+  <script src="../parchment.js?v=20260908-vga7"></script>
   <script src="../app.js?v=20260908-abbeymap4"></script>
 </body>
 </html>
