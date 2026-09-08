@@ -125,6 +125,9 @@ def main() -> None:
     }
 
     glyphs = read_asm_glyphs(asm)
+    # The original CPC reused the unused ASCII w slot for ñ. The reconstructed
+    # source restores both characters separately for the English translations.
+    glyphs["w"] = read_reconstructed_glyph("w", cpp_glyphs)
     required = set("".join(text for collection in texts.values() for text in collection.values())) - {
         " ", "\r", "\n", "\x1a"
     }
@@ -133,7 +136,7 @@ def main() -> None:
             glyphs[character] = read_reconstructed_glyph(character, cpp_glyphs)
 
     data = {
-        "version": 3,
+        "version": 4,
         "width": 320,
         "height": 200,
         "editions": {

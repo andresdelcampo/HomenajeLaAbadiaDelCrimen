@@ -6,6 +6,8 @@
 
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const speedSteps = [1, 2, 4];
+  const scriptUrl = document.currentScript?.src || document.baseURI;
+  const vgaBackgroundUrl = new URL('assets/game/parchment-vga-textured.png', scriptUrl);
 
   document.querySelectorAll('[data-parchment]').forEach(root => {
     const language = root.dataset.parchmentLanguage || document.documentElement.lang || 'es';
@@ -33,6 +35,36 @@
     const context = canvas.getContext('2d', { alpha: false });
     if (!context) return;
     context.imageSmoothingEnabled = false;
+
+    let vgaBackgroundReady = false;
+    const vgaBackground = new Image();
+    vgaBackground.decoding = 'async';
+    const vgaBackgroundCanvas = document.createElement('canvas');
+    vgaBackgroundCanvas.width = data.width;
+    vgaBackgroundCanvas.height = data.height;
+    const vgaBackgroundContext = vgaBackgroundCanvas.getContext('2d', { alpha: false });
+    const vgaOverlayCanvas = document.createElement('canvas');
+    vgaOverlayCanvas.width = data.width;
+    vgaOverlayCanvas.height = data.height;
+    const vgaOverlayContext = vgaOverlayCanvas.getContext('2d');
+
+    vgaBackground.addEventListener('load', () => {
+      if (!vgaBackgroundContext || !vgaOverlayContext) return;
+      vgaBackgroundContext.fillStyle = '#000';
+      vgaBackgroundContext.fillRect(0, 0, data.width, data.height);
+      vgaBackgroundContext.imageSmoothingEnabled = true;
+      vgaBackgroundContext.imageSmoothingQuality = 'high';
+      vgaBackgroundContext.drawImage(vgaBackground, 64, 0, 192, 192);
+      vgaBackgroundReady = true;
+      root.dataset.parchmentVgaBackground = 'ready';
+      root.dataset.parchmentVgaSource = vgaBackgroundUrl.pathname;
+      dirty = true;
+    });
+    vgaBackground.addEventListener('error', () => {
+      root.dataset.parchmentVgaBackground = 'error';
+      console.warn(`Unable to load the VGA parchment background: ${vgaBackgroundUrl.href}`);
+    });
+    vgaBackground.src = vgaBackgroundUrl.href;
 
     function unpackPalette(source) {
       return source.map(hex => [
@@ -130,14 +162,24 @@
     }
 
     function render() {
+      const useVgaBackground = editionKey === 'vga' && vgaBackgroundReady;
+      if (useVgaBackground) image.data.fill(0);
       for (let source = 0, target = 0; source < pixels.length; source++, target += 4) {
+        if (useVgaBackground && pixels[source] === basePixels[source]) continue;
         const color = palette[pixels[source]];
         image.data[target] = color[0];
         image.data[target + 1] = color[1];
         image.data[target + 2] = color[2];
         image.data[target + 3] = 255;
       }
-      context.putImageData(image, 0, 0);
+      if (useVgaBackground) {
+        vgaOverlayContext.clearRect(0, 0, data.width, data.height);
+        vgaOverlayContext.putImageData(image, 0, 0);
+        context.drawImage(vgaBackgroundCanvas, 0, 0);
+        context.drawImage(vgaOverlayCanvas, 0, 0);
+      } else {
+        context.putImageData(image, 0, 0);
+      }
       dirty = false;
     }
 
