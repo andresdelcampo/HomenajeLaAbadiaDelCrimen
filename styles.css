@@ -1279,6 +1279,11 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 .stitched-grid span { color: rgba(255,255,255,.56); font: .65rem/1.4 var(--mono); }
 .guide-link { margin: 1.2rem 0 0; color: rgba(255,255,255,.67); font: .7rem/1.5 var(--mono); }
 .guide-link a { color: var(--cyan); }
+.stitched-atlas--compact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .52fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; }
+.stitched-atlas--compact .stitched-heading { display: block; margin: 0; }
+.stitched-atlas--compact .stitched-heading .source-tag { margin-bottom: 1rem; }
+.stitched-atlas--compact .stitched-heading h3 { margin-bottom: 1.2rem; }
+.stitched-atlas--compact .stitched-grid { grid-template-columns: 1fr; }
 .screen-atlas {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2055,7 +2060,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .abbey-upper-level { grid-template-columns: 1fr; }
   .abbey-map-legend { align-items: flex-start; flex-direction: column; }
   .abbey-map-legend p { text-align: left; }
-  .map-evidence, .stitched-grid { grid-template-columns: 1fr; }
+  .map-evidence, .stitched-grid, .stitched-atlas--compact { grid-template-columns: 1fr; }
   .map-plan-grid { grid-template-columns: 1fr; }
   .map-document--plan { width: min(100%, 42rem); justify-self: center; }
   .map-document--spread { grid-column: auto; }
