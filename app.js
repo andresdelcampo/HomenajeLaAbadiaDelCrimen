@@ -245,6 +245,8 @@
         button.style.gridColumn = column;
         button.style.gridRow = row;
         button.dataset.roomId = roomHex.toLowerCase();
+        button.dataset.mapColumn = column;
+        button.dataset.mapRow = row;
         button.setAttribute('aria-label', `${isSpanish ? 'Ampliar estancia' : 'Enlarge room'} ${roomHex}`);
         const image = document.createElement('img');
         image.alt = '';
@@ -435,8 +437,7 @@
     lightboxTrigger = null;
     returnFocus?.focus();
   };
-  $$('[data-lightbox]').forEach(button => button.addEventListener('click', event => {
-    event.preventDefault();
+  const openLightbox = button => {
     if (!lightbox || !lightboxImage) return;
     lightboxPages = (button.dataset.lightboxPages || button.dataset.lightbox).split('|').filter(Boolean);
     lightboxPage = Number(button.dataset.lightboxPage) || 0;
@@ -461,6 +462,10 @@
       else lightboxImage.addEventListener('load', focusImage, { once: true });
     }
     $('.lightbox-close', lightbox)?.focus();
+  };
+  $$('[data-lightbox]').forEach(button => button.addEventListener('click', event => {
+    event.preventDefault();
+    openLightbox(button);
   }));
   lightboxPrevious?.addEventListener('click', () => showLightboxPage(lightboxPage - 1));
   lightboxNext?.addEventListener('click', () => showLightboxPage(lightboxPage + 1));
@@ -483,6 +488,24 @@
     if (event.key === '+' || event.key === '=') { event.preventDefault(); setLightboxZoom(lightboxZoom + lightboxZoomStep); }
     if (event.key === '-') { event.preventDefault(); setLightboxZoom(lightboxZoom - lightboxZoomStep); }
     if (event.key === '0') { event.preventDefault(); setLightboxZoom(1); }
+    const roomDirections = {
+      ArrowLeft: [-1, 0],
+      ArrowRight: [1, 0],
+      ArrowUp: [0, -1],
+      ArrowDown: [0, 1]
+    };
+    if (lightboxTrigger?.classList.contains('abbey-room') && roomDirections[event.key]) {
+      event.preventDefault();
+      const [columnDelta, rowDelta] = roomDirections[event.key];
+      const grid = lightboxTrigger.closest('[data-room-grid]');
+      const targetColumn = Number(lightboxTrigger.dataset.mapColumn) + columnDelta;
+      const targetRow = Number(lightboxTrigger.dataset.mapRow) + rowDelta;
+      const nextRoom = grid ? $$('.abbey-room', grid).find(button => (
+        Number(button.dataset.mapColumn) === targetColumn && Number(button.dataset.mapRow) === targetRow
+      )) : null;
+      if (nextRoom) openLightbox(nextRoom);
+      return;
+    }
     if (lightboxPages.length > 1 && event.key === 'ArrowLeft') showLightboxPage(lightboxPage - 1);
     if (lightboxPages.length > 1 && event.key === 'ArrowRight') showLightboxPage(lightboxPage + 1);
   });
