@@ -229,6 +229,103 @@
     if (mapText) mapText.textContent = button.dataset.text;
   }));
 
+  const abbeyRoomLayouts = {
+    ground: [[8,1,39],[10,1,62],[1,2,10],[2,2,9],[4,2,7],[5,2,8],[6,2,42],[7,2,40],[8,2,38],[9,2,41],[10,2,55],[11,2,56],[12,2,57],[2,3,2],[3,3,1],[4,3,0],[5,3,13],[6,3,14],[7,3,36],[8,3,35],[9,3,37],[10,3,43],[11,3,44],[12,3,45],[2,4,3],[4,4,31],[8,4,34],[10,4,46],[11,4,47],[12,4,48],[2,5,4],[3,5,29],[4,5,30],[6,5,61],[8,5,33],[10,5,49],[11,5,50],[12,5,51],[1,6,12],[2,6,11],[3,6,28],[4,6,5],[5,6,6],[6,6,60],[8,6,32],[10,6,52],[11,6,53],[12,6,54],[3,7,15],[4,7,16],[5,7,17],[6,7,18],[8,7,27],[10,7,26],[6,8,19],[7,8,20],[8,8,21],[9,8,24],[10,8,25],[8,9,22],[8,10,23]],
+    scriptorium: [[1,1,69],[2,1,68],[4,1,72],[5,1,73],[2,2,67],[3,2,71],[4,2,74],[2,3,66],[4,3,75],[2,4,65],[3,4,64],[4,4,76],[1,5,63],[2,5,70],[4,5,77],[5,5,78]],
+    library: [[1,1,103],[2,1,102],[4,1,101],[5,1,100],[2,2,106],[3,2,105],[4,2,104],[2,3,108],[4,3,107],[2,4,111],[3,4,110],[4,4,109],[1,5,115],[2,5,114],[4,5,113],[5,5,112]]
+  };
+  $$('[data-abbey-map]').forEach(atlas => {
+    const isSpanish = document.documentElement.lang === 'es';
+    $$('[data-room-grid]', atlas).forEach(grid => {
+      (abbeyRoomLayouts[grid.dataset.roomGrid] || []).forEach(([column, row, room]) => {
+        const roomHex = room.toString(16).padStart(2, '0').toUpperCase();
+        const button = document.createElement('button');
+        button.className = 'abbey-room';
+        button.type = 'button';
+        button.style.gridColumn = column;
+        button.style.gridRow = row;
+        button.dataset.roomId = roomHex.toLowerCase();
+        button.setAttribute('aria-label', `${isSpanish ? 'Ampliar estancia' : 'Enlarge room'} ${roomHex}`);
+        const image = document.createElement('img');
+        image.alt = '';
+        image.loading = 'lazy';
+        image.width = 512;
+        image.height = 320;
+        const number = document.createElement('span');
+        number.textContent = roomHex;
+        number.setAttribute('aria-hidden', 'true');
+        button.append(image, number);
+        grid.append(button);
+      });
+    });
+    let currentAtlasPlatform = document.documentElement.dataset.platform;
+    let currentAtlasLight = 'day';
+    const updateAtlasEdition = () => {
+      const platform = currentAtlasPlatform;
+      const light = currentAtlasLight;
+      const useVga = platform === 'vga';
+      const useCpc = platform === 'cpc';
+      const useSpectrum = platform === 'spectrum';
+      const useMsx = platform === 'msx';
+      const mapPlatform = useVga ? 'vga' : (useCpc ? 'cpc' : (useSpectrum ? 'spectrum' : (useMsx ? 'msx' : 'cga')));
+      const assetSet = `${mapPlatform}-${light}`;
+      const lightLabel = light === 'night'
+        ? (isSpanish ? 'paleta nocturna' : 'night palette')
+        : (isSpanish ? 'paleta diurna' : 'daytime palette');
+      const platformLabel = useVga
+        ? (isSpanish ? 'Remake VGA · 256 colores' : 'VGA remake · 256 colours')
+        : (useCpc
+          ? (isSpanish ? 'Amstrad CPC · 4 colores' : 'Amstrad CPC · 4 colours')
+          : (useSpectrum
+            ? (isSpanish ? 'ZX Spectrum · 2 colores' : 'ZX Spectrum · 2 colours')
+            : (useMsx ? (isSpanish ? 'MSX · 2 colores' : 'MSX · 2 colours') : 'PC CGA')));
+      const edition = `${platformLabel} · ${lightLabel}`;
+      atlas.dataset.mapPlatform = mapPlatform;
+      atlas.dataset.mapPalette = light;
+      $$('.abbey-room', atlas).forEach(button => {
+        const source = `../assets/maps/abbey-rooms/${assetSet}/room-${button.dataset.roomId}.png`;
+        const roomHex = button.dataset.roomId.toUpperCase();
+        const label = `${isSpanish ? 'Estancia' : 'Room'} ${roomHex}, ${edition}`;
+        const image = $('img', button);
+        if (image) image.src = source;
+        button.dataset.lightbox = source;
+        button.dataset.alt = label;
+        button.dataset.caption = label;
+      });
+      const legend = $('[data-abbey-edition]', atlas);
+      if (legend) legend.textContent = edition;
+    };
+    const lightButtons = $$('[data-abbey-light]', atlas);
+    lightButtons.forEach(button => button.addEventListener('click', () => {
+      currentAtlasLight = button.dataset.abbeyLight;
+      lightButtons.forEach(item => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      updateAtlasEdition();
+    }));
+    updateAtlasEdition();
+    addEventListener('reportaje:platformchange', event => {
+      currentAtlasPlatform = event.detail.platform;
+      updateAtlasEdition();
+    });
+    const tabs = $$('[data-abbey-floor]', atlas);
+    const panels = $$('[data-abbey-panel]', atlas);
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(item => {
+        const active = item === tab;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach(panel => {
+        const active = panel.dataset.abbeyPanel === tab.dataset.abbeyFloor;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    }));
+  });
+
   const spoilerButton = $('.spoiler-button');
   const days = $('.days-grid');
   if (spoilerButton && days) spoilerButton.addEventListener('click', () => {

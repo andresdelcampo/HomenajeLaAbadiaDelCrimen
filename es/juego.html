@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-ending13">
+  <link rel="stylesheet" href="../styles.css?v=20260908-abbeymap3">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -253,27 +253,32 @@
         <p class="chapter-intro">La perspectiva isométrica oculta puertas tras los muros, confunde el sentido de la orientación y obliga a recordar los desniveles. Aquí perderse también forma parte de la investigación.</p>
       </div>
 
-      <div class="labyrinth-layout reveal">
-        <div class="map-frame" aria-label="Mapa de Retro Gamer España con localizaciones interactivas">
-          <img class="map-source" src="../assets/maps/interactive-retrogamer-map.jpg" alt="Mapa de la abadía publicado en Retro Gamer España 41" loading="lazy">
-          <a class="map-zoom-trigger" href="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox-hires data-alt="Mapa completo de la abadía publicado en Retro Gamer España 41" data-caption="Mapa completo publicado por Retro Gamer España 41, con la planta principal, el scriptorium y el laberinto." aria-label="Ampliar el mapa completo"></a>
-          <button class="map-hotspot is-active" type="button" aria-label="Iglesia" data-title="Iglesia" data-text="Centro del orden. Prima y vísperas sincronizan a los personajes; el altar llega a custodiar una llave crucial."></button>
-          <button class="map-hotspot" type="button" aria-label="Celda de fray Guillermo" data-title="Celda de fray Guillermo y Adso" data-text="La habitación asignada a Guillermo y Adso. El Abad los escolta aquí tras completas; desde ella comienzan las salidas nocturnas."></button>
-          <button class="map-hotspot" type="button" aria-label="Scriptorium" data-title="Scriptorium" data-text="Lugar de trabajo de Malaquías y Berengario. Aquí aparece el pergamino de Venancio y comienza la cadena de denuncias."></button>
-          <button class="map-hotspot" type="button" aria-label="Biblioteca" data-title="Biblioteca" data-text="Una planta superior prohibida, organizada como laberinto. Sin lámpara, el juego oscurece la vista y activa una cuenta atrás."></button>
-          <button class="map-hotspot" type="button" aria-label="Refectorio" data-title="Refectorio" data-text="A sexta, el reparto ocupa lugares fijos. La comida funciona como comprobación de presencia y avance del reloj."></button>
-          <button class="map-hotspot" type="button" aria-label="Espejo" data-title="Habitación del espejo" data-text="El pergamino y las gafas revelan una instrucción. La combinación correcta abre el espejo; la equivocada abre una trampa."></button>
-          <button class="map-hotspot" type="button" aria-label="Celda del Abad" data-title="Celda del Abad" data-text="El Abad duerme aquí, guarda el manuscrito y castiga cualquier intrusión. Entrar sin permiso reduce el Obsequium."></button>
-          <button class="map-hotspot" type="button" aria-label="Cocina" data-title="Cocina" data-text="Aquí se encuentra la lámpara de aceite. La estancia también comunica con el pasadizo secreto usado para cerrar el ala occidental."></button>
-          <button class="map-hotspot" type="button" aria-label="Celda de Severino" data-title="Celda de Severino" data-text="La celda del herbolario: Berengario muere aquí, Severino encuentra el libro y después es asesinado. Más tarde se obtienen los guantes."></button>
-          <button class="map-hotspot" type="button" aria-label="Habitación iluminada" data-title="Habitación iluminada" data-text="La sala del laberinto donde aparecen las gafas. En el desenlace, Jorge huye hacia ella con el libro envenenado."></button>
+      <div class="abbey-screen-map reveal" data-abbey-map data-map-platform="cga" data-map-palette="day">
+        <div class="abbey-map-heading">
+          <div><span class="source-tag">Cartografía ejecutable</span><h3>La abadía real, estancia a estancia</h3></div>
+          <p>Las pantallas se reconstruyen desde las descripciones de estancia de cada programa y ocupan su celda real en el mundo. El selector superior cambia entre los píxeles originales de Amstrad CPC, ZX Spectrum y MSX, los bloques CGA de DOS y el redibujado VGA de Antonio Giner. El nivel superior reúne los dos pisos del <i>aedificium</i>: scriptorium y biblioteca.</p>
         </div>
-        <aside class="map-panel">
-          <small>Localización seleccionada</small>
-          <h3 data-map-title>Iglesia</h3>
-          <p data-map-text>Centro del orden. Prima y vísperas sincronizan a los personajes; el altar llega a custodiar una llave crucial.</p>
-          <p class="map-tip">Los puntos están superpuestos al mapa publicado por Retro Gamer España 41, que reproduce y amplía la cartografía clásica de MicroHobby. Debajo están los documentos completos.</p>
-        </aside>
+        <div class="abbey-map-variantbar">
+          <span>Luz</span>
+          <div class="abbey-light-tabs" role="group" aria-label="Iluminación de las estancias">
+            <button class="is-active" type="button" aria-pressed="true" data-abbey-light="day">Día</button>
+            <button type="button" aria-pressed="false" data-abbey-light="night">Noche</button>
+          </div>
+        </div>
+        <div class="abbey-floor-tabs" role="tablist" aria-label="Nivel de la abadía">
+          <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="abbey-main-es" data-abbey-floor="main">Planta principal <span>61 estancias</span></button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="abbey-upper-es" data-abbey-floor="upper">Aedificium <span>Scriptorium + biblioteca</span></button>
+        </div>
+        <section class="abbey-floor-panel is-active" id="abbey-main-es" role="tabpanel" data-abbey-panel="main">
+          <div class="abbey-room-grid abbey-room-grid--main" data-room-grid="ground" aria-label="Planta principal formada con 61 pantallas diurnas"></div>
+        </section>
+        <section class="abbey-floor-panel" id="abbey-upper-es" role="tabpanel" data-abbey-panel="upper" hidden>
+          <div class="abbey-upper-level">
+            <figure><figcaption><strong>Scriptorium</strong><span>Primer piso · 16 estancias</span></figcaption><div class="abbey-room-grid abbey-room-grid--upper" data-room-grid="scriptorium" aria-label="Scriptorium formado con 16 pantallas diurnas"></div></figure>
+            <figure><figcaption><strong>Biblioteca</strong><span>Piso superior · 16 estancias</span></figcaption><div class="abbey-room-grid abbey-room-grid--upper" data-room-grid="library" aria-label="Biblioteca formada con 16 pantallas diurnas"></div></figure>
+          </div>
+        </section>
+        <div class="abbey-map-legend"><span><i aria-hidden="true"></i><b data-abbey-edition>PC CGA · paleta diurna</b></span><p>Selecciona cualquier estancia para verla a tamaño completo. Cierra con otro clic fuera de la imagen, con «Cerrar» o con Esc.</p></div>
       </div>
 
       <div class="map-evidence reveal">
@@ -445,6 +450,6 @@
   </div>
   <script src="../assets/game/parchment-data.js?v=20260906-ending9"></script>
   <script src="../parchment.js?v=20260906-ending12"></script>
-  <script src="../app.js?v=20260906-palettes1"></script>
+  <script src="../app.js?v=20260908-abbeymap3"></script>
 </body>
 </html>

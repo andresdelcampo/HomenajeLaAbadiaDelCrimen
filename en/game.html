@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-ending13">
+  <link rel="stylesheet" href="../styles.css?v=20260908-abbeymap3">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -146,22 +146,32 @@
 
     <section class="chapter dark" id="labyrinth">
       <div class="chapter-header reveal"><div><span class="chapter-number">V · The labyrinth</span><h2>The abbey as suspect</h2></div><p class="chapter-intro">Isometric perspective hides doors behind walls, reverses instinct, and demands a memory for height. Losing one’s way is part of the investigation, not a detour from it.</p></div>
-      <div class="labyrinth-layout reveal">
-        <div class="map-frame" aria-label="Retro Gamer España map with interactive locations">
-          <img class="map-source" src="../assets/maps/interactive-retrogamer-map.jpg" alt="Abbey map published in Retro Gamer España 41" loading="lazy">
-          <a class="map-zoom-trigger" href="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox-hires data-alt="Complete abbey map published in Retro Gamer España 41" data-caption="Complete map published by Retro Gamer España 41, showing the main floor, scriptorium, and labyrinth." aria-label="Enlarge the complete map"></a>
-          <button class="map-hotspot is-active" type="button" aria-label="Church" data-title="Church" data-text="The centre of order. Prime and vespers synchronise the cast; the altar eventually holds a crucial key."></button>
-          <button class="map-hotspot" type="button" aria-label="Friar William's cell" data-title="Friar William and Adso's cell" data-text="The room assigned to William and Adso. The Abbot escorts them here after compline; their nocturnal excursions begin from this cell."></button>
-          <button class="map-hotspot" type="button" aria-label="Scriptorium" data-title="Scriptorium" data-text="Malachi and Berengar work here. Venantius’s scroll appears on a desk and begins a chain of reports."></button>
-          <button class="map-hotspot" type="button" aria-label="Library" data-title="Library" data-text="A forbidden upper storey laid out as a maze. Without a lamp, the game blacks out the view and begins a countdown."></button>
-          <button class="map-hotspot" type="button" aria-label="Refectory" data-title="Refectory" data-text="At sext, the cast occupies fixed seats. The meal checks attendance and advances the clock."></button>
-          <button class="map-hotspot" type="button" aria-label="Mirror room" data-title="Mirror room" data-text="Scroll and spectacles reveal an instruction. The right combination opens the mirror; a wrong one opens a trap."></button>
-          <button class="map-hotspot" type="button" aria-label="The Abbot's cell" data-title="The Abbot's cell" data-text="The Abbot sleeps here, keeps the manuscript, and punishes any intrusion. Entering without permission lowers Obsequium."></button>
-          <button class="map-hotspot" type="button" aria-label="Kitchen" data-title="Kitchen" data-text="The oil lamp is found here. The room also connects to the secret passage used when the western wing is locked."></button>
-          <button class="map-hotspot" type="button" aria-label="Severinus's cell" data-title="Severinus's cell" data-text="The herbalist's cell: Berengar dies here, Severinus finds the book and is later murdered. The gloves are obtained here afterwards."></button>
-          <button class="map-hotspot" type="button" aria-label="Lit room" data-title="The lit room" data-text="The room in the labyrinth where the spectacles appear. In the finale, Jorge flees towards it with the poisoned book."></button>
+      <div class="abbey-screen-map reveal" data-abbey-map data-map-platform="cga" data-map-palette="day">
+        <div class="abbey-map-heading">
+          <div><span class="source-tag">Executable cartography</span><h3>The real abbey, room by room</h3></div>
+          <p>Every screen is reconstructed from each original program’s room descriptions and placed in its actual world cell. The selector above switches between the original Amstrad CPC, ZX Spectrum, and MSX pixels, the DOS CGA blocks, and Antonio Giner’s VGA redraw. The upper complex brings together both storeys of the <i>aedificium</i>: scriptorium and library.</p>
         </div>
-        <aside class="map-panel"><small>Selected location</small><h3 data-map-title>Church</h3><p data-map-text>The centre of order. Prime and vespers synchronise the cast; the altar eventually holds a crucial key.</p><p class="map-tip">The dots sit over the map published in Retro Gamer España 41, which revisits and expands MicroHobby’s classic cartography. The complete documents follow below.</p></aside>
+        <div class="abbey-map-variantbar">
+          <span>Light</span>
+          <div class="abbey-light-tabs" role="group" aria-label="Room lighting">
+            <button class="is-active" type="button" aria-pressed="true" data-abbey-light="day">Day</button>
+            <button type="button" aria-pressed="false" data-abbey-light="night">Night</button>
+          </div>
+        </div>
+        <div class="abbey-floor-tabs" role="tablist" aria-label="Abbey level">
+          <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="abbey-main-en" data-abbey-floor="main">Main floor <span>61 rooms</span></button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="abbey-upper-en" data-abbey-floor="upper">Aedificium <span>Scriptorium + library</span></button>
+        </div>
+        <section class="abbey-floor-panel is-active" id="abbey-main-en" role="tabpanel" data-abbey-panel="main">
+          <div class="abbey-room-grid abbey-room-grid--main" data-room-grid="ground" aria-label="Main floor assembled from 61 daytime screens"></div>
+        </section>
+        <section class="abbey-floor-panel" id="abbey-upper-en" role="tabpanel" data-abbey-panel="upper" hidden>
+          <div class="abbey-upper-level">
+            <figure><figcaption><strong>Scriptorium</strong><span>First storey · 16 rooms</span></figcaption><div class="abbey-room-grid abbey-room-grid--upper" data-room-grid="scriptorium" aria-label="Scriptorium assembled from 16 daytime screens"></div></figure>
+            <figure><figcaption><strong>Library</strong><span>Upper storey · 16 rooms</span></figcaption><div class="abbey-room-grid abbey-room-grid--upper" data-room-grid="library" aria-label="Library assembled from 16 daytime screens"></div></figure>
+          </div>
+        </section>
+        <div class="abbey-map-legend"><span><i aria-hidden="true"></i><b data-abbey-edition>PC CGA · daytime palette</b></span><p>Select any room to see it at full size. Close it by clicking outside the image, choosing “Close”, or pressing Esc.</p></div>
       </div>
       <div class="map-evidence reveal">
         <div class="map-plan-grid">
@@ -283,6 +293,6 @@
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Archive viewer"><button class="lightbox-close" type="button">Close ×</button><div class="lightbox-zoom" aria-label="Zoom"><button class="lightbox-zoom-out" type="button" aria-label="Zoom out">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Zoom in">+</button><button class="lightbox-zoom-fit" type="button">Fit</button></div><div class="lightbox-stage"><img src="" alt=""></div><div class="lightbox-navigation" aria-label="Article pages" hidden><button class="lightbox-previous" type="button" aria-label="Previous page">← Previous</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Next page">Next →</button></div><p class="lightbox-caption"></p></div>
   <script src="../assets/game/parchment-data.js?v=20260906-ending9"></script>
   <script src="../parchment.js?v=20260906-ending12"></script>
-  <script src="../app.js?v=20260906-palettes1"></script>
+  <script src="../app.js?v=20260908-abbeymap3"></script>
 </body>
 </html>
