@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260908-audio1">
+  <link rel="stylesheet" href="../styles.css?v=20260908-audio2">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="game">
@@ -23,8 +23,8 @@
       <a href="legado.html">Legado</a>
     </div>
     <div class="nav-actions">
-      <div class="platform-picker" role="group" aria-label="Gráficos de las capturas">
-        <span>Gráficos</span>
+      <div class="platform-picker" role="group" aria-label="Versión del juego">
+        <span>Versión</span>
         <button type="button" data-platform-choice="spectrum" aria-pressed="false">ZX</button>
         <button type="button" data-platform-choice="msx" aria-pressed="false">MSX</button>
         <button type="button" data-platform-choice="cpc" aria-pressed="true">CPC</button>
@@ -50,7 +50,7 @@
           <span class="chapter-number">II · El manuscrito</span>
           <h2>La memoria despierta</h2>
         </div>
-        <p class="chapter-intro">Antes de entrar en la abadía, Adso vuelve a escribir lo que presenció en 1327. No es una tipografía que aparece: cada letra se forma, píxel a píxel, como en el manuscrito del juego. El selector de gráficos cambia también su aspecto.</p>
+        <p class="chapter-intro">Antes de entrar en la abadía, Adso vuelve a escribir lo que presenció en 1327. No es una tipografía que aparece: cada letra se forma, píxel a píxel, como en el manuscrito del juego. El selector de versión cambia también su aspecto y su música.</p>
       </div>
 
       <div class="parchment-experience reveal" data-parchment data-parchment-language="es" data-parchment-platform="cpc">
@@ -71,16 +71,14 @@
               </div>
             </div>
             <p class="parchment-status" data-parchment-status aria-live="polite">Página 1</p>
-            <div class="parchment-soundtrack" role="group" aria-label="Música de apertura en bucle opcional">
-              <span class="parchment-sound-label" aria-hidden="true">Música</span>
-              <button type="button" data-parchment-sound="cpc" aria-pressed="false">♪ CPC</button>
-              <button type="button" data-parchment-sound="pc" aria-pressed="false">♫ CGA</button>
-              <button type="button" data-parchment-sound="vga" aria-pressed="false">♫ VGA</button>
-              <button type="button" data-parchment-sound="stop" disabled>Silencio</button>
-              <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">Sin música</span>
+            <div class="parchment-soundtrack" aria-label="Música de apertura de la versión seleccionada">
+              <button type="button" data-parchment-sound-toggle aria-pressed="false"><span aria-hidden="true" data-parchment-sound-icon>♪</span> <span data-parchment-sound-label>Música</span></button>
+              <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">CPC · sin música</span>
               <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/inicio.wav"></audio>
               <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
               <audio data-parchment-audio="vga" preload="none" loop src="../assets/audio/inicio-vga.mp3"></audio>
+              <audio data-parchment-audio="spectrum" preload="none" loop src="../assets/audio/inicio-spectrum.mp3"></audio>
+              <audio data-parchment-audio="msx" preload="none" loop src="../assets/audio/inicio-msx.mp3"></audio>
             </div>
           </div>
         </div>
@@ -409,16 +407,14 @@
                 </div>
               </div>
               <p class="parchment-status" data-parchment-status aria-live="polite">Página 1</p>
-              <div class="parchment-soundtrack" role="group" aria-label="Música final en bucle opcional">
-                <span class="parchment-sound-label" aria-hidden="true">Música</span>
-                <button type="button" data-parchment-sound="ending" aria-pressed="false">♪ CPC</button>
-                <button type="button" data-parchment-sound="ending-pc" aria-pressed="false">♫ CGA</button>
-                <button type="button" data-parchment-sound="ending-vga" aria-pressed="false">♫ VGA</button>
-                <button type="button" data-parchment-sound="stop" disabled>Silencio</button>
-                <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">Sin música</span>
-                <audio data-parchment-audio="ending" preload="none" loop src="../assets/audio/final.wav"></audio>
-                <audio data-parchment-audio="ending-pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
-                <audio data-parchment-audio="ending-vga" preload="none" loop src="../assets/audio/final-vga.mp3"></audio>
+              <div class="parchment-soundtrack" aria-label="Música final de la versión seleccionada">
+                <button type="button" data-parchment-sound-toggle aria-pressed="false"><span aria-hidden="true" data-parchment-sound-icon>♪</span> <span data-parchment-sound-label>Música</span></button>
+                <span class="parchment-sound-status" data-parchment-sound-status aria-live="polite">CPC · sin música</span>
+                <audio data-parchment-audio="cpc" preload="none" loop src="../assets/audio/final.wav"></audio>
+                <audio data-parchment-audio="pc" preload="none" loop src="../assets/audio/inicio-pc.wav"></audio>
+                <audio data-parchment-audio="vga" preload="none" loop src="../assets/audio/final-vga.mp3"></audio>
+                <audio data-parchment-audio="spectrum" preload="none" loop src="../assets/audio/final-spectrum.mp3"></audio>
+                <audio data-parchment-audio="msx" preload="none" loop src="../assets/audio/final-msx.mp3"></audio>
               </div>
             </div>
           </div>
@@ -426,7 +422,7 @@
             <p class="eyebrow">El desenlace original</p>
             <h3>Lo que Adso dejó escrito</h3>
             <p>El texto íntegro del pergamino final, reproducido con los mismos trazos, pausas y paso de página del comienzo.</p>
-            <p class="caption">El selector de gráficos sigue activo. El PC CGA original repite al final su tema de apertura; el remake VGA aporta músicas distintas para los dos manuscritos. Todas son opcionales y se detienen si reproduces la del otro manuscrito.</p>
+            <p class="caption">El selector de versión gobierna también la música. El PC CGA original repite al final su tema de apertura; CPC, VGA, ZX Spectrum y MSX conservan sus pistas finales propias. La música es opcional y se detiene si reproduces la del otro manuscrito.</p>
             <details class="parchment-transcript">
               <summary>Leer la transcripción completa</summary>
               <div data-parchment-transcript></div>
@@ -455,7 +451,7 @@
     <p class="lightbox-caption"></p>
   </div>
   <script src="../assets/game/parchment-data.js?v=20260908-w1"></script>
-  <script src="../parchment.js?v=20260908-vga7"></script>
+  <script src="../parchment.js?v=20260908-platform1"></script>
   <script src="../app.js?v=20260908-abbeymap4"></script>
 </body>
 </html>

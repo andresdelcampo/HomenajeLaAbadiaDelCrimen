@@ -26,7 +26,9 @@
     const speedButtons = Array.from(root.querySelectorAll('[data-parchment-speed]'));
     const status = root.querySelector('[data-parchment-status]');
     const transcript = root.querySelector('[data-parchment-transcript]');
-    const soundButtons = Array.from(root.querySelectorAll('[data-parchment-sound]'));
+    const soundButton = root.querySelector('[data-parchment-sound-toggle]');
+    const soundButtonLabel = root.querySelector('[data-parchment-sound-label]');
+    const soundButtonIcon = root.querySelector('[data-parchment-sound-icon]');
     const soundTracks = Array.from(root.querySelectorAll('[data-parchment-audio]'));
     const soundStatus = root.querySelector('[data-parchment-sound-status]');
     const editionLabel = root.querySelector('[data-parchment-edition]');
@@ -95,23 +97,25 @@
     const labels = language === 'es' ? {
       play: 'Reproducir', pause: 'Pausar', continue: 'Continuar',
       pageStatus: 'Página', of: 'de', complete: 'Manuscrito completo',
-      noMusic: 'Sin música', cpcMusic: 'CPC · tema de apertura en bucle',
-      pcMusic: 'PC CGA original · tema de apertura en bucle',
-      vgaMusic: 'Remake VGA · tema de apertura en bucle',
-      endingMusic: 'CPC · tema final en bucle',
-      pcEndingMusic: 'PC CGA original · tema de apertura repetido al final',
-      vgaEndingMusic: 'Remake VGA · tema final en bucle',
+      music: 'Música', silence: 'Silencio', noMusic: 'sin música',
+      openingMusic: 'tema de apertura en bucle', endingMusic: 'tema final en bucle',
+      pcEndingMusic: 'tema de apertura repetido al final',
+      playMusic: platform => `Reproducir música de ${platform}`,
+      silenceMusic: platform => `Silenciar música de ${platform}`,
       audioError: 'No se ha podido reproducir la pista'
     } : {
       play: 'Play', pause: 'Pause', continue: 'Continue',
       pageStatus: 'Page', of: 'of', complete: 'Manuscript complete',
-      noMusic: 'No music', cpcMusic: 'CPC · opening theme looping',
-      pcMusic: 'Original PC CGA · opening theme looping',
-      vgaMusic: 'VGA remake · opening theme looping',
-      endingMusic: 'CPC · ending theme looping',
-      pcEndingMusic: 'Original PC CGA · opening theme repeated at the ending',
-      vgaEndingMusic: 'VGA remake · ending theme looping',
+      music: 'Music', silence: 'Silence', noMusic: 'no music',
+      openingMusic: 'opening theme looping', endingMusic: 'ending theme looping',
+      pcEndingMusic: 'opening theme repeated at the ending',
+      playMusic: platform => `Play ${platform} music`,
+      silenceMusic: platform => `Silence ${platform} music`,
       audioError: 'The track could not be played'
+    };
+    const platformNames = {
+      cpc: 'CPC', pc: 'PC CGA', vga: language === 'es' ? 'remake VGA' : 'VGA remake',
+      spectrum: 'ZX Spectrum', msx: 'MSX'
     };
 
     function setPixel(x, y, color) {
@@ -469,66 +473,98 @@
       updateControls(paused && characterIndex >= pages[pageIndex].text.length);
     }));
 
-    let activeSound = null;
-    function restartActiveSound() {
-      if (!activeSound) return;
-      const track = soundTracks.find(audio => audio.dataset.parchmentAudio === activeSound);
-      if (track && !track.paused) track.currentTime = 0;
+    let activeTrack = null;
+    let soundEnabled = false;
+    let soundRequest = 0;
+
+    function selectedSoundTrack() {
+      return soundTracks.find(audio => audio.dataset.parchmentAudio === editionKey);
     }
 
-    function stopSound(reset = true) {
+    function soundDescription() {
+      const platform = platformNames[editionKey] || platformNames.cpc;
+      if (!soundEnabled) return `${platform} · ${labels.noMusic}`;
+      const trackLabel = textKey === 'ending'
+        ? (editionKey === 'pc' ? labels.pcEndingMusic : labels.endingMusic)
+        : labels.openingMusic;
+      return `${platform} · ${trackLabel}`;
+    }
+
+    function updateSoundControls(message = null) {
+      const platform = platformNames[editionKey] || platformNames.cpc;
+      if (soundButton) {
+        soundButton.setAttribute('aria-pressed', String(soundEnabled));
+        soundButton.setAttribute('aria-label', soundEnabled
+          ? labels.silenceMusic(platform)
+          : labels.playMusic(platform));
+        soundButton.title = soundButton.getAttribute('aria-label');
+      }
+      if (soundButtonLabel) soundButtonLabel.textContent = soundEnabled ? labels.silence : labels.music;
+      if (soundButtonIcon) soundButtonIcon.textContent = soundEnabled ? '■' : '♪';
+      if (soundStatus) soundStatus.textContent = message || soundDescription();
+    }
+
+    function restartActiveSound() {
+      if (soundEnabled && activeTrack && !activeTrack.paused) activeTrack.currentTime = 0;
+    }
+
+    function haltSoundTracks(reset = true) {
       soundTracks.forEach(track => {
         track.pause();
         if (reset) track.currentTime = 0;
       });
-      activeSound = null;
-      soundButtons.forEach(button => {
-        if (button.dataset.parchmentSound !== 'stop') button.setAttribute('aria-pressed', 'false');
-        else button.disabled = true;
-      });
-      if (soundStatus) soundStatus.textContent = labels.noMusic;
+      activeTrack = null;
+    }
+
+    function stopSound(reset = true) {
+      soundRequest++;
+      haltSoundTracks(reset);
+      soundEnabled = false;
+      updateSoundControls();
+    }
+
+    async function playSelectedSound() {
+      const request = ++soundRequest;
+      haltSoundTracks();
+      const track = selectedSoundTrack();
+      if (!track) {
+        soundEnabled = false;
+        updateSoundControls(labels.audioError);
+        return;
+      }
+      soundEnabled = true;
+      updateSoundControls();
+      try {
+        await track.play();
+        if (request !== soundRequest) {
+          track.pause();
+          return;
+        }
+        activeTrack = track;
+        window.dispatchEvent(new CustomEvent('reportaje:parchmentaudio', { detail: { source: root } }));
+        updateSoundControls();
+      } catch (_) {
+        if (request !== soundRequest) return;
+        haltSoundTracks();
+        soundEnabled = false;
+        updateSoundControls(labels.audioError);
+      }
     }
 
     window.addEventListener('reportaje:parchmentaudio', event => {
-      if (event.detail?.source !== root && activeSound) stopSound();
+      if (event.detail?.source !== root && soundEnabled) stopSound();
     });
 
-    soundButtons.forEach(button => button.addEventListener('click', async () => {
-      const choice = button.dataset.parchmentSound;
-      if (choice === 'stop' || choice === activeSound) {
-        stopSound();
-        return;
-      }
-      stopSound();
-      const track = soundTracks.find(audio => audio.dataset.parchmentAudio === choice);
-      if (!track) return;
-      try {
-        await track.play();
-        window.dispatchEvent(new CustomEvent('reportaje:parchmentaudio', { detail: { source: root } }));
-        activeSound = choice;
-        soundButtons.forEach(item => {
-          if (item.dataset.parchmentSound !== 'stop') item.setAttribute('aria-pressed', String(item === button));
-          else item.disabled = false;
-        });
-        if (soundStatus) {
-          const soundLabels = {
-            cpc: labels.cpcMusic,
-            pc: labels.pcMusic,
-            vga: labels.vgaMusic,
-            ending: labels.endingMusic,
-            'ending-pc': labels.pcEndingMusic,
-            'ending-vga': labels.vgaEndingMusic
-          };
-          soundStatus.textContent = soundLabels[choice] || labels.cpcMusic;
-        }
-      } catch (_) {
-        stopSound();
-        if (soundStatus) soundStatus.textContent = labels.audioError;
-      }
-    }));
+    soundButton?.addEventListener('click', () => {
+      if (soundEnabled) stopSound();
+      else playSelectedSound();
+    });
 
     window.addEventListener('reportaje:platformchange', event => {
+      const resumeSound = soundEnabled;
       applyEdition(event.detail?.platform || 'cpc');
+      if (resumeSound) playSelectedSound();
+      else updateSoundControls();
     });
 
     if (transcript) {
@@ -541,6 +577,7 @@
 
     buildFrame();
     applyEdition(editionKey);
+    updateSoundControls();
     reset(false);
     render();
     requestAnimationFrame(tick);
