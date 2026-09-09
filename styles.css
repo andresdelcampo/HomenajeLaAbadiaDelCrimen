@@ -1827,6 +1827,35 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
   -webkit-user-drag: none;
 }
 .lightbox.is-zoomed img { cursor: zoom-out; }
+.lightbox-room-navigation {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.lightbox-room-navigation[hidden] { display: none; }
+.lightbox-room-navigation button {
+  position: absolute;
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  border: 1px solid rgba(212,154,46,.72);
+  border-radius: 50%;
+  color: var(--white);
+  background: rgba(5,7,9,.82);
+  box-shadow: 0 4px 18px rgba(0,0,0,.42);
+  cursor: pointer;
+  pointer-events: auto;
+  font: 700 1.25rem/1 var(--mono);
+}
+.lightbox-room-navigation button:hover:not(:disabled),
+.lightbox-room-navigation button:focus-visible { color: var(--gold); border-color: var(--gold); }
+.lightbox-room-navigation button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.lightbox-room-navigation button:disabled { opacity: .2; cursor: default; }
+.lightbox-room-up { top: 4.5rem; left: 50%; transform: translateX(-50%); }
+.lightbox-room-right { top: 50%; right: 1rem; transform: translateY(-50%); }
+.lightbox-room-down { bottom: 3rem; left: 50%; transform: translateX(-50%); }
+.lightbox-room-left { top: 50%; left: 1rem; transform: translateY(-50%); }
 .lightbox-close {
   position: fixed;
   z-index: 5;

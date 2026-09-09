@@ -368,6 +368,28 @@
   const lightboxZoomIn = lightbox ? $('.lightbox-zoom-in', lightbox) : null;
   const lightboxZoomFit = lightbox ? $('.lightbox-zoom-fit', lightbox) : null;
   const lightboxZoomLevel = lightbox ? $('.lightbox-zoom-level', lightbox) : null;
+  const isSpanishViewer = document.documentElement.lang === 'es';
+  const roomDirectionLabels = isSpanishViewer
+    ? { up: 'Ir a la estancia superior', right: 'Ir a la estancia de la derecha', down: 'Ir a la estancia inferior', left: 'Ir a la estancia de la izquierda' }
+    : { up: 'Go to the room above', right: 'Go to the room on the right', down: 'Go to the room below', left: 'Go to the room on the left' };
+  const lightboxRoomNavigation = lightbox ? document.createElement('div') : null;
+  if (lightboxRoomNavigation) {
+    lightboxRoomNavigation.className = 'lightbox-room-navigation';
+    lightboxRoomNavigation.hidden = true;
+    lightboxRoomNavigation.setAttribute('role', 'group');
+    lightboxRoomNavigation.setAttribute('aria-label', isSpanishViewer ? 'Estancias contiguas' : 'Adjacent rooms');
+    Object.entries({ up: [0, -1, '↑'], right: [1, 0, '→'], down: [0, 1, '↓'], left: [-1, 0, '←'] }).forEach(([direction, [columnDelta, rowDelta, symbol]]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `lightbox-room-${direction}`;
+      button.dataset.roomColumnDelta = columnDelta;
+      button.dataset.roomRowDelta = rowDelta;
+      button.setAttribute('aria-label', roomDirectionLabels[direction]);
+      button.textContent = symbol;
+      lightboxRoomNavigation.append(button);
+    });
+    lightbox.append(lightboxRoomNavigation);
+  }
   let lightboxPages = [];
   let lightboxPage = 0;
   let lightboxAlt = '';
@@ -377,6 +399,7 @@
   let lightboxFitWidth = 0;
   let lightboxFitHeight = 0;
   let lightboxOpenNative = false;
+  let lightboxSwipeStart = null;
   const lightboxMinZoom = 1;
   const lightboxMaxZoom = 6;
   const lightboxZoomStep = .25;
@@ -433,9 +456,34 @@
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     if (lightboxNavigation) lightboxNavigation.hidden = true;
+    if (lightboxRoomNavigation) lightboxRoomNavigation.hidden = true;
     const returnFocus = lightboxTrigger;
     lightboxTrigger = null;
     returnFocus?.focus();
+  };
+  const adjacentRoom = (columnDelta, rowDelta) => {
+    if (!lightboxTrigger?.classList.contains('abbey-room')) return null;
+    const grid = lightboxTrigger.closest('[data-room-grid]');
+    const targetColumn = Number(lightboxTrigger.dataset.mapColumn) + columnDelta;
+    const targetRow = Number(lightboxTrigger.dataset.mapRow) + rowDelta;
+    return grid ? $$('.abbey-room', grid).find(button => (
+      Number(button.dataset.mapColumn) === targetColumn && Number(button.dataset.mapRow) === targetRow
+    )) : null;
+  };
+  const updateRoomNavigation = () => {
+    if (!lightboxRoomNavigation) return;
+    const isRoom = lightboxTrigger?.classList.contains('abbey-room');
+    lightboxRoomNavigation.hidden = !isRoom;
+    if (!isRoom) return;
+    $$('button', lightboxRoomNavigation).forEach(button => {
+      button.disabled = !adjacentRoom(Number(button.dataset.roomColumnDelta), Number(button.dataset.roomRowDelta));
+    });
+  };
+  const navigateToAdjacentRoom = (columnDelta, rowDelta) => {
+    const nextRoom = adjacentRoom(columnDelta, rowDelta);
+    if (!nextRoom) return false;
+    openLightbox(nextRoom);
+    return true;
   };
   const openLightbox = button => {
     if (!lightbox || !lightboxImage) return;
@@ -450,6 +498,7 @@
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     showLightboxPage(lightboxPage);
+    updateRoomNavigation();
     lightbox.scrollTo(0, 0);
     const focusX = Number(button.dataset.lightboxFocusX);
     const focusY = Number(button.dataset.lightboxFocusY);
@@ -472,6 +521,10 @@
   lightboxZoomOut?.addEventListener('click', () => setLightboxZoom(lightboxZoom - lightboxZoomStep));
   lightboxZoomIn?.addEventListener('click', () => setLightboxZoom(lightboxZoom + lightboxZoomStep));
   lightboxZoomFit?.addEventListener('click', () => setLightboxZoom(1));
+  (lightboxRoomNavigation ? $$('button', lightboxRoomNavigation) : []).forEach(button => button.addEventListener('click', () => {
+    const moved = navigateToAdjacentRoom(Number(button.dataset.roomColumnDelta), Number(button.dataset.roomRowDelta));
+    if (moved) button.focus();
+  }));
   lightboxImage?.addEventListener('dblclick', event => {
     setLightboxZoom(lightboxZoom > 1 ? 1 : 2, { x: event.clientX, y: event.clientY });
   });
@@ -480,6 +533,34 @@
     event.preventDefault();
     setLightboxZoom(lightboxZoom + (event.deltaY < 0 ? lightboxZoomStep : -lightboxZoomStep), { x: event.clientX, y: event.clientY });
   }, { passive: false });
+  lightboxImage?.addEventListener('touchstart', event => {
+    if (event.touches.length !== 1 || lightboxZoom > 1) {
+      lightboxSwipeStart = null;
+      return;
+    }
+    const touch = event.touches[0];
+    lightboxSwipeStart = { x: touch.clientX, y: touch.clientY };
+  }, { passive: true });
+  lightboxImage?.addEventListener('touchend', event => {
+    if (!lightboxSwipeStart || lightboxZoom > 1 || event.changedTouches.length !== 1) {
+      lightboxSwipeStart = null;
+      return;
+    }
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - lightboxSwipeStart.x;
+    const deltaY = touch.clientY - lightboxSwipeStart.y;
+    const horizontal = Math.abs(deltaX) >= Math.abs(deltaY) * 1.2;
+    const vertical = Math.abs(deltaY) >= Math.abs(deltaX) * 1.2;
+    const threshold = 48;
+    lightboxSwipeStart = null;
+    if (lightboxTrigger?.classList.contains('abbey-room')) {
+      if (horizontal && Math.abs(deltaX) >= threshold) navigateToAdjacentRoom(deltaX < 0 ? 1 : -1, 0);
+      else if (vertical && Math.abs(deltaY) >= threshold) navigateToAdjacentRoom(0, deltaY < 0 ? 1 : -1);
+    } else if (lightboxPages.length > 1 && horizontal && Math.abs(deltaX) >= threshold) {
+      showLightboxPage(lightboxPage + (deltaX < 0 ? 1 : -1));
+    }
+  }, { passive: true });
+  lightboxImage?.addEventListener('touchcancel', () => { lightboxSwipeStart = null; }, { passive: true });
   $('.lightbox-close')?.addEventListener('click', closeLightbox);
   lightbox?.addEventListener('click', event => { if (event.target === lightbox || event.target === lightboxStage) closeLightbox(); });
   addEventListener('keydown', event => {
@@ -497,13 +578,7 @@
     if (lightboxTrigger?.classList.contains('abbey-room') && roomDirections[event.key]) {
       event.preventDefault();
       const [columnDelta, rowDelta] = roomDirections[event.key];
-      const grid = lightboxTrigger.closest('[data-room-grid]');
-      const targetColumn = Number(lightboxTrigger.dataset.mapColumn) + columnDelta;
-      const targetRow = Number(lightboxTrigger.dataset.mapRow) + rowDelta;
-      const nextRoom = grid ? $$('.abbey-room', grid).find(button => (
-        Number(button.dataset.mapColumn) === targetColumn && Number(button.dataset.mapRow) === targetRow
-      )) : null;
-      if (nextRoom) openLightbox(nextRoom);
+      navigateToAdjacentRoom(columnDelta, rowDelta);
       return;
     }
     if (lightboxPages.length > 1 && event.key === 'ArrowLeft') showLightboxPage(lightboxPage - 1);
