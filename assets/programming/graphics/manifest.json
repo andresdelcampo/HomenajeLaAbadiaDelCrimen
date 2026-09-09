@@ -1,0 +1,16 @@
+{
+  "platforms": ["pc", "cpc", "vga", "spectrum", "msx"],
+  "variants": ["day", "night"],
+  "tile_count_per_set": 256,
+  "tile_native_size": [16, 8],
+  "block_count_per_set": 87,
+  "block_ids": "even hexadecimal IDs 02-AE for non-zero pointer-table entries",
+  "layout": "<platform>/<variant>/{tile-atlas.png,block-atlas.png,blocks/block-XX.png}",
+  "scene_program_sources": {
+    "pc": "DOS native",
+    "cpc": "DOS scene programs with CPC artwork resource",
+    "vga": "DOS scene programs with VGA remake artwork resource and tile remap",
+    "spectrum": "ZX Spectrum native",
+    "msx": "MSX native"
+  }
+}
