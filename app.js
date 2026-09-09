@@ -191,6 +191,7 @@
     const visibleText = button.textContent.trim();
     const label = visibleText.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
     if (!gameClockLabels.has(label)) return;
+    button.dataset.clockLabel = label;
     const image = document.createElement('img');
     image.className = 'game-clock-label';
     image.src = `../assets/game/interface-labels/${label}.svg?v=20260830-clockfont2`;
@@ -207,6 +208,7 @@
   });
   const clockTitle = $('[data-clock-title]');
   const clockText = $('[data-clock-text]');
+  const clockSlotLabel = $('[data-clock-slot-label]');
   const fitClockTitle = () => {
     if (clockTitle) clockTitle.classList.toggle('is-long', clockTitle.textContent.trim().length > 7);
   };
@@ -218,6 +220,9 @@
       fitClockTitle();
     }
     if (clockText) clockText.textContent = button.dataset.text;
+    if (clockSlotLabel && button.dataset.clockLabel) {
+      clockSlotLabel.src = `../assets/game/interface-labels/${button.dataset.clockLabel}.svg?v=20260830-clockfont2`;
+    }
   }));
 
   const mapButtons = $$('.map-hotspot');
@@ -326,6 +331,65 @@
         panel.hidden = !active;
       });
     }));
+  });
+
+  $$('[data-graphics-explorer]').forEach(explorer => {
+    const isSpanish = document.documentElement.lang === 'es';
+    let currentPlatform = document.documentElement.dataset.platform || 'cpc';
+    let currentLight = 'day';
+    const platformLabels = {
+      cpc: 'Amstrad CPC',
+      pc: 'PC CGA',
+      vga: isSpanish ? 'Remake VGA' : 'VGA remake',
+      spectrum: 'ZX Spectrum',
+      msx: 'MSX'
+    };
+    const subjectLabels = isSpanish
+      ? { tiles: 'Atlas de 256 tiles', blocks: 'Atlas de 87 bloques', block: 'Bloque arquitectónico', room: 'Estancia 17 reconstruida' }
+      : { tiles: 'Atlas of 256 tiles', blocks: 'Atlas of 87 blocks', block: 'Architectural block', room: 'Reconstructed room 17' };
+    const updateGraphicsExplorer = () => {
+      const paletteLabel = currentLight === 'night'
+        ? (isSpanish ? 'paleta nocturna' : 'night palette')
+        : (isSpanish ? 'paleta diurna' : 'daytime palette');
+      $$('[data-graphics-kind]', explorer).forEach(button => {
+        const kind = button.dataset.graphicsKind;
+        const blockId = button.dataset.graphicsBlock;
+        const assetPlatform = kind === 'room' && currentPlatform === 'pc' ? 'cga' : currentPlatform;
+        const source = blockId
+          ? `../assets/programming/graphics/${currentPlatform}/${currentLight}/blocks/block-${blockId}.png`
+          : (kind === 'room'
+            ? `../assets/maps/abbey-rooms/${assetPlatform}-${currentLight}/room-17.png`
+            : `../assets/programming/graphics/${currentPlatform}/${currentLight}/${kind.slice(0, -1)}-atlas.png`);
+        const subject = blockId ? `${subjectLabels.block} ${blockId.toUpperCase()}` : subjectLabels[kind];
+        const description = `${subject} · ${platformLabels[currentPlatform]} · ${paletteLabel}`;
+        const image = $('img', button);
+        if (image) {
+          image.src = source;
+          image.alt = description;
+        }
+        button.dataset.lightbox = source;
+        button.dataset.alt = description;
+        button.dataset.caption = description;
+      });
+      $$('[data-graphics-edition]', explorer).forEach(label => {
+        label.textContent = `${platformLabels[currentPlatform]} · ${paletteLabel}`;
+      });
+    };
+    const lightButtons = $$('[data-graphics-light]', explorer);
+    lightButtons.forEach(button => button.addEventListener('click', () => {
+      currentLight = button.dataset.graphicsLight;
+      lightButtons.forEach(item => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      updateGraphicsExplorer();
+    }));
+    addEventListener('reportaje:platformchange', event => {
+      currentPlatform = event.detail.platform;
+      updateGraphicsExplorer();
+    });
+    updateGraphicsExplorer();
   });
 
   const spoilerButton = $('.spoiler-button');

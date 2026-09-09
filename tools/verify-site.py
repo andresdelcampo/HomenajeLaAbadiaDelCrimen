@@ -7,8 +7,8 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     ROOT / "index.html",
-    *(ROOT / "es" / name for name in ("index.html", "juego.html", "tecnica.html", "prensa.html", "legado.html")),
-    *(ROOT / "en" / name for name in ("index.html", "game.html", "technology.html", "press.html", "legacy.html")),
+    *(ROOT / "es" / name for name in ("index.html", "juego.html", "tecnica.html", "graficos.html", "prensa.html", "legado.html")),
+    *(ROOT / "en" / name for name in ("index.html", "game.html", "technology.html", "graphics.html", "press.html", "legacy.html")),
 ]
 PLATFORMS = ("cpc", "pc", "vga", "spectrum", "msx")
 CHARACTERS = ("guillermo", "adso", "abad", "malaquias", "berengario", "severino", "jorge", "bernardo")
@@ -54,6 +54,11 @@ def main() -> None:
         for target in required:
             if not target.exists():
                 missing.append(("platform-matrix", target.relative_to(ROOT).as_posix()))
+        for light in ("day", "night"):
+            for atlas in ("tile-atlas.png", "block-atlas.png"):
+                target = ROOT / "assets" / "programming" / "graphics" / platform / light / atlas
+                if not target.exists():
+                    missing.append(("graphics-guide", target.relative_to(ROOT).as_posix()))
 
     print(f"MISSING_LOCAL: {missing or 'None'}")
     print(f"LIGHTBOXES: {lightboxes}")

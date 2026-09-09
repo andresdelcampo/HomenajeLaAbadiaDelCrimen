@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Versiones, sonido e ingeniería inversa: el pequeño laboratorio técnico del homenaje, preparado para crecer.">
   <title>Cómo piensa la abadía · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260906-controls3">
+  <link rel="stylesheet" href="../styles.css?v=20260909-graphics2">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="technology">
@@ -92,13 +92,56 @@
       <p class="caption credit-line">Capturas de las versiones originales y del remake VGA: Computer Emuzone, reutilizadas con atribución conforme a su política de contenidos.</p>
     </section>
 
+    <section class="chapter dark graphics-entry" id="graficos">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">IX · La arquitectura invisible</span><h2>Una abadía construida al entrar</h2></div>
+        <p class="chapter-intro">Cada estancia se construye a partir de un vocabulario pequeño de piezas y de unas recetas capaces de levantar suelos, arcos, escaleras, columnas y muros cuando la cámara entra en una nueva zona. El resultado tiene la riqueza de una ilustración completa.</p>
+      </div>
+      <div class="graphics-pipeline reveal" aria-label="Cadena de construcción de una estancia">
+        <div><small>01</small><b>Posición</b><span>La celda del mundo y la planta determinan qué vista corresponde.</span></div>
+        <div><small>02</small><b>Estancia</b><span>Una lista compacta indica qué piezas arquitectónicas deben colocarse.</span></div>
+        <div><small>03</small><b>Bloques</b><span>Cada pieza es una receta parametrizada que puede repetirse, orientarse y variar.</span></div>
+        <div><small>04</small><b>Tiles</b><span>Las recetas depositan pequeños dibujos de 16 × 8 píxeles en capas de profundidad.</span></div>
+        <div><small>05</small><b>Pantalla</b><span>Máscaras y paleta combinan las capas hasta formar el escenario visible.</span></div>
+      </div>
+      <div class="graphics-explorer reveal" data-graphics-explorer>
+        <div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · paleta diurna</p><div class="graphics-light-switch" role="group" aria-label="Iluminación de los gráficos"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Día</button><button type="button" data-graphics-light="night" aria-pressed="false">Noche</button></div></div>
+        <div class="graphics-story">
+          <section class="graphics-story-step graphics-story-step--tiles">
+            <div class="graphics-story-copy"><span>01 · El alfabeto</span><h3>256 trazos elementales</h3><p>Piedra, madera, suelo, bordes y sombras caben en dibujos de 16 × 8 píxeles. Son las unidades mínimas que las recetas pueden depositar.</p></div>
+            <figure class="graphics-plate graphics-tile-plate"><button type="button" data-graphics-kind="tiles" data-lightbox="../assets/programming/graphics/cpc/day/tile-atlas.png" data-alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" data-caption="Atlas de 256 tiles · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/tile-atlas.png" alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>El vocabulario completo · pulsa para ampliar</figcaption></figure>
+          </section>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>los tiles se convierten en recetas arquitectónicas</span></div>
+          <section class="graphics-story-step graphics-story-step--blocks">
+            <div class="graphics-story-copy"><span>02 · La gramática</span><h3>Bloques que saben variar</h3><p>Cada arco, escalera o pared surge de una receta capaz de repetir, reflejar y ordenar tiles según sus parámetros.</p></div>
+            <div class="graphics-block-specimens">
+              <figure><button type="button" data-graphics-kind="block" data-graphics-block="24" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-24.png" data-alt="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-24.png" alt="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Arcadas</figcaption></figure>
+              <figure><button type="button" data-graphics-kind="block" data-graphics-block="16" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-16.png" data-alt="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-16.png" alt="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Escaleras</figcaption></figure>
+              <figure><button type="button" data-graphics-kind="block" data-graphics-block="3e" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-3e.png" data-alt="Bloque arquitectónico 3E · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 3E · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-3e.png" alt="Bloque arquitectónico 3E · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Ventanales</figcaption></figure>
+              <figure><button type="button" data-graphics-kind="block" data-graphics-block="60" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-60.png" data-alt="Bloque arquitectónico 60 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 60 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-60.png" alt="Bloque arquitectónico 60 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Muros</figcaption></figure>
+            </div>
+            <button class="graphics-catalogue-button" type="button" data-graphics-kind="blocks" data-lightbox="../assets/programming/graphics/cpc/day/block-atlas.png" data-alt="Atlas de 87 bloques · Amstrad CPC · paleta diurna" data-caption="Atlas de 87 bloques · Amstrad CPC · paleta diurna">Ver las 87 definiciones en el catálogo completo ↗</button>
+          </section>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>las recetas levantan una estancia</span></div>
+          <section class="graphics-story-step graphics-story-step--room">
+            <figure class="graphics-room-result"><button type="button" data-graphics-kind="room" data-lightbox="../assets/maps/abbey-rooms/cpc-day/room-17.png" data-alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" data-caption="Estancia 17 reconstruida · Amstrad CPC · paleta diurna"><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Arquitectura fija · sin personajes ni objetos móviles</figcaption></figure>
+            <div class="graphics-story-copy"><span>03 · El resultado</span><h3>Una estancia, construida al entrar</h3><p>La descripción de la sala coloca las recetas; las recetas emiten tiles; las capas y máscaras forman finalmente la imagen que ve el jugador.</p></div>
+          </section>
+        </div>
+      </div>
+      <div class="graphics-entry-copy reveal">
+        <p>El selector de gráficos de la cabecera reconstruye también estas láminas. PC, Spectrum y MSX parten de sus datos propios; CPC y VGA aplican sus dibujos a la arquitectura común recuperada. La geometría permite comparar la misma idea visual mientras cada máquina conserva su carácter.</p>
+        <a class="graphics-guide-link" href="graficos.html"><span class="graphics-guide-kicker">Guía técnica ampliada</span><strong>Abrir la guía completa</strong><span class="graphics-guide-description">Coordenadas, registros de estancia, recetas de bloque, capas, máscaras, paletas, alturas y algoritmos en pseudocódigo.</span><span class="graphics-guide-action" aria-hidden="true">Entrar <b>→</b></span></a>
+      </div>
+    </section>
+
     <section class="chapter dark sound-chapter" id="sonido">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">IX · La cámara sonora</span>
+          <span class="chapter-number">X · La cámara sonora</span>
           <h2><cite>Ave María</cite> y los sonidos de la abadía</h2>
         </div>
-        <p class="chapter-intro">El <cite>Ave María</cite> digitalizado —exclusivo de la versión original para PC— ocupa el lugar principal. La acusación «pirata» y las melodías de apertura y fondo para PC proceden de esa versión; las demás pistas visibles son recreaciones en WAV del sonido del Amstrad CPC usadas por Vigasoco, no grabaciones comunes a todas las conversiones.</p>
+        <p class="chapter-intro">El <cite>Ave María</cite> digitalizado —exclusivo de la versión original para PC— ocupa el lugar principal. La acusación «pirata» y las melodías de apertura y fondo proceden también de esa versión. Las demás pistas visibles recrean en WAV el sonido del Amstrad CPC usado por Vigasoco y pertenecen específicamente a ese entorno.</p>
       </div>
       <div class="waveform" aria-hidden="true"></div>
       <div class="audio-console reveal">
@@ -124,7 +167,7 @@
         </section>
       </div>
       <div class="creator-grid audio-story reveal">
-        <div class="prose"><h3>El truco del altavoz</h3><p>El PC speaker estaba pensado para pitidos, no para reproducir voces. La versión DOS manipula el temporizador programable a gran velocidad: cada cambio convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos digitales y dos reconstrucciones en ensamblador: una para el <cite>Ave María</cite> y otra para el aviso antipiratería. Las notas de ingeniería sitúan ambos bloques dentro del ejecutable original y permiten además reconstruir sus distintas melodías de apertura y fondo.</p></div>
+        <div class="prose"><h3>El truco del altavoz</h3><p>El PC speaker estaba pensado para producir pitidos sencillos. La versión DOS lo lleva mucho más lejos manipulando el temporizador programable a gran velocidad: cada cambio convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos digitales y dos reconstrucciones en ensamblador: una para el <cite>Ave María</cite> y otra para el aviso antipiratería. Las notas de ingeniería sitúan ambos bloques dentro del ejecutable original y permiten además reconstruir sus distintas melodías de apertura y fondo.</p></div>
         <blockquote class="pullquote">La protección anticopia tenía un castigo muy concreto: sustituía el <cite>Ave María</cite> por una voz que decía «pirata».</blockquote>
       </div>
     </section>
@@ -162,6 +205,6 @@
     <div class="lightbox-navigation" aria-label="Páginas del artículo" hidden><button class="lightbox-previous" type="button" aria-label="Página anterior">← Anterior</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Página siguiente">Siguiente →</button></div>
     <p class="lightbox-caption"></p>
   </div>
-  <script src="../app.js?v=20260909-swipe1"></script>
+  <script src="../app.js?v=20260909-graphics1"></script>
 </body>
 </html>
