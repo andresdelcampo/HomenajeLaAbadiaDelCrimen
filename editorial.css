@@ -58,7 +58,18 @@ body[data-page="technology"] .page-cue {
 }
 body[data-page="technology"] .page-cue:hover { color: #242522; }
 body[data-page="technology"] .editorial-plate { display: block; margin: 0; min-width: 0; }
+body[data-page="technology"] .editorial-plate-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: zoom-in;
+}
+body[data-page="technology"] .editorial-plate-button:focus-visible { outline: 3px solid #943b29; outline-offset: 4px; }
 body[data-page="technology"] .editorial-plate img {
+  display: block;
   width: 100%;
   max-height: 330px;
   object-fit: contain;
