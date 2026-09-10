@@ -12,6 +12,7 @@ palette.
 """
 
 from pathlib import Path
+import sys
 
 from PIL import Image
 
@@ -41,6 +42,10 @@ CHARACTERS = {
     "jorge": (68908, 61108),
     "bernardo": (68508, 61108),
 }
+
+# Guillermo's second standing axis, used when he faces away from the camera
+# toward the altar. The catalogue portrait above uses the nearer-facing axis.
+GUILLERMO_CHURCH_FRAME = 57240
 
 ITEMS = {
     "libro": 11200,
@@ -427,7 +432,29 @@ def main() -> None:
 
     build_cpc_title_logo()
     build_vga_title_assets(vga_data)
+    build_position_guide_characters()
+
+
+def build_position_guide_characters() -> None:
+    for platform in ("cpc", "vga"):
+        data = (SOURCE_ROOT / ("GraficosCPC" if platform == "cpc" else "GraficosVGA")).read_bytes()
+        church_sprite = indexed_image(data, palette(data), GUILLERMO_CHURCH_FRAME, 16, 33)
+        save_display_asset(
+            church_sprite,
+            OUTPUT / "platforms" / platform / "characters" / "guillermo-church.png",
+            canvas=(240, 300),
+            scale=8,
+            bottom_margin=14,
+        )
+        if platform == "cpc":
+            save_display_asset(
+                pc_cga_sprite(church_sprite, PC_CGA_CHARACTER_COLOURS),
+                OUTPUT / "platforms" / "pc" / "characters" / "guillermo-church.png",
+                canvas=(240, 300),
+                scale=8,
+                bottom_margin=14,
+            )
 
 
 if __name__ == "__main__":
-    main()
+    build_position_guide_characters() if "--position-guide-only" in sys.argv else main()
