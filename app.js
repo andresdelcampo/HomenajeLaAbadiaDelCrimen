@@ -392,6 +392,192 @@
     updateGraphicsExplorer();
   });
 
+  $$('[data-room-trace]').forEach(async player => {
+    const isSpanish = player.dataset.lang === 'es';
+    const image = $('[data-trace-image]', player);
+    const canvas = $('[data-trace-canvas]', player);
+    const range = $('[data-trace-range]', player);
+    const count = $('[data-trace-count]', player);
+    const kicker = $('[data-trace-kicker]', player);
+    const title = $('[data-trace-title]', player);
+    const copy = $('[data-trace-copy]', player);
+    const recipePreview = $('[data-trace-recipe]', player);
+    const recipeImage = $('[data-trace-recipe-image]', player);
+    const recipeLabel = $('[data-trace-recipe-label]', player);
+    const details = $('[data-trace-details]', player);
+    const play = $('[data-trace-play]', player);
+    const context = canvas?.getContext('2d');
+    let mode = 'build';
+    let light = 'day';
+    let trace = null;
+    let timer = null;
+    const finalImage = new Image();
+    const seen = new Set();
+    const spiral = [];
+    let x = 7;
+    let y = 8;
+    let lengths = [4, 1, 5, 2];
+    const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    for (let circuit = 0; spiral.length < 320 && circuit < 20; circuit += 1) {
+      directions.forEach(([dx, dy], direction) => {
+        for (let step = 0; step < lengths[direction]; step += 1) {
+          if (x >= 0 && x < 16 && y >= 0 && y < 20) {
+            const key = `${x},${y}`;
+            if (!seen.has(key)) { seen.add(key); spiral.push([x, y]); }
+          }
+          x += dx;
+          y += dy;
+        }
+      });
+      lengths = lengths.map(value => value + 2);
+    }
+    for (let row = 0; row < 20; row += 1) for (let column = 0; column < 16; column += 1) {
+      const key = `${column},${row}`;
+      if (!seen.has(key)) spiral.push([column, row]);
+    }
+
+    const stop = () => {
+      clearInterval(timer);
+      timer = null;
+      play?.setAttribute('aria-pressed', 'false');
+      if (play) play.textContent = isSpanish ? 'Reproducir' : 'Play';
+    };
+    const setDetails = entries => {
+      if (!details) return;
+      details.replaceChildren(...entries.map(([term, value]) => {
+        const wrapper = document.createElement('div');
+        const dt = document.createElement('dt');
+        const dd = document.createElement('dd');
+        dt.textContent = term;
+        dd.textContent = value;
+        wrapper.append(dt, dd);
+        return wrapper;
+      }));
+    };
+    const drawScreen = value => {
+      if (!context) return;
+      context.imageSmoothingEnabled = false;
+      context.fillStyle = light === 'day' ? '#000000' : '#ff55ff';
+      context.fillRect(0, 0, 512, 320);
+      if (!finalImage.complete) return;
+      spiral.slice(0, value).forEach(([column, row]) => {
+        context.drawImage(finalImage, column * 32, row * 16, 32, 16, column * 32, row * 16, 32, 16);
+      });
+    };
+    const update = () => {
+      const value = Number(range?.value || 0);
+      const placementTotal = Math.max(0, (trace?.placements?.length || 33) - 1);
+      const maximum = mode === 'build' ? placementTotal : 320;
+      if (count) count.textContent = `${value} / ${maximum}`;
+      if (mode === 'build') {
+        if (image) { image.hidden = false; image.src = `../assets/programming/graphics/room-17-trace/${light}/step-${String(value).padStart(2, '0')}.png`; }
+        if (canvas) canvas.hidden = true;
+        const placement = trace?.placements?.[value];
+        if (value === 0) {
+          if (recipePreview) recipePreview.hidden = true;
+          if (kicker) kicker.textContent = isSpanish ? 'Preparación' : 'Preparation';
+          if (title) title.textContent = isSpanish ? 'La zona de la estancia recibe su color de fondo' : 'The room area receives its background colour';
+          if (copy) copy.textContent = isSpanish ? 'Todavía no se ha ejecutado ninguna colocación. Donde la máscara de un tile conserve la imagen anterior, seguirá viéndose este fondo.' : 'No placement has run yet. Wherever a tile\'s mask preserves the existing image, this background remains visible.';
+          setDetails([[isSpanish ? 'Estancia' : 'Room', isSpanish ? '17 hexadecimal' : '17 hexadecimal'], [isSpanish ? 'Colocaciones' : 'Placements', `0 / ${placementTotal}`]]);
+        } else if (!placement) {
+          if (recipePreview) recipePreview.hidden = true;
+          if (kicker) kicker.textContent = `${isSpanish ? 'Colocación' : 'Placement'} ${value} / ${placementTotal}`;
+          if (title) title.textContent = isSpanish ? 'Se muestra el resultado acumulado' : 'The accumulated result is shown';
+          if (copy) copy.textContent = isSpanish ? 'Los datos explicativos de esta colocación no están disponibles, pero el contador y la imagen siguen mostrando el paso seleccionado.' : 'Explanatory data for this placement is unavailable, but the counter and image still show the selected step.';
+          setDetails([[isSpanish ? 'Colocaciones' : 'Placements', `${value} / ${placementTotal}`]]);
+        } else {
+          const changed = placement.changed_cells ?? 0;
+          const added = placement.new_cells ?? 0;
+          const updated = placement.updated_cells ?? Math.max(0, changed - added);
+          if (recipePreview) recipePreview.hidden = false;
+          if (recipeImage) {
+            recipeImage.src = `../assets/programming/graphics/room-17-trace/${light}/recipe-${String(value).padStart(2, '0')}.png`;
+            recipeImage.alt = isSpanish ? `Receta ${placement.block} aislada para la colocación ${value}` : `Recipe ${placement.block} isolated for placement ${value}`;
+          }
+          if (recipeLabel) recipeLabel.textContent = placement.block;
+          if (kicker) kicker.textContent = `${isSpanish ? 'Colocación' : 'Placement'} ${value} / ${placementTotal}`;
+          if (title) title.textContent = isSpanish ? `Receta ${placement.block} · ${changed} celdas` : `Recipe ${placement.block} · ${changed} cells`;
+          if (copy) {
+            if (changed === 0) {
+              copy.textContent = isSpanish
+                ? `Desde (${placement.origin.join(', ')}), la receta ejecuta ${placement.commands} instrucciones, pero no altera el resultado visible: sus tiles quedan fuera de la rejilla o no cambian su estado final.`
+                : `From (${placement.origin.join(', ')}), the recipe executes ${placement.commands} instructions but does not alter the visible result: its tiles fall outside the grid or leave its final state unchanged.`;
+            } else {
+              copy.textContent = isSpanish
+                ? `Desde (${placement.origin.join(', ')}), la receta ejecuta ${placement.commands} instrucciones y escribe ${placement.tile_writes} tiles en la rejilla. Cambia ${changed} celdas: ${added} nuevas y ${updated} que ya contenían arquitectura. Tras este paso hay ${placement.occupied_cells} celdas ocupadas.`
+                : `From (${placement.origin.join(', ')}), the recipe executes ${placement.commands} instructions and writes ${placement.tile_writes} tiles into the grid. It changes ${changed} cells: ${added} new and ${updated} that already held architecture. After this step, ${placement.occupied_cells} cells are occupied.`;
+            }
+          }
+          setDetails([[isSpanish ? 'Colocaciones' : 'Placements', `${value} / ${placementTotal}`], [isSpanish ? 'Receta' : 'Recipe', placement.block], [isSpanish ? 'Origen' : 'Origin', `(${placement.origin.join(', ')})`], [isSpanish ? 'Parámetros' : 'Parameters', placement.parameters.join(' · ')], [isSpanish ? 'Altura' : 'Height', placement.height === null ? '—' : String(placement.height)], [isSpanish ? 'Celdas afectadas' : 'Cells affected', isSpanish ? `${added} nuevas · ${updated} actualizadas` : `${added} new · ${updated} updated`]]);
+        }
+      } else {
+        if (recipePreview) recipePreview.hidden = true;
+        if (image) image.hidden = true;
+        if (canvas) canvas.hidden = false;
+        drawScreen(value);
+        if (kicker) kicker.textContent = isSpanish ? 'Transferencia a pantalla' : 'Screen transfer';
+        if (title) title.textContent = value === 0 ? (isSpanish ? 'La pantalla parte del fondo' : 'The screen begins with its background') : value === 320 ? (isSpanish ? 'Las 320 celdas ya son visibles' : 'All 320 cells are now visible') : (isSpanish ? 'La imagen crece desde el centro' : 'The picture grows from the centre');
+        if (copy) copy.textContent = isSpanish ? 'El programa copia franjas hacia abajo, derecha, arriba e izquierda. En cada celda compone primero el tile posterior y después el anterior.' : 'The program copies strips down, right, up, and left. In each cell it composites the rear tile before the front tile.';
+        setDetails([[isSpanish ? 'Sistema' : 'System', 'PC CGA'], [isSpanish ? 'Celda visible' : 'Visible cell', `${value} / 320`], [isSpanish ? 'Orden' : 'Order', isSpanish ? 'Espiral rectangular' : 'Rectangular spiral']]);
+      }
+    };
+    const loadFinal = () => {
+      finalImage.src = `../assets/maps/abbey-rooms/cga-${light}/room-17.png`;
+      finalImage.onload = () => { if (mode === 'screen') drawScreen(Number(range?.value || 0)); };
+    };
+    $$('[data-trace-mode]', player).forEach(button => button.addEventListener('click', () => {
+      stop();
+      mode = button.dataset.traceMode;
+      $$('[data-trace-mode]', player).forEach(item => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); });
+      if (range) { range.max = mode === 'build' ? String(Math.max(0, (trace?.placements?.length || 33) - 1)) : '320'; range.value = '0'; range.setAttribute('aria-label', mode === 'build' ? (isSpanish ? 'Paso de construcción' : 'Construction step') : (isSpanish ? 'Celda copiada a pantalla' : 'Cell copied to screen')); }
+      update();
+    }));
+    $$('[data-trace-light]', player).forEach(button => button.addEventListener('click', () => {
+      light = button.dataset.traceLight;
+      $$('[data-trace-light]', player).forEach(item => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-pressed', String(active)); });
+      loadFinal();
+      update();
+    }));
+    $('[data-trace-prev]', player)?.addEventListener('click', () => { stop(); if (range) range.value = String(Math.max(0, Number(range.value) - 1)); update(); });
+    $('[data-trace-next]', player)?.addEventListener('click', () => { stop(); if (range) range.value = String(Math.min(Number(range.max), Number(range.value) + 1)); update(); });
+    range?.addEventListener('input', () => { stop(); update(); });
+    play?.addEventListener('click', () => {
+      if (timer) { stop(); return; }
+      if (range && Number(range.value) >= Number(range.max)) range.value = '0';
+      play.setAttribute('aria-pressed', 'true');
+      play.textContent = isSpanish ? 'Pausar' : 'Pause';
+      timer = setInterval(() => {
+        if (!range || Number(range.value) >= Number(range.max)) { stop(); return; }
+        range.value = String(Number(range.value) + 1);
+        update();
+      }, mode === 'build' ? 420 : 18);
+    });
+    try {
+      trace = window.ABBEY_ROOM_TRACE || null;
+      if (!trace) {
+        const response = await fetch('../assets/programming/graphics/room-17-trace/trace.json');
+        if (!response.ok) throw new Error(`Trace data request failed: ${response.status}`);
+        trace = await response.json();
+      }
+      if (range && mode === 'build') range.max = String(Math.max(0, trace.placements.length - 1));
+    } catch (error) {
+      player.classList.add('is-unavailable');
+    }
+    loadFinal();
+    update();
+  });
+
+  $$('.graphics-layer-demo').forEach(demo => {
+    const buttons = $$('[data-layer-step]', demo);
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const step = button.dataset.layerStep;
+      const selected = demo.dataset.layerSelected === step ? '' : step;
+      if (selected) demo.dataset.layerSelected = selected;
+      else delete demo.dataset.layerSelected;
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item.dataset.layerStep === selected)));
+    }));
+  });
+
   const spoilerButton = $('.spoiler-button');
   const days = $('.days-grid');
   if (spoilerButton && days) spoilerButton.addEventListener('click', () => {
@@ -467,6 +653,15 @@
   const lightboxMinZoom = 1;
   const lightboxMaxZoom = 6;
   const lightboxZoomStep = .25;
+  const positionRoomNavigation = () => {
+    if (!lightboxRoomNavigation || !lightboxFitWidth || !lightboxFitHeight) return;
+    const imageLeft = (window.innerWidth - lightboxFitWidth) / 2;
+    const imageTop = (window.innerHeight - lightboxFitHeight) / 2;
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-left', `${imageLeft}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-right', `${imageLeft + lightboxFitWidth}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-top', `${imageTop}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-bottom', `${imageTop + lightboxFitHeight}px`);
+  };
   const setLightboxZoom = (zoom, focusPoint = null) => {
     if (!lightbox || !lightboxImage || !lightboxFitWidth || !lightboxFitHeight) return;
     const nextZoom = Math.min(lightboxMaxZoom, Math.max(lightboxMinZoom, Math.round(zoom * 100) / 100));
@@ -480,11 +675,15 @@
     if (lightboxZoomLevel) lightboxZoomLevel.value = `${Math.round(lightboxZoom * 100)}%`;
     if (lightboxZoomOut) lightboxZoomOut.disabled = lightboxZoom <= lightboxMinZoom;
     if (lightboxZoomIn) lightboxZoomIn.disabled = lightboxZoom >= lightboxMaxZoom;
+    positionRoomNavigation();
     if (focusPoint) requestAnimationFrame(() => {
       const nextRect = lightboxImage.getBoundingClientRect();
       lightbox.scrollBy(nextRect.left + nextRect.width * focusX - focusPoint.x, nextRect.top + nextRect.height * focusY - focusPoint.y);
     });
   };
+  addEventListener('resize', () => {
+    if (lightbox?.classList.contains('is-open')) prepareLightboxImage();
+  });
   const prepareLightboxImage = () => {
     if (!lightbox?.classList.contains('is-open') || !lightboxImage?.naturalWidth) return;
     const availableWidth = Math.min(1100, Math.max(1, lightbox.clientWidth - 64));

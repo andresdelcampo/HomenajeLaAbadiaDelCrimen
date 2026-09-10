@@ -1,6 +1,7 @@
 """Check local media references and the five visual-edition controls."""
 
 from pathlib import Path
+import json
 import re
 
 
@@ -27,6 +28,23 @@ def main() -> None:
     parchment_data = (ROOT / "assets" / "game" / "parchment-data.js").read_text(encoding="utf-8")
     parchment_editions = [platform for platform in PLATFORMS if f'"{platform}":{{' in parchment_data]
     parchment_texts = [text for text in ("opening", "ending") if f'"{text}":{{' in parchment_data]
+    trace_root = ROOT / "assets" / "programming" / "graphics" / "room-17-trace"
+    trace_data_path = trace_root / "trace.json"
+    trace_data = json.loads(trace_data_path.read_text(encoding="utf-8")) if trace_data_path.exists() else {}
+    trace_placements = trace_data.get("placements", [])
+    trace_metrics = {
+        "tile_writes", "target_cells", "changed_cells", "new_cells",
+        "updated_cells", "occupied_cells",
+    }
+    trace_frames = {
+        light: sorted((trace_root / light).glob("step-*.png"))
+        for light in ("day", "night")
+    }
+    trace_recipe_frames = {
+        light: sorted((trace_root / light).glob("recipe-*.png"))
+        for light in ("day", "night")
+    }
+    trace_layer_frames = sorted((trace_root / "layers").glob("*.png"))
 
     for page in PAGES:
         html = page.read_text(encoding="utf-8")
@@ -67,6 +85,10 @@ def main() -> None:
     print(f"PARCHMENT_INSTANCES: {parchment_instances}")
     print(f"PARCHMENT_EDITIONS: {parchment_editions}")
     print(f"PARCHMENT_TEXTS: {parchment_texts}")
+    print(f"ROOM_TRACE_FRAMES: { {light: len(frames) for light, frames in trace_frames.items()} }")
+    print(f"ROOM_TRACE_RECIPE_FRAMES: { {light: len(frames) for light, frames in trace_recipe_frames.items()} }")
+    print(f"ROOM_TRACE_PLACEMENTS: {len(trace_placements)}")
+    print(f"ROOM_TRACE_LAYER_FRAMES: {[frame.name for frame in trace_layer_frames]}")
     expected_parchment_pages = ["es/juego.html", "en/game.html"]
     expected_parchment_instances = {"es/juego.html": 2, "en/game.html": 2}
     if (
@@ -76,6 +98,13 @@ def main() -> None:
         or parchment_instances != expected_parchment_instances
         or parchment_editions != list(PLATFORMS)
         or parchment_texts != ["opening", "ending"]
+        or any(len(frames) != 33 for frames in trace_frames.values())
+        or any(len(frames) != 32 for frames in trace_recipe_frames.values())
+        or len(trace_placements) != 33
+        or [frame.name for frame in trace_layer_frames] != ["front.png", "rear.png"]
+        or any(not trace_metrics.issubset(placement) for placement in trace_placements[1:])
+        or not (trace_root / "lamp-demo-cpc-room-68.png").exists()
+        or not (trace_root / "trace-data.js").exists()
     ):
         raise SystemExit(1)
 

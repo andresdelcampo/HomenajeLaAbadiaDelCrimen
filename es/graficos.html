@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Guía visual y detallada del sistema que construye las estancias de La Abadía del Crimen a partir de mapas, bloques, tiles, capas y máscaras.">
   <title>Cómo se dibuja la abadía · Guía del motor gráfico</title>
-  <link rel="stylesheet" href="../styles.css?v=20260909-graphics2">
+  <link rel="stylesheet" href="../styles.css?v=20260910-graphics11">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
 </head>
 <body data-page="technology" class="graphics-guide-page">
@@ -28,7 +28,7 @@
     <div class="page-masthead-inner">
       <p class="eyebrow">Cuaderno técnico · Motor gráfico</p>
       <h1>Cómo se dibuja la abadía</h1>
-      <p>De una coordenada del mundo a una estancia completa: una guía visual a las descripciones de sala, las recetas arquitectónicas, los tiles, las capas y las máscaras que convierten unos pocos datos en un edificio monumental.</p>
+      <p>Cómo convierte el juego la posición del personaje en una estancia dibujada: primero elige su descripción, después combina piezas arquitectónicas y, por último, compone los píxeles de la pantalla.</p>
       <a class="page-cue" href="#idea">Comenzar la reconstrucción ↓</a>
     </div>
     <figure class="editorial-plate"><img src="../assets/maps/library-labyrinth-plan.png" alt="Plano del laberinto de la biblioteca"><figcaption>Geometría, memoria y perspectiva</figcaption></figure>
@@ -38,51 +38,63 @@
     <section class="chapter dark" id="idea">
       <div class="chapter-header reveal">
         <div><span class="chapter-number">01 · La idea esencial</span><h2>La pantalla nace de una descripción</h2></div>
-        <p class="chapter-intro">El escenario fijo se genera al interpretar una descripción compacta. El programa elige una estancia, lee sus piezas, ejecuta la receta de dibujo de cada una y compone los tiles resultantes. Los personajes, las puertas y los objetos llegan después.</p>
+        <p class="chapter-intro">El juego no guarda una imagen completa de cada estancia. Guarda una descripción breve de sus piezas. Al entrar en ella, lee esa descripción, dibuja cada pieza con tiles y compone la arquitectura. Después añade personajes, puertas y objetos.</p>
       </div>
       <div class="graphics-facts reveal">
-        <div class="graphics-fact"><strong>116</strong><span>huecos numerados en la secuencia; no todos corresponden a lugares accesibles</span></div>
+        <div class="graphics-fact"><strong>116</strong><span>entradas en la tabla de estancias; algunas no representan lugares accesibles</span></div>
         <div class="graphics-fact"><strong>2.497</strong><span>colocaciones arquitectónicas en el conjunto reconstruido</span></div>
         <div class="graphics-fact"><strong>87</strong><span>definiciones de bloque no nulas</span></div>
         <div class="graphics-fact"><strong>256</strong><span>tiles gráficos disponibles</span></div>
-        <div class="graphics-fact"><strong>16 × 20</strong><span>celdas visibles del fondo arquitectónico</span></div>
-        <div class="graphics-fact"><strong>2</strong><span>capas de profundidad conservadas por el diseño original</span></div>
+        <div class="graphics-fact"><strong>32 × 36</strong><span>coordenadas de la rejilla lógica de construcción</span></div>
+        <div class="graphics-fact"><strong>16 × 20</strong><span>celdas del buffer arquitectónico visible</span></div>
       </div>
-      <aside class="graphics-scope reveal" aria-labelledby="alcance-graficos">
-        <div><span>Alcance y fiabilidad</span><h3 id="alcance-graficos">Qué estamos viendo exactamente</h3><p>La explicación central sigue el sistema original de Amstrad CPC, contrastado con la reconstrucción de su código: selección de estancia, descripciones, recetas, rejillas, profundidad, tiles, máscaras y paleta. Las láminas hacen visible ese proceso, pero no pretenden reproducir un fotograma completo con personajes y objetos. Los nombres legibles de algoritmos y variables se han creado para esta explicación.</p></div>
-        <dl>
-          <div><dt>Base técnica</dt><dd>El recorrido principal se apoya en la lógica reconstruida de CPC y en sus estructuras originales.</dd></div>
-          <div><dt>Comparación gráfica</dt><dd>El selector permite observar cómo otras versiones reinterpretan la misma arquitectura; sus diferencias se resumen más adelante.</dd></div>
-        </dl>
-      </aside>
+      <details class="graphics-deep-dive graphics-scope-details reveal">
+        <summary><span>Contenido avanzado</span><strong>Alcance, fuentes y límites de la reconstrucción</strong></summary>
+        <div class="graphics-scope graphics-deep-dive-body" id="alcance-graficos">
+          <div><h3>Qué estamos viendo exactamente</h3><p>La explicación principal describe el sistema original de Amstrad CPC y se ha comprobado reconstruyendo su funcionamiento. Las láminas muestran la arquitectura de la estancia; los personajes y objetos se añaden después. Los nombres legibles de algoritmos y variables se han creado para esta explicación.</p></div>
+          <dl><div><dt>Base técnica</dt><dd>Selección de estancia, descripciones, recetas, rejillas, profundidad, tiles, máscaras y paleta.</dd></div><div><dt>Comparación gráfica</dt><dd>El selector muestra cómo otras versiones reinterpretan la arquitectura; la tabla inferior resume qué comparten y en qué se diferencian.</dd></div></dl>
+          <table class="graphics-port-table">
+            <thead><tr><th>Versión gráfica</th><th>Qué parte del sistema comparte</th><th>Diferencia principal</th></tr></thead>
+            <tbody>
+              <tr><td>Amstrad CPC</td><td>Descripciones, recetas, dos capas, máscaras y paletas de cuatro colores.</td><td>Es la versión de referencia para la explicación principal.</td></tr>
+              <tr><td>PC CGA</td><td>La misma organización general de estancias, recetas y dos capas.</td><td>Usa otra codificación de píxeles y otro proceso para copiar la imagen a vídeo.</td></tr>
+              <tr><td>ZX Spectrum</td><td>Su conversión también usa descripciones, recetas y tiles con máscara.</td><td>Los dos colores visibles dependen de la planta y del momento del día.</td></tr>
+              <tr><td>MSX</td><td>Su conversión también usa descripciones, recetas y tiles con máscara.</td><td>Tiene sus propios tiles y cambia los colores según la planta y el momento del día.</td></tr>
+              <tr><td>Remake VGA</td><td>Recupera la arquitectura y amplía el sistema de profundidad.</td><td>Es una reinterpretación posterior con tiles redibujados y 256 colores.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <div class="graphics-guide-label reveal"><span>Antes de empezar</span><h3>Cuatro palabras que usaremos</h3><p>Son piezas distintas del proceso. Esta fila es un vocabulario, no una secuencia.</p></div>
       <div class="graphics-vocabulary reveal" aria-label="Vocabulario de la guía">
-        <div><b>Estancia</b><span>Una vista fija de la abadía, descrita como una lista de piezas.</span></div>
-        <div><b>Colocación</b><span>La pieza elegida, su origen, sus parámetros y, a veces, una altura.</span></div>
-        <div><b>Bloque o receta</b><span>Un pequeño programa reutilizable que emite tiles; no es una imagen terminada.</span></div>
-        <div><b>Tile</b><span>Una pieza gráfica de 16 × 8 píxeles con información de color y transparencia.</span></div>
+        <div><b>Estancia</b><span>La arquitectura que corresponde a una posición de la abadía. Su descripción contiene la lista de piezas que deben dibujarse.</span></div>
+        <div><b>Colocación</b><span>Una entrada de esa lista: indica qué pieza usar, dónde empezar y qué parámetros aplicar.</span></div>
+        <div><b>Bloque o receta</b><span>Las instrucciones reutilizables que dibujan una pieza arquitectónica combinando tiles.</span></div>
+        <div><b>Tile</b><span>Una pieza gráfica rectangular de 16 × 8 píxeles, con datos de color y máscara.</span></div>
       </div>
+      <div class="graphics-guide-label reveal"><span>Vista general</span><h3>Del mundo a la pantalla, en siete pasos</h3><p>Ahora sí: cada caja conduce a la siguiente, de izquierda a derecha.</p></div>
       <div class="graphics-pipeline graphics-pipeline--seven reveal" aria-label="Siete pasos de la representación">
-        <div><small>01</small><b>Mundo</b><span>La posición y la altura sitúan la cámara.</span></div><div><small>02</small><b>Estancia</b><span>La celda del mundo devuelve un identificador.</span></div><div><small>03</small><b>Descripción</b><span>El registro enumera piezas, posiciones y parámetros.</span></div><div><small>04</small><b>Recetas</b><span>Cada pieza ejecuta una secuencia de dibujo.</span></div><div><small>05</small><b>Capas</b><span>Los tiles ocupan huecos posteriores y anteriores.</span></div><div><small>06</small><b>Color</b><span>Paleta y máscaras traducen los datos en píxeles.</span></div><div><small>07</small><b>Pantalla</b><span>La ventana de 256 × 160 llega a la memoria de vídeo.</span></div>
+        <div><small>01</small><b>Coordenadas</b><span>Las coordenadas indican dónde está la cámara.</span></div><div><small>02</small><b>Estancia</b><span>Esa posición selecciona una estancia.</span></div><div><small>03</small><b>Descripción</b><span>La estancia contiene una lista de piezas.</span></div><div><small>04</small><b>Recetas</b><span>Cada pieza se construye combinando tiles.</span></div><div><small>05</small><b>Profundidad</b><span>Cada celda conserva hasta dos tiles ordenados.</span></div><div><small>06</small><b>Color</b><span>La paleta y las máscaras producen los píxeles.</span></div><div><small>07</small><b>Pantalla</b><span>El resultado de 256 × 160 píxeles se copia a vídeo.</span></div>
       </div>
       <div class="pseudocode-pair reveal" aria-label="Algoritmo general de reconstrucción">
       <pre class="pseudocode"><code>AL CAMBIAR DE CELDA O DE PLANTA:
     planta ← planta correspondiente a posición.z
     celda  ← (posición.x DIV 16, posición.y DIV 16)
-    vista  ← identificador guardado en mapa_del_mundo[planta, celda]
+    estancia  ← identificador guardado en mapa_del_mundo[planta, celda]
 
     vaciar las dos capas de tiles
     rellenar la imagen con el color de iluminación</code></pre>
-      <pre class="pseudocode"><code>PARA CADA colocación de la descripción de vista:
+      <pre class="pseudocode"><code>PARA CADA colocación de la descripción de estancia:
     receta ← definición asociada a colocación.tipo
     seguir sus instrucciones desde colocación.posición,
                                 usando colocación.parámetros
                                 y colocación.altura
 
-PARA CADA celda_visible, DEL CENTRO HACIA FUERA:
-    aplicar máscara y color del tile_trasero
-    aplicar máscara y color del tile_delantero</code></pre>
+PARA CADA celda_visible:
+    aplicar máscara y color del tile de menor profundidad
+    aplicar máscara y color del tile de mayor profundidad</code></pre>
       </div>
-      <p class="graphics-note reveal">La arquitectura se reconstruye cuando cambia la celda seguida por la cámara o la planta. Entre esos cambios, el fondo permanece preparado mientras los personajes se mueven sobre él.</p>
+      <p class="graphics-note reveal">El juego reconstruye la arquitectura cuando la cámara entra en otra celda del mundo o cambia de planta. Mientras la cámara permanezca allí, reutiliza esa imagen y dibuja sobre ella los elementos móviles.</p>
       <aside class="pseudocode-key reveal" aria-labelledby="pseudocode-key-es">
         <div><span>Clave de lectura</span><h3 id="pseudocode-key-es">Cómo leer los algoritmos</h3><p>Estas instrucciones expresan comportamientos verificados con palabras corrientes. Sus nombres son descriptivos, elegidos para esta explicación: no conocemos los nombres que emplearon los autores.</p></div>
         <dl><div><dt>←</dt><dd>Guarda en el elemento de la izquierda el resultado de la derecha.</dd></div><div><dt>DIV / MOD</dt><dd>División entera y resto; sirven para obtener la celda y saber si es par o impar.</dd></div><div><dt>PARA CADA</dt><dd>Repite los pasos interiores para todos los elementos de una lista.</dd></div><div><dt>Máscara y color</dt><dd>Conservan los píxeles permitidos del fondo y añaden los píxeles visibles del tile.</dd></div></dl>
@@ -90,12 +102,12 @@ PARA CADA celda_visible, DEL CENTRO HACIA FUERA:
     </section>
 
     <section class="chapter dark" id="estancia">
-      <div class="chapter-header reveal"><div><span class="chapter-number">02 · Del monasterio a una vista</span><h2>Tres espacios de coordenadas</h2></div><p class="chapter-intro">Mundo, construcción y pantalla trabajan a escalas distintas. Seguir el paso de una a otra permite entender el sistema con claridad.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">02 · De la abadía a una estancia</span><h2>Tres espacios de coordenadas</h2></div><p class="chapter-intro">El sistema usa tres rejillas distintas: una sitúa la cámara en la abadía, otra construye la estancia con tiles y la tercera corresponde a los píxeles de la pantalla.</p></div>
       <div class="graphics-guide-grid reveal">
         <div>
           <h3>1. La celda del mundo</h3>
-          <p>Los personajes se mueven por coordenadas globales. Al dividir horizontal y verticalmente entre dieciséis, la posición queda reducida a la celda que contiene a la cámara. La altura selecciona planta baja, primer piso o biblioteca.</p>
-          <p>La paridad de las dos coordenadas —si cada celda es par o impar— también determina la orientación isométrica. Basta con esa combinación para que dos celdas vecinas miren el edificio desde direcciones alternas.</p>
+          <p>Los personajes se mueven con coordenadas que abarcan toda la abadía. El juego divide las coordenadas X e Y entre dieciséis para obtener la celda donde está la cámara. La altura selecciona una de las tres plantas: baja, primera o biblioteca.</p>
+          <p>Después comprueba si las coordenadas de la celda son pares o impares. Las cuatro combinaciones posibles determinan desde qué orientación isométrica se muestra la estancia.</p>
         </div>
         <pre class="pseudocode"><code>celda_x ← posición_x DIV 16
 celda_y ← posición_y DIV 16
@@ -108,43 +120,36 @@ par_x ← celda_x MOD 2
 par_y ← celda_y MOD 2
 orientación ← combinación de par_x y par_y
 
-vista ← mapa_de_vistas[planta, celda_x, celda_y]</code></pre>
+estancia ← mapa_de_estancias[planta, celda_x, celda_y]</code></pre>
       </div>
-      <figure class="graphics-reference-plate graphics-reference-plate--world reveal"><button type="button" data-lightbox="../assets/programming/graphics/reference/world-room-index.png" data-alt="Mapa de celdas del mundo con identificadores hexadecimales de estancia" data-caption="Cada casilla ocupada representa una celda de 16 × 16 coordenadas; el número hexadecimal elige la estancia" aria-label="Ampliar el mapa completo de celdas y estancias"><span class="graphics-world-floors"><span class="graphics-world-floor"><img src="../assets/programming/graphics/reference/world-room-index.png" alt="Planta baja con sus identificadores de estancia" loading="lazy"></span><span class="graphics-world-floor"><img src="../assets/programming/graphics/reference/world-room-index.png" alt="Primer piso con sus identificadores de estancia" loading="lazy"></span><span class="graphics-world-floor"><img src="../assets/programming/graphics/reference/world-room-index.png" alt="Biblioteca con sus identificadores de estancia" loading="lazy"></span></span></button><figcaption><b>La tabla que el juego consulta</b><span>Planta baja, primer piso y biblioteca. Cada casilla verde cubre una celda de 16 × 16 coordenadas del mundo; el número interior —escrito con los dígitos 0–9 y las letras A–F— identifica la estancia. Las casillas oscuras quedan fuera de la zona válida. Pulsa la lámina para abrir el original completo.</span></figcaption></figure>
+      <figure class="graphics-reference-plate graphics-reference-plate--world reveal"><button type="button" data-lightbox="../assets/programming/graphics/reference/world-room-index.png" data-alt="Mapa de celdas del mundo con identificadores hexadecimales de estancia" data-caption="Cada casilla ocupada representa una celda de 16 × 16 coordenadas; el número hexadecimal elige la estancia" aria-label="Ampliar el mapa completo de celdas y estancias"><span class="graphics-world-floors"><span class="graphics-world-floor"><img src="../assets/programming/graphics/reference/world-room-index.png" alt="Planta baja con sus identificadores de estancia" loading="lazy"></span><span class="graphics-world-floor"><img src="../assets/programming/graphics/reference/world-room-index.png" alt="Primer piso con sus identificadores de estancia" loading="lazy"></span><span class="graphics-world-floor"><img src="../assets/programming/graphics/reference/world-room-index.png" alt="Biblioteca con sus identificadores de estancia" loading="lazy"></span></span></button><figcaption><b>La tabla que el juego consulta</b><span>Las tres imágenes corresponden a la planta baja, el primer piso y la biblioteca. Cada casilla verde representa una celda del mundo de 16 × 16 unidades. El número escrito dentro, con dígitos 0–9 y letras A–F, identifica la estancia que debe dibujarse. Las casillas oscuras no contienen una estancia válida.</span></figcaption></figure>
       <div class="graphics-guide-grid reveal">
-        <figure class="graphics-room-plate graphics-explorer" data-graphics-explorer><div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · paleta diurna</p><div class="graphics-light-switch" role="group" aria-label="Iluminación de la estancia"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Día</button><button type="button" data-graphics-light="night" aria-pressed="false">Noche</button></div></div><button type="button" data-graphics-kind="room" data-lightbox="../assets/maps/abbey-rooms/cpc-day/room-17.png" data-alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" data-caption="Estancia 17 reconstruida · Amstrad CPC · paleta diurna"><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>La arquitectura fija, sin personajes ni objetos móviles</figcaption></figure>
+        <figure class="graphics-construction-plate"><svg viewBox="0 0 64 36" role="img" aria-label="Rejilla lógica de 32 por 36 coordenadas con una ventana central de 16 por 20 celdas"><defs><pattern id="construction-grid-es" width="2" height="1" patternUnits="userSpaceOnUse"><path d="M 2 0 L 0 0 0 1" fill="none" stroke="currentColor" stroke-width=".08"/></pattern></defs><rect class="graphics-construction-field" width="64" height="36"/><rect class="graphics-construction-lines" width="64" height="36" fill="url(#construction-grid-es)"/><rect class="graphics-construction-window" x="16" y="8" width="32" height="20"/><path class="graphics-construction-path" d="M20 13h8v4h8v5h6"/><g class="graphics-construction-cells"><rect x="18" y="12" width="2" height="1"/><rect x="20" y="12" width="2" height="1"/><rect x="22" y="12" width="2" height="1"/><rect x="26" y="16" width="2" height="1"/><rect x="28" y="16" width="2" height="1"/><rect x="34" y="21" width="2" height="1"/><rect x="40" y="21" width="2" height="1"/></g><circle class="graphics-construction-origin" cx="19" cy="12.5" r="1.2"/><text x="2" y="4">32 × 36</text><text x="32" y="18.5" text-anchor="middle">16 × 20</text></svg><figcaption><b>Un espacio lógico mayor que la imagen</b><span>La receta avanza por coordenadas de una rejilla de 32 × 36. Sólo su ventana central se conserva en el buffer visible.</span></figcaption></figure>
         <div>
           <h3>2. La rejilla de construcción</h3>
-          <p>Las recetas dibujan sobre una rejilla local mayor que la pantalla. Cada tile se coloca respecto al origen del bloque que lo produjo. La posición, la altura y la orientación determinan su destino.</p>
-          <p>Cada celda dispone de un hueco posterior y otro anterior. Esa pareja conserva qué parte de la arquitectura queda detrás de los personajes y cuál puede pasar por delante.</p>
+          <p>Las recetas no dibujan directamente en pantalla. Trabajan con coordenadas de una rejilla lógica de 32 columnas por 36 filas. La posición inicial de la pieza, sus parámetros y su orientación determinan por qué celdas avanza la receta y dónde emite cada tile.</p>
+          <p>El juego no necesita almacenar las 1.152 celdas completas: recorta ese espacio contra una ventana central. Aquí sólo importa comprender el recorrido y la colocación; la profundidad se explica más adelante.</p>
           <pre class="pseudocode"><code>PARA CADA tile emitido por una receta:
     destino_x ← origen_x + desplazamiento_x
     destino_y ← origen_y + desplazamiento_y
-    profundidad ← posición relativa del destino y su altura
-
-    si el destino cae dentro de la rejilla:
-        colocar tile en el hueco posterior o anterior
-        según profundidad</code></pre>
+    si el destino cae dentro de la ventana central:
+        guardar el tile en la celda visible correspondiente</code></pre>
         </div>
       </div>
       <div class="graphics-guide-grid reveal">
-        <div><h3>3. La ventana de pantalla</h3><p>Cuando todas las recetas han terminado, el programa recorta una ventana de 16 columnas por 20 filas dentro de la rejilla. Los márgenes indican dónde comienza esa zona visible.</p><p>Cada tile mide 16 × 8 píxeles, de modo que el fondo arquitectónico ocupa 256 × 160 píxeles. El programa recorre las celdas y convierte primero el tile posterior y después el anterior en píxeles de la máquina elegida.</p></div>
-        <pre class="pseudocode"><code>PARA fila DESDE 0 HASTA 19:
+        <div><h3>3. La ventana de pantalla</h3><p>La parte central de la rejilla corresponde al buffer visible: 16 columnas por 20 filas. Los márgenes de ocho coordenadas sitúan esta ventana dentro del espacio de construcción.</p><p>Como cada tile mide 16 × 8 píxeles, el resultado arquitectónico ocupa 256 × 160 píxeles. Más adelante veremos que cada celda conserva información de profundidad; por ahora basta con reconocer la ventana que llegará a la pantalla.</p><pre class="pseudocode"><code>PARA fila DESDE 0 HASTA 19:
     PARA columna DESDE 0 HASTA 15:
         construcción_x ← columna + margen_x
         construcción_y ← fila + margen_y
-        celda ← rejilla[construcción_y, construcción_x]
-
-        dibujar el tile posterior de celda
-        dibujar el tile anterior de celda
-        conservar sus datos de profundidad</code></pre>
+        copiar la celda visible correspondiente</code></pre></div>
+        <figure class="graphics-room-plate graphics-room-plate--window graphics-explorer" data-graphics-explorer><div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · paleta diurna</p><div class="graphics-light-switch" role="group" aria-label="Iluminación de la estancia"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Día</button><button type="button" data-graphics-light="night" aria-pressed="false">Noche</button></div></div><button type="button" data-graphics-kind="room" data-lightbox="../assets/maps/abbey-rooms/cpc-day/room-17.png" data-alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" data-caption="Estancia 17 reconstruida · Amstrad CPC · paleta diurna"><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" loading="lazy"><span class="graphics-visible-grid" aria-hidden="true"></span></button><figcaption>La arquitectura ocupa exactamente la ventana visible de 16 × 20 tiles</figcaption></figure>
       </div>
     </section>
 
     <section class="chapter dark" id="bloques">
-      <div class="chapter-header reveal"><div><span class="chapter-number">03 · La gramática de la piedra</span><h2>Un bloque es un pequeño programa de dibujo</h2></div><p class="chapter-intro">Una estancia se describe mediante una lista de colocaciones. Cada una selecciona una receta arquitectónica, fija su origen, aporta hasta dos parámetros y, cuando hace falta, una altura para ordenar la oclusión. Así se condensa una imagen compleja en unos pocos datos.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">03 · Cómo se describen las piezas</span><h2>Un bloque es un pequeño programa de dibujo</h2></div><p class="chapter-intro">La descripción de una estancia contiene una lista de colocaciones. Cada colocación elige una receta, indica dónde debe comenzar y aporta hasta dos parámetros. Algunas incluyen además una altura para decidir qué piezas quedan delante de otras.</p></div>
       <div class="graphics-guide-grid reveal">
-        <div><h3>Una descripción que ocupa sólo lo necesario</h3><p>Las estancias no reservan el mismo espacio. Cada descripción anuncia su longitud, contiene tantas colocaciones como necesita y termina con una marca de final. Para localizar una estancia, el programa avanza por las longitudes de las anteriores.</p><p>Una colocación compacta en tres bytes el tipo de bloque, dos coordenadas locales y dos parámetros pequeños. Sólo añade un cuarto byte cuando necesita una altura inicial. Esta economía evita guardar una cuadrícula completa para cada vista: dos mapas planos de 16 × 20 para los 116 huecos exigirían al menos 74.240 bytes; todas las descripciones ocupan 9.014.</p></div>
+        <div><h3>Cada estancia ocupa sólo los bytes que necesita</h3><p>Una estancia sencilla tiene menos colocaciones que una compleja. Por eso cada descripción guarda su propia longitud, contiene únicamente las colocaciones necesarias y termina con una marca de final. Para encontrar una estancia concreta, el programa va sumando las longitudes de las anteriores.</p><p>Cada colocación ocupa tres bytes: en ellos guarda el tipo de bloque, dos coordenadas locales y dos parámetros pequeños. Sólo utiliza un cuarto byte cuando necesita una altura inicial. Guardar dos mapas completos de 16 × 20 celdas para las 116 entradas exigiría al menos 74.240 bytes; la lista compacta de todas las descripciones ocupa 9.014.</p></div>
         <pre class="pseudocode"><code>DESCRIPCIÓN DE ESTANCIA
     longitud total
     colocación 1
@@ -162,12 +167,12 @@ COLOCACIÓN
         <div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · paleta diurna</p><div class="graphics-light-switch" role="group" aria-label="Iluminación de los atlas"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Día</button><button type="button" data-graphics-light="night" aria-pressed="false">Noche</button></div></div>
         <div class="graphics-story graphics-story--guide">
           <section class="graphics-story-step graphics-story-step--tiles">
-            <div class="graphics-story-copy"><span>El alfabeto</span><h3>256 dibujos elementales</h3><p>Piedra, madera, suelo, bordes y sombras se guardan como pequeñas piezas de 16 × 8 píxeles. Por separado apenas dicen nada; son el vocabulario que las recetas aprenderán a combinar.</p></div>
-            <figure class="graphics-plate graphics-tile-plate"><button type="button" data-graphics-kind="tiles" data-lightbox="../assets/programming/graphics/cpc/day/tile-atlas.png" data-alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" data-caption="Atlas de 256 tiles · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/tile-atlas.png" alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>El vocabulario completo · pulsa para ampliar</figcaption></figure>
+            <div class="graphics-story-copy"><span>Piezas básicas</span><h3>256 tiles de 16 × 8 píxeles</h3><p>Los detalles de piedra, madera, suelo, bordes y sombras se guardan en estas piezas gráficas. Las recetas combinan varios tiles para formar un elemento arquitectónico completo.</p></div>
+            <figure class="graphics-plate graphics-tile-plate"><button type="button" data-graphics-kind="tiles" data-lightbox="../assets/programming/graphics/cpc/day/tile-atlas.png" data-alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" data-caption="Atlas de 256 tiles · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/tile-atlas.png" alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Los 256 tiles disponibles · pulsa para ampliar</figcaption></figure>
           </section>
-          <div class="graphics-story-arrow" aria-hidden="true"><span>los tiles se convierten en recetas arquitectónicas</span></div>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>las recetas combinan los tiles</span></div>
           <section class="graphics-story-step graphics-story-step--blocks">
-            <div class="graphics-story-copy"><span>La gramática</span><h3>Cuatro recetas, cuatro escalas</h3><p>Una misma mecánica puede levantar una arcada, extender una escalera, abrir una hilera de ventanas o prolongar un muro. Los parámetros cambian el resultado sin exigir un dibujo completo nuevo.</p></div>
+            <div class="graphics-story-copy"><span>Recetas reutilizables</span><h3>Cuatro ejemplos de bloque</h3><p>Una receta puede dibujar una arcada, una escalera, una hilera de ventanas o un muro. Sus parámetros modifican la longitud, la altura o la orientación sin almacenar otra imagen completa.</p></div>
             <div class="graphics-block-specimens">
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="24" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-24.png" data-alt="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-24.png" alt="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Arcadas</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="16" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-16.png" data-alt="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-16.png" alt="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Escaleras</figcaption></figure>
@@ -179,7 +184,7 @@ COLOCACIÓN
         </div>
       </div>
       <div class="graphics-guide-grid graphics-guide-grid--after-plates reveal">
-        <div><h3>Recetas de tamaño variable</h3><p>Una receta empieza con un pequeño conjunto de valores: qué tiles suele emplear, dónde está su cursor de dibujo y qué parámetros ha recibido. Después avanza por una secuencia de órdenes sencillas.</p><p>Puede emitir una hilera, mover el cursor, repetir según la anchura o la altura pedida, guardar una posición, recuperarla, reflejar el eje horizontal, cambiar un valor o invocar otra receta. Así, la misma definición produce una pared corta o larga, una escalera de distinta extensión o una arcada orientada hacia el otro lado.</p></div>
+        <div><h3>Los parámetros cambian el resultado</h3><p>Al comenzar, la receta recibe los tiles que puede usar, una posición inicial y los parámetros de la colocación. A continuación ejecuta una secuencia de órdenes sencillas.</p><p>Las órdenes pueden colocar uno o varios tiles, mover la posición de dibujo, repetir una parte, guardar y recuperar una posición, reflejar horizontalmente una pieza o llamar a otra receta. Así, una sola definición produce paredes de distinta longitud, escaleras de varios tamaños o arcadas orientadas hacia lados opuestos.</p></div>
         <pre class="pseudocode"><code>EJEMPLO CONCEPTUAL — NO ES UNA RECETA TRANSCRITA
 
 RECETA muro_con_arcos(origen, longitud, altura):
@@ -197,112 +202,81 @@ RECETA muro_con_arcos(origen, longitud, altura):
 
     FINALIZAR receta</code></pre>
       </div>
-      <p class="graphics-note reveal"><b>Qué representan las palabras:</b> el <i>cursor</i> es la casilla donde caerá el próximo tile; <i>emitir</i> significa escribir ese tile en la rejilla; <i>restaurar la base</i> devuelve el cursor al pie del elemento; y <i>reflejar</i> cambia la orientación para reutilizar la receta hacia el lado opuesto. El ejemplo anterior enseña las posibilidades del lenguaje, no reproduce una receta histórica concreta. Cada lámina recoge una ejecución representativa: los parámetros pueden cambiar la longitud, la altura, la orientación y la combinación de tiles.</p>
+      <p class="graphics-note reveal"><b>Cómo leer el ejemplo:</b> el <i>cursor</i> señala la celda donde se colocará el próximo tile; <i>emitir</i> significa escribirlo en la rejilla; <i>restaurar la base</i> devuelve el cursor al pie de la pieza; y <i>reflejar</i> invierte la orientación horizontal. El algoritmo es un ejemplo explicativo, no la transcripción de una receta histórica. Las láminas muestran ejecuciones reales, aunque otros parámetros podrían cambiar su tamaño u orientación.</p>
       <details class="graphics-deep-dive reveal">
         <summary><span>Mirar más de cerca</span><strong>El intérprete de recetas</strong></summary>
-        <div class="graphics-deep-dive-body"><p>Cada tipo conduce a una definición formada por dos partes: un vocabulario local de doce valores —normalmente identificadores de tile y constantes— y la secuencia de instrucciones. Al comenzar, se añaden los dos parámetros de la colocación, la altura opcional y dos coordenadas de profundidad: diecisiete valores de trabajo en total, además de un cursor y una pequeña pila.</p><p>El intérprete puede emitir y desplazar, repetir y restaurar, calcular, transformar coordenadas e invocar otra receta. Las hileras de tiles poseen su propia forma abreviada: una orden puede emitir una pieza, avanzar, repetirla y continuar hasta la siguiente instrucción principal. Así se describen suelos, peldaños o paredes largas con muy pocos datos.</p></div>
+        <div class="graphics-deep-dive-body"><p>Cada tipo conduce a una definición formada por dos partes: una lista local de doce valores —normalmente identificadores de tile y constantes— y la secuencia de instrucciones. Al comenzar, se añaden los dos parámetros de la colocación, la altura opcional y dos coordenadas de profundidad: diecisiete valores de trabajo en total, además de un cursor y una pequeña pila.</p><p>El intérprete puede emitir y desplazar, repetir y restaurar, calcular, transformar coordenadas e invocar otra receta. Las hileras de tiles poseen su propia forma abreviada: una orden puede emitir una pieza, avanzar, repetirla y continuar hasta la siguiente instrucción principal. Así se describen suelos, peldaños o paredes largas con muy pocos datos.</p></div>
       </details>
     </section>
 
     <section class="chapter dark" id="recorrido">
-      <div class="chapter-header reveal"><div><span class="chapter-number">04 · Una estancia de principio a fin</span><h2>Sigamos la estancia 17</h2></div><p class="chapter-intro">Un ejemplo continuo une todas las abstracciones. El número 17 es un identificador hexadecimal: aquí nombra una vista, no una coordenada ni una cantidad decimal.</p></div>
-      <div class="graphics-trace reveal">
-        <div><small>01</small><b>Selección</b><p>La planta y la celda del mundo conducen al identificador 17.</p></div>
-        <div><small>02</small><b>Descripción</b><p>Su registro contiene 32 colocaciones y emplea 22 tipos de bloque distintos.</p></div>
-        <div><small>03</small><b>Ejecución</b><p>En conjunto se interpretan 1.899 instrucciones para emitir suelos, muros, escaleras, columnas y barandillas.</p></div>
-        <div><small>04</small><b>Orden</b><p>Los tiles coincidentes se comparan mediante sus dos coordenadas de profundidad y ocupan el hueco posterior o anterior.</p></div>
-        <div><small>05</small><b>Composición</b><p>El color inicial, las máscaras y los dos tiles de cada celda producen el fondo arquitectónico terminado.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">04 · Una estancia de principio a fin</span><h2>Sigamos la estancia 17</h2></div><p class="chapter-intro">Este ejemplo muestra cómo una descripción se convierte en una estancia completa. «17» es su identificador hexadecimal; no indica una coordenada ni el número decimal diecisiete.</p></div>
+      <div class="room-trace-player reveal" data-room-trace data-lang="es">
+        <div class="room-trace-head"><div><span>Demostración interactiva · CPC y PC CGA</span><h3>Construye la estancia paso a paso</h3><p>«Construcción» muestra cómo las 32 colocaciones forman la arquitectura CPC y detalla qué cambia cada receta en la rejilla de tiles. «Copia a pantalla» cambia a PC CGA para reproducir el recorrido documentado de sus 320 celdas visibles.</p></div><div class="room-trace-switches"><div role="group" aria-label="Fase de la demostración"><button class="is-active" type="button" data-trace-mode="build" aria-pressed="true">Construcción</button><button type="button" data-trace-mode="screen" aria-pressed="false">Copia a pantalla</button></div><div role="group" aria-label="Paleta de la demostración"><button class="is-active" type="button" data-trace-light="day" aria-pressed="true">Día</button><button type="button" data-trace-light="night" aria-pressed="false">Noche</button></div></div></div>
+        <div class="room-trace-body">
+          <div class="room-trace-stage"><img data-trace-image src="../assets/programming/graphics/room-17-trace/day/step-00.png" alt="Fondo inicial de la estancia 17 antes de colocar arquitectura"><canvas data-trace-canvas width="512" height="320" hidden aria-label="La estancia 17 aparece siguiendo el recorrido desde el centro hacia fuera"></canvas></div>
+          <div class="room-trace-readout" aria-live="polite"><span data-trace-kicker>Preparación</span><h4 data-trace-title>La zona de la estancia recibe su color de fondo</h4><p data-trace-copy>Todavía no se ha ejecutado ninguna colocación. Este color ya forma parte del resultado: donde la máscara de un tile conserve la imagen anterior, seguirá viéndose este fondo.</p><figure class="room-trace-recipe" data-trace-recipe hidden><img data-trace-recipe-image src="" alt=""><figcaption><span>Receta actual aislada</span><b data-trace-recipe-label></b></figcaption></figure><details class="room-trace-advanced"><summary>Detalles avanzados</summary><dl data-trace-details><div><dt>Estancia</dt><dd>17 hexadecimal</dd></div><div><dt>Colocaciones</dt><dd>0 de 32</dd></div></dl></details></div>
+        </div>
+        <div class="room-trace-controls"><button type="button" data-trace-prev aria-label="Paso anterior">←</button><button type="button" data-trace-play aria-pressed="false">Reproducir</button><input type="range" min="0" max="32" value="0" step="1" data-trace-range aria-label="Paso de construcción"><output data-trace-count>0 / 32</output><button type="button" data-trace-next aria-label="Paso siguiente">→</button></div>
       </div>
-      <div class="graphics-guide-grid reveal">
-        <figure class="graphics-room-plate graphics-explorer" data-graphics-explorer><div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · paleta diurna</p><div class="graphics-light-switch" role="group" aria-label="Iluminación del ejemplo"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Día</button><button type="button" data-graphics-light="night" aria-pressed="false">Noche</button></div></div><button type="button" data-graphics-kind="room" data-lightbox="../assets/maps/abbey-rooms/cpc-day/room-17.png" data-alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" data-caption="Estancia 17 reconstruida · Amstrad CPC · paleta diurna"><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>El resultado fijo del recorrido · pulsa para ampliar</figcaption></figure>
-        <div><h3>Una comprobación especialmente exigente</h3><p>Esta estancia obliga a enlazar toda la cadena recuperada en el código CPC: selección de la vista, lectura de 32 colocaciones, ejecución de las recetas, elección de tiles, cálculo de profundidad, máscaras, color inicial y composición final.</p><p>Es una prueba útil porque ninguna etapa puede acertarse de forma aislada. Un error al interpretar una colocación o al ordenar un tile se propaga por arcos, escaleras, columnas y barandillas, y deja de producir la arquitectura coherente que vemos.</p></div>
-      </div>
+      <p class="graphics-note reveal"><b>La demostración compara dos versiones:</b> la fase «Construcción» usa la descripción y los gráficos CPC reconstruidos. La fase «Copia a pantalla» usa el recorrido y los gráficos de PC CGA. No representan dos etapas de una misma versión. En ambos casos se muestra sólo la arquitectura; personajes, puertas, objetos y lámpara se añaden después.</p>
+      <details class="graphics-deep-dive reveal">
+        <summary><span>Mirar más de cerca</span><strong>Por qué la copia PC CGA empieza en el centro</strong></summary>
+        <div class="graphics-deep-dive-body"><p>En PC CGA, una vez llena la rejilla, el programa no copia las celdas fila por fila. Empieza en la posición (7, 8), cerca del centro, y avanza en franjas hacia abajo, derecha, arriba e izquierda. Las franjas crecen en cada vuelta hasta cubrir las 16 × 20 celdas visibles.</p><p>El recorrido sólo determina el orden en que aparece la imagen durante la copia. El resultado final no cambia: en cada celda se componen por orden los dos tiles conservados. Cada tile ocupa ocho filas de dieciséis píxeles; su máscara decide cuáles conservan el color anterior y cuáles lo sustituyen.</p></div>
+      </details>
     </section>
 
     <section class="chapter dark" id="capas">
-      <div class="chapter-header reveal"><div><span class="chapter-number">05 · Profundidad y transparencia</span><h2>Dos tiles pueden ocupar la misma celda</h2></div><p class="chapter-intro">El escenario isométrico necesita saber qué queda detrás y qué queda delante. Para ello, cada posición visible guarda dos huecos arquitectónicos. La altura opcional y dos valores de profundidad calculados desde la posición ayudan a insertar cada tile en el orden correcto.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">05 · Profundidad y composición</span><h2>Dos tiles pueden ocupar la misma celda</h2></div><p class="chapter-intro">No son dos imágenes completas llamadas «fondo» y «frente». Cada celda visible conserva hasta dos tiles con sus coordenadas de profundidad. Cuando se redibuja un personaje, su posición determina cuáles se mezclan antes y cuáles después.</p></div>
+      <figure class="graphics-layer-demo reveal"><div class="graphics-layer-stage" role="img" aria-label="Animación en tres pasos: suelo, Guillermo y fragmentos de columnas y barandilla"><img class="graphics-layer-rear" src="../assets/programming/graphics/room-17-trace/layers/rear.png?v=20260910-3" alt=""><img class="graphics-layer-character" src="../assets/platforms/cpc/characters/guillermo.png" alt=""><img class="graphics-layer-front" src="../assets/programming/graphics/room-17-trace/layers/front.png?v=20260910-3" alt=""></div><ol aria-label="Elegir paso de composición"><li><button type="button" data-layer-step="1" aria-pressed="false"><b>1 · Suelo</b><span>Primero se recuperan los tiles del suelo.</span></button></li><li><button type="button" data-layer-step="2" aria-pressed="false"><b>2 · Guillermo</b><span>El personaje se dibuja sobre esa base.</span></button></li><li><button type="button" data-layer-step="3" aria-pressed="false"><b>3 · Delante</b><span>Los fragmentos de las columnas y la barandilla vuelven a dibujarse encima.</span></button></li></ol><figcaption>Recorte didáctico construido con los tiles reales de la estancia 17. Pulsa un paso para fijarlo; vuelve a pulsarlo para reanudar la animación.</figcaption></figure>
       <div class="graphics-guide-grid reveal">
-        <div>
-          <h3>La pila visual</h3>
-          <div class="graphics-layer-list"><div><b>FONDO</b><span>Color de base de la estancia; cambia con el estado de iluminación.</span></div><div><b>CAPA 1</b><span>Arquitectura posterior: suelo, muro o elemento que queda detrás.</span></div><div><b>ACTORES</b><span>Personajes, puertas y objetos se mezclan posteriormente con el escenario.</span></div><div><b>CAPA 2</b><span>Arquitectura anterior que puede ocultar parte de un actor.</span></div></div>
-        </div>
-        <pre class="pseudocode"><code>CONSTRUCCIÓN DEL FONDO FIJO:
-    componer tile posterior
-    componer tile anterior
-
-USO DINÁMICO POSTERIOR:
-    consultar posición, altura y profundidad
-    restaurar el fondo alterado
-    dibujar actores y objetos
-    conservar delante los elementos que los ocultan</code></pre>
-      </div>
-      <p class="graphics-note reveal"><b>Dos órdenes relacionados, pero no idénticos:</b> la pila de la izquierda explica el resultado visual. El algoritmo de la derecha separa el pase que prepara la arquitectura de la composición dinámica de personajes y objetos; no se inserta literalmente un actor entre ambos tiles mientras se construye cada celda del fondo.</p>
-      <div class="graphics-guide-grid reveal">
-        <div><h3>Dos coordenadas para decidir la profundidad</h3><p>Cuando una colocación aporta altura, el sistema combina esa altura con la posición local. El resultado no es una profundidad por píxel, sino dos valores ligados al tile emitido. Las recetas pueden modificarlos mientras avanzan.</p><p>Si varias piezas arquitectónicas llegan a la misma celda, estos valores ayudan a conservar una detrás y otra delante. El diseño retiene así dos registros completos —profundidad y tile— por posición visible.</p></div>
+        <div><h3>Dos valores para ordenar los tiles</h3><p>Cuando una colocación incluye altura, el sistema la combina con la posición local del tile. El cálculo produce dos valores de profundidad para ese tile, no una profundidad distinta para cada píxel. La receta puede modificar esos valores mientras dibuja.</p><p>Si varias piezas llegan a la misma celda, el programa compara sus valores y conserva hasta dos tiles con sus datos de profundidad. «Detrás» y «delante» no son etiquetas permanentes: se deciden al comparar esos valores con la posición concreta del personaje.</p></div>
         <pre class="pseudocode"><code>mitad_altura ← altura DIV 2
 
 profundidad_a ← tile_y + mitad_altura + tile_x − 15
 profundidad_b ← tile_y + mitad_altura − tile_x + 16
 
 comparar profundidad del tile nuevo
-con los huecos posterior y anterior</code></pre>
+con los dos huecos conservados</code></pre>
       </div>
       <div class="graphics-guide-grid reveal">
-        <div><h3>Una máscara decide qué sobrevive</h3><p>Oscuridad y transparencia son propiedades distintas. Cada fragmento gráfico aporta tanto color como una máscara. La máscara decide qué bits del fondo sobreviven; el color aporta los nuevos. Eso permite que un borde diagonal deje ver el suelo mientras una zona negra opaca siga pintándose como negro.</p><p>Tratar siempre el «color cero» como transparente abre cuñas y huecos falsos en arcos, escaleras y muros. El color con que se rellena la vista antes de dibujar también forma parte del resultado.</p></div>
-        <pre class="pseudocode"><code>PARA CADA fragmento_codificado DEL tile:
-    máscara ← máscara correspondiente al fragmento
-    color   ← color correspondiente al estado y al fragmento
-
-    destino ← (destino Y máscara) O color</code></pre>
+        <div><h3>La máscara controla la forma de cada tile</h3><p>Antes de colocar un tile, esa zona ya contiene el color de fondo u otro tile. La <b>máscara de composición</b> indica en qué píxeles debe conservarse esa imagen anterior y en cuáles debe dibujarse el tile nuevo.</p><p>Por ejemplo, la máscara de un arco conserva el suelo alrededor de su borde diagonal. Además, un píxel negro puede ser opaco: <b>negro no significa transparente</b>.</p></div>
+        <div class="graphics-mask-example" aria-label="Ejemplo visual de composición de un tile">
+          <figure><div class="mask-swatch mask-swatch--base"></div><figcaption><b>1 · Fondo previo</b><span>Lo que ya había en pantalla.</span></figcaption></figure>
+          <figure><div class="mask-swatch mask-swatch--mask"></div><figcaption><b>2 · Máscara del tile</b><span>Claro: conservar. Oscuro: sustituir.</span></figcaption></figure>
+          <figure><div class="mask-swatch mask-swatch--colour"></div><figcaption><b>3 · Color del tile</b><span>Incluye piedra y negro opaco.</span></figcaption></figure>
+          <figure><div class="mask-swatch mask-swatch--result"></div><figcaption><b>4 · Resultado</b><span>El fondo sólo se ve donde la máscara lo permite.</span></figcaption></figure>
+        </div>
       </div>
       <details class="graphics-deep-dive reveal">
         <summary><span>Mirar más de cerca</span><strong>Del tile codificado a dieciséis píxeles</strong></summary>
-        <div class="graphics-deep-dive-body"><p>Cada tile CPC contiene ocho filas de cuatro bytes: 32 bytes en total. En el modo gráfico empleado, cada byte codifica cuatro píxeles; al desplegarlo aparecen dieciséis píxeles por fila y cuatro índices de color posibles. La mitad superior de los 256 identificadores selecciona la segunda pareja de tablas de composición.</p><p>Para cada píxel se lee primero el color que ya hay en pantalla. Después, una tabla decide qué parte se conserva y otra qué parte aporta el tile nuevo; ambas se combinan para obtener el resultado. El cambio entre día y noche no altera estos datos ni sus máscaras: sustituye los cuatro colores asociados a los mismos índices.</p></div>
+        <div class="graphics-deep-dive-body"><p>Cada tile CPC contiene ocho filas de cuatro bytes: 32 bytes en total. En el modo gráfico empleado, cada byte codifica cuatro píxeles; al desplegarlo aparecen dieciséis píxeles por fila y cuatro índices de color posibles. La mitad superior de los 256 identificadores selecciona la segunda pareja de tablas de composición.</p><div><p>Para cada fragmento se lee primero el color que ya hay en pantalla. Una tabla decide qué parte se conserva y otra qué aporta el tile nuevo. Día y noche no alteran la máscara: cambian los colores asociados a los índices.</p><pre class="pseudocode"><code>destino ← (destino Y máscara) O color</code></pre></div></div>
       </details>
     </section>
 
     <section class="chapter dark" id="luz">
-      <div class="chapter-header reveal"><div><span class="chapter-number">06 · Día, noche y versión</span><h2>La paleta también es lógica</h2></div><p class="chapter-intro">En el sistema original, la noche sustituye la paleta de cuatro colores sin cambiar la geometría ni los tiles. Otras conversiones resuelven el color de manera distinta, como resume la comparación inferior.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">06 · Color e iluminación</span><h2>Noche y oscuridad son decisiones distintas</h2></div><p class="chapter-intro">La hora determina los colores. El tipo de estancia determina cuánto puede verse. Una estancia normal sigue mostrándose completa durante la noche; una estancia oscura sólo se ve dentro del alcance de la lámpara.</p></div>
       <div class="graphics-guide-grid reveal">
-        <div><h3>La misma geometría, otra lectura</h3><p>Los índices de píxel, las máscaras y los identificadores de tile permanecen estables entre día y noche; lo que cambia es la paleta que convierte los cuatro índices en colores visibles. En la oscuridad real interviene después un sistema dinámico de luz limitada; las láminas nocturnas de esta guía mantienen toda la arquitectura expuesta para poder estudiarla.</p><p>El selector superior permite comparar cinco versiones gráficas a través de su vocabulario y su geometría. La comparación es visual: cada conversión posee su propia representación interna y solo se atribuye a todas aquello que se ha comprobado como común.</p></div>
-        <pre class="pseudocode"><code>si momento ES día:
-    paleta ← cuatro colores diurnos
-    fondo ← índice iluminado de base
-si no:
-    paleta ← cuatro colores nocturnos
-    fondo ← índice nocturno de base
+        <div><h3>Dos preguntas, en este orden</h3><p><b>1. ¿Es de día o de noche?</b> El juego asigna una paleta distinta a los mismos datos gráficos. Este cambio modifica los colores, no la parte visible de la estancia.</p><p><b>2. ¿La estancia está marcada como oscura?</b> Si lo está, el juego oculta la arquitectura completa. La lámpara revela únicamente una zona alrededor de Adso.</p></div>
+        <pre class="pseudocode"><code>1 · MOMENTO DEL DÍA
+    elegir paleta diurna o nocturna
 
-PARA CADA tile:
-    píxeles ← desplegar sus índices codificados
-    aplicar sus máscaras y colores sobre fondo</code></pre>
+2 · TIPO DE ESTANCIA
+    normal  → mostrar la arquitectura completa
+    oscura  → mostrar sólo el alcance de la lámpara</code></pre>
       </div>
-      <table class="graphics-port-table reveal">
-        <thead><tr><th>Versión gráfica</th><th>Qué conserva la lámina</th><th>Cómo debe interpretarse</th></tr></thead>
-        <tbody>
-          <tr><td>Amstrad CPC</td><td>Descripciones arquitectónicas, intérprete de recetas, dos capas, tiles enmascarados y paletas de cuatro colores.</td><td>Es la base técnica de esta explicación y la referencia para las láminas principales.</td></tr>
-          <tr><td>CGA</td><td>Conserva la cadena arquitectónica y las dos capas, pero emplea su propia codificación de píxeles, conversión cromática y disposición de pantalla.</td><td>Una adaptación directa a cuatro colores, con diferencias en la etapa final de dibujo.</td></tr>
-          <tr><td>ZX Spectrum</td><td>Descripciones, recetas, tiles enmascarados y colores propios de la conversión.</td><td>La pareja de colores depende de planta y momento del día.</td></tr>
-          <tr><td>MSX</td><td>Descripciones, recetas y tiles enmascarados propios, contrastados mediante fuentes independientes.</td><td>También usa colores distintos por planta y posee un vocabulario gráfico independiente del CPC.</td></tr>
-          <tr><td>Remake VGA</td><td>Arquitectura recuperada con tiles redibujados, más profundidad y ajustes puntuales.</td><td>Reinterpretación posterior a 256 colores, desarrollada fuera del conjunto de conversiones originales de 1988.</td></tr>
-        </tbody>
-      </table>
-      <div class="graphics-guide-grid reveal">
-        <div><h3>Noche no significa necesariamente oscuridad</h3><p>El momento del día cambia la paleta, pero una estancia iluminada conserva el mismo índice para su fondo. Aparte de eso, una estancia puede estar marcada como oscura: entonces la vista parte del negro y el sistema dinámico de luz determina qué zona llega a verse.</p><p>Por eso las láminas nocturnas de esta página son estudios de paleta con toda la arquitectura expuesta. No representan cuánto ve realmente el jugador dentro de una zona oscura.</p></div>
-        <pre class="pseudocode"><code>si momento ES nocturno:
-    instalar colores nocturnos
-    usar el índice base de la paleta nocturna
-
-si además la estancia ES oscura:
-    partir de un fondo negro
-    la iluminación dinámica decide
-    qué parte llega a verse</code></pre>
+      <div class="graphics-light-comparison reveal" aria-label="Diferencia entre día, noche y una estancia oscura">
+        <figure><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Estancia 17 completa con la paleta diurna de Amstrad CPC" loading="lazy"><figcaption><b>1 · Día, estancia normal</b><span>La arquitectura completa usa la paleta diurna.</span></figcaption></figure>
+        <figure><img src="../assets/maps/abbey-rooms/cpc-night/room-17.png" alt="La misma estancia 17 completa con la paleta nocturna de Amstrad CPC" loading="lazy"><figcaption><b>2 · Noche, estancia normal</b><span>Cambian los colores; no se reduce la zona visible.</span></figcaption></figure>
+        <figure><img src="../assets/programming/graphics/room-17-trace/lamp-demo-cpc-room-68.png" alt="Reconstrucción de la estancia 68 del laberinto visible sólo dentro del patrón de la lámpara CPC" loading="lazy"><figcaption><b>3 · Laberinto de la biblioteca, con lámpara</b><span>Sólo se muestra la parte de la arquitectura que queda dentro del patrón de luz.</span></figcaption></figure>
       </div>
+      <p class="graphics-note reveal"><b>Estas tres láminas no siguen el selector gráfico superior: la comparación se presenta exclusivamente con gráficos de Amstrad CPC.</b> La tercera es una reconstrucción explicativa, no una captura histórica: aplica el patrón de luz CPC conservado en el código a la arquitectura reconstruida de la estancia 68 del laberinto. Extender artificialmente ese patrón a las demás versiones no representaría fielmente su funcionamiento.</p>
     </section>
 
     <section class="chapter dark" id="altura">
-      <div class="chapter-header reveal"><div><span class="chapter-number">07 · El mapa que no se ve</span><h2>La altura se construye aparte</h2></div><p class="chapter-intro">La imagen arquitectónica y el suelo por el que se camina se guardan en estructuras distintas, aunque relacionadas. Una segunda descripción llena una cuadrícula local de 24 × 24 valores con rectángulos y rampas.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">07 · Alturas para el movimiento</span><h2>El terreno caminable se construye aparte</h2></div><p class="chapter-intro">La altura de una colocación sirve para ordenar los tiles arquitectónicos. El movimiento utiliza otra información: un <b>campo de alturas del terreno</b> de 24 × 24 celdas que indica el nivel del suelo alrededor de los personajes.</p></div>
       <div class="graphics-guide-grid reveal">
-        <div><h3>Geometría para moverse y ocultarse</h3><p>Cada celda guarda una altura. Las áreas planas se rellenan con un valor constante; las escaleras y pendientes avanzan sumando o restando altura en una dirección. La ventana cubre la celda del mundo de 16 × 16 y añade un margen de cuatro unidades por cada lado: de ahí sus 24 × 24 posiciones.</p><p>Su función es geométrica: permite decidir si un personaje puede avanzar, debe subir o bajar y cómo debe ordenarse respecto a las partes del escenario. El dibujo del fondo sigue a cargo de las recetas arquitectónicas.</p></div>
+        <div><h3>Una altura para cada posición del suelo</h3><p>Cada celda del campo guarda la altura del terreno en ese punto. Las superficies planas repiten el mismo valor. En escaleras y pendientes, el valor aumenta o disminuye paso a paso. La cuadrícula cubre la celda actual del mundo, de 16 × 16 unidades, y añade un margen de cuatro unidades por cada lado; por eso mide 24 × 24.</p><p>El juego consulta estos valores para decidir si un personaje puede avanzar, subir o bajar, y para ordenarlo respecto a la arquitectura. Las recetas arquitectónicas siguen siendo las responsables de dibujar la estancia.</p></div>
         <pre class="pseudocode"><code>vaciar cuadrícula_de_alturas[24, 24]
 origen ← celda_actual × 16 − margen
 
@@ -328,40 +302,39 @@ PARA CADA forma EN geometría_de_la_planta:
     </section>
 
     <section class="chapter dark" id="limites">
-      <div class="chapter-header reveal"><div><span class="chapter-number">08 · Qué falta en la imagen fija</span><h2>El escenario espera a sus actores</h2></div><p class="chapter-intro">Al terminar este proceso ya existen la arquitectura y su geometría de alturas. Sobre esa base se incorporan las capas dinámicas que completan la escena recordada por el jugador.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">08 · Durante la partida</span><h2>La estancia no se reconstruye entera en cada fotograma</h2></div><p class="chapter-intro">Ya hemos visto cómo la profundidad mezcla arquitectura y personajes. Queda una cuestión práctica: cuando algo se mueve, el juego sólo recompone la región de pantalla que ha cambiado.</p></div>
       <div class="graphics-guide-grid reveal">
-        <div><h3>Capas dinámicas posteriores</h3><p>Personajes, puertas, objetos, animaciones, reflejos, restauración del fondo y el círculo de luz de las zonas oscuras pertenecen a fases posteriores. El pergamino, el texto y el marcador inferior también siguen caminos de dibujo independientes.</p><p>Esta separación es una ventaja: la habitación fija puede reconstruirse una vez y conservarse mientras los actores se mueven. Sólo las zonas alteradas por sprites necesitan restaurarse y componerse de nuevo.</p></div>
+        <div><h3>Sólo se recompone lo que ha cambiado</h3><p>La arquitectura completa vuelve a construirse al cambiar de estancia. Mientras se permanece en la misma, el mezclador trata cada sprite modificado —un personaje, una puerta, un objeto, un reflejo o la luz de la lámpara—.</p><p>Para cada uno delimita un rectángulo que abarca tanto su posición anterior como la nueva, lo amplía hasta los límites de los tiles de 16 × 8 píxeles y recompone dentro de él la arquitectura y todos los sprites que se solapan. El pergamino, los textos y el marcador inferior utilizan sistemas de dibujo independientes.</p></div>
         <pre class="pseudocode"><code>si cambia_la_estancia:
-    fondo_fijo ← resultado de los pasos 1 a 7 de esta guía
+    arquitectura ← construir y componer los tiles de la estancia
+    alturas ← construir el campo de alturas del terreno
 
 EN CADA FOTOGRAMA:
-    recuperar el fondo bajo los actores del fotograma anterior
-    actualizar personajes, puertas y objetos
-    ordenar elementos según posición, altura y capas
-    dibujar las zonas dinámicas
-    si la_estancia_es_oscura:
-        limitar la zona visible al alcance de la lámpara</code></pre>
+    actualizar personajes, puertas, objetos, reflejos y luz
+    ordenar los sprites según su profundidad
+
+    PARA CADA sprite visible que haya cambiado:
+        área ← rectángulo que abarca su posición anterior y la nueva
+        ajustar área a los límites de los tiles de 16 × 8 píxeles
+        recomponer en ella la arquitectura y los sprites solapados</code></pre>
       </div>
-      <details class="graphics-deep-dive reveal">
-        <summary><span>Mirar más de cerca</span><strong>Por qué el fondo aparece desde el centro</strong></summary>
-        <div class="graphics-deep-dive-body"><p>Una vez llena la rejilla, el dibujado CPC no recorre simplemente las filas de arriba abajo. Comienza cerca del centro y visita franjas hacia abajo, derecha, arriba e izquierda. Cada vuelta amplía esas franjas, formando una espiral rectangular hasta cubrir las 16 × 20 celdas visibles.</p><p>Ese orden determina cómo aparece la reconstrucción durante el proceso, pero no altera el resultado final: en cada celda se compone primero el tile posterior y después el anterior. Cada tile se despliega después en ocho filas consecutivas de dieciséis píxeles, conservando o sustituyendo el color previo según sus tablas de máscara.</p></div>
-      </details>
-      <div class="graphics-evidence reveal" aria-labelledby="fiabilidad-final">
-        <div><span>Cómo sabemos que encaja</span><h3 id="fiabilidad-final">Evidencia, límites y términos</h3><p>Las cifras, formatos y algoritmos presentados como hechos proceden de estructuras coherentes, ejecución completa de todas las descripciones y comparación visual. Los nombres legibles de operaciones, recetas y variables son nuestros: describen su función, pero no atribuyen vocabulario histórico a los programadores.</p></div>
-        <ul>
+      <details class="graphics-deep-dive graphics-evidence-details reveal">
+        <summary><span>Contenido avanzado</span><strong>Evidencia, límites y términos</strong></summary>
+        <div class="graphics-evidence graphics-deep-dive-body" id="fiabilidad-final"><div><h3>Cómo sabemos que encaja</h3><p>Las cifras, formatos y algoritmos presentados como hechos proceden de estructuras coherentes, ejecución completa de todas las descripciones y comparación visual. Los nombres legibles de operaciones, recetas y variables son nuestros: describen su función, pero no atribuyen vocabulario histórico a los programadores.</p></div><ul>
           <li><b>Comprobación estructural.</b> Las 116 descripciones se recorren hasta su final y las instrucciones conocidas se ejecutan sin encontrar una operación desconocida.</li>
-          <li><b>Comprobación del código.</b> La selección de estancia, el intérprete, las fórmulas de profundidad, las dos capas, las máscaras y el recorrido desde el centro aparecen unidos en la reconstrucción CPC.</li>
+          <li><b>Comprobación del código.</b> La selección de estancia, el intérprete, las fórmulas de profundidad, las dos capas y las máscaras se han comprobado en la reconstrucción. El recorrido desde el centro está documentado específicamente en la versión PC CGA.</li>
           <li><b>Catálogo con excepciones.</b> De las 87 definiciones no nulas, cinco no son llamadas por las descripciones; tres de ellas terminan sin emitir ningún tile.</li>
-          <li><b>Frontera deliberada.</b> Este recorrido reconstruye la arquitectura fija y la geometría de alturas. Actores, puertas, objetos, reflejos, restauración, iluminación limitada, pergamino, texto y marcador pertenecen a otros sistemas.</li>
-        </ul>
-      </div>
-      <p class="graphics-note reveal">Con esto puede implementarse un reconstructor independiente del fondo: primero el mapa y las estancias, después el intérprete de bloques, luego las capas y máscaras, y finalmente —como proyectos separados— actores, objetos e iluminación dinámica.</p>
+          <li><b>Límite de esta guía.</b> Aquí se reconstruyen la arquitectura de la estancia y el campo de alturas. Personajes, puertas, objetos, reflejos, restauración de la imagen, lámpara, pergamino, textos y marcador pertenecen a otros sistemas.</li>
+        </ul></div>
+      </details>
+      <p class="graphics-note reveal">Un reconstructor de la arquitectura necesita estos componentes, en orden: el mapa de estancias, el lector de descripciones, el intérprete de bloques, las dos capas de tiles y la composición mediante máscaras. Los personajes, los objetos y la iluminación limitada se implementarían después como sistemas separados.</p>
     </section>
   </main>
 
   <nav class="page-pagination" aria-label="Continuar leyendo"><a class="page-previous" href="tecnica.html#graficos"><span>Volver a Programación</span><strong>← Resumen gráfico</strong></a><a class="page-next" href="prensa.html"><span>Siguiente ruta</span><strong>Prensa y anuncios →</strong></a></nav>
   <footer class="site-footer"><div><strong>Finis?</strong><p>La investigación continúa por otras rutas del homenaje.</p><p><a href="#inicio">Volver arriba</a> · <a href="../en/graphics.html" lang="en">English edition</a></p><p class="project-credit"><span class="credit-role">Autor</span>: Andrés del Campo Novales <span>with GPT 5.6 Sol</span><span class="technical-reviewers"><span class="credit-role">Revisión técnica</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div><div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div></footer>
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Visor de archivo"><button class="lightbox-close" type="button">Cerrar ×</button><div class="lightbox-zoom" aria-label="Ampliación"><button class="lightbox-zoom-out" type="button" aria-label="Alejar">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Acercar">+</button><button class="lightbox-zoom-fit" type="button">Ajustar</button></div><div class="lightbox-stage"><img src="" alt=""></div><div class="lightbox-navigation" aria-label="Páginas" hidden><button class="lightbox-previous" type="button" aria-label="Página anterior">← Anterior</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Página siguiente">Siguiente →</button></div><p class="lightbox-caption"></p></div>
-  <script src="../app.js?v=20260909-graphics2"></script>
+  <script src="../assets/programming/graphics/room-17-trace/trace-data.js?v=20260910-1"></script>
+  <script src="../app.js?v=20260910-graphics8"></script>
 </body>
 </html>
