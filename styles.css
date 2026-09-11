@@ -712,6 +712,21 @@ main { overflow: clip; }
   font: .73rem/1.45 var(--mono);
 }
 .dark .caption { color: rgba(255,255,255,.58); }
+.claim-source {
+  display: inline-block;
+  padding: .15em .1em;
+  color: inherit;
+  font: max(.75rem, .68em)/1.4 var(--mono);
+  font-weight: normal;
+  letter-spacing: normal;
+  white-space: nowrap;
+  vertical-align: baseline;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: .2em;
+}
+.claim-source:hover { text-decoration-style: solid; }
+.claim-source:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
 .source-tag {
   display: inline-block;
   padding: .28rem .45rem;

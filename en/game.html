@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-scrollbar2">
+  <link rel="stylesheet" href="../styles.css?v=20260911-sources1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
   <link rel="stylesheet" href="../week.css?v=20260911-labyrinth1">
@@ -301,7 +301,7 @@
           <p>If the game ends without solving the case, the percentage combines elapsed time with recorded discoveries. Obsequium is not added to the score.</p>
           <div class="score-formula">Percentage = 7 × (day − 1) + hour + 4 × bonuses</div>
           <p>Hour values: night 0 · prime 1 · terce 2 · sext 3 · none 4 · vespers 5 · compline 6. A total below 5 is displayed as 0%.</p>
-          <p>Each of these fourteen bonuses adds <strong>4 percentage points once</strong>. It remains recorded after losing the item or leaving the room; one visit can activate several bonuses.</p>
+          <p>Each of these fourteen bonuses adds <strong>4 percentage points once</strong>. <a class="claim-source" href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java" title="CPC reconstruction · percentage calculation" aria-label="Source: CPC reconstruction · percentage calculation">[source]</a> It remains recorded after losing the item or leaving the room; one visit can activate several bonuses.</p>
           <p><strong>Example.</strong> At prime on day VI, with eight distinct bonuses: 7 × 5 + 1 + 4 × 8 = <strong>68%</strong>. One new discovery raises it to <strong>72%</strong>; repeating an existing one adds nothing.</p>
           <p>Completing the investigation displays the ending manuscript instead of this percentage.</p>
           <details class="week-spoilers game-reference score-reference">
@@ -370,7 +370,7 @@
   </nav>
 
   <footer class="site-footer">
-    <div><strong>Finis?</strong><p>The investigation continues along the other routes of the tribute.</p><p><a href="#start">Back to the top</a> · <a href="../index.html">Back to the entrance page</a> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">GitHub repository</a> · <a href="../es/juego.html" lang="es">Edición española</a></p><p class="project-credit"><span class="credit-role">Author</span>: Andrés del Campo Novales <span>with GPT 5.6 Sol and GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role">Technical review of the previous version dated 5 September 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
+    <div><strong>Finis?</strong><p>The investigation continues along the other routes of the tribute.</p><p><a href="#start">Back to the top</a> · <a href="legacy.html#sources">Sources</a> · <a href="../index.html">Back to the entrance page</a> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">GitHub repository</a> · <a href="../es/juego.html" lang="es">Edición española</a></p><p class="project-credit"><span class="credit-role">Author</span>: Andrés del Campo Novales <span>with GPT 5.6 Sol and GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role">Technical review of the previous version dated 5 September 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
     <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
   </footer>
 

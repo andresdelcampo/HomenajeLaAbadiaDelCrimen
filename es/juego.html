@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-scrollbar2">
+  <link rel="stylesheet" href="../styles.css?v=20260911-sources1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
   <link rel="stylesheet" href="../week.css?v=20260911-labyrinth1">
@@ -464,7 +464,7 @@
           <p>Si la partida acaba sin resolver el caso, el porcentaje suma el tiempo transcurrido y los hallazgos registrados. El Obsequium no se añade a la puntuación.</p>
           <div class="score-formula">Porcentaje = 7 × (día − 1) + hora + 4 × bonus</div>
           <p>La hora vale: noche 0 · prima 1 · tercia 2 · sexta 3 · nona 4 · vísperas 5 · completas 6. Si el total es menor que 5, se muestra 0%.</p>
-          <p>Cada uno de estos catorce bonus suma <strong>4 puntos porcentuales una sola vez</strong>. Se conserva aunque después pierdas el objeto o abandones la estancia; una misma visita puede activar varios.</p>
+          <p>Cada uno de estos catorce bonus suma <strong>4 puntos porcentuales una sola vez</strong>. <a class="claim-source" href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java" title="Reconstrucción CPC · cálculo del porcentaje" aria-label="Fuente: Reconstrucción CPC · cálculo del porcentaje">[fuente]</a> Se conserva aunque después pierdas el objeto o abandones la estancia; una misma visita puede activar varios.</p>
           <p><strong>Ejemplo.</strong> En prima del día VI, con ocho bonus distintos: 7 × 5 + 1 + 4 × 8 = <strong>68%</strong>. Un hallazgo nuevo lo eleva a <strong>72%</strong>; repetir uno ya conseguido no suma nada.</p>
           <p>Al completar la investigación, el juego muestra el manuscrito final en lugar de este porcentaje.</p>
           <details class="week-spoilers game-reference score-reference">
@@ -536,7 +536,7 @@
   </nav>
 
   <footer class="site-footer">
-    <div><strong>Finis?</strong><p>La investigación continúa por otras rutas del homenaje.</p><p><a href="#inicio">Volver arriba</a> · <a href="../index.html">Volver a la página de entrada</a> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">Repositorio en GitHub</a> · <a href="../en/game.html" lang="en">English edition</a></p><p class="project-credit"><span class="credit-role">Autor</span>: Andrés del Campo Novales <span>con GPT 5.6 Sol y GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role">Revisión técnica de la versión previa del 5 de septiembre de 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
+    <div><strong>Finis?</strong><p>La investigación continúa por otras rutas del homenaje.</p><p><a href="#inicio">Volver arriba</a> · <a href="legado.html#fuentes">Fuentes</a> · <a href="../index.html">Volver a la página de entrada</a> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">Repositorio en GitHub</a> · <a href="../en/game.html" lang="en">English edition</a></p><p class="project-credit"><span class="credit-role">Autor</span>: Andrés del Campo Novales <span>con GPT 5.6 Sol y GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role">Revisión técnica de la versión previa del 5 de septiembre de 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
     <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
   </footer>
 
