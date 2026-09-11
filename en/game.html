@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-review1">
+  <link rel="stylesheet" href="../styles.css?v=20260911-scrollbar2">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
+  <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
   <link rel="stylesheet" href="../week.css?v=20260911-labyrinth1">
 </head>
 <body data-page="game">
@@ -41,6 +42,7 @@
       <h1>The game</h1>
       <p>Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.</p>
       <a class="page-cue" href="#manuscript">Open the manuscript ↓</a>
+      <nav class="game-quick-links" aria-label="Quick reference"><a href="#controls">Controls</a><a href="#objects">Objects</a><a href="#scoring">Scoring</a></nav>
     </div>
   </header>
 
@@ -109,7 +111,7 @@
           <button class="character-button" type="button" role="tab" aria-selected="false" data-character="bernard"><img src="../assets/characters/bernardo.png" alt="" aria-hidden="true"><small>Inquisitor</small><b>Bernard</b></button>
         </div>
         <div class="character-dossier" data-seal="W">
-          <article class="character-panel is-active" data-character="william"><figure class="character-art"><img src="../assets/characters/guillermo.png" alt="CPC sprite of William"><figcaption>CPC · original design</figcaption></figure><p class="role">Friar William of Occam · Reason under surveillance</p><h3>William</h3><p>He is the only figure whose agenda depends on us, yet the abbey treats him as another moving piece. He can carry six objects, open doors according to his keys, read the scroll when wearing the spectacles, and die by leafing through the poisoned book without gloves.</p><blockquote>“I fear one of the monks has committed a crime.”</blockquote><div class="stat-line"><b>Routine</b><span>Investigate without missing prime, sext, vespers, or compline; leave the cell only when the Abbot sleeps.</span></div><div class="stat-line"><b>The week</b><span>D1: receives the case. D2–3: scriptorium, scroll, first clues. D4: Bernard officially closes the investigation. D5–6: keys, lamp, spectacles, library. D7: the last chance.</span></div><div class="stat-line"><b>Secret</b><span>The final percentage does not merely ask whether he solved the crime; it rewards objects, optional rooms, and discoveries.</span></div></article>
+          <article class="character-panel is-active" data-character="william"><figure class="character-art"><img src="../assets/characters/guillermo.png" alt="CPC sprite of William"><figcaption>CPC · original design</figcaption></figure><p class="role">Friar William of Occam · Reason under surveillance</p><h3>William</h3><p>He is the only figure whose agenda depends on us, yet the abbey treats him as another moving piece. He can carry six objects, open doors according to his keys, read the scroll when wearing the spectacles, and die by leafing through the poisoned book without gloves.</p><blockquote>“I fear one of the monks has committed a crime.”</blockquote><div class="stat-line"><b>Routine</b><span>Investigate without missing prime, sext, vespers, or compline; leave the cell only when the Abbot sleeps.</span></div><div class="stat-line"><b>The week</b><span>D1: receives the case. D2–3: scriptorium, scroll, first clues. D4: Bernard officially closes the investigation. D5–6: keys, lamp, spectacles, library. D7: the last chance.</span></div><div class="stat-line"><b>Secret</b><span>The percentage combines elapsed time with recorded discoveries. A spoiler-protected explanation appears below.</span></div></article>
 
           <article class="character-panel" data-character="adso"><figure class="character-art"><img src="../assets/characters/adso.png" alt="CPC sprite of Adso"><figcaption>CPC · original design</figcaption></figure><p class="role">Adso of Melk · Companion, compass, bearer of light</p><h3>Adso</h3><p>His apparent clumsiness hides elaborate following logic. He searches routes to William, tries alternative directions, steps away when blocking him, and can be controlled directly to collect selected objects. The daily cycle also makes him leave his master for communal duties.</p><blockquote>“Shall we sleep, master?”</blockquote><div class="stat-line"><b>Routine</b><span>Church at prime and vespers, refectory at sext, cell at compline. At night he asks whether to sleep; if the answer is no, he resumes following William.</span></div><div class="stat-line"><b>The week</b><span>Warns of dawn, a missing lamp, and dwindling oil. In the library he lights it; outside he extinguishes it. Trapped in darkness, he counts down to failure.</span></div><div class="stat-line"><b>Secret</b><span>In the ending he sees what blind Jorge cannot: William’s gloves. The observation turns a certain execution into a pursuit.</span></div></article>
 
@@ -171,8 +173,25 @@
       </aside>
     </section>
 
+    <section class="chapter paper-warm controls-chapter" id="controls" aria-labelledby="controls-title">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">VI · The controls</span><h2 id="controls-title">Classic controls</h2></div>
+        <p class="chapter-intro">Movement is deliberate: first turn William, then walk. Adso and the objects follow rules of their own.</p>
+      </div>
+      <div class="controls-guide reveal">
+        <p>Based on the original manual and checked against the CPC reconstruction. Remakes and emulator mappings may differ. Turn first, then walk: the arrows do not represent the screen’s diagonals.</p>
+        <dl class="controls-list">
+          <div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> Move William</dt><dd>Left and right turn on the spot; up walks in the direction he faces. The manual also gives <kbd>L</kbd> to turn left, <kbd>K</kbd> to turn right and <kbd>A</kbd> to walk forward.</dd></div>
+          <div><dt><kbd>↓</kbd> Direct Adso</dt><dd>Turn William, then hold down —or <kbd>Z</kbd>— to make Adso try to walk in that direction, within the same screen. Release it to let him follow you again.</dd></div>
+          <div><dt>Pick up and drop objects</dt><dd>Stand the appropriate carrier in front of an object to collect it automatically. <kbd>Space</kbd> drops William’s leftmost carried item on the status bar, if there is room ahead. Only his items can be dropped; Adso’s two items do not appear in that inventory.</dd></div>
+          <div><dt><kbd>S</kbd> / <kbd>N</kbd> Sleep</dt><dd>At night, in your cell, Adso asks whether you want to sleep. <kbd>S</kbd> (Spanish <i>sí</i>) advances to prime; <kbd>N</kbd> keeps you awake. Answer promptly: waiting too long makes the game choose sleep.</dd></div>
+        </dl>
+        <p class="guide-source">Reference: <a href="https://worldofspectrum.net/pub/sinclair/games-info/a/AbadiaDelCrimen%2BSirFredLa.pdf">preserved original manual</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Adso.java">reconstructed Adso routine</a>.</p>
+      </div>
+    </section>
+
     <section class="chapter dark" id="labyrinth">
-      <div class="chapter-header reveal"><div><span class="chapter-number">VI · The labyrinth</span><h2>The abbey as suspect</h2></div><p class="chapter-intro">Isometric perspective hides doors behind walls, reverses instinct, and demands a memory for height. Losing one’s way is part of the investigation, not a detour from it.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">VII · The labyrinth</span><h2>The abbey as suspect</h2></div><p class="chapter-intro">Isometric perspective hides doors behind walls, reverses instinct, and demands a memory for height. Losing one’s way is part of the investigation, not a detour from it.</p></div>
       <div class="labyrinth-layout reveal">
         <div class="map-frame" aria-label="Retro Gamer España map with interactive locations">
           <img class="map-source" src="../assets/maps/interactive-retrogamer-map.jpg" alt="Abbey map published in Retro Gamer España 41" loading="lazy">
@@ -223,22 +242,43 @@
     </section>
 
     <section class="chapter" id="objects">
-      <div class="chapter-header reveal"><div><span class="chapter-number">VII · Evidence locker</span><h2>Eight objects, no accidents</h2></div><p class="chapter-intro">The inventory is tiny and choreographed. Objects change hands, appear only on selected days, or open routes the game never explains.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">VIII · Evidence locker</span><h2>Eight objects, no accidents</h2></div><p class="chapter-intro">The inventory is tiny and choreographed. Objects change hands, appear only on selected days, or open routes the game never explains.</p></div>
       <p class="sprite-credit reveal">Original Amstrad CPC patterns, shown in a real three-slot tray from the status panel.</p>
       <div class="object-grid reveal">
-        <article class="object-card" data-symbol="B"><img class="object-sprite" src="../assets/items/libro.png" alt="CPC sprite of the book"><small>01 · Fatal evidence</small><h3>Book</h3><p>The <cite>Coena Cypriani</cite>. It passes through several hands, kills anyone who moistens a finger, and triggers the finale.</p></article>
-        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="CPC sprite of the gloves"><small>02 · Protection</small><h3>Gloves</h3><p>They make the poisoned book safe to touch. Jorge cannot see them; Adso can.</p></article>
-        <article class="object-card" data-symbol="S"><img class="object-sprite" src="../assets/items/gafas.png" alt="CPC sprite of the spectacles"><small>03 · Reading</small><h3>Spectacles</h3><p>They make the scroll readable. They appear in the maze’s lit room and may vanish at dawn.</p></article>
-        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="CPC sprite of the scroll"><small>04 · Code</small><h3>Scroll</h3><p>Venantius’s manuscript contains the mirror clue. Berengar, Bernard, and the Abbot may take it away.</p></article>
-        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>05 · Access</small><h3>Key I</h3><p>It passes through the altar; if not taken in time, it disappears. Stealing it may wake the Abbot.</p></article>
-        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>06 · Access</small><h3>Key II</h3><p>William uses it to open Severinus’s cell. It appears on Malachi’s desk on night VI.</p></article>
-        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>07 · Access</small><h3>Key III</h3><p>Adso carries it to open the secret passage. Malachi picks it up and leaves it on his desk as part of his routine.</p></article>
-        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="CPC sprite of the lamp"><small>08 · Time</small><h3>Lamp</h3><p>Adso carries it. It burns only in dark rooms, warns before expiring, and may reappear in the kitchen on another day.</p></article>
+        <article class="object-card" data-symbol="B"><img class="object-sprite" src="../assets/items/libro.png" alt="CPC sprite of the book"><small>01 · Investigation</small><h3>Book</h3><p>A book connected to the investigation.</p></article>
+        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="CPC sprite of the gloves"><small>02 · Protection</small><h3>Gloves</h3><p>Protect William’s hands.</p></article>
+        <article class="object-card" data-symbol="S"><img class="object-sprite" src="../assets/items/gafas.png" alt="CPC sprite of the spectacles"><small>03 · Reading</small><h3>Spectacles</h3><p>William’s spectacles, needed to read small writing.</p></article>
+        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="CPC sprite of the scroll"><small>04 · Manuscript</small><h3>Scroll</h3><p>A document that may provide clues to the investigation.</p></article>
+        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>05 · Access</small><h3>Key I</h3><p>One of the two keys William can carry.</p></article>
+        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>06 · Access</small><h3>Key II</h3><p>William’s other key. Each opens a different door.</p></article>
+        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>07 · Access</small><h3>Key III</h3><p>The key Adso can carry.</p></article>
+        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="CPC sprite of the lamp"><small>08 · Light</small><h3>Lamp</h3><p>Adso carries it to illuminate dark places.</p></article>
       </div>
+      <details class="week-spoilers game-reference reveal" id="object-reference">
+        <summary>Open object locations, availability and uses · contains spoilers</summary>
+        <div class="reference-body">
+          <p>William’s six item types and Adso’s two. Night begins the numbered day: night V follows compline IV. Locations change when a character picks up or drops an item.</p>
+          <table class="reference-table" role="table">
+            <caption>The classic game’s eight objects</caption>
+            <thead><tr role="row"><th scope="col" role="columnheader">Object</th><th scope="col" role="columnheader">Carrier</th><th scope="col" role="columnheader">Location</th><th scope="col" role="columnheader">Availability</th><th scope="col" role="columnheader">Purpose</th><th scope="col" role="columnheader">Removal or disappearance</th></tr></thead>
+            <tbody>
+              <tr role="row"><th scope="row" role="rowheader">Book</th><td role="cell" data-label="Carrier">William</td><td role="cell" data-label="Location">Initially in the scriptorium; later passes through Severinus’s cell and Jorge’s hands.</td><td role="cell" data-label="Availability">During the final sequence, Jorge offers it behind the mirror, from night VI onwards.</td><td role="cell" data-label="Purpose">Evidence of the crime; gloves protect against its poison.</td><td role="cell" data-label="Removal or disappearance">Berengar removes it from the scriptorium on night III. Jorge hides it at prime III and takes it away during his final escape.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Gloves</th><td role="cell" data-label="Carrier">William</td><td role="cell" data-label="Location">Severinus’s cell.</td><td role="cell" data-label="Availability">Present from the start; key II opens the cell from night VI.</td><td role="cell" data-label="Purpose">Handle the poisoned book without dying.</td><td role="cell" data-label="Removal or disappearance">No scheduled removal. If dropped, they must be collected again.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Spectacles</th><td role="cell" data-label="Carrier">William</td><td role="cell" data-label="Location">Starting inventory; later, the library’s illuminated room.</td><td role="cell" data-label="Availability">Lost at prime II; reappear on night V.</td><td role="cell" data-label="Purpose">Read the scroll and learn the mirror clue.</td><td role="cell" data-label="Removal or disappearance">Removal at prime II is compulsory. The pair that reappears on night V has no further dawn removal.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Scroll</th><td role="cell" data-label="Carrier">William</td><td role="cell" data-label="Location">Scriptorium; may move to the Abbot’s cell or behind the mirror.</td><td role="cell" data-label="Availability">Available from the start, before the monks’ routines move it.</td><td role="cell" data-label="Purpose">With the spectacles, reveals which step corresponds to the mirror.</td><td role="cell" data-label="Removal or disappearance">Moves behind the mirror at prime III unless William carries it. Berengar, Bernard and the Abbot can take it; the Abbot stores it in his cell.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Key I</th><td role="cell" data-label="Carrier">William</td><td role="cell" data-label="Location">Church altar.</td><td role="cell" data-label="Availability">Night V: collect it before prime.</td><td role="cell" data-label="Purpose">Open the Abbot’s cell.</td><td role="cell" data-label="Removal or disappearance">Disappears at prime V unless William carries it.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Key II</th><td role="cell" data-label="Carrier">William</td><td role="cell" data-label="Location">Malachi’s desk in the scriptorium.</td><td role="cell" data-label="Availability">Appears at the start of night VI.</td><td role="cell" data-label="Purpose">Open Severinus’s cell to reach the gloves.</td><td role="cell" data-label="Removal or disappearance">No scheduled removal after it appears.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Key III</th><td role="cell" data-label="Carrier">Adso</td><td role="cell" data-label="Location">Malachi’s desk in the scriptorium.</td><td role="cell" data-label="Availability">From the start, while on the desk: Malachi collects it at vespers and returns it when he resumes his post.</td><td role="cell" data-label="Purpose">Open the secret passage door.</td><td role="cell" data-label="Removal or disappearance">May temporarily be carried by Malachi. Once Adso collects it, there is no scheduled removal.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Lamp</th><td role="cell" data-label="Carrier">Adso</td><td role="cell" data-label="Location">Kitchen.</td><td role="cell" data-label="Availability">From prime III; returns to the kitchen at prime if used.</td><td role="cell" data-label="Purpose">Light the library’s dark rooms; oil is consumed only there.</td><td role="cell" data-label="Removal or disappearance">If used, it is removed from Adso and replaced in the kitchen at prime. Running out of oil extinguishes it; it need not be empty to be replaced.</td></tr>
+            </tbody>
+          </table>
+          <p class="guide-source">Reference: Manuel Abadía’s reconstructed CPC logic, preserved in the Java/GWT conversion · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/AccionesDia.java">daily changes</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java">inventory and lamp</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Malaquias.java">Malachi</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Jorge.java">Jorge</a>.</p>
+        </div>
+      </details>
     </section>
 
     <section class="chapter paper-light" id="week">
-      <div class="chapter-header reveal"><div><span class="chapter-number">VIII · The week</span><h2>Seven days to the <em>Finis Africae</em></h2></div><p class="chapter-intro">First the spoiler-light version; then, if you choose, the full machinery. The cards scroll horizontally on small screens.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">IX · The week</span><h2>Seven days to the <em>Finis Africae</em></h2></div><p class="chapter-intro">First the spoiler-light version; then, if you choose, the full machinery. The cards scroll horizontally on small screens.</p></div>
       <div class="days-control reveal"><p class="caption">Hidden plots are blurred.</p><button class="spoiler-button" type="button" aria-pressed="false" data-show="Reveal every secret" data-hide="Hide the secrets">Reveal every secret</button></div>
       <div class="days-grid reveal">
         <article class="day-card"><span class="day-no">Day I</span><h3>Arrival</h3><p>The Abbot guides us in, explains the crime, and lays down the rules. The west wing is forbidden.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secret of the day">Architecture and routine are learned while the case still appears manageable.</p></article>
@@ -252,9 +292,29 @@
       <div class="week-explorer" id="week-explorer" data-week-explorer><noscript><p>Enable JavaScript to explore days and hours. The weekly summary is available above.</p></noscript></div>
     </section>
 
+    <section class="chapter paper-warm scoring-chapter" id="scoring" aria-labelledby="score-title">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">X · The score</span><h2 id="score-title">How the percentage works</h2></div>
+        <p class="chapter-intro">When the investigation remains incomplete, the game sums up your progress as a percentage.</p>
+      </div>
+      <div class="scoring-guide reveal">
+          <p>If the game ends without solving the case, the percentage combines elapsed time with recorded discoveries. Obsequium is not added to the score.</p>
+          <div class="score-formula">Percentage = 7 × (day − 1) + hour + 4 × bonuses</div>
+          <p>Hour values: night 0 · prime 1 · terce 2 · sext 3 · none 4 · vespers 5 · compline 6. A total below 5 is displayed as 0%.</p>
+          <p>Each of these fourteen bonuses adds <strong>4 percentage points once</strong>. It remains recorded after losing the item or leaving the room; one visit can activate several bonuses.</p>
+          <p><strong>Example.</strong> At prime on day VI, with eight distinct bonuses: 7 × 5 + 1 + 4 × 8 = <strong>68%</strong>. One new discovery raises it to <strong>72%</strong>; repeating an existing one adds nothing.</p>
+          <p>Completing the investigation displays the ending manuscript instead of this percentage.</p>
+          <details class="week-spoilers game-reference score-reference">
+            <summary>Open the fourteen investigation bonuses · contains spoilers</summary>
+          <ul class="score-bonuses"><li>William collects the gloves.</li><li>William collects key I.</li><li>William collects key II.</li><li>Adso collects key III.</li><li>William visits the abbey’s left wing at night.</li><li>William carries the scroll during night III.</li><li>William holds the scroll and spectacles together, making it readable.</li><li>William enters the Abbot’s cell carrying the scroll.</li><li>William enters the library.</li><li>William is in the library while Adso has the lamp.</li><li>William is in the library with the spectacles.</li><li>Reach the mirror room.</li><li>Operate the mirror mechanism: this bonus is recorded even if the wrong step is chosen.</li><li>Enter Jorge’s room behind the mirror during the final sequence.</li></ul>
+          </details>
+          <p class="guide-source">Reference: reconstructed CPC logic · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L262-L307">bonuses</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L557-L578">calculation</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L694-L715">mirror</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Jorge.java">ending</a>.</p>
+      </div>
+    </section>
+
     <section class="chapter parchment-chapter parchment-ending" id="ending-manuscript">
       <div class="chapter-header reveal">
-        <div><span class="chapter-number">IX · The ending</span><h2>The final pages</h2></div>
+        <div><span class="chapter-number">XI · The ending</span><h2>The final pages</h2></div>
         <p class="chapter-intro">When the investigation is complete, the game returns to the parchment so Adso can close his account. Its text reveals the entire ending.</p>
       </div>
 
@@ -319,6 +379,6 @@
   <script src="../parchment.js?v=20260908-platform1"></script>
   <script src="../app.js?v=20260911-review1"></script>
   <script src="../assets/game/week-dialogue.js?v=20260911-1"></script>
-  <script src="../week.js?v=20260911-labyrinth1"></script>
+  <script src="../week.js?v=20260911-objects1"></script>
 </body>
 </html>

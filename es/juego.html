@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-review1">
+  <link rel="stylesheet" href="../styles.css?v=20260911-scrollbar2">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
+  <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
   <link rel="stylesheet" href="../week.css?v=20260911-labyrinth1">
 </head>
 <body data-page="game">
@@ -41,6 +42,7 @@
       <h1>El juego</h1>
       <p>Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.</p>
       <a class="page-cue" href="#manuscrito">Abrir el manuscrito ↓</a>
+      <nav class="game-quick-links" aria-label="Consulta rápida"><a href="#controles">Controles</a><a href="#objetos">Objetos</a><a href="#puntuacion">Puntuación</a></nav>
     </div>
   </header>
 
@@ -126,7 +128,7 @@
             <blockquote>«Temo que uno de los monjes ha cometido un crimen.»</blockquote>
             <div class="stat-line"><b>Rutina</b><span>Investigar sin faltar a prima, sexta, vísperas ni completas; abandonar la celda sólo cuando el Abad duerme.</span></div>
             <div class="stat-line"><b>Semana</b><span>Día 1: recibe la misión. Días 2–3: scriptorium, pergamino y primeras pistas. Día 4: Bernardo clausura oficialmente el caso. Días 5–6: llaves, lámpara, gafas y biblioteca. Día 7: la última oportunidad.</span></div>
-            <div class="stat-line"><b>Secreto</b><span>El porcentaje final tiene en cuenta la resolución del crimen, los objetos, las zonas visitadas y los hallazgos opcionales.</span></div>
+            <div class="stat-line"><b>Secreto</b><span>El porcentaje combina el tiempo transcurrido con los hallazgos registrados. La explicación detallada está protegida contra spoilers más abajo.</span></div>
           </article>
 
           <article class="character-panel" data-character="adso">
@@ -271,10 +273,30 @@
       </aside>
     </section>
 
+    <section class="chapter paper-warm controls-chapter" id="controles" aria-labelledby="controls-title">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">VI · Los controles</span>
+          <h2 id="controls-title">Controles clásicos</h2>
+        </div>
+        <p class="chapter-intro">El movimiento es deliberado: primero orientas a Guillermo y después avanzas. Adso y los objetos obedecen sus propias reglas.</p>
+      </div>
+      <div class="controls-guide reveal">
+        <p>Basados en el manual original y contrastados con la reconstrucción de CPC. Los remakes y las asignaciones del emulador pueden variar. Primero gira y después avanza: las flechas no representan las diagonales de la pantalla.</p>
+        <dl class="controls-list">
+          <div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> Mover a Guillermo</dt><dd>Izquierda y derecha giran sobre el sitio; arriba avanza hacia donde mira. El manual también indica <kbd>L</kbd> para girar a la izquierda, <kbd>K</kbd> a la derecha y <kbd>A</kbd> para avanzar.</dd></div>
+          <div><dt><kbd>↓</kbd> Dirigir a Adso</dt><dd>Orienta a Guillermo y mantén abajo —o <kbd>Z</kbd>—: Adso intenta avanzar en esa dirección, dentro de la misma pantalla. Suelta la tecla para que vuelva a seguirte.</dd></div>
+          <div><dt>Recoger y dejar objetos</dt><dd>Coloca al portador frente al objeto: lo recoge automáticamente. <kbd>Espacio</kbd> deja el objeto de Guillermo situado más a la izquierda del marcador, si hay sitio delante. Sólo pueden dejarse sus objetos; los dos de Adso no aparecen en ese inventario.</dd></div>
+          <div><dt><kbd>S</kbd> / <kbd>N</kbd> Dormir</dt><dd>De noche, en vuestra celda, Adso pregunta si deseas dormir. <kbd>S</kbd> avanza hasta prima; <kbd>N</kbd> permite seguir despierto. Contesta pronto: si esperas demasiado, el juego elige dormir.</dd></div>
+        </dl>
+        <p class="guide-source">Consulta: <a href="https://worldofspectrum.net/pub/sinclair/games-info/a/AbadiaDelCrimen%2BSirFredLa.pdf">manual original conservado</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Adso.java">rutina de Adso reconstruida</a>.</p>
+      </div>
+    </section>
+
     <section class="chapter dark" id="laberinto">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">VI · El laberinto</span>
+          <span class="chapter-number">VII · El laberinto</span>
           <h2>La abadía bajo sospecha</h2>
         </div>
         <p class="chapter-intro">La perspectiva isométrica oculta puertas tras los muros, confunde el sentido de la orientación y obliga a recordar los desniveles. Aquí perderse también forma parte de la investigación.</p>
@@ -367,28 +389,49 @@
     <section class="chapter" id="objetos">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">VII · El armario de pruebas</span>
+          <span class="chapter-number">VIII · El armario de pruebas</span>
           <h2>Ocho objetos, cada uno a su hora</h2>
         </div>
         <p class="chapter-intro">El inventario es pequeño, pero cada objeto tiene su momento. Cambian de dueño, aparecen sólo ciertos días o abren rutas que el juego nunca explica directamente.</p>
       </div>
       <p class="sprite-credit reveal">Patrones originales de Amstrad CPC, mostrados en una bandeja real de tres casillas del marcador.</p>
       <div class="object-grid reveal">
-        <article class="object-card" data-symbol="L"><img class="object-sprite" src="../assets/items/libro.png" alt="Sprite CPC del libro"><small>01 · Prueba mortal</small><h3>Libro</h3><p>El <cite>Coena Cypriani</cite>. Pasa por varias manos, mata a quien humedece los dedos y desencadena el final.</p></article>
-        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="Sprite CPC de los guantes"><small>02 · Protección</small><h3>Guantes</h3><p>Permiten tocar el libro envenenado. Jorge no puede verlos; Adso sí.</p></article>
-        <article class="object-card" data-symbol="O"><img class="object-sprite" src="../assets/items/gafas.png" alt="Sprite CPC de las gafas"><small>03 · Lectura</small><h3>Gafas</h3><p>Hacen legible el pergamino. Aparecen en la habitación iluminada del laberinto y pueden desaparecer al amanecer.</p></article>
-        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="Sprite CPC del pergamino"><small>04 · Código</small><h3>Pergamino</h3><p>El manuscrito de Venancio contiene la pista del espejo. Berengario, Bernardo y el Abad pueden quitárnoslo.</p></article>
-        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>05 · Acceso</small><h3>Llave I</h3><p>Pasa por el altar; si no se obtiene a tiempo desaparece. Robarla puede despertar al Abad.</p></article>
-        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>06 · Acceso</small><h3>Llave II</h3><p>Guillermo la utiliza para abrir la celda de Severino. Aparece en la mesa de Malaquías durante la noche VI.</p></article>
-        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>07 · Acceso</small><h3>Llave III</h3><p>La lleva Adso para abrir el pasadizo secreto. Malaquías la recoge y la deja en su mesa como parte de su rutina.</p></article>
-        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="Sprite CPC de la lámpara"><small>08 · Tiempo</small><h3>Lámpara</h3><p>La lleva Adso. Se consume sólo en zonas oscuras, avisa antes de agotarse y puede reaparecer en la cocina otro día.</p></article>
+        <article class="object-card" data-symbol="L"><img class="object-sprite" src="../assets/items/libro.png" alt="Sprite CPC del libro"><small>01 · Investigación</small><h3>Libro</h3><p>Un libro ligado a la investigación.</p></article>
+        <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="Sprite CPC de los guantes"><small>02 · Protección</small><h3>Guantes</h3><p>Protegen las manos de Guillermo.</p></article>
+        <article class="object-card" data-symbol="O"><img class="object-sprite" src="../assets/items/gafas.png" alt="Sprite CPC de las gafas"><small>03 · Lectura</small><h3>Gafas</h3><p>Las gafas de Guillermo, necesarias para leer textos pequeños.</p></article>
+        <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="Sprite CPC del pergamino"><small>04 · Manuscrito</small><h3>Pergamino</h3><p>Un documento que puede aportar pistas a la investigación.</p></article>
+        <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>05 · Acceso</small><h3>Llave I</h3><p>Una de las dos llaves que puede llevar Guillermo.</p></article>
+        <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>06 · Acceso</small><h3>Llave II</h3><p>La otra llave de Guillermo. Cada una abre una puerta distinta.</p></article>
+        <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>07 · Acceso</small><h3>Llave III</h3><p>La llave que puede llevar Adso.</p></article>
+        <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="Sprite CPC de la lámpara"><small>08 · Luz</small><h3>Lámpara</h3><p>Adso la transporta para iluminar lugares oscuros.</p></article>
       </div>
+      <details class="week-spoilers game-reference reveal" id="referencia-objetos">
+        <summary>Abrir ubicaciones, disponibilidad y uso de los objetos · contiene spoilers</summary>
+        <div class="reference-body">
+          <p>Los seis tipos de objeto de Guillermo y los dos de Adso. La noche abre el día indicado: la noche V va después de completas IV. Las ubicaciones cambian si un personaje recoge o deja un objeto.</p>
+          <table class="reference-table" role="table">
+            <caption>Los ocho objetos del juego clásico</caption>
+            <thead><tr role="row"><th scope="col" role="columnheader">Objeto</th><th scope="col" role="columnheader">Portador</th><th scope="col" role="columnheader">Ubicación</th><th scope="col" role="columnheader">Disponibilidad</th><th scope="col" role="columnheader">Utilidad</th><th scope="col" role="columnheader">Retirada o desaparición</th></tr></thead>
+            <tbody>
+              <tr role="row"><th scope="row" role="rowheader">Libro</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Scriptorium al inicio; después pasa por la celda de Severino y por Jorge.</td><td role="cell" data-label="Disponibilidad">La secuencia final permite recogerlo de manos de Jorge, tras el espejo, desde la noche VI.</td><td role="cell" data-label="Utilidad">Prueba del crimen; los guantes protegen del veneno.</td><td role="cell" data-label="Retirada o desaparición">Berengario lo retira del scriptorium en la noche III. Jorge lo oculta en prima III y lo arrebata durante la huida final.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Guantes</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Celda de Severino.</td><td role="cell" data-label="Disponibilidad">Están desde el inicio; la llave II permite abrir la celda desde la noche VI.</td><td role="cell" data-label="Utilidad">Manipular el libro envenenado sin morir.</td><td role="cell" data-label="Retirada o desaparición">Sin retirada programada. Si los dejas, debes volver a recogerlos.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Gafas</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Inventario inicial; después, habitación iluminada de la biblioteca.</td><td role="cell" data-label="Disponibilidad">Se pierden en prima II y reaparecen en la noche V.</td><td role="cell" data-label="Utilidad">Leer el pergamino y conocer la pista del espejo.</td><td role="cell" data-label="Retirada o desaparición">La retirada de prima II es obligatoria. Las gafas que reaparecen en la noche V no tienen otra retirada al amanecer.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Pergamino</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Scriptorium; puede acabar en la celda del Abad o tras el espejo.</td><td role="cell" data-label="Disponibilidad">Disponible desde el inicio, antes de que las rutinas de los monjes lo trasladen.</td><td role="cell" data-label="Utilidad">Con las gafas, revela qué escalón corresponde al espejo.</td><td role="cell" data-label="Retirada o desaparición">En prima III pasa tras el espejo si Guillermo no lo lleva. Berengario, Bernardo y el Abad pueden quitárselo; el Abad lo guarda en su celda.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Llave I</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Altar de la iglesia.</td><td role="cell" data-label="Disponibilidad">Noche V: recógela antes de prima.</td><td role="cell" data-label="Utilidad">Abrir la celda del Abad.</td><td role="cell" data-label="Retirada o desaparición">Desaparece en prima V si Guillermo no la lleva.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Llave II</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Mesa de Malaquías, en el scriptorium.</td><td role="cell" data-label="Disponibilidad">Aparece al comenzar la noche VI.</td><td role="cell" data-label="Utilidad">Abrir la celda de Severino y acceder a los guantes.</td><td role="cell" data-label="Retirada o desaparición">Sin retirada programada tras aparecer.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Llave III</th><td role="cell" data-label="Portador">Adso</td><td role="cell" data-label="Ubicación">Mesa de Malaquías, en el scriptorium.</td><td role="cell" data-label="Disponibilidad">Desde el inicio, cuando está sobre la mesa: Malaquías la recoge en vísperas y la devuelve al regresar a su puesto.</td><td role="cell" data-label="Utilidad">Abrir la puerta del pasadizo secreto.</td><td role="cell" data-label="Retirada o desaparición">Puede estar temporalmente en poder de Malaquías. Una vez recogida por Adso, no hay retirada programada.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Lámpara</th><td role="cell" data-label="Portador">Adso</td><td role="cell" data-label="Ubicación">Cocina.</td><td role="cell" data-label="Disponibilidad">Desde prima III; vuelve a la cocina en prima si se ha usado.</td><td role="cell" data-label="Utilidad">Iluminar las zonas oscuras de la biblioteca; sólo allí consume aceite.</td><td role="cell" data-label="Retirada o desaparición">Si se ha usado, se retira de Adso y se repone en la cocina en prima. Agotar el aceite la apaga; no hay que esperar a agotarla para que se reponga.</td></tr>
+            </tbody>
+          </table>
+          <p class="guide-source">Referencia: lógica de CPC reconstruida por Manuel Abadía, conservada en la conversión Java/GWT · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/AccionesDia.java">cambios diarios</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java">inventario y lámpara</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Malaquias.java">Malaquías</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Jorge.java">Jorge</a>.</p>
+        </div>
+      </details>
     </section>
 
     <section class="chapter paper-light" id="semana">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">VIII · La semana</span>
+          <span class="chapter-number">IX · La semana</span>
           <h2>Siete días hacia el <em>Finis Africae</em></h2>
         </div>
         <p class="chapter-intro">Las primeras tarjetas evitan revelar a los culpables. Si quieres conocer todos los detalles, despliega después los textos ocultos. En pantallas pequeñas, las tarjetas se desplazan horizontalmente.</p>
@@ -409,10 +452,33 @@
       <div class="week-explorer" id="week-explorer" data-week-explorer><noscript><p>Activa JavaScript para explorar los días y las horas. El resumen de la semana está disponible arriba.</p></noscript></div>
     </section>
 
+    <section class="chapter paper-warm scoring-chapter" id="puntuacion" aria-labelledby="score-title">
+      <div class="chapter-header reveal">
+        <div>
+          <span class="chapter-number">X · La puntuación</span>
+          <h2 id="score-title">Cómo funciona el porcentaje</h2>
+        </div>
+        <p class="chapter-intro">Cuando la investigación queda incompleta, el juego resume cuánto has avanzado con un porcentaje.</p>
+      </div>
+      <div class="scoring-guide reveal">
+          <p>Si la partida acaba sin resolver el caso, el porcentaje suma el tiempo transcurrido y los hallazgos registrados. El Obsequium no se añade a la puntuación.</p>
+          <div class="score-formula">Porcentaje = 7 × (día − 1) + hora + 4 × bonus</div>
+          <p>La hora vale: noche 0 · prima 1 · tercia 2 · sexta 3 · nona 4 · vísperas 5 · completas 6. Si el total es menor que 5, se muestra 0%.</p>
+          <p>Cada uno de estos catorce bonus suma <strong>4 puntos porcentuales una sola vez</strong>. Se conserva aunque después pierdas el objeto o abandones la estancia; una misma visita puede activar varios.</p>
+          <p><strong>Ejemplo.</strong> En prima del día VI, con ocho bonus distintos: 7 × 5 + 1 + 4 × 8 = <strong>68%</strong>. Un hallazgo nuevo lo eleva a <strong>72%</strong>; repetir uno ya conseguido no suma nada.</p>
+          <p>Al completar la investigación, el juego muestra el manuscrito final en lugar de este porcentaje.</p>
+          <details class="week-spoilers game-reference score-reference">
+            <summary>Abrir los catorce bonus de investigación · contiene spoilers</summary>
+          <ul class="score-bonuses"><li>Guillermo recoge los guantes.</li><li>Guillermo recoge la llave I.</li><li>Guillermo recoge la llave II.</li><li>Adso recoge la llave III.</li><li>Guillermo visita el ala izquierda de la abadía de noche.</li><li>Guillermo lleva el pergamino durante la noche III.</li><li>Guillermo reúne el pergamino y las gafas: puede leerlo.</li><li>Guillermo entra en la celda del Abad llevando el pergamino.</li><li>Guillermo entra en la biblioteca.</li><li>Guillermo está en la biblioteca y Adso tiene la lámpara.</li><li>Guillermo está en la biblioteca con las gafas.</li><li>Llegar a la sala del espejo.</li><li>Accionar el mecanismo del espejo: este bonus se registra incluso si se elige el escalón equivocado.</li><li>Entrar en la estancia de Jorge tras el espejo, durante la secuencia final.</li></ul>
+          </details>
+          <p class="guide-source">Referencia: reconstrucción de la lógica de CPC · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L262-L307">bonus</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L557-L578">cálculo</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L694-L715">espejo</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Jorge.java">desenlace</a>.</p>
+      </div>
+    </section>
+
     <section class="chapter parchment-chapter parchment-ending" id="manuscrito-final">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">IX · El desenlace</span>
+          <span class="chapter-number">XI · El desenlace</span>
           <h2>Las últimas páginas</h2>
         </div>
         <p class="chapter-intro">Al completar la investigación, el juego vuelve al pergamino para que Adso cierre su relato. El texto revela por completo el desenlace.</p>
@@ -485,6 +551,6 @@
   <script src="../parchment.js?v=20260908-platform1"></script>
   <script src="../app.js?v=20260911-review1"></script>
   <script src="../assets/game/week-dialogue.js?v=20260911-1"></script>
-  <script src="../week.js?v=20260911-labyrinth1"></script>
+  <script src="../week.js?v=20260911-objects1"></script>
 </body>
 </html>

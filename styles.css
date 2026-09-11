@@ -1424,7 +1424,28 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
   letter-spacing: .08em;
 }
 .spoiler-button:hover, .spoiler-button[aria-pressed="true"] { background: var(--ink); color: var(--paper-light); }
-.days-grid { display: grid; grid-template-columns: repeat(7, minmax(190px, 1fr)); gap: 1px; overflow-x: auto; background: var(--rule); border: 1px solid var(--rule); }
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(190px, 1fr));
+  gap: 1px;
+  overflow-x: auto;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  scrollbar-color: var(--game-panel-hover) var(--paper-dark);
+}
+.days-grid::-webkit-scrollbar { height: 14px; }
+.days-grid::-webkit-scrollbar-track {
+  background: var(--paper-dark);
+  box-shadow: inset 0 1px rgba(41,31,20,.22);
+}
+.days-grid::-webkit-scrollbar-thumb {
+  min-width: 4rem;
+  border: 3px solid var(--paper-dark);
+  border-radius: 999px;
+  background: var(--game-panel-hover);
+}
+.days-grid::-webkit-scrollbar-thumb:hover { background: var(--ink-soft); }
+.days-grid::-webkit-scrollbar-button { display: none; }
 .day-card { min-width: 190px; padding: 1.4rem; background: var(--paper-light); }
 .day-card .day-no { color: var(--red); font: 700 .68rem/1 var(--mono); text-transform: uppercase; }
 .day-card h3 { min-height: 3.2rem; margin: .65rem 0 1rem; font: 400 1.7rem/1 var(--display); }
