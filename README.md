@@ -102,9 +102,9 @@ No installation, build step, database, or external service is required.
 
 ## Derechos y créditos / Rights and credits
 
-**Autor / Author:** Andrés del Campo Novales with GPT 5.6 Sol
+**Autor / Author:** Andrés del Campo Novales · con GPT 5.6 Sol y GPT 6 Astra / with GPT 5.6 Sol and GPT 6 Astra
 
-**Revisión técnica / Technical review:** Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez
+**Revisión técnica de la versión previa del 5 de septiembre de 2026 / Technical review of the previous version dated 5 September 2026:** Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez
 
 Homenaje cultural no oficial y sin fines comerciales. Las fuentes y los créditos detallados figuran al final de ambas ediciones. Los gráficos del juego, capturas, páginas de revista, mapas, audio, marcas y demás materiales de terceros pertenecen a sus respectivos titulares y no quedan sometidos a una licencia general del repositorio.
 

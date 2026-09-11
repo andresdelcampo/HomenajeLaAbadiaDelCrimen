@@ -41,11 +41,12 @@
 
   $$('.character-art figcaption').forEach(caption => {
     if (!caption.textContent.includes('CPC')) return;
+    const spanish = document.documentElement.lang === 'es';
     caption.dataset.platformTextCpc = caption.textContent;
-    caption.dataset.platformTextPc = caption.textContent.replace('CPC · diseño original', 'PC CGA · conversión de paleta');
-    caption.dataset.platformTextVga = caption.textContent.replace('CPC · diseño original', 'VGA · redibujado a 256 colores');
-    caption.dataset.platformTextSpectrum = caption.textContent.replace('CPC · diseño original', 'ZX Spectrum · tinta diurna');
-    caption.dataset.platformTextMsx = caption.textContent.replace('CPC · diseño original', 'MSX · tinta diurna');
+    caption.dataset.platformTextPc = spanish ? 'PC CGA · conversión de paleta' : 'PC CGA · palette conversion';
+    caption.dataset.platformTextVga = spanish ? 'VGA · redibujado a 256 colores' : 'VGA · redrawn in 256 colours';
+    caption.dataset.platformTextSpectrum = spanish ? 'ZX Spectrum · tinta diurna' : 'ZX Spectrum · daytime ink';
+    caption.dataset.platformTextMsx = spanish ? 'MSX · tinta diurna' : 'MSX · daytime ink';
   });
 
   $$('.sprite-credit').forEach(credit => {
@@ -594,6 +595,7 @@
   const days = $('.days-grid');
   if (spoilerButton && days) spoilerButton.addEventListener('click', () => {
     const show = days.classList.toggle('show-spoilers');
+    $$('.spoiler-text', days).forEach(text => text.setAttribute('aria-hidden', String(!show)));
     spoilerButton.setAttribute('aria-pressed', String(show));
     spoilerButton.textContent = show ? spoilerButton.dataset.hide : spoilerButton.dataset.show;
   });
@@ -724,12 +726,16 @@
     if (lightboxImage.complete) requestAnimationFrame(prepareLightboxImage);
   };
   lightboxImage?.addEventListener('load', prepareLightboxImage);
+  let lightboxBackground = [];
+  let previousBodyOverflow = '';
   const closeLightbox = () => {
-    if (!lightbox) return;
+    if (!lightbox?.classList.contains('is-open')) return;
     lightbox.classList.remove('is-open');
     lightbox.classList.remove('is-hires');
     lightbox.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    lightboxBackground.forEach(element => { element.inert = false; });
+    lightboxBackground = [];
+    document.body.style.overflow = previousBodyOverflow;
     if (lightboxNavigation) lightboxNavigation.hidden = true;
     if (lightboxRoomNavigation) lightboxRoomNavigation.hidden = true;
     const returnFocus = lightboxTrigger;
@@ -762,6 +768,13 @@
   };
   const openLightbox = button => {
     if (!lightbox || !lightboxImage) return;
+    if (!lightbox.classList.contains('is-open')) {
+      previousBodyOverflow = document.body.style.overflow;
+      lightboxBackground = Array.from(document.body.children).filter(element => (
+        element !== lightbox && !element.inert && !['SCRIPT', 'STYLE', 'LINK'].includes(element.tagName)
+      ));
+      lightboxBackground.forEach(element => { element.inert = true; });
+    }
     lightboxPages = (button.dataset.lightboxPages || button.dataset.lightbox).split('|').filter(Boolean);
     lightboxPage = Number(button.dataset.lightboxPage) || 0;
     lightboxAlt = button.dataset.alt || '';
@@ -841,8 +854,21 @@
   $('.lightbox-close')?.addEventListener('click', closeLightbox);
   lightbox?.addEventListener('click', event => { if (event.target === lightbox || event.target === lightboxStage) closeLightbox(); });
   addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeLightbox();
     if (!lightbox?.classList.contains('is-open')) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeLightbox(); return; }
+    if (event.key === 'Tab') {
+      const controls = $$('button, a[href], input, select, textarea, [tabindex]', lightbox)
+        .filter(element => !element.disabled && element.tabIndex >= 0 && element.getClientRects().length);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (first && (!lightbox.contains(document.activeElement) ||
+          (event.shiftKey && document.activeElement === first) ||
+          (!event.shiftKey && document.activeElement === last))) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      }
+      return;
+    }
     if (event.key === '+' || event.key === '=') { event.preventDefault(); setLightboxZoom(lightboxZoom + lightboxZoomStep); }
     if (event.key === '-') { event.preventDefault(); setLightboxZoom(lightboxZoom - lightboxZoomStep); }
     if (event.key === '0') { event.preventDefault(); setLightboxZoom(1); }
