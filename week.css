@@ -3,23 +3,28 @@
 .week-heading { padding: 1rem 2rem .7rem; border-bottom: 1px solid var(--rule); line-height: 1.45; }
 .week-heading h3 { margin: .2rem 0 .5rem; font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: normal; }
 .week-heading p { margin: .25rem 0; }
-.week-days, .week-hours { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
-.week-days button, .week-hours button { min-height: 48px; border: 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; }
-.week-days button { padding: .45rem .2rem; font-size: 1.15rem; }
-.week-hours button { padding: .4rem .15rem; font-size: .88rem; }
+.week-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); background: var(--game-panel); }
+.week-hours { display: grid; grid-template-columns: repeat(var(--week-hour-columns, 7), minmax(0, 1fr)); background: var(--game-panel); }
+.week-days button, .week-hours button { display: grid; min-width: 0; min-height: 48px; padding: .55rem .35rem; place-items: center; border: 0; border-right: 1px solid var(--game-panel-rule); border-bottom: 1px solid var(--game-panel-rule); background: var(--game-panel); color: var(--ink); cursor: pointer; font: 400 .72rem/1.2 var(--game-dialogue); letter-spacing: .04em; text-transform: uppercase; }
+.week-days button:last-child, .week-hours button:last-child { border-right: 0; }
+.week-days button { min-height: 52px; border-color: rgba(65,45,27,.22); background: #e4d3ad; color: var(--ink); }
+.week-days button:hover, .week-days button:focus-visible { background: #d7bd87; }
+.week-hours button:hover, .week-hours button:focus-visible { background: var(--game-panel-hover); }
 .week-explorer button[aria-pressed="true"] { background: var(--ink); color: var(--paper-light); }
+.week-days button[aria-pressed="true"] { background: #91362f; color: #fff1d0; box-shadow: inset 0 4px #d49a2e; }
+.week-hours button[aria-pressed="true"] { background: var(--paper-light); color: var(--ink); box-shadow: inset 0 4px var(--red); }
 .week-explorer button:focus-visible, .week-explorer summary:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
 .week-explorer button:disabled { opacity: .3; cursor: default; text-decoration: line-through; }
-.week-reading { padding: .85rem 2rem; display: grid; grid-template-columns: minmax(160px, .7fr) minmax(0, 2fr); gap: .35rem 1.5rem; line-height: 1.45; }
+.week-reading { padding: .85rem 2rem; display: grid; grid-template-columns: minmax(160px, .7fr) minmax(0, 2fr); align-content: start; gap: .35rem 1.5rem; line-height: 1.45; }
 .week-reading h4 { grid-column: 1; grid-row: 2 / 4; font-size: 1.65rem; margin: .1rem 0; font-weight: normal; }
 .week-reading p { grid-column: 2; margin: .2rem 0; max-width: 78ch; }
 .week-reading .eyebrow { grid-column: 1 / -1; margin: 0 0 .25rem; }
 .week-navigation { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 2rem .75rem; }
-.week-navigation button { background: transparent; color: var(--ink); border: 1px solid var(--rule); padding: .5rem .8rem; cursor: pointer; min-height: 44px; }
+.week-navigation button { background: transparent; color: var(--ink); border: 1px solid var(--rule); padding: .5rem .8rem; cursor: pointer; min-height: 44px; font: 700 .72rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 .week-navigation--local { padding: .55rem 0; margin: .5rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .week-navigation-position { text-align: center; line-height: 1.35; }
 .week-navigation-position > span { display: block; }
-.week-navigation-position [data-week-nav-phase] { font-size: .9rem; font-weight: bold; }
+.week-navigation-position [data-week-nav-phase] { font: 400 .9rem/1.35 var(--game-dialogue); letter-spacing: .04em; text-transform: uppercase; }
 .week-navigation-position .caption { font-size: .7rem; }
 .week-map-help { font-size: .85rem; margin: .3rem 0; }
 .week-map-help summary { cursor: pointer; color: var(--ink-soft); }
@@ -29,8 +34,14 @@
 .week-secret-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 1rem 2rem; line-height: 1.45; }
 .week-secret-copy h5, .week-atlas h5 { margin: 0 0 .6rem; font: bold .8rem var(--mono); text-transform: uppercase; letter-spacing: .07em; }
 .week-secret-copy p { margin: .5rem 0; }
+.week-secret-copy.is-quote-heavy { grid-template-columns: 1fr; }
+.week-secret-copy.is-quote-heavy > div:first-child > p { max-width: 90ch; }
+.week-secret-copy.is-quote-heavy [data-week-quotes] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; padding-top: .7rem; }
+.week-secret-copy.is-quote-heavy .week-dialogue { margin-top: 0; }
+.week-quote-column { display: grid; min-width: 0; align-content: start; gap: .7rem; }
+.week-secret-copy.is-quote-heavy > div:nth-child(2) { padding-top: 1rem; border-top: 1px solid var(--rule); }
 .week-dialogue { margin: .7rem 0 0; border-left: 2px solid var(--red); padding-left: 1rem; }
-.week-dialogue p { font-size: 1rem; }
+.week-dialogue p { font: 400 .92rem/1.65 var(--game-dialogue); letter-spacing: .025em; text-transform: uppercase; }
 .week-dialogue cite { font: .72rem var(--mono); font-style: normal; }
 .week-atlas { padding: 0 2rem 1.5rem; }
 .week-atlas-intro { font-size: .85rem; max-width: 90ch; }
@@ -53,6 +64,8 @@
 .week-route strong { display: block; }
 .week-roster { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 1rem; }
 .week-roster button { display: flex; gap: .6rem; align-items: center; text-align: left; background: var(--paper-light); color: var(--ink); border: 0; padding: .7rem; cursor: pointer; min-height: 76px; }
+.week-roster button[aria-pressed="true"] { background: #91362f; color: #fff1d0; box-shadow: inset 4px 0 #d49a2e; }
+.week-roster button[aria-pressed="true"] .week-roster-portrait { border-color: #f2bf4f; }
 .week-roster-portrait { position: relative; width: 50px; height: 50px; overflow: hidden; border: 2px solid #fff1c5; border-radius: 50%; background: #30291c; padding: 3px; flex-shrink: 0; }
 .week-roster-portrait img { position: absolute; width: 82px; max-width: none; height: auto; left: calc(50% - var(--week-face-x, 46.5px)); top: -1px; image-rendering: pixelated; pointer-events: none; }
 .week-roster-portrait[data-week-portrait="adso"], .week-roster-portrait[data-week-portrait="abad"], .week-roster-portrait[data-week-portrait="jorge"] { --week-face-x: 43.5px; }
@@ -73,14 +86,18 @@
   .week-reading { display: block; }
   .week-reading p { margin: .4rem 0; }
   .week-navigation { padding: 0 1rem .75rem; gap: .5rem; }
-  .week-navigation button { padding: .4rem .5rem; font-size: .8rem; }
+  .week-navigation button { padding: .4rem .5rem; }
   .week-navigation--local { padding: .5rem 0; flex-wrap: wrap; }
   .week-navigation-position { width: 100%; order: -1; }
   .week-navigation-position > span { display: inline; }
   .week-navigation-position .caption { margin-left: .65rem; }
-  .week-days button { font-size: 1.05rem; }
-  .week-hours { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .week-days button { font-size: .85rem; }
+  .week-day-prefix { display: none; }
+  .week-hours { grid-template-columns: repeat(var(--week-hour-mobile-columns, 4), minmax(0, 1fr)); }
+  .week-hours button:nth-child(4) { border-right: 0; }
+  .week-hours button:nth-child(7) { border-right: 1px solid var(--game-panel-rule); }
   .week-secret-copy { grid-template-columns: 1fr; gap: 1rem; }
+  .week-secret-copy.is-quote-heavy [data-week-quotes] { grid-template-columns: 1fr; gap: .7rem; }
   .week-atlas { padding: 0 1rem 1rem; }
   .week-roster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

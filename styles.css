@@ -6,6 +6,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Abadia Dialogue";
+  src: url("assets/fonts/abadia-dialogue.woff2?v=20260911-1") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   --ink: #171512;
   --ink-soft: #4c4438;
@@ -20,12 +28,16 @@
   --blue: #1f6370;
   --cyan: #67c5c1;
   --green: #536b40;
+  --game-panel: #ad966b;
+  --game-panel-hover: #9e855a;
+  --game-panel-rule: rgba(65, 45, 27, .24);
   --white: #fffaf0;
   --rule: rgba(41, 31, 20, .25);
   --shadow: 0 22px 60px rgba(17, 13, 8, .25);
   --display: Georgia, "Times New Roman", serif;
   --body: Georgia, "Times New Roman", serif;
   --mono: "Courier New", Courier, monospace;
+  --game-dialogue: "Abadia Dialogue", "Courier New", monospace;
   --max: 1220px;
 }
 
@@ -965,7 +977,7 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
 @keyframes dossierIn { from { opacity: 0; transform: translateY(8px); } }
 .character-panel .role { color: var(--gold); font: 700 .7rem/1 var(--mono); text-transform: uppercase; letter-spacing: .12em; }
 .character-panel h3 { margin: .65rem 0 1rem; font: 400 clamp(3rem, 6vw, 5.5rem)/.86 var(--display); letter-spacing: -.05em; }
-.character-panel blockquote { margin: 1.7rem 0; padding-left: 1.2rem; border-left: 3px solid var(--red-bright); color: var(--gold); font: italic 1.35rem/1.3 var(--display); }
+.character-panel blockquote { margin: 1.7rem 0; padding-left: 1.2rem; border-left: 3px solid var(--red-bright); color: var(--gold); font: 400 .92rem/1.65 var(--game-dialogue); letter-spacing: .025em; text-transform: uppercase; }
 .stat-line { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: .6rem 0; border-top: 1px solid rgba(255,255,255,.12); font-size: .9rem; }
 .stat-line b { color: rgba(255,255,255,.55); font: 700 .65rem/1.5 var(--mono); text-transform: uppercase; }
 
@@ -998,15 +1010,15 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  color: var(--paper-light);
-  background: #11130f;
-  border-bottom: 1px solid rgba(247,237,211,.34);
+  color: var(--ink);
+  background: var(--game-panel);
+  border-bottom: 1px solid var(--game-panel-rule);
   font: 700 .68rem/1.2 var(--mono);
   letter-spacing: .08em;
   text-transform: uppercase;
 }
 .clock-interface-head small {
-  color: var(--gold);
+  color: var(--red);
   font: inherit;
   font-size: .56rem;
 }
@@ -1017,7 +1029,7 @@ html[lang="en"][data-platform="msx"] .character-panel[data-character="bernard"]:
   min-width: 0;
   padding: clamp(1.35rem, 3vw, 2.4rem);
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   text-align: left;
   color: var(--ink);
@@ -1093,28 +1105,17 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
   min-height: 0;
   padding: .58rem 1.7rem .58rem .8rem;
   border: 0;
-  border-right: 1px solid rgba(247,237,211,.2);
-  border-bottom: 1px solid rgba(247,237,211,.14);
+  border-right: 1px solid var(--game-panel-rule);
+  border-bottom: 1px solid var(--game-panel-rule);
   border-radius: 0;
-  background: #11130f;
-  color: var(--paper-light);
+  background: var(--game-panel);
+  color: var(--ink);
   box-shadow: none;
   cursor: pointer;
-  font: 700 .58rem/1.15 var(--mono);
+  font: 400 .62rem/1.15 var(--game-dialogue);
   text-transform: uppercase;
   letter-spacing: .045em;
   transition: color .16s, background .16s, box-shadow .16s;
-}
-.hour-button.has-game-label { font-size: 0; }
-.game-clock-label {
-  display: block;
-  width: auto;
-  max-width: none;
-  height: .56rem;
-  object-fit: contain;
-  image-rendering: pixelated;
-  filter: invert(92%) sepia(15%) saturate(595%) hue-rotate(347deg) brightness(108%) contrast(94%);
-  transition: filter .2s;
 }
 .hour-button::before {
   content: "›";
@@ -1125,10 +1126,8 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
   font: 1.05rem/1 var(--mono);
   translate: 0 -50%;
 }
-.hour-button:hover, .hour-button:focus-visible { color: var(--gold); background: #1d2118; box-shadow: inset 3px 0 var(--gold); }
-.hour-button:hover .game-clock-label, .hour-button:focus-visible .game-clock-label { filter: invert(72%) sepia(80%) saturate(637%) hue-rotate(351deg) brightness(94%) contrast(83%); }
+.hour-button:hover, .hour-button:focus-visible { color: var(--ink); background: var(--game-panel-hover); box-shadow: inset 3px 0 var(--red); }
 .hour-button.is-active { color: var(--ink); background: var(--paper-light); box-shadow: inset 4px 0 var(--red); }
-.hour-button.is-active .game-clock-label { filter: none; }
 .hour-button.is-active::before { color: var(--red); }
 .hour-button:nth-of-type(1) { grid-row: 2; }
 .hour-button:nth-of-type(2) { grid-row: 3; }
@@ -2516,7 +2515,6 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .clock-face { width: min(92vw, 560px); margin: 0 auto; transform: none; }
   .position-guide-grid { grid-template-columns: 1fr; }
   .hour-button { width: 100%; min-width: 0; min-height: 0; padding: .5rem 1.55rem .5rem .7rem; font-size: .53rem; }
-  .game-clock-label { height: .48rem; }
   .map-frame { min-height: 0; }
   .map-panel { min-height: 320px; }
   .map-hotspot::after { display: none; }
@@ -2649,7 +2647,6 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .graphics-block-specimens button { height: 8rem; }
   .audio-button .audio-icon { margin-bottom: 1rem; }
   .hour-button { width: 100%; min-width: 0; min-height: 0; padding: .35rem 1.25rem .35rem .55rem; }
-  .game-clock-label { height: .38rem; }
   .press-cover-stack { min-height: 410px; }
   .clock-face { width: min(96vw, 420px); min-height: 27rem; margin: 0 auto; padding: .42rem; border-width: .4rem; grid-template-columns: minmax(7.25rem, .62fr) minmax(0, 1.38fr); transform: none; }
   .clock-interface-head { min-height: 3rem; padding: .65rem .7rem; font-size: .58rem; }

@@ -183,34 +183,39 @@
   systemButtons.forEach(button => button.addEventListener('click', () => activate(systemButtons, systemPanels, button, 'system')));
 
   const hourButtons = $$('.hour-button');
-  const gameClockLabels = new Set([
-    'NOCHE', 'PRIMA', 'TERCIA', 'SEXTA', 'NONA', 'VISPERAS', 'COMPLETAS',
-    'NIGHT', 'PRIME', 'TERCE', 'SEXT', 'NONE', 'VESPERS', 'COMPLINE'
-  ]);
   hourButtons.forEach(button => {
     const visibleText = button.textContent.trim();
-    const label = visibleText.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
-    if (!gameClockLabels.has(label)) return;
-    button.dataset.clockLabel = label;
-    const image = document.createElement('img');
-    image.className = 'game-clock-label';
-    image.src = `../assets/game/interface-labels/${label}.svg?v=20260830-clockfont2`;
-    image.alt = '';
-    image.setAttribute('aria-hidden', 'true');
-    image.addEventListener('error', () => {
-      button.classList.remove('has-game-label');
-      button.textContent = visibleText;
-      button.removeAttribute('aria-label');
-    }, { once: true });
-    button.classList.add('has-game-label');
-    button.setAttribute('aria-label', visibleText);
-    button.replaceChildren(image);
+    button.dataset.clockLabel = visibleText.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase();
   });
   const clockTitle = $('[data-clock-title]');
   const clockText = $('[data-clock-text]');
   const clockSlotLabel = $('[data-clock-slot-label]');
+  const clockFace = $('.clock-face');
   const fitClockTitle = () => {
     if (clockTitle) clockTitle.classList.toggle('is-long', clockTitle.textContent.trim().length > 7);
+  };
+  const stabilizeClockHeight = () => {
+    if (!clockFace || !clockTitle || !clockText || !hourButtons.length) return;
+    const probe = clockFace.cloneNode(true);
+    const probeTitle = $('[data-clock-title]', probe);
+    const probeText = $('[data-clock-text]', probe);
+    probe.style.position = 'absolute';
+    probe.style.visibility = 'hidden';
+    probe.style.pointerEvents = 'none';
+    probe.style.width = `${clockFace.offsetWidth}px`;
+    probe.style.removeProperty('min-height');
+    probe.style.transform = 'none';
+    document.body.append(probe);
+
+    let tallest = 0;
+    hourButtons.forEach(button => {
+      probeTitle.textContent = button.dataset.title;
+      probeTitle.classList.toggle('is-long', button.dataset.title.trim().length > 7);
+      probeText.textContent = button.dataset.text;
+      tallest = Math.max(tallest, probe.offsetHeight);
+    });
+    probe.remove();
+    clockFace.style.minHeight = `${tallest}px`;
   };
   fitClockTitle();
   hourButtons.forEach(button => button.addEventListener('click', () => {
@@ -224,6 +229,13 @@
       clockSlotLabel.src = `../assets/game/interface-labels/${button.dataset.clockLabel}.svg?v=20260830-clockfont2`;
     }
   }));
+  let clockResizeFrame = 0;
+  addEventListener('resize', () => {
+    cancelAnimationFrame(clockResizeFrame);
+    clockResizeFrame = requestAnimationFrame(stabilizeClockHeight);
+  });
+  addEventListener('reportaje:platformchange', () => requestAnimationFrame(stabilizeClockHeight));
+  requestAnimationFrame(stabilizeClockHeight);
 
   const mapButtons = $$('.map-hotspot');
   const mapTitle = $('[data-map-title]');

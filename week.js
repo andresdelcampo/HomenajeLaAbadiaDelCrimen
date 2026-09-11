@@ -187,39 +187,89 @@
       <div class="week-secret-copy"><div><h5>${t('Lo que sucede','What happens')}</h5><p data-week-event></p><div data-week-quotes></div></div><div><h5>${t('Qué hacer','What to do')}</h5><p data-week-advice></p><p class="caption">${t('Los encuentros pueden depender de la cercanía, el inventario y las acciones anteriores.','Encounters may depend on proximity, inventory and earlier actions.')}</p></div></div>
       <div class="week-atlas"><h5>${t('Los habitantes de la abadía','The inhabitants of the abbey')}</h5><p class="week-atlas-intro">${t('Las flechas enlazan el destino de la hora anterior con el de esta hora, o los extremos de una escena documentada. Selecciona un retrato para destacar su recorrido. Si permanece en el mismo lugar o el origen es variable, no se dibuja una flecha. Son movimientos previstos, sujetos a los encuentros de la partida; las líneas no trazan caminos. En móvil, desliza el mapa horizontalmente.','Arrows connect the previous hour’s destination to this hour’s, or the endpoints of a documented scene. Select a portrait to highlight its journey. No arrow is drawn for a stationary character or a variable origin. These are expected movements, subject to encounters during play; the lines do not trace paths. On mobile, scroll the map sideways.')}</p>
       <div class="week-map-scroll" tabindex="0" role="region" aria-label="${t('Mapa de destinos, desplazable','Scrollable destination map')}"><div class="week-map"><img src="../assets/maps/interactive-retrogamer-map.jpg" alt="${t('Plano de la abadía y sus plantas superiores','Plan of the abbey and its upper floors')}" loading="lazy"><svg aria-hidden="true"><defs><marker id="week-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9" fill="#a32d27"/></marker></defs><g data-week-routes></g></svg><div data-week-origins></div><div data-week-pins></div></div></div>
-      <p class="caption">${t('Mapa: Retro Gamer España 41 · círculo vacío: origen · retrato: destino · rojo intenso: personaje seleccionado. Los extremos usan las posiciones ajustadas de cada personaje; varios retratos en una estancia se separan para poder seleccionarlos.','Map: Retro Gamer España 41 · empty circle: origin · portrait: destination · strong red: selected character. Endpoints use each character’s adjusted position; portraits sharing a room are spread out for selection.')}</p><p class="week-route" aria-live="polite" aria-atomic="true"></p><div class="week-roster" role="group" aria-label="${t('Personajes','Characters')}"></div></div>
-    </details><details class="week-sources"><summary>${t('Cómo se ha reconstruido esta crónica','How this chronicle was reconstructed')}</summary><p>${t('Lectura del código de VigasocoSDL: AccionesDia, Abad, Berengario, Malaquias, Severino, Bernardo y Jorge. Las citas conservan la escritura de su tabla GestorFrases; los resúmenes y consejos son editoriales. No es una simulación de una partida ni una comprobación de todas las versiones.','A reading of VigasocoSDL code: AccionesDia, Abad, Berengario, Malaquias, Severino, Bernardo and Jorge. Quotations preserve its GestorFrases table wording; summaries and advice are editorial. This is not a game simulation or a verification of every version. The English quotations come from the port’s translation.')}</p><a href="../assets/game/week-sources.md">${t('Ver notas de fuentes y condiciones','Read source notes and conditions')}</a></details>`;
+      <p class="caption week-map-caption">${t('Mapa: Retro Gamer España 41 · círculo vacío: origen · retrato: destino · rojo intenso: personaje seleccionado. Los extremos usan las posiciones ajustadas de cada personaje; varios retratos en una estancia se separan para poder seleccionarlos.','Map: Retro Gamer España 41 · empty circle: origin · portrait: destination · strong red: selected character. Endpoints use each character’s adjusted position; portraits sharing a room are spread out for selection.')}</p><p class="week-route" aria-live="polite" aria-atomic="true"></p><div class="week-roster" role="group" aria-label="${t('Personajes','Characters')}"></div></div>
+    </details><details class="week-sources"><summary>${t('Cómo se ha reconstruido esta crónica','How this chronicle was reconstructed')}</summary><p>${t('Lectura del código de VigasocoSDL: AccionesDia, Abad, Berengario, Malaquias, Severino, Bernardo y Jorge. Las citas conservan la escritura de su tabla GestorFrases; los resúmenes y consejos son editoriales. No es una simulación de una partida ni una comprobación de todas las versiones.','A reading of VigasocoSDL code: AccionesDia, Abad, Berengario, Malaquias, Severino, Bernardo and Jorge. Quotations preserve its GestorFrases table wording; summaries and advice are editorial. This is not a game simulation or a verification of every version. The English quotations come from the port’s translation.')}</p></details>`;
   const find = s => root.querySelector(s);
   const put = (s, value) => { find(s).textContent = value; };
+  const summary = (d,h) => ({
+    now: `${t('Día','Day')} ${roman[d-1]} · ${hours[h]} · ${t('Sin spoilers','Spoiler-free')}`,
+    title: titles[d-1],
+    dayCopy: dayCopy[d-1],
+    routine: d===1&&h===4
+      ? t('La partida comienza en la entrada. El Abad espera para dar la bienvenida y enseñar el camino.','Play begins at the entrance. The Abbot waits to welcome you and show the way.')
+      : d===7&&h===2
+        ? t('El plazo concedido por el Abad ha terminado.','The time granted by the Abbot has ended.')
+        : routine[h]
+  });
+  const fillSummary = (scope,d,h) => {
+    const copy = summary(d,h);
+    scope.querySelector('[data-week-now]').textContent = copy.now;
+    scope.querySelector('[data-week-title]').textContent = copy.title;
+    scope.querySelector('[data-week-daycopy]').textContent = copy.dayCopy;
+    scope.querySelector('[data-week-routine]').textContent = copy.routine;
+  };
   const navigation = find('.week-navigation');
   navigation.dataset.weekNavigation = 'summary';
-  for (const location of ['map','characters']) {
-    const copy = navigation.cloneNode(true);
-    copy.classList.add('week-navigation--local');
-    copy.dataset.weekNavigation = location;
-    copy.setAttribute('role','group');
-    copy.setAttribute('aria-label',location === 'map' ? t('Cambiar hora junto al mapa','Change hour beside the map') : t('Cambiar hora junto a los personajes','Change hour beside the characters'));
-    const position = document.createElement('span');
-    position.className = 'week-navigation-position';
-    const phase = document.createElement('span');
-    phase.dataset.weekNavPhase = '';
-    const count = copy.querySelector('[data-week-count]');
-    count.replaceWith(position);position.append(phase,count);
-    if (location === 'map') find('.week-map-scroll').before(copy);
-    else find('.week-roster').after(copy);
-  }
+  const mapNavigation = navigation.cloneNode(true);
+  mapNavigation.classList.add('week-navigation--local');
+  mapNavigation.dataset.weekNavigation = 'map';
+  mapNavigation.setAttribute('role','group');
+  mapNavigation.setAttribute('aria-label',t('Cambiar hora junto al mapa','Change hour beside the map'));
+  const position = document.createElement('span');
+  position.className = 'week-navigation-position';
+  const phase = document.createElement('span');
+  phase.dataset.weekNavPhase = '';
+  const count = mapNavigation.querySelector('[data-week-count]');
+  count.replaceWith(position);position.append(phase,count);
+  find('.week-map-scroll').after(mapNavigation);
   const mapHelp = document.createElement('details');
   mapHelp.className = 'week-map-help';
   const helpTitle = document.createElement('summary');
   helpTitle.textContent = t('Cómo leer el mapa','How to read the map');
   const mapIntro = find('.week-atlas-intro');
-  mapIntro.before(mapHelp);mapHelp.append(helpTitle,mapIntro);
+  const mapCaption = find('.week-map-caption');
+  mapIntro.before(mapHelp);mapHelp.append(helpTitle,mapIntro,mapCaption);
   function button(label, pressed, handler) {
     const b = document.createElement('button'); b.type = 'button'; b.textContent = label;
     b.setAttribute('aria-pressed', String(pressed)); b.addEventListener('click', handler); return b;
   }
-  roman.forEach((n,i) => { const b = button(`${t('Día','Day')} ${n}`, i === 0, () => { day=i+1; if(!valid(day,hour)) hour=day===1?4:2; render(); }); find('.week-days').append(b); });
+  roman.forEach((n,i) => {
+    const label = `${t('Día','Day')} ${n}`;
+    const b = button(label, i === 0, () => { day=i+1; if(!valid(day,hour)) hour=day===1?4:2; render(); });
+    const labelWrap = document.createElement('span'); labelWrap.className = 'week-day-label';
+    const prefix = document.createElement('span'); prefix.className = 'week-day-prefix'; prefix.textContent = t('Día','Day');
+    const number = document.createElement('span'); number.textContent = n;
+    labelWrap.append(prefix, document.createTextNode(' '), number);
+    b.setAttribute('aria-label', label); b.replaceChildren(labelWrap);
+    find('.week-days').append(b);
+  });
   hours.forEach((h,i) => find('.week-hours').append(button(h, i === 4, () => {hour=i;render();})));
+  const weekReading = find('.week-reading');
+  function stabilizeWeekReadingHeight() {
+    const probe = weekReading.cloneNode(true);
+    probe.setAttribute('aria-hidden','true');
+    probe.style.position='absolute';
+    probe.style.visibility='hidden';
+    probe.style.pointerEvents='none';
+    probe.style.width=`${weekReading.getBoundingClientRect().width}px`;
+    probe.style.removeProperty('min-height');
+    root.append(probe);
+    const probeEyebrow=probe.querySelector('[data-week-now]');
+    let tallestEyebrow=0;
+    phases.forEach(([d,h])=>{
+      fillSummary(probe,d,h);
+      tallestEyebrow=Math.max(tallestEyebrow,probeEyebrow.offsetHeight);
+    });
+    probeEyebrow.style.minHeight=`${tallestEyebrow}px`;
+    let tallest=0;
+    phases.forEach(([d,h])=>{
+      fillSummary(probe,d,h);
+      tallest=Math.max(tallest,probe.offsetHeight);
+    });
+    probe.remove();
+    find('[data-week-now]').style.minHeight=`${tallestEyebrow}px`;
+    weekReading.style.minHeight=`${tallest}px`;
+  }
   function renderMap() {
     const rows = cast(day,hour), pins = find('[data-week-pins]'), roster = find('.week-roster');
     mapMovements = movements(day,hour,rows);
@@ -281,19 +331,31 @@
   }
   function render() {
     [...find('.week-days').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===day-1)));
-    [...find('.week-hours').children].forEach((b,i)=>{b.setAttribute('aria-pressed',String(i===hour));b.disabled=!valid(day,i);b.title=b.disabled?t('Fuera del intervalo jugable','Outside the playable interval'):'';});
+    const availableHours = hours.filter((_,i)=>valid(day,i)).length;
+    find('.week-hours').style.setProperty('--week-hour-columns',availableHours);
+    find('.week-hours').style.setProperty('--week-hour-mobile-columns',Math.min(availableHours,4));
+    [...find('.week-hours').children].forEach((b,i)=>{
+      const unavailable = !valid(day,i);
+      b.setAttribute('aria-pressed',String(i===hour));
+      b.disabled=unavailable;
+      b.hidden=unavailable;
+      b.title='';
+    });
     const index=phases.findIndex(([d,h])=>d===day&&h===hour), event=events[`${day}-${hour}`];
     root.querySelectorAll('[data-week-prev]').forEach(button=>{button.disabled=index===0;});
     root.querySelectorAll('[data-week-next]').forEach(button=>{button.disabled=index===phases.length-1;});
     root.querySelectorAll('[data-week-count]').forEach(count=>{count.textContent=`${index+1} / ${phases.length}`;});
     root.querySelectorAll('[data-week-nav-phase]').forEach(phase=>{phase.textContent=`${t('Día','Day')} ${roman[day-1]} · ${hours[hour]}`;});
-    put('[data-week-now]',`${t('Día','Day')} ${roman[day-1]} · ${hours[hour]} · ${t('Sin spoilers','Spoiler-free')}`);
-    put('[data-week-title]',titles[day-1]);put('[data-week-daycopy]',dayCopy[day-1]);
-    put('[data-week-routine]',day===1&&hour===4?t('La partida comienza en la entrada. El Abad espera para dar la bienvenida y enseñar el camino.','Play begins at the entrance. The Abbot waits to welcome you and show the way.'):day===7&&hour===2?t('El plazo concedido por el Abad ha terminado.','The time granted by the Abbot has ended.'):routine[hour]);
+    fillSummary(root,day,hour);
     put('[data-week-event]',event?.text||routine[hour]);put('[data-week-advice]',event?.action||advice[hour]);
     const defaultQuotes = hour===0?[[1,18]]:hour===1||hour===5?[[2,23]]:hour===3?[[2,25]]:hour===6?[[2,13],[2,16]]:[];
     const quotes=event?.q??defaultQuotes, holder=find('[data-week-quotes]');holder.replaceChildren();
-    quotes.forEach(([speaker,id])=>{const quote=document.createElement('blockquote');quote.className='week-dialogue';const p=document.createElement('p');p.textContent=window.AbbeyWeekDialogue[en?'en':'es'][id];const cite=document.createElement('cite');cite.textContent=`${names[speaker]} · ${t('frase','phrase')} 0x${id.toString(16).toUpperCase().padStart(2,'0')} · VigasocoSDL`;quote.append(p,cite);holder.append(quote);});
+    const quoteHeavy=quotes.length>=4;
+    find('.week-secret-copy').classList.toggle('is-quote-heavy',quoteHeavy);
+    const quoteColumns=quoteHeavy?[document.createElement('div'),document.createElement('div')]:null;
+    quoteColumns?.forEach(column=>{column.className='week-quote-column';});
+    quotes.forEach(([speaker,id],index)=>{const quote=document.createElement('blockquote');quote.className='week-dialogue';const p=document.createElement('p');p.textContent=window.AbbeyWeekDialogue[en?'en':'es'][id];const cite=document.createElement('cite');cite.textContent=`${names[speaker]} · ${t('frase','phrase')} 0x${id.toString(16).toUpperCase().padStart(2,'0')} · VigasocoSDL`;quote.append(p,cite);(quoteColumns?quoteColumns[index<Math.ceil(quotes.length/2)?0:1]:holder).append(quote);});
+    if(quoteColumns)holder.append(...quoteColumns);
     if(!quotes.length){const p=document.createElement('p');p.className='caption';p.textContent=t('No se asigna una frase exclusiva a este momento.','No exclusive phrase is assigned to this moment.');holder.append(p);}
     renderMap();
   }
@@ -312,5 +374,12 @@
   find('.week-spoilers').addEventListener('toggle',drawMovements);
   find('.week-map > img').addEventListener('load',drawMovements);
   new ResizeObserver(drawMovements).observe(find('.week-map'));
+  let readingResizeFrame=0;
+  window.addEventListener('resize',()=>{
+    cancelAnimationFrame(readingResizeFrame);
+    readingResizeFrame=requestAnimationFrame(stabilizeWeekReadingHeight);
+  });
   render();
+  requestAnimationFrame(stabilizeWeekReadingHeight);
+  document.fonts?.ready.then(stabilizeWeekReadingHeight);
 })();
