@@ -51,7 +51,7 @@
   $$('.sprite-credit').forEach(credit => {
     credit.dataset.platformTextCpc = credit.textContent;
     credit.dataset.platformTextPc = document.documentElement.lang === 'es'
-      ? 'Patrones e tintas CGA verificados en el volcado PC, mostrados en una bandeja real de tres casillas del marcador.'
+      ? 'Patrones y tintas CGA verificados en el volcado PC, mostrados en una bandeja real de tres casillas del marcador.'
       : 'CGA patterns and inks verified against the PC memory dump, shown in a real three-slot tray from the status panel.';
     credit.dataset.platformTextVga = document.documentElement.lang === 'es'
       ? 'Gráficos del remake VGA a 256 colores, mostrados en su bandeja real de tres casillas.'
@@ -488,7 +488,7 @@
         if (value === 0) {
           if (recipePreview) recipePreview.hidden = true;
           if (kicker) kicker.textContent = isSpanish ? 'Preparación' : 'Preparation';
-          if (title) title.textContent = isSpanish ? 'La zona de la estancia recibe su color de fondo' : 'The room area receives its background colour';
+          if (title) title.textContent = isSpanish ? 'Se aplica el color de fondo a la estancia' : 'The room area receives its background colour';
           if (copy) copy.textContent = isSpanish ? 'Todavía no se ha ejecutado ninguna colocación. Donde la máscara de un tile conserve la imagen anterior, seguirá viéndose este fondo.' : 'No placement has run yet. Wherever a tile\'s mask preserves the existing image, this background remains visible.';
           setDetails([[isSpanish ? 'Estancia' : 'Room', isSpanish ? '17 hexadecimal' : '17 hexadecimal'], [isSpanish ? 'Colocaciones' : 'Placements', `0 / ${placementTotal}`]]);
         } else if (!placement) {
@@ -528,7 +528,7 @@
         if (canvas) canvas.hidden = false;
         drawScreen(value);
         if (kicker) kicker.textContent = isSpanish ? 'Transferencia a pantalla' : 'Screen transfer';
-        if (title) title.textContent = value === 0 ? (isSpanish ? 'La pantalla parte del fondo' : 'The screen begins with its background') : value === 320 ? (isSpanish ? 'Las 320 celdas ya son visibles' : 'All 320 cells are now visible') : (isSpanish ? 'La imagen crece desde el centro' : 'The picture grows from the centre');
+        if (title) title.textContent = value === 0 ? (isSpanish ? 'Primero se dibuja el fondo' : 'The screen begins with its background') : value === 320 ? (isSpanish ? 'Las 320 celdas ya son visibles' : 'All 320 cells are now visible') : (isSpanish ? 'La imagen se completa desde el centro' : 'The picture grows from the centre');
         if (copy) copy.textContent = isSpanish ? 'El programa copia franjas hacia abajo, derecha, arriba e izquierda. En cada celda compone primero el tile posterior y después el anterior.' : 'The program copies strips down, right, up, and left. In each cell it composites the rear tile before the front tile.';
         setDetails([[isSpanish ? 'Sistema' : 'System', 'PC CGA'], [isSpanish ? 'Celda visible' : 'Visible cell', `${value} / 320`], [isSpanish ? 'Orden' : 'Order', isSpanish ? 'Espiral rectangular' : 'Rectangular spiral']]);
       }
