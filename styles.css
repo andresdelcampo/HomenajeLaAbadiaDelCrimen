@@ -1529,6 +1529,10 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .system-score strong { display: block; color: var(--gold); font: 400 clamp(4rem, 8vw, 7rem)/.8 var(--display); }
 .system-score span { display: block; margin-top: .8rem; color: rgba(255,255,255,.58); font: .67rem/1.3 var(--mono); text-transform: uppercase; }
 .system-score img { width: 100%; margin-top: 1.5rem; image-rendering: pixelated; border: 1px solid rgba(255,255,255,.15); }
+.system-score-pair { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; width: 100%; margin-top: 1.5rem; }
+.system-score-pair figure { min-width: 0; margin: 0; }
+.system-score-pair img { display: block; margin-top: 0; }
+.system-score-pair figcaption { margin-top: .4rem; color: rgba(255,255,255,.58); font: 700 .55rem/1.3 var(--mono); text-transform: uppercase; }
 .system-copy h3 { margin: 0 0 1rem; font: 400 clamp(2.4rem, 4vw, 4.3rem)/.9 var(--display); }
 .system-copy ul { padding-left: 1.1rem; }
 .credit-line { margin-top: 2.5rem; }
@@ -1711,6 +1715,10 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .graphics-room-result { margin: 0; padding: .55rem; color: var(--ink); background: #f8f1e0; box-shadow: var(--shadow); transform: rotate(-.35deg); }
 .graphics-room-result img { display: block; width: 100%; image-rendering: pixelated; }
 .graphics-room-result figcaption { padding: .7rem .35rem .25rem; font: 700 .6rem/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.graphics-viewer-resource { display: grid; grid-template-columns: minmax(8rem, .25fr) minmax(0, 1fr); gap: 1rem; margin: 1.25rem 0 0; padding: 1rem 1.2rem; border-left: 3px solid var(--cyan); color: rgba(255,255,255,.7); background: rgba(103,197,193,.07); }
+.graphics-viewer-resource > span:first-child { color: var(--cyan); font: 700 .64rem/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.graphics-viewer-resource a { color: var(--gold); font-weight: 700; }
+.graphics-viewer-resource a:hover, .graphics-viewer-resource a:focus-visible { color: var(--white); }
 .graphics-entry-copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(19rem, .8fr); gap: clamp(2rem, 4vw, 4rem); margin-top: 4.5rem; align-items: center; }
 .graphics-entry-copy p { margin: 0; }
 .graphics-guide-link { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto 1fr; gap: .15rem 1rem; overflow: hidden; align-self: stretch; padding: .5rem 1rem; border: 1px solid #f0c361; color: var(--night); background: linear-gradient(135deg, #efd08a 0%, var(--gold) 58%, #c78622 100%); box-shadow: 0 10px 24px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.35); text-decoration: none; }
@@ -2547,7 +2555,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .extensum-visual-stack { padding-right: 1.6rem; padding-bottom: clamp(12rem, 48vw, 17rem); }
   .extensum-script { top: 60%; width: 64%; }
   .tech-diagram { grid-template-columns: 1fr; }
-  .graphics-pipeline, .graphics-plates, .graphics-entry-copy, .graphics-guide-grid { grid-template-columns: 1fr; }
+  .graphics-pipeline, .graphics-plates, .graphics-viewer-resource, .graphics-entry-copy, .graphics-guide-grid { grid-template-columns: 1fr; }
   .pseudocode-pair, .pseudocode-key, .graphics-scope, .graphics-evidence, .graphics-reference-plate figcaption { grid-template-columns: 1fr; }
   .pseudocode-key dl { grid-template-columns: 1fr; }
   .graphics-height-examples { grid-template-columns: 1fr; }
