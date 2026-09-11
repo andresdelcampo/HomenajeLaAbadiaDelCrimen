@@ -228,7 +228,7 @@
       const i = ids.indexOf(r.id);
       const image = () => { const img=document.createElement('img'); const platform=document.documentElement.dataset.platform; img.src=`../assets/platforms/${['cpc','pc','vga','spectrum','msx'].includes(platform)?platform:'cpc'}/characters/${r.id}.png`; img.alt=''; return img; };
       const b = button('',i===selected,()=>{selected=i;renderMap();find('.week-roster').children[i].focus({preventScroll:true});});
-      b.append(image()); const copy=document.createElement('span'); const name=document.createElement('b'); name.textContent=r.name; const status=document.createElement('small'); status.textContent=r.to?places[r.to][2]:r.note; copy.append(name);
+      const portrait=document.createElement('span'); portrait.className='week-roster-portrait'; portrait.dataset.weekPortrait=r.id; portrait.append(image()); b.append(portrait); const copy=document.createElement('span'); const name=document.createElement('b'); name.textContent=r.name; const status=document.createElement('small'); status.textContent=r.to?places[r.to][2]:r.note; copy.append(name);
       if (r.presence) {
         b.dataset.presence=r.presence;
         const badge=document.createElement('span'); badge.className='week-presence';
