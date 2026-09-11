@@ -34,6 +34,11 @@
 .week-secret-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 1rem 2rem; line-height: 1.45; }
 .week-secret-copy h5, .week-atlas h5 { margin: 0 0 .6rem; font: bold .8rem var(--mono); text-transform: uppercase; letter-spacing: .07em; }
 .week-secret-copy p { margin: .5rem 0; }
+.week-labyrinth-route { margin: 1rem 0; max-width: 22rem; }
+.week-labyrinth-route > a { display: block; border: 1px solid var(--rule); text-decoration: none; }
+.week-labyrinth-route img { display: block; width: 100%; height: auto; }
+.week-labyrinth-route > a > span { display: block; padding: .55rem .7rem; color: var(--red); font: bold .75rem/1.4 var(--mono); }
+.week-labyrinth-route figcaption { margin-top: .45rem; font-size: .75rem; line-height: 1.4; color: var(--ink-soft); }
 .week-secret-copy.is-quote-heavy { grid-template-columns: 1fr; }
 .week-secret-copy.is-quote-heavy > div:first-child > p { max-width: 90ch; }
 .week-secret-copy.is-quote-heavy [data-week-quotes] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; padding-top: .7rem; }

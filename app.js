@@ -787,10 +787,12 @@
     }
     $('.lightbox-close', lightbox)?.focus();
   };
-  $$('[data-lightbox]').forEach(button => button.addEventListener('click', event => {
+  document.addEventListener('click', event => {
+    const button = event.target.closest('[data-lightbox]');
+    if (!button) return;
     event.preventDefault();
     openLightbox(button);
-  }));
+  });
   lightboxPrevious?.addEventListener('click', () => showLightboxPage(lightboxPage - 1));
   lightboxNext?.addEventListener('click', () => showLightboxPage(lightboxPage + 1));
   lightboxZoomOut?.addEventListener('click', () => setLightboxZoom(lightboxZoom - lightboxZoomStep));
