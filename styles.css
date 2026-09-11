@@ -2105,6 +2105,31 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .legacy-event h3 { margin: .45rem 0; font: 400 1.35rem/1 var(--display); }
 .legacy-event p { font-size: .82rem; line-height: 1.45; color: var(--ink-soft); }
 
+.preservation-lineage {
+  display: grid;
+  grid-template-columns: minmax(14rem, .72fr) minmax(0, 1.28fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border: 1px solid rgba(26,23,19,.28);
+  border-top: 5px solid var(--ink);
+  background:
+    linear-gradient(90deg, rgba(163,45,39,.045) 1px, transparent 1px) 0 0 / 2.75rem 100%,
+    rgba(255,255,255,.18);
+  box-shadow: 0 20px 50px rgba(45,31,18,.1);
+}
+.preservation-lineage-header { align-self: start; position: sticky; top: 7rem; }
+.preservation-lineage-header h3 { margin: .8rem 0 1.25rem; font: 400 clamp(2.2rem, 4vw, 4.2rem)/.92 var(--display); }
+.preservation-lineage-header p { margin: 0; color: var(--ink-soft); line-height: 1.7; }
+.preservation-steps { position: relative; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.preservation-steps::before { content: ""; position: absolute; top: .65rem; bottom: .65rem; left: 3.7rem; width: 1px; background: rgba(26,23,19,.32); }
+.preservation-steps li { position: relative; display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); gap: 1.3rem; padding: 0 0 2rem; }
+.preservation-steps li:last-child { padding-bottom: 0; }
+.preservation-steps li::before { content: ""; position: absolute; top: .35rem; left: 3.38rem; width: .7rem; aspect-ratio: 1; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px var(--paper-light); }
+.preservation-steps time { padding-top: .18rem; color: var(--red); font: 700 .72rem/1 var(--mono); }
+.preservation-steps h4 { margin: 0 0 .45rem; font: 700 .82rem/1.35 var(--mono); letter-spacing: .015em; }
+.preservation-steps p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.6; }
+
 .reader-letter {
   position: relative;
   width: min(100%, 980px);
@@ -2467,6 +2492,8 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .legacy-timeline::before { display: none; }
   .legacy-event { padding-top: 2rem; }
   .legacy-event::before { top: .45rem; }
+  .preservation-lineage { grid-template-columns: 1fr; }
+  .preservation-lineage-header { position: static; }
   .parchment-experience { grid-template-columns: 1fr; }
   .parchment-console { position: relative; top: 0; }
 }
@@ -2572,6 +2599,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .room-trace-controls [data-trace-next] { grid-column: 3; grid-row: 3; }
   .tech-node::after { display: none; }
   .legacy-timeline { grid-template-columns: 1fr 1fr; }
+  .preservation-lineage { padding: 1.5rem; }
   .reader-letter::before { right: 1rem; top: 7.4rem; }
   .reader-letter-header { align-items: flex-start; flex-direction: column; gap: .8rem; }
   .reader-letter-edition { text-align: left; }
