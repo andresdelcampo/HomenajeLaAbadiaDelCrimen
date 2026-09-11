@@ -57,6 +57,7 @@ CHARACTERS = {
 }
 
 GUILLERMO_CHURCH_FRAME = 57240
+ADSO_CHURCH_FRAME = 59668
 
 ITEMS = {
     "libro": 11200,
@@ -328,19 +329,21 @@ def main() -> None:
 
 
 def build_position_guide_characters() -> None:
-    data = SOURCE.read_bytes()
-    church_source = source_sprite(data, GUILLERMO_CHURCH_FRAME, 16, 33)
-    for target, colours in (
-        (OUTPUT / "spectrum", {0: SPECTRUM_BLUE, 16: SPECTRUM_YELLOW, 17: SPECTRUM_YELLOW, 255: (0, 0, 0, 0)}),
-        (OUTPUT / "msx", {0: MSX_BLACK, 16: MSX_CREAM, 17: MSX_CREAM, 255: (0, 0, 0, 0)}),
-    ):
-        save_display_asset(
-            colour_indexes(church_source, colours),
-            target / "characters" / "guillermo-church.png",
-            (240, 300),
-            8,
-            14,
-        )
+    # Rear-facing standing frames from each character's animation table.
+    for character, frame, height in (("guillermo", GUILLERMO_CHURCH_FRAME, 33), ("adso", ADSO_CHURCH_FRAME, 30)):
+        data = SOURCE.read_bytes()
+        church_source = source_sprite(data, frame, 16, height)
+        for target, colours in (
+            (OUTPUT / "spectrum", {0: SPECTRUM_BLUE, 16: SPECTRUM_YELLOW, 17: SPECTRUM_YELLOW, 255: (0, 0, 0, 0)}),
+            (OUTPUT / "msx", {0: MSX_BLACK, 16: MSX_CREAM, 17: MSX_CREAM, 255: (0, 0, 0, 0)}),
+        ):
+            save_display_asset(
+                colour_indexes(church_source, colours),
+                target / "characters" / f"{character}-church.png",
+                (240, 300),
+                8,
+                14,
+            )
 
 
 if __name__ == "__main__":

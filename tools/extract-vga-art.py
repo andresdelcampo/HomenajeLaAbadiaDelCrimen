@@ -46,6 +46,7 @@ CHARACTERS = {
 # Guillermo's second standing axis, used when he faces away from the camera
 # toward the altar. The catalogue portrait above uses the nearer-facing axis.
 GUILLERMO_CHURCH_FRAME = 57240
+ADSO_CHURCH_FRAME = 59668
 
 ITEMS = {
     "libro": 11200,
@@ -436,24 +437,26 @@ def main() -> None:
 
 
 def build_position_guide_characters() -> None:
-    for platform in ("cpc", "vga"):
-        data = (SOURCE_ROOT / ("GraficosCPC" if platform == "cpc" else "GraficosVGA")).read_bytes()
-        church_sprite = indexed_image(data, palette(data), GUILLERMO_CHURCH_FRAME, 16, 33)
-        save_display_asset(
-            church_sprite,
-            OUTPUT / "platforms" / platform / "characters" / "guillermo-church.png",
-            canvas=(240, 300),
-            scale=8,
-            bottom_margin=14,
-        )
-        if platform == "cpc":
+    # Rear-facing standing frames from each character's animation table.
+    for character, frame, height in (("guillermo", GUILLERMO_CHURCH_FRAME, 33), ("adso", ADSO_CHURCH_FRAME, 30)):
+        for platform in ("cpc", "vga"):
+            data = (SOURCE_ROOT / ("GraficosCPC" if platform == "cpc" else "GraficosVGA")).read_bytes()
+            church_sprite = indexed_image(data, palette(data), frame, 16, height)
             save_display_asset(
-                pc_cga_sprite(church_sprite, PC_CGA_CHARACTER_COLOURS),
-                OUTPUT / "platforms" / "pc" / "characters" / "guillermo-church.png",
+                church_sprite,
+                OUTPUT / "platforms" / platform / "characters" / f"{character}-church.png",
                 canvas=(240, 300),
                 scale=8,
                 bottom_margin=14,
             )
+            if platform == "cpc":
+                save_display_asset(
+                    pc_cga_sprite(church_sprite, PC_CGA_CHARACTER_COLOURS),
+                    OUTPUT / "platforms" / "pc" / "characters" / f"{character}-church.png",
+                    canvas=(240, 300),
+                    scale=8,
+                    bottom_margin=14,
+                )
 
 
 if __name__ == "__main__":

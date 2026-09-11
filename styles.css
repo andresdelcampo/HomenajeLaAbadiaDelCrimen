@@ -1201,6 +1201,7 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .position-background { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
 .position-character { position: absolute; z-index: 1; display: block; width: 11.71875%; height: auto; translate: -50% 0; image-rendering: pixelated; pointer-events: none; }
 .position-shot--church .position-character { left: 28.125%; top: 31.5%; }
+.position-shot--church .position-character--adso { left: 18.75%; top: 39%; }
 .position-shot--refectory .position-character {
   left: 53.890625%;
   top: 32.6125%;
