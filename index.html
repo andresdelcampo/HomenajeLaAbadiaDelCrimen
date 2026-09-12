@@ -1,36 +1,45 @@
 <!doctype html>
-<html lang="es" data-platform="cpc">
+<html lang="es" data-platform="cpc" data-gate-language="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="assets/game/guillermo-favicon.png">
-  <meta name="description" content="Elige la versión del juego y la edición española o inglesa del homenaje interactivo a La Abadía del Crimen: historia, personajes, laberinto, siete días, sonido, revistas y legado.">
-  <title>La Abadía del Crimen — Antes de entrar · Configure your visit</title>
-  <link rel="stylesheet" href="styles.css?v=20260911-sources1">
+  <meta name="description" content="Elige el idioma y la versión del juego antes de entrar en el homenaje interactivo a La Abadía del Crimen · Choose the language and game edition before entering the interactive tribute.">
+  <title>La Abadía del Crimen — Antes de entrar · Before entering</title>
+  <link rel="stylesheet" href="styles.css?v=20260912-gate4">
 </head>
 <body>
   <main class="language-gate">
-    <section class="gate-art" aria-label="Pantalla original de carga de La Abadía del Crimen">
-      <span class="gate-stamp">Archivo visual · Visual archive</span>
+    <section class="gate-art" aria-label="Pantalla original de carga de La Abadía del Crimen · Original loading screen">
+      <span class="gate-stamp"><span lang="es">Archivo visual</span> · <span lang="en">Visual archive</span></span>
     </section>
     <section class="gate-copy">
       <div class="gate-content">
         <p class="gate-kicker"><span lang="es">Homenaje interactivo</span> · <span lang="en">Interactive tribute</span></p>
       <h1 class="gate-title-art" aria-label="La Abadía del Crimen"></h1>
       <div class="gate-intro">
-        <p lang="es">Siete días. Ocho personajes. Una biblioteca que no debería existir.</p>
-        <p lang="en">Seven days. Eight characters. A library that must not exist.</p>
+        <p lang="es">Siete días. Ocho personajes. Una biblioteca prohibida.</p>
+        <p lang="en">Seven days. Eight characters. A forbidden library.</p>
       </div>
       <div class="gate-config-heading">
         <span lang="es">Antes de entrar</span>
         <span aria-hidden="true">/</span>
-        <span lang="en">Configure your visit</span>
+        <span lang="en">Before entering</span>
+      </div>
+      <div class="gate-step-heading gate-step-heading--language" id="language-step">
+        <span class="gate-step-number">01</span>
+        <span lang="es">Elige el idioma</span>
+        <span aria-hidden="true">/</span>
+        <span lang="en">Choose language</span>
+      </div>
+      <div class="gate-language-picker" role="group" aria-labelledby="language-step">
+        <button type="button" lang="es" data-language-choice="es" aria-pressed="true">Español</button>
+        <button type="button" lang="en" data-language-choice="en" aria-pressed="false">English</button>
       </div>
       <div class="gate-step-heading" id="version-step">
-        <span class="gate-step-number">01</span>
-        <span lang="es">Elige la versión</span>
-        <span aria-hidden="true">/</span>
-        <span lang="en">Choose the version</span>
+        <span class="gate-step-number">02</span>
+        <span data-gate-lang="es" lang="es">Elige la edición</span>
+        <span data-gate-lang="en" lang="en">Choose the edition</span>
       </div>
       <div class="platform-picker platform-picker--gate" role="group" aria-labelledby="version-step">
         <button type="button" data-platform-choice="spectrum" aria-pressed="false">ZX</button>
@@ -39,34 +48,31 @@
         <button type="button" data-platform-choice="pc" aria-pressed="false">PC CGA</button>
         <button type="button" data-platform-choice="vga" aria-pressed="false">PC VGA</button>
       </div>
-      <div class="gate-step-heading" id="language-step">
-        <span class="gate-step-number">02</span>
-        <span lang="es">Elige el idioma y entra</span>
-        <span aria-hidden="true">/</span>
-        <span lang="en">Choose language and enter</span>
+      <div class="gate-step-heading" id="enter-step">
+        <span class="gate-step-number">03</span>
+        <span data-gate-lang="es" lang="es">Entra en la abadía</span>
+        <span data-gate-lang="en" lang="en">Enter the abbey</span>
       </div>
-      <div class="gate-options" aria-labelledby="language-step">
-        <a class="gate-option" href="es/index.html" hreflang="es" lang="es" data-language="es">
-          <span class="gate-option-number">ES · Edición española</span>
-          <strong>Homenaje a<br>La Abadía del Crimen</strong>
-          <span class="gate-option-summary">El caso, los personajes, el laberinto, la semana completa, versiones, sonido, revistas y legado.</span>
-          <span class="gate-option-cta">Entrar en la abadía →</span>
-        </a>
-        <a class="gate-option" href="en/index.html" hreflang="en" lang="en" data-language="en">
-          <span class="gate-option-number">EN · English edition</span>
-          <strong>Tribute to<br>La Abadía del Crimen</strong>
-          <span class="gate-option-summary">The case, the characters, the labyrinth, the complete week, versions, sound, magazines, and legacy.</span>
-          <span class="gate-option-cta">Enter the abbey →</span>
+      <div class="gate-options" aria-labelledby="enter-step">
+        <a class="gate-option" href="es/index.html" hreflang="es" lang="es" data-language-entry>
+          <span class="gate-option-number" data-gate-lang="es" lang="es">Edición española</span>
+          <span class="gate-option-number" data-gate-lang="en" lang="en">English edition</span>
+          <strong data-gate-lang="es" lang="es">Homenaje a<br>La Abadía del Crimen</strong>
+          <strong data-gate-lang="en" lang="en">Tribute to<br>La Abadía del Crimen</strong>
+          <span class="gate-option-summary" data-gate-lang="es" lang="es">El misterio, los personajes, el laberinto, la semana completa, versiones, sonido, revistas y legado.</span>
+          <span class="gate-option-summary" data-gate-lang="en" lang="en">The mystery, the characters, the labyrinth, the complete week, versions, sound, magazines, and legacy.</span>
+          <span class="gate-option-cta" data-gate-lang="es" lang="es">Entrar en la abadía →</span>
+          <span class="gate-option-cta" data-gate-lang="en" lang="en">Enter the abbey →</span>
         </a>
       </div>
-        <p class="gate-note"><span lang="es">Cada edición mantiene un solo idioma para conservar el ritmo de lectura.</span> <span lang="en">Each edition keeps one language throughout.</span></p>
+        <p class="gate-note"><span data-gate-lang="es" lang="es">La edición elegida se mantendrá durante toda la visita.</span><span data-gate-lang="en" lang="en">Your chosen edition will remain active throughout the visit.</span></p>
       </div>
       <footer class="gate-credits">
-        <p class="caption gate-credit"><span lang="es">Homenaje no oficial dedicado a la preservación cultural.</span> <span lang="en">Unofficial cultural-preservation tribute.</span> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">GitHub</a> · <a href="es/legado.html#fuentes" lang="es">Fuentes</a> / <a href="en/legacy.html#sources" lang="en">Sources</a></p>
-        <p class="project-credit"><span class="credit-role"><span lang="es">Autor</span><span lang="en">Author</span></span>: Andrés del Campo Novales · <span lang="es">con GPT 5.6 Sol y GPT 6 Astra</span> / <span lang="en">with GPT 5.6 Sol and GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role"><span lang="es">Revisión técnica de la versión previa del 5 de septiembre de 2026</span><span lang="en">Technical review of the previous version dated 5 September 2026</span></span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p>
+        <p class="caption gate-credit"><span data-gate-lang="es" lang="es">Homenaje no oficial dedicado a la preservación cultural.</span><span data-gate-lang="en" lang="en">Unofficial cultural-preservation tribute.</span> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">GitHub</a> · <a href="es/legado.html#fuentes" lang="es" data-gate-lang="es">Fuentes</a><a href="en/legacy.html#sources" lang="en" data-gate-lang="en">Sources</a></p>
+        <p class="project-credit"><span data-gate-lang="es" lang="es"><span class="credit-role">Autor</span>: Andrés del Campo Novales · con GPT 5.6 Sol y GPT 6 Astra<span class="technical-reviewers"><span class="credit-role">Revisión técnica de la versión previa del 5 de septiembre de 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></span><span data-gate-lang="en" lang="en"><span class="credit-role">Author</span>: Andrés del Campo Novales · with GPT 5.6 Sol and GPT 6 Astra<span class="technical-reviewers"><span class="credit-role">Technical review of the previous version dated 5 September 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></span></p>
       </footer>
     </section>
   </main>
-  <script src="app.js?v=20260911-review1"></script>
+  <script src="app.js?v=20260912-gate2"></script>
 </body>
 </html>

@@ -105,15 +105,51 @@
   }));
   setPlatform(rememberedPlatform, false);
 
-  const languageLinks = $$('[data-language]');
+  const languageLinks = $$('a[data-language]');
   let rememberedLanguage = null;
   try { rememberedLanguage = localStorage.getItem('reportaje-language'); } catch (_) { /* local files may deny storage */ }
   languageLinks.forEach(link => {
-    if (link.dataset.language === rememberedLanguage && $('.language-gate')) link.setAttribute('data-last-language', '');
     link.addEventListener('click', () => {
       try { localStorage.setItem('reportaje-language', link.dataset.language); } catch (_) { /* navigation still works */ }
     });
   });
+
+  const gate = $('.language-gate');
+  if (gate) {
+    const gateLanguageButtons = $$('[data-language-choice]', gate);
+    const gateEntry = $('[data-language-entry]', gate);
+    const gateCopy = {
+      es: {
+        href: 'es/index.html'
+      },
+      en: {
+        href: 'en/index.html'
+      }
+    };
+
+    function setGateLanguage(language, remember = true) {
+      const selected = language === 'en' ? 'en' : 'es';
+      const copy = gateCopy[selected];
+      document.documentElement.lang = selected;
+      document.documentElement.dataset.gateLanguage = selected;
+      gateLanguageButtons.forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.languageChoice === selected));
+      });
+      if (gateEntry) {
+        gateEntry.href = copy.href;
+        gateEntry.hreflang = selected;
+        gateEntry.lang = selected;
+      }
+      if (remember) {
+        try { localStorage.setItem('reportaje-language', selected); } catch (_) { /* navigation still works */ }
+      }
+    }
+
+    gateLanguageButtons.forEach(button => button.addEventListener('click', () => {
+      setGateLanguage(button.dataset.languageChoice);
+    }));
+    setGateLanguage(rememberedLanguage, false);
+  }
 
   $$('.chapter-intro').forEach(intro => {
     if ($('.game-initial', intro)) return;
