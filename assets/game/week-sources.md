@@ -4,6 +4,8 @@ This is an editorial reading of the reconstructed VigasocoSDL game logic, not a 
 
 Local source base: `Fuentes/VigasocoSDL-master/VigasocoSDL-master/core/abadia/`.
 
+Full bilingual sweep, 2026-09-12: `tools/week-audit-2026-09-12.md` records all 41 phases, comparison with the six preserved Micromanía 33 pages and the earlier object table, and the differences between recommended collection times and actual availability. The advice follows the magazine's progression without adopting its mistaken day-II victim name or treating its centre mirror stair as universal. Scroll pickup before prime III, reading the mirror clue, lamp replacement, glove access and pursuit completion are explicit prerequisites.
+
 - `Logica.cpp`, initialization: starts at day 1, NONA.
 - `Marcador.cpp`, `avanzaMomentoDia`: COMPLETAS rolls over to NOCHE and increments the day. The night of day III precedes its prima.
 - `AccionesDia.cpp`, `AccionesNoche`: night V places spectacles in the illuminated room and key I on the altar; night VI places key II on Malachi's table and activates Jorge behind the mirror.

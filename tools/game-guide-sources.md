@@ -2,6 +2,8 @@
 
 Checked 2026-09-11 for the Spanish and English controls, object reference and scoring additions.
 
+Rechecked the eight object rows against both seven-day guides and Micromanía 33 on 2026-09-12; see `week-audit-2026-09-12.md`. Clarified that the gloves exist from initialization but Micromanía recommends collecting them with key II at terce VI; its final book visit is night VII although Jorge is available from night VI. Poison applies to the book before the finale too. Reading scroll and spectacles together sets the valid mirror stair, rather than merely revealing a pre-existing answer that could be guessed without reading.
+
 ## Scope and attribution
 
 Controls follow the preserved original manual. Detailed schedules and score conditions follow Manuel Abadía's reconstruction of the Amstrad CPC game, cross-checked in the local C++ sources and the Java conversion by Pedro García-pego Catalá, adapted to GWT by Ignacio Baca Moreno-Torres. They are not a claim that Extensum or every port has identical rules.
