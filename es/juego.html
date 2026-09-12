@@ -6,10 +6,10 @@
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-sources1">
+  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
-  <link rel="stylesheet" href="../week.css?v=20260911-labyrinth1">
+  <link rel="stylesheet" href="../week.css?v=20260912-spoilers6">
 </head>
 <body data-page="game">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -121,7 +121,10 @@
           <span class="chapter-number">V · Los personajes</span>
           <h2>Ocho vidas, siete días</h2>
         </div>
-        <p class="chapter-intro">Selecciona un retrato. Cada ficha combina lo que se ve durante la partida con las rutinas que describe el código reconstruido. Esta sección contiene revelaciones argumentales.</p>
+        <div class="chapter-intro-stack">
+          <p class="chapter-intro">Selecciona un retrato. Cada ficha combina lo que se ve durante la partida con las rutinas que describe el código reconstruido.</p>
+          <p class="spoiler-notice" role="note"><span>Spoilers</span><strong>Esta sección revela personajes y acontecimientos de la historia.</strong></p>
+        </div>
       </div>
 
       <div class="character-layout reveal">
@@ -402,8 +405,8 @@
         <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>07 · Acceso</small><h3>Llave III</h3><p>La llave que puede llevar Adso.</p></article>
         <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="Sprite CPC de la lámpara"><small>08 · Luz</small><h3>Lámpara</h3><p>Adso la transporta para iluminar lugares oscuros.</p></article>
       </div>
-      <details class="week-spoilers game-reference reveal" id="referencia-objetos">
-        <summary>Abrir ubicaciones, disponibilidad y uso de los objetos · contiene spoilers</summary>
+      <details class="week-spoilers game-reference spoiler-disclosure spoiler-disclosure--paper reveal" id="referencia-objetos">
+        <summary><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action"><span class="spoiler-when-closed">Mostrar ubicaciones, disponibilidad y uso de los objetos</span><span class="spoiler-when-open">Ocultar ubicaciones, disponibilidad y uso de los objetos</span></strong></summary>
         <div class="reference-body">
           <p>Los seis tipos de objeto de Guillermo y los dos de Adso. La noche abre el día indicado: la noche V va después de completas IV. Las ubicaciones cambian si un personaje recoge o deja un objeto.</p>
           <table class="reference-table" role="table">
@@ -433,11 +436,8 @@
         </div>
         <p class="chapter-intro">Las primeras tarjetas evitan revelar a los culpables. Si quieres conocer todos los detalles, despliega después los textos ocultos. En pantallas pequeñas, las tarjetas se desplazan horizontalmente.</p>
       </div>
-      <div class="days-control reveal">
-        <p class="caption">Los detalles ocultos aparecen difuminados.</p>
-        <button class="spoiler-button" type="button" aria-pressed="false" data-show="Revelar todos los secretos" data-hide="Ocultar los secretos">Revelar todos los secretos</button>
-      </div>
-      <div class="days-grid reveal">
+      <button class="days-control spoiler-inline-control spoiler-button reveal" type="button" aria-pressed="false" aria-controls="secretos-siete-dias" data-show="Mostrar los secretos de los siete días" data-hide="Ocultar los secretos de los siete días"><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action" data-spoiler-action>Mostrar los secretos de los siete días</strong></button>
+      <div class="days-grid reveal" id="secretos-siete-dias">
         <article class="day-card"><span class="day-no">Día I</span><h3>La llegada</h3><p>El Abad nos guía, explica el crimen y fija las normas. El ala izquierda está prohibida.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">La arquitectura y la rutina se aprenden mientras el caso parece todavía controlable.</p></article>
         <article class="day-card"><span class="day-no">Día II</span><h3>El scriptorium</h3><p>Severino se presenta. Malaquías permite que Berengario muestre el lugar de trabajo.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Guillermo puede coger el pergamino de Venancio; Berengario amenaza con avisar al Abad y Malaquías vigila la biblioteca.</p></article>
         <article class="day-card"><span class="day-no">Día III</span><h3>El anciano</h3><p>El Abad presenta a Jorge, que habla del Anticristo y de los últimos días.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Al comienzo del día III, Berengario encapuchado roba el libro, lo lleva a la celda de Severino y muere. Jorge lo oculta al amanecer, antes de la presentación.</p></article>
@@ -464,8 +464,8 @@
           <p>Cada uno de estos catorce bonus suma <strong>4 puntos porcentuales una sola vez</strong>. <a class="claim-source" href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java" title="Reconstrucción CPC · cálculo del porcentaje" aria-label="Fuente: Reconstrucción CPC · cálculo del porcentaje">[fuente]</a> Se conserva aunque después pierdas el objeto o abandones la estancia; una misma visita puede activar varios.</p>
           <p><strong>Ejemplo.</strong> En prima del día VI, con ocho bonus distintos: 7 × 5 + 1 + 4 × 8 = <strong>68%</strong>. Un hallazgo nuevo lo eleva a <strong>72%</strong>; repetir uno ya conseguido no suma nada.</p>
           <p>Al completar la investigación, el juego muestra el manuscrito final en lugar de este porcentaje.</p>
-          <details class="week-spoilers game-reference score-reference">
-            <summary>Abrir los catorce bonus de investigación · contiene spoilers</summary>
+          <details class="week-spoilers game-reference score-reference spoiler-disclosure spoiler-disclosure--paper">
+            <summary><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action"><span class="spoiler-when-closed">Mostrar los catorce bonus de investigación</span><span class="spoiler-when-open">Ocultar los catorce bonus de investigación</span></strong></summary>
           <ul class="score-bonuses"><li>Guillermo recoge los guantes.</li><li>Guillermo recoge la llave I.</li><li>Guillermo recoge la llave II.</li><li>Adso recoge la llave III.</li><li>Guillermo visita el ala izquierda de la abadía de noche.</li><li>Guillermo lleva el pergamino durante la noche III.</li><li>Guillermo reúne el pergamino y las gafas: puede leerlo.</li><li>Guillermo entra en la celda del Abad llevando el pergamino.</li><li>Guillermo entra en la biblioteca.</li><li>Guillermo está en la biblioteca y Adso tiene la lámpara.</li><li>Guillermo está en la biblioteca con las gafas.</li><li>Llegar a la sala del espejo.</li><li>Accionar el mecanismo del espejo: este bonus se registra incluso si se elige el escalón equivocado.</li><li>Entrar en la estancia de Jorge tras el espejo, durante la secuencia final.</li></ul>
           </details>
           <p class="guide-source">Referencia: reconstrucción de la lógica de CPC · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L262-L307">bonus</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L557-L578">cálculo</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L694-L715">espejo</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Jorge.java">desenlace</a>.</p>
@@ -481,8 +481,8 @@
         <p class="chapter-intro">Al completar la investigación, el juego vuelve al pergamino para que Adso cierre su relato. El texto revela por completo el desenlace.</p>
       </div>
 
-      <details class="ending-spoiler reveal">
-        <summary><span>Advertencia · destripa el final del juego</span><strong>Mostrar el manuscrito final</strong></summary>
+      <details class="ending-spoiler spoiler-disclosure spoiler-disclosure--dark reveal">
+        <summary><span class="spoiler-kicker">Spoilers del final</span><strong class="spoiler-action"><span class="spoiler-when-closed">Mostrar el manuscrito final</span><span class="spoiler-when-open">Ocultar el manuscrito final</span></strong></summary>
         <div class="parchment-experience" data-parchment data-parchment-language="es" data-parchment-platform="cpc" data-parchment-text="ending">
           <div class="parchment-player">
             <div class="parchment-stage">
@@ -546,8 +546,8 @@
   </div>
   <script src="../assets/game/parchment-data.js?v=20260908-w1"></script>
   <script src="../parchment.js?v=20260908-platform1"></script>
-  <script src="../app.js?v=20260911-review1"></script>
+  <script src="../app.js?v=20260912-spoilers1"></script>
   <script src="../assets/game/week-dialogue.js?v=20260911-1"></script>
-  <script src="../week.js?v=20260912-week-audit"></script>
+  <script src="../week.js?v=20260912-spoilers1"></script>
 </body>
 </html>

@@ -633,7 +633,9 @@
     const show = days.classList.toggle('show-spoilers');
     $$('.spoiler-text', days).forEach(text => text.setAttribute('aria-hidden', String(!show)));
     spoilerButton.setAttribute('aria-pressed', String(show));
-    spoilerButton.textContent = show ? spoilerButton.dataset.hide : spoilerButton.dataset.show;
+    const action = $('[data-spoiler-action]', spoilerButton);
+    if (action) action.textContent = show ? spoilerButton.dataset.hide : spoilerButton.dataset.show;
+    else spoilerButton.textContent = show ? spoilerButton.dataset.hide : spoilerButton.dataset.show;
   });
 
   let activeAudio = null;

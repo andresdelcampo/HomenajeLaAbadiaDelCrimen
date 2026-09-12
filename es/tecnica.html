@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <meta name="description" content="Versiones, sonido e ingeniería inversa en el laboratorio técnico del homenaje.">
   <title>Cómo piensa la abadía · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-sources1">
+  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260910-editorial2">
 </head>
 <body data-page="technology">
@@ -95,44 +95,44 @@
 
     <section class="chapter dark graphics-entry" id="graficos">
       <div class="chapter-header reveal">
-        <div><span class="chapter-number">XI · La arquitectura invisible</span><h2>Una abadía construida al entrar</h2></div>
-        <p class="chapter-intro">Cada estancia se construye a partir de un vocabulario pequeño de piezas y de unas recetas capaces de levantar suelos, arcos, escaleras, columnas y muros cuando la cámara entra en una nueva zona. El resultado tiene la riqueza de una ilustración completa.</p>
+        <div><span class="chapter-number">XI · La arquitectura invisible</span><h2>El juego construye cada estancia al entrar</h2></div>
+        <p class="chapter-intro">El juego no guarda una imagen completa de cada estancia. Guarda una breve descripción de sus piezas y, cuando la cámara entra en una nueva zona, las combina para dibujar suelos, arcos, escaleras, columnas y muros.</p>
       </div>
       <div class="graphics-pipeline reveal" aria-label="Cadena de construcción de una estancia">
-        <div><small>01</small><b>Posición</b><span>La celda del mundo y la planta determinan qué vista corresponde.</span></div>
-        <div><small>02</small><b>Estancia</b><span>Una lista compacta indica qué piezas arquitectónicas deben colocarse.</span></div>
-        <div><small>03</small><b>Bloques</b><span>Cada pieza es una receta parametrizada que puede repetirse, orientarse y variar.</span></div>
-        <div><small>04</small><b>Tiles</b><span>Las recetas depositan pequeños dibujos de 16 × 8 píxeles en capas de profundidad.</span></div>
-        <div><small>05</small><b>Pantalla</b><span>Máscaras y paleta combinan las capas hasta formar el escenario visible.</span></div>
+        <div><small>01</small><b>Posición</b><span>La posición de la cámara indica qué estancia debe mostrar el juego.</span></div>
+        <div><small>02</small><b>Estancia</b><span>Su descripción contiene una breve lista de piezas arquitectónicas.</span></div>
+        <div><small>03</small><b>Bloques</b><span>Cada pieza se dibuja siguiendo unas instrucciones que combinan tiles.</span></div>
+        <div><small>04</small><b>Tiles</b><span>Son pequeños dibujos de 16 × 8 píxeles que forman la arquitectura.</span></div>
+        <div><small>05</small><b>Pantalla</b><span>Las capas, las máscaras y los colores producen la imagen final.</span></div>
       </div>
       <div class="graphics-explorer reveal" data-graphics-explorer>
         <div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · paleta diurna</p><div class="graphics-light-switch" role="group" aria-label="Iluminación de los gráficos"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Día</button><button type="button" data-graphics-light="night" aria-pressed="false">Noche</button></div></div>
         <div class="graphics-story">
           <section class="graphics-story-step graphics-story-step--tiles">
-            <div class="graphics-story-copy"><span>01 · El alfabeto</span><h3>256 trazos elementales</h3><p>Piedra, madera, suelo, bordes y sombras caben en dibujos de 16 × 8 píxeles. Son las unidades mínimas que las recetas pueden depositar.</p></div>
+            <div class="graphics-story-copy"><span>Piezas básicas</span><h3>256 tiles de 16 × 8 píxeles</h3><p>Los detalles de piedra, madera, suelo, bordes y sombras se guardan en estas piezas gráficas. Las recetas combinan varios tiles para formar un elemento arquitectónico completo.</p></div>
             <figure class="graphics-plate graphics-tile-plate"><button type="button" data-graphics-kind="tiles" data-lightbox="../assets/programming/graphics/cpc/day/tile-atlas.png" data-alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" data-caption="Atlas de 256 tiles · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/tile-atlas.png" alt="Atlas de 256 tiles · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>El vocabulario completo · pulsa para ampliar</figcaption></figure>
           </section>
-          <div class="graphics-story-arrow" aria-hidden="true"><span>los tiles se convierten en recetas arquitectónicas</span></div>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>las recetas combinan los tiles</span></div>
           <section class="graphics-story-step graphics-story-step--blocks">
-            <div class="graphics-story-copy"><span>02 · La gramática</span><h3>Bloques con variaciones</h3><p>Cada arco, escalera o pared surge de una receta que repite, refleja y ordena tiles según sus parámetros.</p></div>
+            <div class="graphics-story-copy"><span>Recetas reutilizables</span><h3>Cuatro ejemplos de bloque</h3><p>Una receta puede dibujar una arcada, una escalera, una hilera de ventanas o un muro. Sus parámetros cambian la longitud, la altura o la orientación sin guardar otra imagen completa.</p></div>
             <div class="graphics-block-specimens">
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="24" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-24.png" data-alt="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-24.png" alt="Bloque arquitectónico 24 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Arcadas</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="16" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-16.png" data-alt="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-16.png" alt="Bloque arquitectónico 16 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Escaleras</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="3e" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-3e.png" data-alt="Bloque arquitectónico 3E · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 3E · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-3e.png" alt="Bloque arquitectónico 3E · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Ventanales</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="60" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-60.png" data-alt="Bloque arquitectónico 60 · Amstrad CPC · paleta diurna" data-caption="Bloque arquitectónico 60 · Amstrad CPC · paleta diurna"><img src="../assets/programming/graphics/cpc/day/blocks/block-60.png" alt="Bloque arquitectónico 60 · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Muros</figcaption></figure>
             </div>
-            <button class="graphics-catalogue-button" type="button" data-graphics-kind="blocks" data-lightbox="../assets/programming/graphics/cpc/day/block-atlas.png" data-alt="Atlas de 87 bloques · Amstrad CPC · paleta diurna" data-caption="Atlas de 87 bloques · Amstrad CPC · paleta diurna">Ver las 87 definiciones en el catálogo completo ↗</button>
+            <button class="graphics-catalogue-button" type="button" data-graphics-kind="blocks" data-lightbox="../assets/programming/graphics/cpc/day/block-atlas.png" data-alt="Atlas de 87 bloques · Amstrad CPC · paleta diurna" data-caption="Atlas de 87 bloques · Amstrad CPC · paleta diurna">Examinar las 87 definiciones del catálogo completo ↗</button>
           </section>
-          <div class="graphics-story-arrow" aria-hidden="true"><span>las recetas levantan una estancia</span></div>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>las piezas forman una estancia</span></div>
           <section class="graphics-story-step graphics-story-step--room">
             <figure class="graphics-room-result"><button type="button" data-graphics-kind="room" data-lightbox="../assets/maps/abbey-rooms/cpc-day/room-17.png" data-alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" data-caption="Estancia 17 reconstruida · Amstrad CPC · paleta diurna"><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Estancia 17 reconstruida · Amstrad CPC · paleta diurna" loading="lazy"></button><figcaption>Arquitectura fija · sin personajes ni objetos móviles</figcaption></figure>
-            <div class="graphics-story-copy"><span>03 · El resultado</span><h3>Una estancia, construida al entrar</h3><p>La descripción de la sala indica qué recetas debe usar el juego. Estas dibujan los tiles y las capas y máscaras los combinan en la imagen que ve el jugador.</p></div>
+            <div class="graphics-story-copy"><span>El resultado</span><h3>La estancia completa</h3><p>La descripción indica qué piezas debe dibujar el juego y dónde debe colocarlas. Después, las capas y las máscaras las combinan para formar la imagen que ve el jugador.</p></div>
           </section>
         </div>
       </div>
       <div class="graphics-entry-copy reveal">
-        <p>Al cambiar los gráficos de la cabecera cambian también estas láminas. PC, Spectrum y MSX parten de sus propios datos; CPC y VGA aplican sus dibujos a la arquitectura común recuperada. Así se puede comparar una misma estancia sin borrar el carácter de cada máquina.</p>
-        <a class="graphics-guide-link" href="graficos.html"><span class="graphics-guide-kicker">Guía técnica ampliada</span><strong>Abrir la guía completa</strong><span class="graphics-guide-description">Coordenadas, bloques, capas y algoritmos del motor.</span><span class="graphics-guide-action" aria-hidden="true">Entrar <b>→</b></span></a>
+        <p>Al cambiar la versión en la cabecera, cambian también estas láminas. Así puedes comparar una misma estancia con los gráficos propios de cada máquina.</p>
+        <a class="graphics-guide-link" href="graficos.html"><span class="graphics-guide-kicker">Guía visual del motor gráfico</span><strong>Cómo se dibuja la abadía</strong><span class="graphics-guide-description">Coordenadas, bloques, tiles y píxeles.</span><span class="graphics-guide-action" aria-hidden="true">Abrir guía <b>→</b></span></a>
       </div>
     </section>
 

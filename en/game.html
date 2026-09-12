@@ -6,10 +6,10 @@
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <meta name="description" content="Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.">
   <title>The game · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-sources1">
+  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
-  <link rel="stylesheet" href="../week.css?v=20260911-labyrinth1">
+  <link rel="stylesheet" href="../week.css?v=20260912-spoilers6">
 </head>
 <body data-page="game">
   <a class="skip-link" href="#contenido">Skip to content</a>
@@ -114,7 +114,10 @@
     <section class="chapter dark" id="characters">
       <div class="chapter-header reveal">
         <div><span class="chapter-number">V · The characters</span><h2>Eight lives, seven days</h2></div>
-        <p class="chapter-intro">Choose a portrait. Each dossier combines what players see with the genuine routines described by the reconstructed code. This chapter contains story spoilers.</p>
+        <div class="chapter-intro-stack">
+          <p class="chapter-intro">Choose a portrait. Each dossier combines what players see with the genuine routines described by the reconstructed code.</p>
+          <p class="spoiler-notice" role="note"><span>Spoilers</span><strong>This chapter reveals characters and events from the story.</strong></p>
+        </div>
       </div>
       <div class="character-layout reveal">
         <div class="character-list" role="tablist" aria-label="Characters">
@@ -254,8 +257,8 @@
         <article class="object-card" data-symbol="III"><img class="object-sprite" src="../assets/items/llave.png" alt="CPC sprite of a key"><small>07 · Access</small><h3>Key III</h3><p>The key Adso can carry.</p></article>
         <article class="object-card" data-symbol="✦"><img class="object-sprite" src="../assets/items/lampara.png" alt="CPC sprite of the lamp"><small>08 · Light</small><h3>Lamp</h3><p>Adso carries it to illuminate dark places.</p></article>
       </div>
-      <details class="week-spoilers game-reference reveal" id="object-reference">
-        <summary>Open object locations, availability and uses · contains spoilers</summary>
+      <details class="week-spoilers game-reference spoiler-disclosure spoiler-disclosure--paper reveal" id="object-reference">
+        <summary><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action"><span class="spoiler-when-closed">Show object locations, availability and uses</span><span class="spoiler-when-open">Hide object locations, availability and uses</span></strong></summary>
         <div class="reference-body">
           <p>William’s six item types and Adso’s two. Night begins the numbered day: night V follows compline IV. Locations change when a character picks up or drops an item.</p>
           <table class="reference-table" role="table">
@@ -279,8 +282,8 @@
 
     <section class="chapter paper-light" id="week">
       <div class="chapter-header reveal"><div><span class="chapter-number">IX · The week</span><h2>Seven days to the <em>Finis Africae</em></h2></div><p class="chapter-intro">First the spoiler-light version; then, if you choose, the full machinery. The cards scroll horizontally on small screens.</p></div>
-      <div class="days-control reveal"><p class="caption">Hidden details are blurred.</p><button class="spoiler-button" type="button" aria-pressed="false" data-show="Reveal every secret" data-hide="Hide the secrets">Reveal every secret</button></div>
-      <div class="days-grid reveal">
+      <button class="days-control spoiler-inline-control spoiler-button reveal" type="button" aria-pressed="false" aria-controls="seven-day-secrets" data-show="Show the secrets of all seven days" data-hide="Hide the secrets of all seven days"><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action" data-spoiler-action>Show the secrets of all seven days</strong></button>
+      <div class="days-grid reveal" id="seven-day-secrets">
         <article class="day-card"><span class="day-no">Day I</span><h3>Arrival</h3><p>The Abbot guides us in, explains the crime, and lays down the rules. The west wing is forbidden.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secret of the day">Architecture and routine are learned while the case still appears manageable.</p></article>
         <article class="day-card"><span class="day-no">Day II</span><h3>The scriptorium</h3><p>Severinus introduces himself. Malachi lets Berengar show the workplace.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secret of the day">Venantius’s scroll can be taken; Berengar threatens to report William, while Malachi guards the library.</p></article>
         <article class="day-card"><span class="day-no">Day III</span><h3>The elder</h3><p>The Abbot presents Jorge, who speaks of Antichrist and the final days.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secret of the day">On the night that begins this day, hooded Berengar steals the book, takes it to Severinus’s cell, and dies. Jorge hides it at dawn, before the introduction.</p></article>
@@ -304,8 +307,8 @@
           <p>Each of these fourteen bonuses adds <strong>4 percentage points once</strong>. <a class="claim-source" href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java" title="CPC reconstruction · percentage calculation" aria-label="Source: CPC reconstruction · percentage calculation">[source]</a> It remains recorded after losing the item or leaving the room; one visit can activate several bonuses.</p>
           <p><strong>Example.</strong> At prime on day VI, with eight distinct bonuses: 7 × 5 + 1 + 4 × 8 = <strong>68%</strong>. One new discovery raises it to <strong>72%</strong>; repeating an existing one adds nothing.</p>
           <p>Completing the investigation displays the ending manuscript instead of this percentage.</p>
-          <details class="week-spoilers game-reference score-reference">
-            <summary>Open the fourteen investigation bonuses · contains spoilers</summary>
+          <details class="week-spoilers game-reference score-reference spoiler-disclosure spoiler-disclosure--paper">
+            <summary><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action"><span class="spoiler-when-closed">Show the fourteen investigation bonuses</span><span class="spoiler-when-open">Hide the fourteen investigation bonuses</span></strong></summary>
           <ul class="score-bonuses"><li>William collects the gloves.</li><li>William collects key I.</li><li>William collects key II.</li><li>Adso collects key III.</li><li>William visits the abbey’s left wing at night.</li><li>William carries the scroll during night III.</li><li>William holds the scroll and spectacles together, making it readable.</li><li>William enters the Abbot’s cell carrying the scroll.</li><li>William enters the library.</li><li>William is in the library while Adso has the lamp.</li><li>William is in the library with the spectacles.</li><li>Reach the mirror room.</li><li>Operate the mirror mechanism: this bonus is recorded even if the wrong step is chosen.</li><li>Enter Jorge’s room behind the mirror during the final sequence.</li></ul>
           </details>
           <p class="guide-source">Reference: reconstructed CPC logic · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L262-L307">bonuses</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L557-L578">calculation</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Logica.java#L694-L715">mirror</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Jorge.java">ending</a>.</p>
@@ -318,8 +321,8 @@
         <p class="chapter-intro">When the investigation is complete, the game returns to the parchment so Adso can close his account. Its text reveals the entire ending.</p>
       </div>
 
-      <details class="ending-spoiler reveal">
-        <summary><span>Warning · full game-ending spoilers</span><strong>Reveal the ending manuscript</strong></summary>
+      <details class="ending-spoiler spoiler-disclosure spoiler-disclosure--dark reveal">
+        <summary><span class="spoiler-kicker">Ending spoilers</span><strong class="spoiler-action"><span class="spoiler-when-closed">Reveal the ending manuscript</span><span class="spoiler-when-open">Hide the ending manuscript</span></strong></summary>
         <div class="parchment-experience" data-parchment data-parchment-language="en" data-parchment-platform="cpc" data-parchment-text="ending">
           <div class="parchment-player">
             <div class="parchment-stage">
@@ -377,8 +380,8 @@
   <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Archive viewer"><button class="lightbox-close" type="button">Close ×</button><div class="lightbox-zoom" aria-label="Zoom"><button class="lightbox-zoom-out" type="button" aria-label="Zoom out">−</button><output class="lightbox-zoom-level" aria-live="polite">100%</output><button class="lightbox-zoom-in" type="button" aria-label="Zoom in">+</button><button class="lightbox-zoom-fit" type="button">Fit</button></div><div class="lightbox-stage"><img src="" alt=""></div><div class="lightbox-navigation" aria-label="Article pages" hidden><button class="lightbox-previous" type="button" aria-label="Previous page">← Previous</button><span class="lightbox-page-count" aria-live="polite"></span><button class="lightbox-next" type="button" aria-label="Next page">Next →</button></div><p class="lightbox-caption"></p></div>
   <script src="../assets/game/parchment-data.js?v=20260908-w1"></script>
   <script src="../parchment.js?v=20260908-platform1"></script>
-  <script src="../app.js?v=20260911-review1"></script>
+  <script src="../app.js?v=20260912-spoilers1"></script>
   <script src="../assets/game/week-dialogue.js?v=20260911-1"></script>
-  <script src="../week.js?v=20260912-week-audit"></script>
+  <script src="../week.js?v=20260912-spoilers1"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <meta name="description" content="Versions, sound, and reverse engineering: the technical laboratory of the tribute, ready to grow.">
   <title>How the abbey thinks · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260911-sources1">
+  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260910-editorial2">
 </head>
 <body data-page="technology">
@@ -63,40 +63,40 @@
     </section>
 
     <section class="chapter dark graphics-entry" id="graphics">
-      <div class="chapter-header reveal"><div><span class="chapter-number">XI · The invisible architecture</span><h2>An abbey built on entry</h2></div><p class="chapter-intro">Every room is assembled from a small vocabulary of parts and recipes able to raise floors, arches, stairs, columns, and walls whenever the camera enters a new area. The result has the richness of a complete illustration.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">XI · The invisible architecture</span><h2>The game builds each room on entry</h2></div><p class="chapter-intro">The game does not store a complete image of every room. It stores a short description of its parts and combines them to draw floors, arches, stairs, columns, and walls whenever the camera enters a new area.</p></div>
       <div class="graphics-pipeline reveal" aria-label="Room construction pipeline">
-        <div><small>01</small><b>Position</b><span>The world cell and floor determine which view belongs here.</span></div>
-        <div><small>02</small><b>Room</b><span>A compact list says which architectural pieces must be placed.</span></div>
-        <div><small>03</small><b>Blocks</b><span>Each piece is a parameterised recipe that can repeat, turn, and vary.</span></div>
-        <div><small>04</small><b>Tiles</b><span>The recipes deposit small 16 × 8 pixel drawings into depth layers.</span></div>
-        <div><small>05</small><b>Screen</b><span>Masks and palette combine the layers into the visible setting.</span></div>
+        <div><small>01</small><b>Position</b><span>The camera position tells the game which room to show.</span></div>
+        <div><small>02</small><b>Room</b><span>Its description contains a short list of architectural pieces.</span></div>
+        <div><small>03</small><b>Blocks</b><span>Each piece is drawn by following instructions that combine tiles.</span></div>
+        <div><small>04</small><b>Tiles</b><span>These small 16 × 8 pixel drawings form the architecture.</span></div>
+        <div><small>05</small><b>Screen</b><span>Layers, masks, and colours produce the final image.</span></div>
       </div>
       <div class="graphics-explorer reveal" data-graphics-explorer>
         <div class="graphics-explorer-bar"><p data-graphics-edition>Amstrad CPC · daytime palette</p><div class="graphics-light-switch" role="group" aria-label="Graphics lighting"><button class="is-active" type="button" data-graphics-light="day" aria-pressed="true">Day</button><button type="button" data-graphics-light="night" aria-pressed="false">Night</button></div></div>
         <div class="graphics-story">
           <section class="graphics-story-step graphics-story-step--tiles">
-            <div class="graphics-story-copy"><span>01 · The alphabet</span><h3>256 elementary marks</h3><p>Stone, timber, floor, edges, and shadows fit into 16 × 8 pixel drawings. They are the smallest units the recipes can deposit.</p></div>
+            <div class="graphics-story-copy"><span>Basic pieces</span><h3>256 tiles of 16 × 8 pixels</h3><p>Details of stone, timber, floors, edges, and shadows are stored in these graphic pieces. Recipes combine several tiles to form a complete architectural element.</p></div>
             <figure class="graphics-plate graphics-tile-plate"><button type="button" data-graphics-kind="tiles" data-lightbox="../assets/programming/graphics/cpc/day/tile-atlas.png" data-alt="Atlas of 256 tiles · Amstrad CPC · daytime palette" data-caption="Atlas of 256 tiles · Amstrad CPC · daytime palette"><img src="../assets/programming/graphics/cpc/day/tile-atlas.png" alt="Atlas of 256 tiles · Amstrad CPC · daytime palette" loading="lazy"></button><figcaption>The complete vocabulary · select to enlarge</figcaption></figure>
           </section>
-          <div class="graphics-story-arrow" aria-hidden="true"><span>tiles become architectural recipes</span></div>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>recipes combine the tiles</span></div>
           <section class="graphics-story-step graphics-story-step--blocks">
-            <div class="graphics-story-copy"><span>02 · The grammar</span><h3>Blocks that know how to vary</h3><p>Each arch, staircase, or wall grows from a recipe able to repeat, mirror, and order tiles according to its parameters.</p></div>
+            <div class="graphics-story-copy"><span>Reusable recipes</span><h3>Four block examples</h3><p>A recipe can draw an arcade, a staircase, a row of windows, or a wall. Its parameters change the length, height, or orientation without storing another complete image.</p></div>
             <div class="graphics-block-specimens">
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="24" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-24.png" data-alt="Architectural block 24 · Amstrad CPC · daytime palette" data-caption="Architectural block 24 · Amstrad CPC · daytime palette"><img src="../assets/programming/graphics/cpc/day/blocks/block-24.png" alt="Architectural block 24 · Amstrad CPC · daytime palette" loading="lazy"></button><figcaption>Arcades</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="16" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-16.png" data-alt="Architectural block 16 · Amstrad CPC · daytime palette" data-caption="Architectural block 16 · Amstrad CPC · daytime palette"><img src="../assets/programming/graphics/cpc/day/blocks/block-16.png" alt="Architectural block 16 · Amstrad CPC · daytime palette" loading="lazy"></button><figcaption>Stairs</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="3e" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-3e.png" data-alt="Architectural block 3E · Amstrad CPC · daytime palette" data-caption="Architectural block 3E · Amstrad CPC · daytime palette"><img src="../assets/programming/graphics/cpc/day/blocks/block-3e.png" alt="Architectural block 3E · Amstrad CPC · daytime palette" loading="lazy"></button><figcaption>Windows</figcaption></figure>
               <figure><button type="button" data-graphics-kind="block" data-graphics-block="60" data-lightbox="../assets/programming/graphics/cpc/day/blocks/block-60.png" data-alt="Architectural block 60 · Amstrad CPC · daytime palette" data-caption="Architectural block 60 · Amstrad CPC · daytime palette"><img src="../assets/programming/graphics/cpc/day/blocks/block-60.png" alt="Architectural block 60 · Amstrad CPC · daytime palette" loading="lazy"></button><figcaption>Walls</figcaption></figure>
             </div>
-            <button class="graphics-catalogue-button" type="button" data-graphics-kind="blocks" data-lightbox="../assets/programming/graphics/cpc/day/block-atlas.png" data-alt="Atlas of 87 blocks · Amstrad CPC · daytime palette" data-caption="Atlas of 87 blocks · Amstrad CPC · daytime palette">View all 87 definitions in the complete catalogue ↗</button>
+            <button class="graphics-catalogue-button" type="button" data-graphics-kind="blocks" data-lightbox="../assets/programming/graphics/cpc/day/block-atlas.png" data-alt="Atlas of 87 blocks · Amstrad CPC · daytime palette" data-caption="Atlas of 87 blocks · Amstrad CPC · daytime palette">Explore all 87 definitions in the complete catalogue ↗</button>
           </section>
-          <div class="graphics-story-arrow" aria-hidden="true"><span>recipes raise a room</span></div>
+          <div class="graphics-story-arrow" aria-hidden="true"><span>the pieces form a room</span></div>
           <section class="graphics-story-step graphics-story-step--room">
             <figure class="graphics-room-result"><button type="button" data-graphics-kind="room" data-lightbox="../assets/maps/abbey-rooms/cpc-day/room-17.png" data-alt="Reconstructed room 17 · Amstrad CPC · daytime palette" data-caption="Reconstructed room 17 · Amstrad CPC · daytime palette"><img src="../assets/maps/abbey-rooms/cpc-day/room-17.png" alt="Reconstructed room 17 · Amstrad CPC · daytime palette" loading="lazy"></button><figcaption>Fixed architecture · without characters or movable objects</figcaption></figure>
-            <div class="graphics-story-copy"><span>03 · The result</span><h3>A room, constructed on entry</h3><p>The room description places recipes; recipes emit tiles; layers and masks finally form the image seen by the player.</p></div>
+            <div class="graphics-story-copy"><span>The result</span><h3>The complete room</h3><p>The description tells the game which pieces to draw and where to place them. Layers and masks then combine them into the image seen by the player.</p></div>
           </section>
         </div>
       </div>
-      <div class="graphics-entry-copy reveal"><p>The graphics selector in the header also rebuilds these plates. PC, Spectrum, and MSX draw on their own data; CPC and VGA apply their artwork to the recovered common architecture. The geometry makes the same visual idea comparable while each machine retains its character.</p><a class="graphics-guide-link" href="graphics.html"><span class="graphics-guide-kicker">Expanded technical guide</span><strong>Open the complete guide</strong><span class="graphics-guide-description">Coordinates, blocks, layers, and engine algorithms.</span><span class="graphics-guide-action" aria-hidden="true">Enter <b>→</b></span></a></div>
+      <div class="graphics-entry-copy reveal"><p>When you change the version in the header, these plates change too. This lets you compare the same room using the graphics of each machine.</p><a class="graphics-guide-link" href="graphics.html"><span class="graphics-guide-kicker">Visual graphics-engine guide</span><strong>How the abbey is drawn</strong><span class="graphics-guide-description">Coordinates, blocks, tiles, and pixels.</span><span class="graphics-guide-action" aria-hidden="true">Open guide <b>→</b></span></a></div>
     </section>
 
     <section class="chapter dark sound-chapter" id="sound">
