@@ -382,6 +382,99 @@
     }));
   });
 
+  const extensumRoomLayouts = {
+    ground: '8,1,39;10,1,62;11,1,79;12,1,126;1,2,10;2,2,9;4,2,7;5,2,8;6,2,42;7,2,40;8,2,38;9,2,41;10,2,55;11,2,56;12,2,57;2,3,2;3,3,1;4,3,0;5,3,13;6,3,14;7,3,36;8,3,35;9,3,37;10,3,43;11,3,44;12,3,45;2,4,3;4,4,31;5,4,132;6,4,131;7,4,116;8,4,34;9,4,117;10,4,46;11,4,47;12,4,48;2,5,4;3,5,29;4,5,30;5,5,130;6,5,61;7,5,98;8,5,33;9,5,99;10,5,49;11,5,50;12,5,51;1,6,12;2,6,11;3,6,28;4,6,5;5,6,6;6,6,60;7,6,96;8,6,32;9,6,97;10,6,52;11,6,53;12,6,54;3,7,15;4,7,16;5,7,17;6,7,18;7,7,94;8,7,27;9,7,95;10,7,26;11,7,58;12,7,59;5,8,129;6,8,19;7,8,20;8,8,21;9,8,24;10,8,25;11,8,124;12,8,125;4,9,123;5,9,120;6,9,90;7,9,91;8,9,22;9,9,92;10,9,93;11,9,137;4,10,122;5,10,119;6,10,85;7,10,86;8,10,87;9,10,88;10,10,89;11,10,138;4,11,121;5,11,118;6,11,80;7,11,81;8,11,82;9,11,83;10,11,84;11,11,139;8,12,23',
+    upper: '1,1,69;2,1,68;4,1,72;5,1,73;6,1,127;2,2,67;3,2,71;4,2,74;2,3,66;4,3,75;2,4,65;3,4,64;4,4,76;1,5,63;2,5,70;4,5,77;5,5,78',
+    library: '1,1,103;2,1,102;4,1,101;5,1,100;6,1,128;1,2,133;2,2,106;3,2,105;4,2,104;5,2,134;2,3,108;4,3,107;1,4,135;2,4,111;3,4,110;4,4,109;5,4,136;1,5,115;2,5,114;4,5,113;5,5,112;7,5,140'
+  };
+  const extensumUnreachableRooms = new Set([123]);
+  $$('[data-extensum-map]').forEach(browser => {
+    const isSpanish = document.documentElement.lang === 'es';
+    const layouts = Object.fromEntries(Object.entries(extensumRoomLayouts).map(([floor, encoded]) => [
+      floor,
+      encoded.split(';').map(room => room.split(',').map(Number))
+    ]));
+    const tabs = $$('[data-extensum-floor]', browser);
+    const panels = $$('[data-extensum-panel]', browser);
+    const lightButtons = $$('[data-extensum-light]', browser);
+    let currentLight = 'day';
+    let isBuilt = false;
+
+    const updateExtensumEdition = () => {
+      const lightLabel = currentLight === 'night'
+        ? (isSpanish ? 'noche' : 'night')
+        : (isSpanish ? 'día' : 'day');
+      $$('.abbey-room', browser).forEach(button => {
+        const source = `../assets/extensum/rooms/${currentLight}/room-${button.dataset.roomId}.png`;
+        const label = `${isSpanish ? 'Estancia' : 'Room'} ${button.dataset.roomId} · Extensum · ${lightLabel}`;
+        const image = $('img', button);
+        if (image) image.src = source;
+        button.dataset.lightbox = source;
+        button.dataset.alt = label;
+        button.dataset.caption = label;
+      });
+      const legend = $('[data-extensum-edition]', browser);
+      if (legend) legend.textContent = `Extensum · ${lightLabel}`;
+      browser.dataset.mapPalette = currentLight;
+    };
+    const buildExtensumMap = () => {
+      if (isBuilt) return;
+      $$('[data-room-grid]', browser).forEach(grid => {
+        (layouts[grid.dataset.roomGrid] || []).forEach(([column, row, room]) => {
+          if (extensumUnreachableRooms.has(room)) return;
+          const roomId = String(room).padStart(3, '0');
+          const button = document.createElement('button');
+          button.className = 'abbey-room';
+          button.type = 'button';
+          button.style.gridColumn = column;
+          button.style.gridRow = row;
+          button.dataset.roomId = roomId;
+          button.dataset.mapColumn = column;
+          button.dataset.mapRow = row;
+          button.setAttribute('aria-label', `${isSpanish ? 'Ampliar estancia' : 'Enlarge room'} ${roomId}`);
+          const image = document.createElement('img');
+          image.alt = '';
+          image.loading = 'lazy';
+          image.decoding = 'async';
+          image.width = 320;
+          image.height = 176;
+          const number = document.createElement('span');
+          number.textContent = roomId;
+          number.setAttribute('aria-hidden', 'true');
+          button.append(image, number);
+          grid.append(button);
+        });
+      });
+      isBuilt = true;
+      updateExtensumEdition();
+    };
+
+    browser.addEventListener('toggle', () => {
+      if (browser.open) buildExtensumMap();
+    });
+    lightButtons.forEach(button => button.addEventListener('click', () => {
+      currentLight = button.dataset.extensumLight;
+      lightButtons.forEach(item => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      if (isBuilt) updateExtensumEdition();
+    }));
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(item => {
+        const active = item === tab;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach(panel => {
+        const active = panel.dataset.extensumPanel === tab.dataset.extensumFloor;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+    }));
+  });
+
   $$('[data-graphics-explorer]').forEach(explorer => {
     const isSpanish = document.documentElement.lang === 'es';
     let currentPlatform = document.documentElement.dataset.platform || 'cpc';
@@ -698,6 +791,7 @@
   let lightboxBaseCaption = '';
   let lightboxTrigger = null;
   let lightboxZoom = 1;
+  let lightboxRequestedZoom = null;
   let lightboxFitWidth = 0;
   let lightboxFitHeight = 0;
   let lightboxOpenNative = false;
@@ -706,13 +800,14 @@
   const lightboxMaxZoom = 6;
   const lightboxZoomStep = .25;
   const positionRoomNavigation = () => {
-    if (!lightboxRoomNavigation || !lightboxFitWidth || !lightboxFitHeight) return;
-    const imageLeft = (window.innerWidth - lightboxFitWidth) / 2;
-    const imageTop = (window.innerHeight - lightboxFitHeight) / 2;
-    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-left', `${imageLeft}px`);
-    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-right', `${imageLeft + lightboxFitWidth}px`);
-    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-top', `${imageTop}px`);
-    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-bottom', `${imageTop + lightboxFitHeight}px`);
+    if (!lightboxRoomNavigation || !lightboxImage || !lightboxFitWidth || !lightboxFitHeight) return;
+    const imageRect = lightboxImage.getBoundingClientRect();
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-left', `${imageRect.left}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-right', `${imageRect.right}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-top', `${imageRect.top}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-bottom', `${imageRect.bottom}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-center-x', `${imageRect.left + imageRect.width / 2}px`);
+    lightboxRoomNavigation.style.setProperty('--lightbox-room-image-center-y', `${imageRect.top + imageRect.height / 2}px`);
   };
   const setLightboxZoom = (zoom, focusPoint = null) => {
     if (!lightbox || !lightboxImage || !lightboxFitWidth || !lightboxFitHeight) return;
@@ -721,16 +816,18 @@
     const focusX = focusPoint && imageRect.width ? (focusPoint.x - imageRect.left) / imageRect.width : .5;
     const focusY = focusPoint && imageRect.height ? (focusPoint.y - imageRect.top) / imageRect.height : .5;
     lightboxZoom = nextZoom;
+    lightboxRequestedZoom = nextZoom;
     lightboxImage.style.width = `${Math.round(lightboxFitWidth * lightboxZoom)}px`;
     lightboxImage.style.height = `${Math.round(lightboxFitHeight * lightboxZoom)}px`;
     lightbox.classList.toggle('is-zoomed', lightboxZoom > 1);
     if (lightboxZoomLevel) lightboxZoomLevel.value = `${Math.round(lightboxZoom * 100)}%`;
     if (lightboxZoomOut) lightboxZoomOut.disabled = lightboxZoom <= lightboxMinZoom;
     if (lightboxZoomIn) lightboxZoomIn.disabled = lightboxZoom >= lightboxMaxZoom;
-    positionRoomNavigation();
+    requestAnimationFrame(positionRoomNavigation);
     if (focusPoint) requestAnimationFrame(() => {
       const nextRect = lightboxImage.getBoundingClientRect();
       lightbox.scrollBy(nextRect.left + nextRect.width * focusX - focusPoint.x, nextRect.top + nextRect.height * focusY - focusPoint.y);
+      requestAnimationFrame(positionRoomNavigation);
     });
   };
   addEventListener('resize', () => {
@@ -744,12 +841,13 @@
     lightboxFitWidth = lightboxImage.naturalWidth * fitScale;
     lightboxFitHeight = lightboxImage.naturalHeight * fitScale;
     const nativeZoom = lightboxImage.naturalWidth / lightboxFitWidth;
-    setLightboxZoom(lightboxOpenNative ? nativeZoom : 1);
+    setLightboxZoom(lightboxRequestedZoom ?? (lightboxOpenNative ? nativeZoom : 1));
     lightbox.scrollTo(0, 0);
   };
-  const showLightboxPage = page => {
+  const showLightboxPage = (page, requestedZoom = null) => {
     if (!lightbox || !lightboxImage || !lightboxPages.length) return;
     lightboxPage = Math.max(0, Math.min(page, lightboxPages.length - 1));
+    lightboxRequestedZoom = requestedZoom;
     lightboxFitWidth = 0;
     lightboxFitHeight = 0;
     lightboxImage.removeAttribute('style');
@@ -764,6 +862,7 @@
     if (lightboxImage.complete) requestAnimationFrame(prepareLightboxImage);
   };
   lightboxImage?.addEventListener('load', prepareLightboxImage);
+  lightbox?.addEventListener('scroll', positionRoomNavigation, { passive: true });
   let lightboxBackground = [];
   let previousBodyOverflow = '';
   const closeLightbox = () => {
@@ -801,10 +900,10 @@
   const navigateToAdjacentRoom = (columnDelta, rowDelta) => {
     const nextRoom = adjacentRoom(columnDelta, rowDelta);
     if (!nextRoom) return false;
-    openLightbox(nextRoom);
+    openLightbox(nextRoom, { preserveZoom: true });
     return true;
   };
-  const openLightbox = button => {
+  const openLightbox = (button, { preserveZoom = false } = {}) => {
     if (!lightbox || !lightboxImage) return;
     if (!lightbox.classList.contains('is-open')) {
       previousBodyOverflow = document.body.style.overflow;
@@ -823,7 +922,7 @@
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    showLightboxPage(lightboxPage);
+    showLightboxPage(lightboxPage, preserveZoom ? lightboxZoom : null);
     updateRoomNavigation();
     lightbox.scrollTo(0, 0);
     const focusX = Number(button.dataset.lightboxFocusX);

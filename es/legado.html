@@ -77,6 +77,30 @@
         <figure><button type="button" data-lightbox="../assets/extensum/extensum-church.jpg" data-alt="Misa y reunión de los monjes en la iglesia de Extensum" data-caption="Captura oficial de Extensum en Steam: la comunidad reunida en la iglesia."><img src="../assets/extensum/extensum-church.jpg" alt="Iglesia de Extensum con los monjes reunidos" loading="lazy"></button></figure>
         <figure><button type="button" data-lightbox="../assets/extensum/extensum-3.jpg" data-alt="Escena nocturna de Extensum" data-caption="Captura oficial de Extensum en Steam."><img src="../assets/extensum/extensum-3.jpg" alt="Escena nocturna de Extensum" loading="lazy"></button></figure>
       </div>
+      <details class="extensum-map-browser reveal" data-extensum-map>
+        <summary>
+          <span class="source-tag">Atlas interactivo · 140 lugares</span>
+          <strong>Recorre la abadía ampliada</strong>
+          <span class="extensum-map-summary-action extensum-map-summary-action--open" aria-hidden="true">Abrir el mapa ↓</span>
+          <span class="extensum-map-summary-action extensum-map-summary-action--close" aria-hidden="true">Cerrar el mapa ↑</span>
+        </summary>
+        <div class="extensum-map-frame">
+          <header class="extensum-map-heading">
+            <div><span class="source-tag">Extraído del juego de 2016</span><h3>La nueva abadía, estancia a estancia</h3></div>
+            <p>Elige una planta y la iluminación. Selecciona cualquier pantalla para ampliarla; dentro del visor, las flechas siguen las estancias contiguas.</p>
+          </header>
+          <div class="abbey-map-variantbar"><span>Luz</span><div class="abbey-light-tabs" aria-label="Iluminación de Extensum"><button type="button" class="is-active" data-extensum-light="day" aria-pressed="true">Día</button><button type="button" data-extensum-light="night" aria-pressed="false">Noche</button></div></div>
+          <div class="abbey-floor-tabs" role="tablist" aria-label="Plantas de Extensum">
+            <button type="button" class="is-active" role="tab" id="extensum-ground-tab-es" aria-controls="extensum-ground-es" aria-selected="true" data-extensum-floor="ground">Planta baja <span>102 estancias</span></button>
+            <button type="button" role="tab" id="extensum-upper-tab-es" aria-controls="extensum-upper-es" aria-selected="false" data-extensum-floor="upper">Planta superior <span>17 estancias</span></button>
+            <button type="button" role="tab" id="extensum-library-tab-es" aria-controls="extensum-library-es" aria-selected="false" data-extensum-floor="library">Biblioteca <span>22 estancias</span></button>
+          </div>
+          <section class="abbey-floor-panel is-active" role="tabpanel" id="extensum-ground-es" aria-labelledby="extensum-ground-tab-es" data-extensum-panel="ground"><div class="abbey-room-grid extensum-room-grid extensum-room-grid--ground" data-room-grid="ground"></div></section>
+          <section class="abbey-floor-panel" role="tabpanel" id="extensum-upper-es" aria-labelledby="extensum-upper-tab-es" data-extensum-panel="upper" hidden><div class="abbey-room-grid extensum-room-grid extensum-room-grid--upper" data-room-grid="upper"></div></section>
+          <section class="abbey-floor-panel" role="tabpanel" id="extensum-library-es" aria-labelledby="extensum-library-tab-es" data-extensum-panel="library" hidden><div class="abbey-room-grid extensum-room-grid extensum-room-grid--library" data-room-grid="library"></div></section>
+          <div class="abbey-map-legend"><span data-extensum-edition>Extensum · día</span><p><b>140 estancias base cartografiadas · día y noche.</b> Su posición procede de la propia tabla tridimensional del mundo de Extensum; los estados arquitectónicos mutables no son lugares nuevos.</p></div>
+        </div>
+      </details>
     </section>
 
     <section class="chapter paper-light" id="legado">

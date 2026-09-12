@@ -71,6 +71,30 @@
         <div class="prose"><span class="source-tag">2016 · Free</span><h3><cite>Extensum</cite>: remake and expansion</h3><p><cite>Extensum</cite> preserves the isometric heart and schedule, but enlarges the map, adds characters, situations, cinematics, and new logic. It offers classic or directional controls and optional aids: map, alternate camera, an indicator for the sleeping Abbot, and an oil gauge.</p><p>The project culminated a long chain of reconstructions detailed in the Legacy chapter. Daniel Celemín renewed the visuals with pixel art that evokes the film without abandoning the original’s clarity.</p><p>It runs on Windows, macOS, and Linux with several interface languages. More than 20,000 copies were downloaded during its first week; Steam reviews remain very positive.</p><p><a href="https://store.steampowered.com/app/474030/The_Abbey_of_Crime_Extensum/">Play free on Steam</a></p></div>
       </div>
       <div class="extensum-gallery reveal"><figure><button type="button" data-lightbox="../assets/extensum/extensum-church.jpg" data-alt="Monks gathered in the Extensum church" data-caption="Official Extensum screenshot on Steam: the community gathered in the church."><img src="../assets/extensum/extensum-church.jpg" alt="Extensum church with the monks gathered" loading="lazy"></button></figure><figure><button type="button" data-lightbox="../assets/extensum/extensum-3.jpg" data-alt="Extensum night scene" data-caption="Official Extensum screenshot on Steam."><img src="../assets/extensum/extensum-3.jpg" alt="Extensum night scene" loading="lazy"></button></figure></div>
+      <details class="extensum-map-browser reveal" data-extensum-map>
+        <summary>
+          <span class="source-tag">Interactive atlas · 140 locations</span>
+          <strong>Browse the expanded abbey</strong>
+          <span class="extensum-map-summary-action extensum-map-summary-action--open" aria-hidden="true">Open the map ↓</span>
+          <span class="extensum-map-summary-action extensum-map-summary-action--close" aria-hidden="true">Close the map ↑</span>
+        </summary>
+        <div class="extensum-map-frame">
+          <header class="extensum-map-heading">
+            <div><span class="source-tag">Extracted from the 2016 game</span><h3>The new abbey, room by room</h3></div>
+            <p>Choose a floor and a light setting. Select any screen to enlarge it; inside the viewer, the arrow controls follow adjacent rooms.</p>
+          </header>
+          <div class="abbey-map-variantbar"><span>Light</span><div class="abbey-light-tabs" aria-label="Extensum light setting"><button type="button" class="is-active" data-extensum-light="day" aria-pressed="true">Day</button><button type="button" data-extensum-light="night" aria-pressed="false">Night</button></div></div>
+          <div class="abbey-floor-tabs" role="tablist" aria-label="Extensum floors">
+            <button type="button" class="is-active" role="tab" id="extensum-ground-tab-en" aria-controls="extensum-ground-en" aria-selected="true" data-extensum-floor="ground">Ground floor <span>102 rooms</span></button>
+            <button type="button" role="tab" id="extensum-upper-tab-en" aria-controls="extensum-upper-en" aria-selected="false" data-extensum-floor="upper">Upper floor <span>17 rooms</span></button>
+            <button type="button" role="tab" id="extensum-library-tab-en" aria-controls="extensum-library-en" aria-selected="false" data-extensum-floor="library">Library <span>22 rooms</span></button>
+          </div>
+          <section class="abbey-floor-panel is-active" role="tabpanel" id="extensum-ground-en" aria-labelledby="extensum-ground-tab-en" data-extensum-panel="ground"><div class="abbey-room-grid extensum-room-grid extensum-room-grid--ground" data-room-grid="ground"></div></section>
+          <section class="abbey-floor-panel" role="tabpanel" id="extensum-upper-en" aria-labelledby="extensum-upper-tab-en" data-extensum-panel="upper" hidden><div class="abbey-room-grid extensum-room-grid extensum-room-grid--upper" data-room-grid="upper"></div></section>
+          <section class="abbey-floor-panel" role="tabpanel" id="extensum-library-en" aria-labelledby="extensum-library-tab-en" data-extensum-panel="library" hidden><div class="abbey-room-grid extensum-room-grid extensum-room-grid--library" data-room-grid="library"></div></section>
+          <div class="abbey-map-legend"><span data-extensum-edition>Extensum · day</span><p><b>140 mapped base rooms · day and night.</b> Their positions come from Extensum’s own three-floor world lookup; mutable architectural states are not extra geography.</p></div>
+        </div>
+      </details>
     </section>
 
     <section class="chapter paper-light" id="legacy">
