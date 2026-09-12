@@ -99,10 +99,26 @@
       </div>
     </section>
 
+    <section class="chapter paper-warm controls-chapter" id="controles" aria-labelledby="controls-title">
+      <div class="chapter-header reveal">
+        <div><span class="chapter-number">IV · Los controles</span><h2 id="controls-title">Controles clásicos</h2></div>
+        <p class="chapter-intro">Primero orientas a Guillermo y después avanzas. Adso y los objetos obedecen sus propias reglas.</p>
+      </div>
+      <div class="controls-guide reveal">
+        <dl class="controls-list">
+          <div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> Mover a Guillermo</dt><dd>Izquierda y derecha giran; arriba avanza. También puedes usar <kbd>L</kbd>, <kbd>K</kbd> y <kbd>A</kbd>.</dd></div>
+          <div><dt><kbd>↓</kbd> Dirigir a Adso</dt><dd>Orienta a Guillermo y mantén abajo —o <kbd>Z</kbd>— para mover a Adso en esa dirección. Al soltar, vuelve a seguirte.</dd></div>
+          <div><dt>Objetos</dt><dd>Se recogen automáticamente al acercar al portador. <kbd>Espacio</kbd> deja el objeto de Guillermo situado más a la izquierda, si hay sitio delante.</dd></div>
+          <div><dt><kbd>S</kbd> / <kbd>N</kbd> Dormir</dt><dd>Responde a Adso en vuestra celda: <kbd>S</kbd> avanza hasta prima; <kbd>N</kbd> permite seguir despierto.</dd></div>
+        </dl>
+        <p class="guide-source">Consulta: <a href="https://worldofspectrum.net/pub/sinclair/games-info/a/AbadiaDelCrimen%2BSirFredLa.pdf">manual original conservado</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Adso.java">rutina de Adso reconstruida</a>. Los remakes y las asignaciones del emulador pueden variar.</p>
+      </div>
+    </section>
+
     <section class="chapter dark" id="personajes">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">IV · Los personajes</span>
+          <span class="chapter-number">V · Los personajes</span>
           <h2>Ocho vidas, siete días</h2>
         </div>
         <p class="chapter-intro">Selecciona un retrato. Cada ficha combina lo que se ve durante la partida con las rutinas que describe el código reconstruido. Esta sección contiene revelaciones argumentales.</p>
@@ -183,7 +199,7 @@
             <p>Se presenta a partir del segundo día y expresa con claridad una de las ideas del juego: alguien decide qué pueden saber los monjes. Examina el cadáver de Berengario y observa las manchas negras que relacionan las muertes con el libro.</p>
             <blockquote>«Alguien no quiere que los monjes decidan por sí solos lo que deben saber.»</blockquote>
             <div class="stat-line"><b>Rutina</b><span>Prima en la iglesia, sexta en el refectorio, completas y noche en su celda. Entre tercia y nona alterna su celda con una habitación adyacente y busca a Guillermo para conversar.</span></div>
-            <div class="stat-line"><b>Semana</b><span>D2 se presenta. D4, en tercia, busca a Guillermo y le pide que espere antes de revelar las manchas. D5 encuentra un extraño libro en su celda e intenta avisarlo; Malaquías llega antes o después y lo asesina.</span></div>
+            <div class="stat-line"><b>Semana</b><span>D2 se presenta. D4, en tercia, busca a Guillermo y le pide que espere antes de revelar las manchas. D5 encuentra un extraño libro en su celda e intenta avisar a Guillermo; en tercia, Malaquías va a su celda y lo asesina.</span></div>
             <div class="stat-line"><b>Secreto</b><span>Su ruta depende de si ya se presentó, de la posición de Guillermo y de si otra frase está sonando. El encuentro parece casual porque el programa comprueba todas esas condiciones antes de iniciarlo.</span></div>
           </article>
 
@@ -215,7 +231,7 @@
     <section class="chapter paper-light" id="horas">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">V · La regla</span>
+          <span class="chapter-number">VI · La regla</span>
           <h2>Las campanas mandan</h2>
         </div>
         <p class="chapter-intro">Aquí el día se mide en prima, tercia, sexta, nona, vísperas y completas. Selecciona una fase y observa cómo una campanada pone en movimiento a toda la comunidad.</p>
@@ -229,7 +245,7 @@
           <button class="hour-button" type="button" data-title="Nona" data-text="La tarde deja tiempo para recorrer la abadía e investigar. El primer día tiene lugar el largo paseo de bienvenida; el quinto, el hallazgo de Severino.">Nona</button>
           <button class="hour-button" type="button" data-title="Vísperas" data-text="La comunidad vuelve a la iglesia. Malaquías cierra el ala izquierda antes de acudir. El quinto día muere durante el rito.">Vísperas</button>
           <button class="hour-button" type="button" data-title="Completas" data-text="El Abad ordena ir a las celdas, escolta a Guillermo, espera que entre y cierra la puerta que comunica con la iglesia.">Completas</button>
-          <button class="hour-button" type="button" data-title="Noche" data-text="La puerta se cierra. Adso pregunta si dormimos. El Abad duerme, se despierta y patrulla. Es la única ventana para la biblioteca.">Noche</button>
+          <button class="hour-button" type="button" data-title="Noche" data-text="Adso pregunta si dormimos. El Abad duerme, se despierta y patrulla. Es la única ventana para la biblioteca.">Noche</button>
           <div class="clock-center"><figure class="clock-status-slot" aria-label="Reconstrucción del marcador horario de la versión seleccionada"><div class="clock-status-viewport"><img src="../assets/game/clock-status/cpc.png" data-platform-src-cpc="../assets/game/clock-status/cpc.png" data-platform-src-pc="../assets/game/clock-status/pc.png" data-platform-src-vga="../assets/game/clock-status/vga.png" data-platform-src-spectrum="../assets/game/clock-status/spectrum.png" data-platform-src-msx="../assets/game/clock-status/msx.png" alt="" aria-hidden="true"><span class="clock-status-current"><img data-clock-slot-label src="../assets/game/interface-labels/PRIMA.svg?v=20260830-clockfont2" alt="" aria-hidden="true"></span></div><figcaption data-platform-text-cpc="Reconstrucción · marcador CPC" data-platform-text-pc="Reconstrucción · marcador PC CGA" data-platform-text-vga="Reconstrucción · marcador VGA" data-platform-text-spectrum="Reconstrucción · marcador ZX Spectrum" data-platform-text-msx="Reconstrucción · marcador MSX">Reconstrucción · marcador CPC</figcaption></figure><small>Ahora</small><strong data-clock-title>Prima</strong><span data-clock-text>Misa al amanecer. El Abad espera a los monjes previstos para ese día y pronuncia una frase distinta según las ausencias y muertes.</span></div>
         </div>
         <div class="clock-copy prose">
@@ -274,26 +290,6 @@
       </aside>
     </section>
 
-    <section class="chapter paper-warm controls-chapter" id="controles" aria-labelledby="controls-title">
-      <div class="chapter-header reveal">
-        <div>
-          <span class="chapter-number">VI · Los controles</span>
-          <h2 id="controls-title">Controles clásicos</h2>
-        </div>
-        <p class="chapter-intro">El movimiento es deliberado: primero orientas a Guillermo y después avanzas. Adso y los objetos obedecen sus propias reglas.</p>
-      </div>
-      <div class="controls-guide reveal">
-        <p>Basados en el manual original y contrastados con la reconstrucción de CPC. Los remakes y las asignaciones del emulador pueden variar. Primero gira y después avanza: las flechas no representan las diagonales de la pantalla.</p>
-        <dl class="controls-list">
-          <div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> Mover a Guillermo</dt><dd>Izquierda y derecha giran sobre el sitio; arriba avanza hacia donde mira. El manual también indica <kbd>L</kbd> para girar a la izquierda, <kbd>K</kbd> a la derecha y <kbd>A</kbd> para avanzar.</dd></div>
-          <div><dt><kbd>↓</kbd> Dirigir a Adso</dt><dd>Orienta a Guillermo y mantén abajo —o <kbd>Z</kbd>—: Adso intenta avanzar en esa dirección, dentro de la misma pantalla. Suelta la tecla para que vuelva a seguirte.</dd></div>
-          <div><dt>Recoger y dejar objetos</dt><dd>Coloca al portador frente al objeto: lo recoge automáticamente. <kbd>Espacio</kbd> deja el objeto de Guillermo situado más a la izquierda del marcador, si hay sitio delante. Sólo pueden dejarse sus objetos; los dos de Adso no aparecen en ese inventario.</dd></div>
-          <div><dt><kbd>S</kbd> / <kbd>N</kbd> Dormir</dt><dd>De noche, en vuestra celda, Adso pregunta si deseas dormir. <kbd>S</kbd> avanza hasta prima; <kbd>N</kbd> permite seguir despierto. Contesta pronto: si esperas demasiado, el juego elige dormir.</dd></div>
-        </dl>
-        <p class="guide-source">Consulta: <a href="https://worldofspectrum.net/pub/sinclair/games-info/a/AbadiaDelCrimen%2BSirFredLa.pdf">manual original conservado</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Adso.java">rutina de Adso reconstruida</a>.</p>
-      </div>
-    </section>
-
     <section class="chapter dark" id="laberinto">
       <div class="chapter-header reveal">
         <div>
@@ -307,23 +303,23 @@
         <div class="map-frame" aria-label="Mapa de Retro Gamer España con localizaciones interactivas">
           <img class="map-source" src="../assets/maps/interactive-retrogamer-map.jpg" alt="Mapa de la abadía publicado en Retro Gamer España 41" loading="lazy">
           <a class="map-zoom-trigger" href="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox="../assets/maps/interactive-retrogamer-map.jpg" data-lightbox-hires data-alt="Mapa completo de la abadía publicado en Retro Gamer España 41" data-caption="Mapa completo publicado por Retro Gamer España 41, con la planta principal, el scriptorium y el laberinto." aria-label="Ampliar el mapa completo"></a>
-          <button class="map-hotspot is-active" type="button" aria-label="Iglesia" data-title="Iglesia" data-text="Centro del orden. Prima y vísperas sincronizan a los personajes; el altar llega a custodiar una llave crucial."></button>
+          <button class="map-hotspot" type="button" aria-label="Iglesia" data-title="Iglesia" data-text="Centro del orden. En prima y vísperas, todos los monjes deben acudir a la iglesia; el altar llega a custodiar una llave crucial."></button>
           <button class="map-hotspot" type="button" aria-label="Celda de fray Guillermo" data-title="Celda de fray Guillermo y Adso" data-text="La habitación asignada a Guillermo y Adso. El Abad los escolta aquí tras completas; desde ella comienzan las salidas nocturnas."></button>
           <button class="map-hotspot" type="button" aria-label="Scriptorium" data-title="Scriptorium" data-text="Lugar de trabajo de Malaquías y Berengario. Aquí aparece el pergamino de Venancio y comienza la cadena de denuncias."></button>
           <button class="map-hotspot" type="button" aria-label="Biblioteca" data-title="Biblioteca" data-text="Una planta superior prohibida, organizada como laberinto. Sin lámpara, el juego oscurece la vista y activa una cuenta atrás."></button>
-          <button class="map-hotspot" type="button" aria-label="Refectorio" data-title="Refectorio" data-text="A sexta, el reparto ocupa lugares fijos. La comida funciona como comprobación de presencia y avance del reloj."></button>
+          <button class="map-hotspot" type="button" aria-label="Refectorio" data-title="Refectorio" data-text="A sexta, todos los comensales deben ocupar su lugar en el refectorio sin demora y sólo entonces avanza el reloj."></button>
           <button class="map-hotspot" type="button" aria-label="Espejo" data-title="Habitación del espejo" data-text="El pergamino y las gafas revelan una instrucción. La combinación correcta abre el espejo; la equivocada abre una trampa."></button>
           <button class="map-hotspot" type="button" aria-label="Celda del Abad" data-title="Celda del Abad" data-text="El Abad duerme aquí y guarda el manuscrito. Si sorprende a Guillermo dentro, le recrimina haber entrado en su celda y lo expulsa para siempre de la abadía."></button>
           <button class="map-hotspot" type="button" aria-label="Cocina" data-title="Cocina" data-text="Aquí se encuentra la lámpara de aceite. La estancia también comunica con el pasadizo secreto usado para cerrar el ala occidental."></button>
           <button class="map-hotspot" type="button" aria-label="Celda de Severino" data-title="Celda de Severino" data-text="La celda del herbolario: Berengario muere aquí, Severino encuentra el libro y después es asesinado. Más tarde se obtienen los guantes."></button>
           <button class="map-hotspot" type="button" aria-label="Habitación iluminada" data-title="Habitación iluminada" data-text="La sala del laberinto donde aparecen las gafas. En el desenlace, Jorge huye hacia ella con el libro envenenado."></button>
-          <button class="map-hotspot" type="button" aria-label="Entrada" data-title="Entrada" data-text="Aquí comienza la investigación: el Abad recibe a Guillermo y Adso y los guía hasta su celda. Por estas escaleras llega Bernardo Gui y abandona después la abadía."></button>
+          <button class="map-hotspot is-active" type="button" aria-label="Entrada" data-title="Entrada" data-text="Aquí comienza la investigación: el Abad recibe a Guillermo y Adso y los guía hasta su celda. Por estas escaleras llega Bernardo Gui y abandona después la abadía."></button>
           <button class="map-hotspot" type="button" aria-label="Pasadizo secreto" data-title="Pasadizo secreto" data-text="Oculto tras la cocina, permite atravesar el ala occidental cuando sus puertas están cerradas. Malaquías lo utiliza al retirarse y la llave III abre su puerta."></button>
         </div>
         <aside class="map-panel">
           <small>Localización seleccionada</small>
-          <h3 data-map-title>Iglesia</h3>
-          <p data-map-text>Centro del orden. Prima y vísperas sincronizan a los personajes; el altar llega a custodiar una llave crucial.</p>
+          <h3 data-map-title>Entrada</h3>
+          <p data-map-text>Aquí comienza la investigación: el Abad recibe a Guillermo y Adso y los guía hasta su celda. Por estas escaleras llega Bernardo Gui y abandona después la abadía.</p>
           <p class="map-tip">Los puntos están superpuestos al mapa publicado por Retro Gamer España 41, que reproduce y amplía la cartografía clásica de MicroHobby. Debajo están los documentos completos.</p>
         </aside>
       </div>
@@ -355,7 +351,7 @@
       <div class="abbey-screen-map reveal" data-abbey-map data-map-platform="cga" data-map-palette="day">
         <div class="abbey-map-heading">
           <div><span class="source-tag">Mapa interactivo</span><h3>La abadía completa, estancia a estancia</h3></div>
-          <p>Las pantallas reconstruidas ocupan sus celdas en el mapa del mundo. PC, Spectrum y MSX parten de sus propios datos; CPC y VGA aplican sus gráficos a la arquitectura común recuperada. El selector superior permite comparar los píxeles originales de Amstrad CPC, ZX Spectrum y MSX, los bloques CGA de DOS y el redibujado VGA de Antonio Giner. El nivel superior reúne los dos pisos del <i>aedificium</i>: scriptorium y biblioteca.</p>
+          <p>Cada pantalla aparece en su lugar dentro de la abadía. PC, Spectrum y MSX usan sus propios datos; CPC y VGA comparten la arquitectura recuperada, con los gráficos de cada versión. El selector «Versión» permite comparar las pantallas de las cinco versiones; el control «Luz» alterna entre día y noche. El nivel superior reúne los dos pisos del <i>aedificium</i>: scriptorium y biblioteca.</p>
         </div>
         <div class="abbey-map-variantbar"><span>Luz</span><div class="abbey-light-tabs" role="group" aria-label="Iluminación de las estancias"><button class="is-active" type="button" aria-pressed="true" data-abbey-light="day">Día</button><button type="button" aria-pressed="false" data-abbey-light="night">Noche</button></div></div>
         <div class="abbey-floor-tabs" role="tablist" aria-label="Nivel de la abadía"><button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="abbey-main-es" data-abbey-floor="main">Planta principal <span>61 estancias</span></button><button type="button" role="tab" aria-selected="false" aria-controls="abbey-upper-es" data-abbey-floor="upper">Aedificium <span>Scriptorium + biblioteca</span></button></div>
@@ -399,7 +395,7 @@
       <div class="object-grid reveal">
         <article class="object-card" data-symbol="L"><img class="object-sprite" src="../assets/items/libro.png" alt="Sprite CPC del libro"><small>01 · Investigación</small><h3>Libro</h3><p>Un libro ligado a la investigación.</p></article>
         <article class="object-card" data-symbol="G"><img class="object-sprite" src="../assets/items/guantes.png" alt="Sprite CPC de los guantes"><small>02 · Protección</small><h3>Guantes</h3><p>Protegen las manos de Guillermo.</p></article>
-        <article class="object-card" data-symbol="O"><img class="object-sprite" src="../assets/items/gafas.png" alt="Sprite CPC de las gafas"><small>03 · Lectura</small><h3>Gafas</h3><p>Las gafas de Guillermo, necesarias para leer textos pequeños.</p></article>
+        <article class="object-card" data-symbol="O"><img class="object-sprite" src="../assets/items/gafas.png" alt="Sprite CPC de las gafas"><small>03 · Lectura</small><h3>Gafas</h3><p>Permiten a Guillermo leer el pergamino.</p></article>
         <article class="object-card" data-symbol="P"><img class="object-sprite" src="../assets/items/pergamino.png" alt="Sprite CPC del pergamino"><small>04 · Manuscrito</small><h3>Pergamino</h3><p>Un documento que puede aportar pistas a la investigación.</p></article>
         <article class="object-card" data-symbol="I"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>05 · Acceso</small><h3>Llave I</h3><p>Una de las dos llaves que puede llevar Guillermo.</p></article>
         <article class="object-card" data-symbol="II"><img class="object-sprite" src="../assets/items/llave.png" alt="Sprite CPC de una llave"><small>06 · Acceso</small><h3>Llave II</h3><p>La otra llave de Guillermo. Cada una abre una puerta distinta.</p></article>
@@ -416,7 +412,7 @@
             <tbody>
               <tr role="row"><th scope="row" role="rowheader">Libro</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Scriptorium al inicio; después pasa por la celda de Severino y por Jorge.</td><td role="cell" data-label="Disponibilidad">La secuencia final permite recogerlo de manos de Jorge, tras el espejo, desde la noche VI.</td><td role="cell" data-label="Utilidad">Prueba del crimen; los guantes protegen del veneno.</td><td role="cell" data-label="Retirada o desaparición">Berengario lo retira del scriptorium en la noche III. Jorge lo oculta en prima III y lo arrebata durante la huida final.</td></tr>
               <tr role="row"><th scope="row" role="rowheader">Guantes</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Celda de Severino.</td><td role="cell" data-label="Disponibilidad">Están desde el inicio; la llave II permite abrir la celda desde la noche VI.</td><td role="cell" data-label="Utilidad">Manipular el libro envenenado sin morir.</td><td role="cell" data-label="Retirada o desaparición">Sin retirada programada. Si los dejas, debes volver a recogerlos.</td></tr>
-              <tr role="row"><th scope="row" role="rowheader">Gafas</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Inventario inicial; después, habitación iluminada de la biblioteca.</td><td role="cell" data-label="Disponibilidad">Se pierden en prima II y reaparecen en la noche V.</td><td role="cell" data-label="Utilidad">Leer el pergamino y conocer la pista del espejo.</td><td role="cell" data-label="Retirada o desaparición">La retirada de prima II es obligatoria. Las gafas que reaparecen en la noche V no tienen otra retirada al amanecer.</td></tr>
+              <tr role="row"><th scope="row" role="rowheader">Gafas</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Inventario inicial; después, habitación iluminada de la biblioteca.</td><td role="cell" data-label="Disponibilidad">Se pierden en prima II y reaparecen en la noche V.</td><td role="cell" data-label="Utilidad">Leer el pergamino y conocer la pista del espejo.</td><td role="cell" data-label="Retirada o desaparición">La retirada de prima II es obligatoria. Las gafas que reaparecen en la noche V no vuelven a perderse al amanecer.</td></tr>
               <tr role="row"><th scope="row" role="rowheader">Pergamino</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Scriptorium; puede acabar en la celda del Abad o tras el espejo.</td><td role="cell" data-label="Disponibilidad">Disponible desde el inicio, antes de que las rutinas de los monjes lo trasladen.</td><td role="cell" data-label="Utilidad">Con las gafas, revela qué escalón corresponde al espejo.</td><td role="cell" data-label="Retirada o desaparición">En prima III pasa tras el espejo si Guillermo no lo lleva. Berengario, Bernardo y el Abad pueden quitárselo; el Abad lo guarda en su celda.</td></tr>
               <tr role="row"><th scope="row" role="rowheader">Llave I</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Altar de la iglesia.</td><td role="cell" data-label="Disponibilidad">Noche V: recógela antes de prima.</td><td role="cell" data-label="Utilidad">Abrir la celda del Abad.</td><td role="cell" data-label="Retirada o desaparición">Desaparece en prima V si Guillermo no la lleva.</td></tr>
               <tr role="row"><th scope="row" role="rowheader">Llave II</th><td role="cell" data-label="Portador">Guillermo</td><td role="cell" data-label="Ubicación">Mesa de Malaquías, en el scriptorium.</td><td role="cell" data-label="Disponibilidad">Aparece al comenzar la noche VI.</td><td role="cell" data-label="Utilidad">Abrir la celda de Severino y acceder a los guantes.</td><td role="cell" data-label="Retirada o desaparición">Sin retirada programada tras aparecer.</td></tr>
@@ -447,7 +443,7 @@
         <article class="day-card"><span class="day-no">Día III</span><h3>El anciano</h3><p>El Abad presenta a Jorge, que habla del Anticristo y de los últimos días.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Al comienzo del día III, Berengario encapuchado roba el libro, lo lleva a la celda de Severino y muere. Jorge lo oculta al amanecer, antes de la presentación.</p></article>
         <article class="day-card"><span class="day-no">Día IV</span><h3>La Inquisición</h3><p>Llega Bernardo. El Abad ordena abandonar la investigación.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Bernardo persigue el pergamino y lo entrega al Abad. Severino revela las manchas negras de Berengario.</p></article>
         <article class="day-card"><span class="day-no">Día V</span><h3>Mil escorpiones</h3><p>Bernardo abandona la abadía. Severino encuentra un extraño libro en su celda.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Malaquías asesina a Severino en tercia. En vísperas muere en la iglesia, alcanzado por el mismo veneno.</p></article>
-          <article class="day-card"><span class="day-no">Día VI</span><h3>La biblioteca</h3><p>El Abad anuncia que mañana habrá que partir. Ya es posible reunir las pistas necesarias para abrir el espejo.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Llaves, gafas, pergamino y lámpara permiten atravesar la biblioteca y abrir la habitación tras el espejo.</p></article>
+          <article class="day-card"><span class="day-no">Día VI</span><h3>La biblioteca</h3><p>El Abad anuncia que mañana habrá que partir. Ya es posible reunir las pistas necesarias para abrir el espejo.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">La noche VI sirve para volver a la biblioteca con la lámpara, recoger la llave II, recuperar las gafas y aprender el recorrido del laberinto. Durante el día, la llave II abre la celda de Severino para obtener los guantes; también hay que recuperar el pergamino antes de la visita final.</p></article>
           <article class="day-card"><span class="day-no">Día VII</span><h3>El libro</h3><p>La expulsión es inminente. Al llegar tercia, se acaba el tiempo.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secreto del día">Jorge ofrece el libro envenenado. Los guantes frustran su plan; huye hacia el laberinto y la investigación concluye.</p></article>
       </div>
       <div class="week-explorer" id="week-explorer" data-week-explorer><noscript><p>Activa JavaScript para explorar los días y las horas. El resumen de la semana está disponible arriba.</p></noscript></div>
@@ -552,6 +548,6 @@
   <script src="../parchment.js?v=20260908-platform1"></script>
   <script src="../app.js?v=20260911-review1"></script>
   <script src="../assets/game/week-dialogue.js?v=20260911-1"></script>
-  <script src="../week.js?v=20260911-objects1"></script>
+  <script src="../week.js?v=20260912-night6d"></script>
 </body>
 </html>

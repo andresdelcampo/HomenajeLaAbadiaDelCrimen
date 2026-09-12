@@ -6,6 +6,7 @@ Build dependency: ``python -m pip install fonttools brotli``.
 from __future__ import annotations
 
 import ast
+import json
 from pathlib import Path
 
 from fontTools.fontBuilder import FontBuilder
@@ -15,6 +16,7 @@ from fontTools.pens.ttGlyphPen import TTGlyphPen
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "Font" / "Font.py"
 OUTPUT = Path(__file__).resolve().parents[1] / "assets" / "fonts" / "abadia-dialogue.woff2"
+DIALOGUE = Path(__file__).resolve().parents[1] / "assets" / "game" / "week-dialogue.js"
 PIXEL = 100
 ADVANCE = 900
 
@@ -26,6 +28,7 @@ EXTRAS = {
     "Ó": [0x18, 0x30, 0x00, 0x38, 0x6C, 0xC6, 0xC6, 0xC6, 0xEE, 0x7C],
     "Ú": [0x18, 0x30, 0x00, 0xE6, 0x66, 0xC6, 0xC6, 0xC6, 0xC6, 0x7C],
     "Ü": [0x00, 0x6C, 0x00, 0xE6, 0x66, 0xC6, 0xC6, 0xC6, 0xC6, 0x7C],
+    "Ñ": [0x36, 0x6C, 0x00, 0xCC, 0xE6, 0xE6, 0xD6, 0xCE, 0xCE, 0x66],
     "W": [0x00, 0x00, 0x00, 0x66, 0xE6, 0xC6, 0xD6, 0xD6, 0xFE, 0x66],
     "-": [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7E, 0xFC, 0x00, 0x00],
     "'": [0x00, 0x00, 0x00, 0x30, 0x30, 0x10, 0x20, 0x00, 0x00, 0x00],
@@ -73,11 +76,10 @@ def main() -> None:
         for codepoint in range(0x2D, 0x5C)
     }
 
-    # The original game reuses these charset slots for Spanish dialogue marks.
+    # The original game reuses some charset slots for Spanish dialogue marks.
     rows_by_character[","] = source_rows(font_bytes, "<")
     rows_by_character["."] = source_rows(font_bytes, "=")
     rows_by_character["¿"] = source_rows(font_bytes, "@")
-    rows_by_character["Ñ"] = source_rows(font_bytes, "W")
     rows_by_character.update(EXTRAS)
 
     glyph_rows = {"space": []}
@@ -92,6 +94,17 @@ def main() -> None:
             cmap[ord(character.lower())] = name
 
     cmap.update({0x2018: "uni0027", 0x2019: "uni0027", 0x201C: "uni0022", 0x201D: "uni0022"})
+
+    dialogue = json.loads(DIALOGUE.read_text(encoding="utf-8").split("=", 1)[1].strip().removesuffix(";"))
+    dialogue_characters = {
+        character
+        for language in dialogue.values()
+        for phrase in language.values()
+        for character in phrase
+    }
+    missing_characters = sorted(dialogue_characters - {chr(codepoint) for codepoint in cmap})
+    if missing_characters:
+        raise RuntimeError(f"Dialogue characters missing from font: {missing_characters}")
 
     glyph_order = [".notdef", *glyph_rows]
     glyphs = {".notdef": pixel_glyph([0x7E, 0x42, 0x5A, 0x5A, 0x42, 0x7E, 0x00, 0x00])}
