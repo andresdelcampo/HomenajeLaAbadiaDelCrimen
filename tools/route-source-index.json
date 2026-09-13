@@ -1,0 +1,395 @@
+{
+  "sourceRoot": "D:\\Downloads\\Retro\\DOS\\Abadia\\Fuentes\\VigasocoSDL-master\\VigasocoSDL-master\\core\\abadia",
+  "characters": {
+    "Abad": {
+      "file": "Abad.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "ARRIBA",
+          "x": 136,
+          "y": 60,
+          "height": 4,
+          "comment": "posición en el altar de la iglesia"
+        },
+        {
+          "index": 1,
+          "orientation": "IZQUIERDA",
+          "x": 61,
+          "y": 55,
+          "height": 2,
+          "comment": "posición en el refectorio"
+        },
+        {
+          "index": 2,
+          "orientation": "DERECHA",
+          "x": 84,
+          "y": 60,
+          "height": 2,
+          "comment": "posición en su celda"
+        },
+        {
+          "index": 3,
+          "orientation": "ARRIBA",
+          "x": 136,
+          "y": 132,
+          "height": 2,
+          "comment": "posición en la entrada de la abadía"
+        },
+        {
+          "index": 4,
+          "orientation": "ABAJO",
+          "x": 164,
+          "y": 88,
+          "height": 0,
+          "comment": "posición de la primera parada durante el discurso de bienvenida"
+        },
+        {
+          "index": 5,
+          "orientation": "DERECHA",
+          "x": 165,
+          "y": 33,
+          "height": 2,
+          "comment": "posición para que entremos a nuestra celda"
+        },
+        {
+          "index": 6,
+          "orientation": "DERECHA",
+          "x": 156,
+          "y": 42,
+          "height": 2,
+          "comment": "posición en la puerta de acceso de los monjes a la iglesia"
+        },
+        {
+          "index": 7,
+          "orientation": "DERECHA",
+          "x": 199,
+          "y": 39,
+          "height": 0,
+          "comment": "posición en la pantalla en la que presenta a jorge"
+        },
+        {
+          "index": 8,
+          "orientation": "ABAJO",
+          "x": 104,
+          "y": 97,
+          "height": 2,
+          "comment": "posición en la puerta de la celda de severino"
+        },
+        {
+          "index": 9,
+          "orientation": "DERECHA",
+          "x": 58,
+          "y": 52,
+          "height": 15,
+          "comment": "posición a la entrada del pasillo por el que lleva a la biblioteca"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x3f"
+      ]
+    },
+    "Malaquias": {
+      "file": "Malaquias.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "ABAJO",
+          "x": 132,
+          "y": 72,
+          "height": 2,
+          "comment": "posición en la iglesia"
+        },
+        {
+          "index": 1,
+          "orientation": "ARRIBA",
+          "x": 47,
+          "y": 55,
+          "height": 2,
+          "comment": "posición en el refectorio"
+        },
+        {
+          "index": 2,
+          "orientation": "ABAJO",
+          "x": 55,
+          "y": 56,
+          "height": 15,
+          "comment": "posición en la mesa que está en la entrada del pasillo para poder subir a la biblioteca"
+        },
+        {
+          "index": 3,
+          "orientation": "IZQUIERDA",
+          "x": 58,
+          "y": 52,
+          "height": 15,
+          "comment": "posición para cerrar el paso al pasillo que lleva a la biblioteca"
+        },
+        {
+          "index": 4,
+          "orientation": "DERECHA",
+          "x": 93,
+          "y": 119,
+          "height": 0,
+          "comment": "posición para cerrar las 2 puertas del ala izquierda de la abadía"
+        },
+        {
+          "index": 5,
+          "orientation": "DERECHA",
+          "x": 88,
+          "y": 42,
+          "height": 0,
+          "comment": "posición en frente de la mesa de la cocina de delante del pasadizo"
+        },
+        {
+          "index": 6,
+          "orientation": "ABAJO",
+          "x": 53,
+          "y": 55,
+          "height": 19,
+          "comment": "posición donde deja la llave en la mesa que está en la entrada del pasillo para poder subir a la biblioteca"
+        },
+        {
+          "index": 7,
+          "orientation": "DERECHA",
+          "x": 188,
+          "y": 24,
+          "height": 2,
+          "comment": "posición en su celda"
+        },
+        {
+          "index": 8,
+          "orientation": "DERECHA",
+          "x": 104,
+          "y": 82,
+          "height": 0,
+          "comment": "posición en la celda de severino"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x3f"
+      ]
+    },
+    "Berengario": {
+      "file": "Berengario.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "ABAJO",
+          "x": 140,
+          "y": 72,
+          "height": 2,
+          "comment": "posición en la iglesia"
+        },
+        {
+          "index": 1,
+          "orientation": "ARRIBA",
+          "x": 50,
+          "y": 53,
+          "height": 2,
+          "comment": "posición en el refectorio"
+        },
+        {
+          "index": 2,
+          "orientation": "IZQUIERDA",
+          "x": 61,
+          "y": 92,
+          "height": 15,
+          "comment": "posición de su mesa en el scriptorium"
+        },
+        {
+          "index": 3,
+          "orientation": "DERECHA",
+          "x": 188,
+          "y": 21,
+          "height": 2,
+          "comment": "celda de los monjes"
+        },
+        {
+          "index": 4,
+          "orientation": "ARRIBA",
+          "x": 82,
+          "y": 103,
+          "height": 4,
+          "comment": "posición al pie de las escaleras para subir al scriptorium"
+        },
+        {
+          "index": 5,
+          "orientation": "ARRIBA",
+          "x": 104,
+          "y": 87,
+          "height": 2,
+          "comment": "celda de severino"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x3f"
+      ]
+    },
+    "Severino": {
+      "file": "Severino.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "ABAJO",
+          "x": 140,
+          "y": 75,
+          "height": 2,
+          "comment": "posición en la iglesia"
+        },
+        {
+          "index": 1,
+          "orientation": "ARRIBA",
+          "x": 54,
+          "y": 53,
+          "height": 2,
+          "comment": "posición en el refectorio"
+        },
+        {
+          "index": 2,
+          "orientation": "DERECHA",
+          "x": 104,
+          "y": 85,
+          "height": 0,
+          "comment": "posición en su celda"
+        },
+        {
+          "index": 3,
+          "orientation": "DERECHA",
+          "x": 201,
+          "y": 42,
+          "height": 0,
+          "comment": "pantalla de al lado de las celdas de los monjes"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x2f"
+      ]
+    },
+    "Jorge": {
+      "file": "Jorge.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "DERECHA",
+          "x": 188,
+          "y": 21,
+          "height": 2,
+          "comment": "celda de los monjes"
+        },
+        {
+          "index": 1,
+          "orientation": "DERECHA",
+          "x": 25,
+          "y": 43,
+          "height": 26,
+          "comment": "habitación iluminada de la biblioteca"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x3f"
+      ]
+    },
+    "Bernardo": {
+      "file": "Bernardo.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "ABAJO",
+          "x": 140,
+          "y": 72,
+          "height": 2,
+          "comment": "posición en la iglesia"
+        },
+        {
+          "index": 1,
+          "orientation": "ARRIBA",
+          "x": 50,
+          "y": 53,
+          "height": 2,
+          "comment": "posición en el refectorio"
+        },
+        {
+          "index": 2,
+          "orientation": "IZQUIERDA",
+          "x": 61,
+          "y": 92,
+          "height": 15,
+          "comment": "posición de su mesa en el scriptorium"
+        },
+        {
+          "index": 3,
+          "orientation": "DERECHA",
+          "x": 188,
+          "y": 21,
+          "height": 2,
+          "comment": "celda de los monjes"
+        },
+        {
+          "index": 4,
+          "orientation": "ARRIBA",
+          "x": 136,
+          "y": 168,
+          "height": 0,
+          "comment": "salida de la abadía"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x3f"
+      ]
+    },
+    "Adso": {
+      "file": "Adso.cpp",
+      "destinations": [
+        {
+          "index": 0,
+          "orientation": "ABAJO",
+          "x": 132,
+          "y": 78,
+          "height": 2,
+          "comment": "posición en la iglesia"
+        },
+        {
+          "index": 1,
+          "orientation": "ABAJO",
+          "x": 52,
+          "y": 57,
+          "height": 2,
+          "comment": "posición en el refectorio"
+        },
+        {
+          "index": 2,
+          "orientation": "ABAJO",
+          "x": 168,
+          "y": 24,
+          "height": 0,
+          "comment": "posición en la celda"
+        }
+      ],
+      "doorMaskAssignments": [
+        "0x3c"
+      ]
+    },
+    "Guillermo": {
+      "file": "Guillermo.cpp",
+      "destinations": [],
+      "doorMaskAssignments": []
+    }
+  },
+  "sourceHashes": {
+    "Abad.cpp": "dba8c7e2dda26aac3ce4746473b3f7747105b0918e913e32b60b6d04e60bb6f5",
+    "Malaquias.cpp": "56142d663e3fee8bf0d3b191a4182f316cf25de45b147700b6053d973cdc0a04",
+    "Berengario.cpp": "dc297e951e6836cb7adf1ff46335de59491b496477a159612899810484edfac7",
+    "Severino.cpp": "1a2f5550f30bfacdaae2499656b28d94eb07c0deb75b82dead1a71ec87fbf5e4",
+    "Jorge.cpp": "bef9163c3a92ef52d231c10f1ff7081f7e25b155401b4940f33d80536f66f2f1",
+    "Bernardo.cpp": "b38cf632b6af957c305e7787eef2350f92584a75996c91c4b186ea9bfbc11efd",
+    "Adso.cpp": "d9c9c4fc920701b75f759e1ff576df407332b7abcc1b9630b035ea052b383aea",
+    "Guillermo.cpp": "81e350d6ba3a1f81eb49cbc0db9a82e315cf92b99726356f745dc3879fd5bbf2",
+    "Logica.cpp": "b723856946a5d71afdf33bb20c8988c0c8c3589987eb11ae5291c05da6504c7d",
+    "AccionesDia.cpp": "6029f9b044f479ef5e416120e85ad0985179d4f1a534f64c5b1ec7e5d2deea26",
+    "BuscadorRutas.cpp": "d383efee02aae87937dbe29f5c3fee7bdb6e4711e93ec9d5730d09bf1d4a16d9",
+    "RejillaPantalla.cpp": "2c41f9e0df6e2adca68d30de58b768c5ccff323ddf599b28a723026141f0e367",
+    "FijarOrientacion.cpp": "5c8c2456353ae35d96d5aacd9407d5b4fda6704efbc7211c5b51303b6d5abf3c",
+    "PersonajeConIA.cpp": "f820547a373750df2b0208bf8537c11894d555e98f6859c2f57303f7b26b498c",
+    "MotorGrafico.cpp": "58dae956145e887d70103758397f47c3b3f2a1afb44db11dc2bb5316ae553e1b"
+  }
+}

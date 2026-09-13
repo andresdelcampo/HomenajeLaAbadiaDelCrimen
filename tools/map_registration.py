@@ -1,0 +1,51 @@
+"""Convert the user's accepted print-to-reference fit to site coordinates.
+
+SVG affine convention: (x',y')=(a*x+c*y+e,b*x+d*y+f).
+If A(print)=G(world) in the accepted comparison and P is the site's print
+transform, then siteGeometry(world)=P * inverse(A) * G(world).
+No new visual fitting, independent nudges, or world-coordinate mutations.
+"""
+from pathlib import Path
+import json
+import math
+
+CONFIG=json.loads(Path(__file__).with_name('map-registration.json').read_text(encoding='utf-8'))
+
+
+def multiply(left,right):
+    a,b,c,d,e,f=left; g,h,i,j,k,l=right
+    return [a*g+c*h,b*g+d*h,a*i+c*j,b*i+d*j,a*k+c*l+e,b*k+d*l+f]
+
+
+def inverse(matrix):
+    a,b,c,d,e,f=matrix; det=a*d-b*c
+    assert abs(det)>1e-12, 'Singular map registration'
+    return [d/det,-b/det,-c/det,a/det,(c*f-d*e)/det,(b*e-a*f)/det]
+
+
+def print_matrix(fit):
+    angle=math.radians(fit['rotation']); co,si=math.cos(angle),math.sin(angle)
+    sx=fit.get('scaleX',fit.get('scale')); sy=fit.get('scaleY',fit.get('scale'))
+    px,py=fit['pivot']; a,b,c,d=sx*co,sx*si,-sy*si,sy*co
+    return [a,b,c,d,fit['x']+px-a*px-c*py,fit['y']+py-b*px-d*py]
+
+
+def panel_matrix(panel):
+    if 'matrix' in panel:return panel['matrix']
+    s=panel['scale']; sign=-1 if panel.get('rotation')==180 else 1
+    return [0,sign*s,-sign*s,0,panel['ox'],panel['oy']]
+
+
+def registered_panels():
+    site_print=print_matrix(CONFIG['sitePrint'])
+    panels=[CONFIG['groundPanel']]
+    for floor in ('1','2'):
+        fit=CONFIG['upperFloors'][floor]
+        matrix=multiply(multiply(site_print,inverse(print_matrix(fit['acceptedPrint']))),fit['referenceGeometryMatrix'])
+        panels.append({'matrix':matrix})
+    return panels
+
+
+def project(matrix,point):
+    a,b,c,d,e,f=matrix;x,y=point
+    return [a*x+c*y+e,b*x+d*y+f]

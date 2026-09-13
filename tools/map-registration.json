@@ -1,0 +1,19 @@
+{
+  "imageSize": [1323, 982],
+  "sitePrint": {"rotation": 2.5, "scale": 1.08, "x": -4, "y": 0, "pivot": [350, 500]},
+  "groundPanel": {"scale": 3.65, "ox": 666, "oy": 73},
+  "upperFloors": {
+    "1": {
+      "name": "Scriptorium",
+      "referenceGeometryMatrix": [0, -3.15, 3.15, 0, 609.55, 453.65],
+      "acceptedPrint": {"rotation": 2.5, "scaleX": 1.067, "scaleY": 1.067, "x": 41, "y": -9.7, "pivot": [792, 285]},
+      "previewOpacity": 60
+    },
+    "2": {
+      "name": "Labyrinth",
+      "referenceGeometryMatrix": [0, -3.15, 3.15, 0, 927, 475],
+      "acceptedPrint": {"rotation": 2, "scaleX": 1.117, "scaleY": 0.973, "x": 65.9, "y": 21.4, "pivot": [1089, 279.5]},
+      "previewOpacity": 28
+    }
+  }
+}

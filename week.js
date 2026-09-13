@@ -110,6 +110,48 @@
     entrance: [8.1,58.8,t('Entrada','Entrance')], shared: [43.9,76,t('Celda común','Shared cell')],
     corridor: [46,71,t('Pasillo de las celdas','Cells’ corridor')]
   };
+  // Exact predefined destinations used by the characters. Keeping these
+  // stable also prevents a stationary portrait from shifting when another
+  // occupant enters or leaves the same room between phases.
+  const fixedPositions = {
+    abad: {church:[136,60,0],refectory:[61,55,0],abbot:[84,60,0],severinus:[104,97,0]},
+    adso: {church:[132,78,0],refectory:[52,57,0],cell:[168,24,0]},
+    malaquias: {church:[132,72,0],refectory:[47,55,0],shared:[188,24,0],severinus:[104,82,0]},
+    berengario: {church:[140,72,0],refectory:[50,53,0],shared:[188,21,0],severinus:[104,87,0]},
+    severino: {church:[140,75,0],refectory:[54,53,0],severinus:[104,85,0]},
+    jorge: {shared:[188,21,0]},
+    bernardo: {church:[140,72,0],refectory:[50,53,0],shared:[188,21,0]}
+  };
+  // Reviewed reconstructed routes; all other phase transitions remain schematic.
+  // The new plan and the trace share one world grid. Each panel owns the same
+  // orientation and scale used to draw its floor in the generated SVG.
+  const welcomeData = window.ABBOT_WELCOME_ROUTE;
+  function worldPosition(x,y,floor=0) {
+    const panel=welcomeData.panels[floor];
+    if (panel.matrix) {
+      const [a,b,c,d,e,f]=panel.matrix;
+      return {x:100*(a*x+c*y+e)/welcomeData.imageSize[0],
+        y:100*(b*x+d*y+f)/welcomeData.imageSize[1],dx:0,dy:0};
+    }
+    if (panel.rotation === 180) return {x:100*(panel.ox+panel.scale*y)/welcomeData.imageSize[0],
+      y:100*(panel.oy-panel.scale*x)/welcomeData.imageSize[1],dx:0,dy:0};
+    return {x:100*(panel.ox-panel.scale*y)/welcomeData.imageSize[0],
+      y:100*(panel.oy+panel.scale*x)/welcomeData.imageSize[1],dx:0,dy:0};
+  }
+  const routeCatalog = window.WEEK_ROUTES || {};
+  let preferredMap='print';
+  // Map choice is independent of the selected phase. Routes and portraits use
+  // the same registered coordinates on the complete print and geometry maps.
+  function routeMapMode() { return preferredMap; }
+  // Calibrate the printed artwork to the fixed route, about the same pivot
+  // used in the comparison. Other portraits retain their schematic anchors.
+  function printPosition(x,y) {
+    const a=welcomeData.printAlignment, [w,h]=welcomeData.imageSize;
+    const angle=a.rotation*Math.PI/180, [px,py]=a.pivot;
+    const u=(x*w/100-px)*a.scale, v=(y*h/100-py)*a.scale;
+    return {x:100*(px+a.x+u*Math.cos(angle)-v*Math.sin(angle))/w,
+      y:100*(py+a.y+u*Math.sin(angle)+v*Math.cos(angle))/h};
+  }
   // A null destination deliberately means that no fixed position can be inferred.
   function cast(d, h) {
     const variable = t('Posición variable','Variable position');
@@ -117,28 +159,108 @@
     const rows = ids.map((id, i) => ({ id, name: names[i], to: null, from: null, note: variable }));
     const set = (i, to, note, from = null) => Object.assign(rows[i], {to, note, from});
     set(0, null, t('Su posición depende del jugador.','Player controlled; no fixed position.'));
-    set(1, h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 6 ? 'cell' : null, t('Sigue a Guillermo; acude a los oficios, comida y celda según la hora.','Follows William; attends services, the meal and the cell according to the hour.'));
-    set(2, h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 6 ? 'cell' : h === 0 ? 'abbot' : null, h === 0 ? t('Se retira; puede despertar y buscar a Guillermo según su posición.','Retires; may wake and seek William depending on his position.') : t('Sigue esta ruta salvo cuando debe buscar a Guillermo o atender la denuncia de otro monje.','He follows this route unless he must find William or respond to another monk’s report.'));
-    set(3, d < 5 || (d === 5 && h <= 5) ? (h === 1 || h === 5 ? 'church' : h === 0 || h === 6 ? 'shared' : 'desk') : null, t('Vigila el acceso a la biblioteca. En vísperas cierra el ala occidental, pasa por la cocina y va a la iglesia.','Guards library access. At vespers he closes the west wing, passes through the kitchen and goes to church.'));
-    if (d > 5 || (d === 5 && h > 5)) set(3, null, t('Muerto tras la escena de vísperas del día V.','Dead after the day V vespers scene.'));
-    set(4, d < 3 ? (h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 0 || h === 6 ? 'shared' : 'desk') : null, d < 3 ? t('Puede abandonar su rutina para denunciar el robo del pergamino.','May leave his routine to report the scroll’s theft.') : t('Muerto tras llevar el libro a Severino en la noche III.','Dead after taking the book to Severinus on night III.'));
-    set(5, d < 5 || (d === 5 && h <= 2) ? (h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 0 || h === 6 ? 'severinus' : null) : null, d < 5 ? t('En tercia y nona alterna su celda y el pasillo, o busca a Guillermo.','At terce and none alternates between his cell and the corridor, or seeks William.') : t('Muerto si Malaquías completó el encuentro en tercia del día V.','Dead if Malachi completed the encounter at terce on day V.'));
-    set(6, d >= 6 ? 'mirror' : null, d >= 6 ? t('Espera aquí; si la conversación revela los guantes, huye a la habitación iluminada.','Waits here; if the conversation reveals the gloves, flees to the illuminated room.') : absent);
+    const adsoNote = h === 0
+      ? t('Sigue a Guillermo durante la noche y puede proponerle dormir.','Follows William during the night and may suggest going to sleep.')
+      : h === 1
+        ? t('Se dirige a la iglesia para prima.','Heads to the church for Prime.')
+        : h === 2
+          ? t('Sigue a Guillermo durante tercia.','Follows William during Terce.')
+          : h === 3
+            ? t('Se dirige al refectorio para la comida.','Heads to the refectory for the meal.')
+            : h === 4
+              ? t('Sigue a Guillermo durante nona.','Follows William during None.')
+              : h === 5
+                ? t('Se dirige a la iglesia para vísperas.','Heads to the church for Vespers.')
+                : t('Se retira con Guillermo a su celda.','Retires with William to their cell.');
+    set(1, h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 6 ? 'cell' : null, adsoNote);
+    const abbotDestination = h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 6 ? 'cell' : h === 0 ? 'abbot' : null;
+    const abbotNote = h === 0
+      ? t('El abad va a su celda.','The Abbot goes to his cell.')
+      : h === 1
+        ? t('Se dirige al altar para celebrar prima.','Heads to the altar for Prime.')
+        : h === 3
+          ? t('Se dirige al refectorio para la comida.','Heads to the refectory for the meal.')
+          : h === 5
+            ? t('Se dirige al altar para celebrar vísperas.','Heads to the altar for Vespers.')
+            : h === 6
+              ? t('Escolta a Guillermo hasta su celda y después cierra la puerta de los monjes.','Escorts William to his cell and then closes the monks’ door.')
+              : t('Durante esta hora puede buscar a Guillermo o responder a una denuncia.','During this hour he may seek William or respond to a report.');
+    set(2, abbotDestination, abbotNote);
+    const malachiNote = h === 0
+      ? t('Pasa la noche en la celda común.','Spends the night in the communal cell.')
+      : h === 1
+        ? t('Acude a la iglesia para prima.','Attends Prime in the church.')
+        : h >= 2 && h <= 4
+          ? t('Vigila el acceso a la biblioteca desde su mesa del scriptorium.','Guards library access from his scriptorium desk.')
+          : h === 5
+            ? t('Se dirige a la iglesia para vísperas.','Heads to the church for Vespers.')
+            : t('Se retira a la celda común después de completas.','Retires to the communal cell after Compline.');
+    set(3, d < 5 || (d === 5 && h <= 5) ? (h === 1 || h === 5 ? 'church' : h === 0 || h === 6 ? 'shared' : 'desk') : null, malachiNote);
+    if (d > 5 || (d === 5 && h > 5)) set(3, null, t('No realiza ningún recorrido: está muerto.','He makes no journey: he is dead.'));
+    const berengarNote = h === 0
+      ? t('Permanece en la celda común durante esta noche.','Remains in the shared cell during this night.')
+      : h === 1
+        ? t('Se dirige a la iglesia para prima.','Heads to the church for Prime.')
+        : h === 2
+          ? t('Regresa a su mesa del scriptorium; durante el día II puede iniciar allí la visita.','Returns to his scriptorium desk; on day II he may begin the tour there.')
+          : h === 3
+            ? t('Se dirige al refectorio para la comida.','Heads to the refectory for the meal.')
+            : h === 4
+              ? t('Regresa a su mesa y vigila el pergamino durante nona.','Returns to his desk and guards the scroll during None.')
+              : h === 5
+                ? t('Deja el scriptorium y se dirige a la iglesia para vísperas.','Leaves the scriptorium and heads to the church for Vespers.')
+                : t('Se retira desde la iglesia hasta la celda común.','Retires from the church to the shared cell.');
+    set(4, d < 3 ? (h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 0 || h === 6 ? 'shared' : 'desk') : null, d < 3 ? berengarNote : t('No realiza ningún recorrido: está muerto.','He makes no journey: he is dead.'));
+    const severinusNote = h === 0
+      ? t('Permanece en su celda durante esta noche.','Remains in his cell during this night.')
+      : h === 1
+        ? t('Se dirige a la iglesia para prima.','Heads to the church for Prime.')
+        : h === 2
+          ? t('Regresa a su celda y puede salir a buscar a Guillermo durante tercia.','Returns to his cell and may leave to seek William during Terce.')
+          : h === 3
+            ? t('Se dirige al refectorio para la comida.','Heads to the refectory for the meal.')
+            : h === 4
+              ? t('Regresa a su celda y puede recorrer el pasillo durante nona.','Returns to his cell and may walk the corridor during None.')
+              : h === 5
+                ? t('Se dirige a la iglesia para vísperas.','Heads to the church for Vespers.')
+                : t('Se retira desde la iglesia hasta su celda.','Retires from the church to his cell.');
+    set(5, d < 5 || (d === 5 && h <= 2) ? (h === 1 || h === 5 ? 'church' : h === 3 ? 'refectory' : h === 0 || h === 6 ? 'severinus' : null) : null, d < 5 ? severinusNote : t('No realiza ningún recorrido: está muerto.','He makes no journey: he is dead.'));
+    set(6, d >= 6 ? 'mirror' : null, d >= 6 ? t('Durante esta hora espera tras el espejo; si descubre los guantes, huye con el libro.','During this hour he waits behind the mirror; if he discovers the gloves, he flees with the book.') : absent);
     set(7, null, absent);
-    if (d === 4 && h >= 3) set(7, h === 3 ? 'refectory' : h === 5 ? 'church' : h === 6 ? 'shared' : null, t('Busca el pergamino; después de entregarlo, sus destinos pueden ser aleatorios.','Seeks the scroll; after delivering it, his destinations may be random.'), h === 3 ? 'entrance' : null);
-    if (d === 5 && h <= 2) set(7, h === 0 ? 'shared' : h === 1 ? 'church' : 'entrance', t('La salida depende de su estado; prima y la noche tienen sus propias rutinas.','Departure depends on his state; prime and night have their own routines.'));
-    if (d === 1 && h === 4) { set(2, 'cell', events['1-4'].action, 'entrance'); set(1, null, t('Acompaña a Guillermo durante la bienvenida.','Accompanies William during the welcome.')); }
+    if (d === 4 && h >= 3) {
+      const bernardNote = h === 3
+        ? t('Entra en la abadía y se dirige al refectorio durante sexta.','Enters the abbey and heads to the refectory during Sext.')
+        : h === 4
+          ? t('Durante nona busca el pergamino o persigue a Guillermo si lo lleva.','During None he seeks the scroll or pursues William if he carries it.')
+          : h === 5
+            ? t('Durante vísperas se dirige a la iglesia desde el lugar donde terminó su búsqueda.','During Vespers he heads to the church from wherever his search ended.')
+            : t('Se retira desde la iglesia hasta la celda común.','Retires from the church to the shared cell.');
+      set(7, h === 3 ? 'refectory' : h === 5 ? 'church' : h === 6 ? 'shared' : null, bernardNote, h === 3 ? 'entrance' : null);
+    }
+    if (d === 5 && h <= 2) {
+      const bernardNote = h === 0
+        ? t('Permanece en la celda común durante esta noche.','Remains in the shared cell during this night.')
+        : h === 1
+          ? t('Se dirige a la iglesia para prima.','Heads to the church for Prime.')
+          : t('Sale de la iglesia y abandona la abadía durante tercia.','Leaves the church and departs the abbey during Terce.');
+      set(7, h === 0 ? 'shared' : h === 1 ? 'church' : 'entrance', bernardNote);
+    }
+    if (d === 1 && h === 4) {
+      set(2, 'cell', events['1-4'].action, 'entrance');
+      set(1, null, t('Acompaña a Guillermo durante la bienvenida.','Accompanies William during the welcome.'));
+    }
     if (d === 3 && h === 0) set(4, 'severinus', t('Celda común → escaleras del scriptorium → libro → celda de Severino. Muere al llegar con el libro.','Shared cell → scriptorium stairs → book → Severinus’s cell. Dies on arrival with the book.'), 'shared');
     if (d === 3 && (h === 1 || h === 2)) set(6, 'corridor', t('Permanece quieto hasta que termina la presentación.','Stays still until the introduction ends.'));
     if (d === 3 && h === 2) set(2, 'corridor', t('Conduce a Guillermo hasta Jorge tras llamarlo.','Leads William to Jorge after summoning him.'), 'church');
-    if (d === 3 && h === 3) set(6, 'shared', t('Se desactiva al llegar; desaparece en nona.','Becomes inactive on arrival; disappears at none.'), 'corridor');
+    if (d === 3 && h === 3) set(6, 'shared', t('Llega a la celda común y queda inactivo durante sexta.','Reaches the shared cell and becomes inactive during Sext.'), 'corridor');
     if (d === 4 && h === 2) set(5, null, events['4-2'].action);
     if (d === 5 && h === 0) set(5, 'severinus', t('Se retira a su celda.','Retires to his cell.'));
     if (d === 5 && h === 1) set(5, null, t('Busca a Guillermo para avisarlo o se dirige a la iglesia, según la posición del jugador.','Seeks William to warn him or heads to church, depending on the player’s position.'));
     if (d === 5 && h === 2) { set(3, 'severinus', events['5-2'].text, 'church'); set(5, 'severinus', t('Espera en su celda; Malaquías lo mata cuando ambos han llegado.','Waits in his cell; Malachi kills him when both have arrived.')); }
+    if (d === 5 && h === 3) set(3, 'desk', t('Regresa desde la celda de Severino hasta su mesa durante sexta.','Returns from Severinus’s cell to his desk during Sext.'), 'severinus');
     if (d === 5 && h === 4) set(2, 'severinus', events['5-4'].text);
     if (d === 5 && h === 5) set(3, 'church', events['5-5'].text, 'desk');
-    if (d === 7 && h === 0) set(6, 'light', t('Si descubre los guantes durante el encuentro, huye desde detrás del espejo con el libro. Esta ruta también puede comenzar durante la noche VI.','Only if he discovers the gloves during the encounter: flees from behind the mirror with the book. This route can also trigger from night VI.'), 'mirror');
+    if (d === 7 && h === 0) set(6, 'light', t('Si descubre los guantes durante esta noche, huye desde detrás del espejo con el libro.','If he discovers the gloves during this night, he flees from behind the mirror with the book.'), 'mirror');
     // Presence is distinct from an unknown or player-dependent map position.
     if (!rows[6].to) rows[6].presence = 'absent';
     if (d < 4 || (d === 4 && h < 3) || d > 5 || (d === 5 && h > 2)) rows[7].presence = 'absent';
@@ -149,13 +271,32 @@
     if (d === 5 && h === 2) rows[5].presence = 'dying';
     if (d === 5 && h === 5) rows[3].presence = 'dying';
     if (d === 7 && h === 2) rows.forEach(r => { r.to = null; r.from = null; r.note = t('La investigación ha terminado; los personajes ya no emprenden nuevos recorridos.','The investigation is over; the characters no longer begin new journeys.'); });
+    // Reviewed route data replaces only the matching character/phase.
+    // Missing records retain the editorial schematic; never invent a trace.
+    if (welcomeData && !(d === 7 && h === 2)) for (const row of rows) {
+      const route=routeCatalog[`${d}-${h}:${row.id}`];
+      if (!route || ['dead','absent'].includes(row.presence)) continue;
+      row.route=route;
+      row.from=route.from; row.to=route.to;
+      row.pathSegments=route.segments.map(segment=>segment.worldPoints.map(([x,y])=>worldPosition(x,y,segment.floor)));
+      row.path=row.pathSegments.flat();
+      // Route records retain technical provenance and cross-phase caveats.
+      // The visible note stays limited to the selected day and hour.
+    }
     return rows;
   }
   const valid = (d,h) => !(d === 1 && h < 4) && !(d === 7 && h > 2);
   const phases = [];
   for (let d=1;d<=7;d++) for(let h=0;h<7;h++) if(valid(d,h)) phases.push([d,h]);
   // Reuse the exact portrait layout for both ends of every journey.
-  function markerPosition(id, place, rows) {
+  function markerPosition(id, place, rows, mode=routeMapMode(rows)) {
+    const row=rows.find(row=>row.id===id), traced=row?.path;
+    if (mode && traced && place === row.to) return traced[traced.length-1];
+    const fixed=fixedPositions[id]?.[place];
+    if (mode && fixed) return worldPosition(...fixed);
+    // Desk portraits and schematic endpoints share the floor projection in
+    // both map styles, including phases without a reviewed incoming route.
+    if (mode && place==='desk' && welcomeData.deskPositions[id]) return worldPosition(...welcomeData.deskPositions[id]);
     const [x,y] = places[place];
     const occupants = rows.filter(row => row.to === place);
     const slot = occupants.findIndex(row => row.id === id);
@@ -166,7 +307,11 @@
     const dy = place === 'cell' ? 8.5 : place === 'shared' ? -25.5
       : place === 'desk' && id === 'berengario' ? -51
       : place === 'mirror' && id === 'jorge' ? 25.5 : 0;
-    return {x,y,dx,dy};
+    if (mode && ['mirror','light'].includes(place)) {
+      // AccionesNoche::ejecutar and Jorge::posicionesPredef[1].
+      return worldPosition(...(place==='mirror'?[18,101,2]:[25,43,2]));
+    }
+    return {...(mode ? printPosition(x,y) : {x,y}),dx,dy};
   }
   function movements(d,h,rows) {
     const index = phases.findIndex(([pd,ph]) => pd === d && ph === h);
@@ -179,13 +324,13 @@
       const optionalEnding = row.id === 'jorge' && prior?.from === 'mirror' && prior?.to === 'light';
       const priorPresent = prior && !['dead','absent','dying'].includes(prior.presence);
       const from = row.from || (priorPresent && !optionalEnding ? prior.to : null);
-      if (!from || from === row.to) return [];
+      if (!from || (from === row.to && !row.path)) return [];
       const originRows = prior?.to === from ? previous : [{...row,to:from}];
-      const origin = markerPosition(row.id,from,originRows);
+      const origin = row.path ? row.path[0] : markerPosition(row.id,from,originRows,routeMapMode(rows));
       // Communal rooms share one hollow anchor, even when their portraits
       // were spread apart for selection in the preceding stage.
       if (from === 'church' || from === 'refectory') { origin.dx=0; origin.dy=0; }
-      return [{id:row.id,from,to:row.to,explicit:Boolean(row.from),
+      return [{id:row.id,from,to:row.to,explicit:Boolean(row.from),path:row.path,segments:row.pathSegments,
         origin,
         destination:markerPosition(row.id,row.to,rows)}];
     });
@@ -199,8 +344,9 @@
     <details class="week-spoilers spoiler-disclosure spoiler-disclosure--paper"><summary><span class="spoiler-kicker">${t('Spoilers','Spoilers')}</span><strong class="spoiler-action"><span class="spoiler-when-closed">${t('Mostrar pistas, diálogos y movimientos','Show clues, dialogue and movements')}</span><span class="spoiler-when-open">${t('Ocultar pistas, diálogos y movimientos','Hide clues, dialogue and movements')}</span></strong></summary>
       <div class="week-secret-copy"><div><h5>${t('Lo que sucede','What happens')}</h5><p data-week-event></p><div data-week-quotes></div></div><div><h5>${t('Qué hacer','What to do')}</h5><p data-week-advice></p><figure class="week-labyrinth-route" data-week-labyrinth hidden><a href="../assets/maps/library-route-micromania.png" data-lightbox="../assets/maps/library-route-micromania.png" data-alt="${t('Plano del laberinto con el recorrido marcado en rojo','Labyrinth plan with the route marked in red')}" data-caption="${t('Plano de Micromanía 33 con el recorrido anotado en rojo, conservado por CPC-Power.','Micromanía 33 plan with the route annotated in red, preserved by CPC-Power.')}"><img src="../assets/maps/library-route-micromania.png" alt="${t('Plano del laberinto con el recorrido marcado en rojo','Labyrinth plan with the route marked in red')}" loading="lazy"><span>${t('Ampliar el recorrido del laberinto','Enlarge the labyrinth route')}</span></a><figcaption>Micromanía 33 · ${t('copia anotada conservada en','annotated copy preserved by')} <a href="https://www.cpc-power.com/index.php?page=detail&amp;onglet=plan&amp;num=222">CPC-Power</a>.</figcaption></figure><div data-week-mirror hidden><p>${mirrorSource}</p><blockquote class="week-dialogue"><p lang="la">${mirrorManuscript}</p></blockquote><p>${mirrorReminder}</p></div><p class="caption">${t('Los encuentros pueden depender de la cercanía, el inventario y las acciones anteriores.','Encounters may depend on proximity, inventory and earlier actions.')}</p></div></div>
       <div class="week-atlas"><h5>${t('Los habitantes de la abadía','The inhabitants of the abbey')}</h5><p class="week-atlas-intro">${t('Las flechas muestran el desplazamiento entre la hora anterior y la actual, o entre el principio y el final de una escena documentada. Selecciona un retrato para destacar su recorrido. Cuando el personaje permanece en el mismo lugar o se desconoce el punto de partida, no aparece ninguna flecha. Son los desplazamientos habituales; los encuentros de cada partida pueden alterarlos. Las líneas unen dos puntos, pero no trazan el camino exacto. En móvil, desliza el mapa horizontalmente.','Arrows connect the previous hour’s destination to this hour’s, or the endpoints of a documented scene. Select a portrait to highlight its journey. No arrow is drawn for a stationary character or a variable origin. These are expected movements, subject to encounters during play; the lines do not trace paths. On mobile, scroll the map sideways.')}</p>
+      <div class="week-map-style" data-week-map-style role="group" aria-label="${t('Estilo del mapa','Map style')}"><button type="button" data-map-style="print" aria-pressed="true">${t('Mapa impreso','Printed map')}</button><button type="button" data-map-style="geometry" aria-pressed="false">${t('Mapa reconstruido','Reconstructed map')}</button></div>
       <div class="week-map-scroll" tabindex="0" role="region" aria-label="${t('Mapa de destinos, desplazable','Scrollable destination map')}"><div class="week-map"><img src="../assets/maps/interactive-retrogamer-map.jpg" alt="${t('Plano de la abadía y sus plantas superiores','Plan of the abbey and its upper floors')}" loading="lazy"><svg aria-hidden="true"><defs><marker id="week-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9" fill="#a32d27"/></marker></defs><g data-week-routes></g></svg><div data-week-origins></div><div data-week-pins></div></div></div>
-      <p class="caption week-map-caption">${t('Mapa: Retro Gamer España 41 · círculo vacío: origen · retrato: destino · rojo intenso: personaje seleccionado. Los extremos usan las posiciones ajustadas de cada personaje; varios retratos en una estancia se separan para poder seleccionarlos.','Map: Retro Gamer España 41 · empty circle: origin · portrait: destination · strong red: selected character. Endpoints use each character’s adjusted position; portraits sharing a room are spread out for selection.')}</p><p class="week-route" aria-live="polite" aria-atomic="true"></p><div class="week-roster" role="group" aria-label="${t('Personajes','Characters')}"></div></div>
+      <p class="caption week-map-caption">${t('Mapa: Retro Gamer España 41 · círculo vacío: origen · retrato: destino · rojo intenso: personaje seleccionado. Los personajes con un puesto documentado se muestran en su posición exacta; si comparten coordenadas, sus retratos pueden superponerse.','Map: Retro Gamer España 41 · empty circle: origin · portrait: destination · strong red: selected character. Characters with a documented place appear at their exact position; portraits may overlap when they share coordinates.')}</p><p class="week-route" aria-live="polite" aria-atomic="true"></p><div class="week-roster" role="group" aria-label="${t('Personajes','Characters')}"></div></div>
     </details><details class="week-sources"><summary>${t('Cómo se ha reconstruido esta crónica','How this chronicle was reconstructed')}</summary><p>${t('Los consejos siguen la progresión de Micromanía 33 y distinguen sus visitas recomendadas de la disponibilidad de los objetos. La crónica se ha elaborado leyendo el código de VigasocoSDL: AccionesDia, Abad, Berengario, Malaquias, Severino, Bernardo y Jorge. Las citas conservan la escritura de la tabla GestorFrases; los resúmenes y consejos son editoriales. La guía describe las rutinas documentadas, pero no simula una partida ni comprueba todas las versiones.','The advice follows Micromanía 33’s progression and distinguishes its recommended visits from object availability. A reading of VigasocoSDL code: AccionesDia, Abad, Berengario, Malaquias, Severino, Bernardo and Jorge. Quotations preserve its GestorFrases table wording; summaries and advice are editorial. This is not a game simulation or a verification of every version. The English quotations come from the port’s translation.')}</p></details>`;
   const find = s => root.querySelector(s);
   const put = (s, value) => { find(s).textContent = value; };
@@ -241,6 +387,7 @@
   helpTitle.textContent = t('Cómo leer el mapa','How to read the map');
   const mapIntro = find('.week-atlas-intro');
   const mapCaption = find('.week-map-caption');
+  const schematicIntro = mapIntro.textContent, schematicCaption = mapCaption.textContent;
   mapIntro.before(mapHelp);mapHelp.append(helpTitle,mapIntro,mapCaption);
   function button(label, pressed, handler) {
     const b = document.createElement('button'); b.type = 'button'; b.textContent = label;
@@ -283,8 +430,28 @@
     find('[data-week-now]').style.minHeight=`${tallestEyebrow}px`;
     weekReading.style.minHeight=`${tallest}px`;
   }
+  find('[data-week-map-style]').addEventListener('click',event=>{
+    const choice=event.target.closest('[data-map-style]');
+    if (!choice) return;
+    preferredMap=choice.dataset.mapStyle;
+    renderMap();
+  });
   function renderMap() {
     const rows = cast(day,hour), pins = find('[data-week-pins]'), roster = find('.week-roster');
+    const mapImage=find('.week-map > img');
+    const mode=routeMapMode(), traced=rows.some(row=>row.path);
+    mapIntro.textContent=traced?t('Las líneas continuas muestran recorridos reconstruidos con el código del juego; las discontinuas conectan destinos aproximados. Selecciona un retrato para destacar al personaje. En móvil, desliza el mapa horizontalmente.','Solid lines show routes reconstructed from the game code; dashed lines connect approximate destinations. Select a portrait to highlight a character. On mobile, scroll the map sideways.'):schematicIntro;
+    mapCaption.textContent=traced?t('Mapa de MicroHobby reproducido por Retro Gamer España 41, ajustado al recorrido reconstruido con VigasocoSDL. Círculo vacío: inicio · retrato: destino. Las imperfecciones del dibujo impreso dejan pequeñas diferencias de alineación. No se simulan las colisiones con otros personajes ni con las hojas de las puertas.','MicroHobby map reproduced by Retro Gamer España 41, aligned to the route reconstructed with VigasocoSDL. Empty circle: start · portrait: destination. Imperfections in the printed drawing leave small alignment differences. Collisions with other characters and door leaves are not simulated.'):schematicCaption;
+    if (mode==='geometry') mapCaption.textContent=t('Plano reconstruido con las alturas del juego, registrado con el mapa impreso. Las zonas bloqueadas simplifican la arquitectura visible. Círculo vacío: inicio · retrato: destino. Los recorridos no simulan las colisiones con otros personajes ni con las hojas de las puertas.','Plan reconstructed from the game’s floor heights and registered with the printed map. Blocked areas simplify the visible architecture. Empty circle: start · portrait: destination. Routes omit collisions with other characters and door leaves.');
+    const stylePicker=find('[data-week-map-style]');
+    stylePicker.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapStyle===preferredMap)));
+    const mapSource=mode==='geometry'?`../assets/maps/abbey-world-map-${en?'en':'es'}.svg?v=20260913-map13`:'../assets/maps/interactive-retrogamer-map.jpg';
+    if (mapImage.getAttribute('src') !== mapSource) mapImage.setAttribute('src',mapSource);
+    mapImage.alt=t('Plano de la abadía y sus plantas superiores','Plan of the abbey and its upper floors');
+    find('.week-map').classList.add('week-map--aligned');
+    const alignment=welcomeData?.printAlignment;
+    mapImage.style.transformOrigin=mode==='print'?`${100*alignment.pivot[0]/welcomeData.imageSize[0]}% ${100*alignment.pivot[1]/welcomeData.imageSize[1]}%`:'';
+    mapImage.style.transform=mode==='print'?`translate(${100*alignment.x/welcomeData.imageSize[0]}%,${100*alignment.y/welcomeData.imageSize[1]}%) rotate(${alignment.rotation}deg) scale(${alignment.scale})`:'';
     mapMovements = movements(day,hour,rows);
     pins.replaceChildren(); roster.replaceChildren();
     for (const r of rows) {
@@ -324,16 +491,34 @@
     for (const movement of sorted) {
       const a=pixels(movement.origin), b=pixels(movement.destination);
       const distance=Math.hypot(b.x-a.x,b.y-a.y);
-      if (distance < 1) continue;
+      if (distance < 1 && !movement.path) continue;
       // Stop just before the portrait edge so the arrowhead remains visible.
       const inset=Math.min(20,distance/3);
       const end={x:b.x-(b.x-a.x)/distance*inset,y:b.y-(b.y-a.y)/distance*inset};
+      const segments=movement.segments ? movement.segments.map(segment=>segment.map(pixels)) : [[a,end]];
+      for (const [segmentIndex,points] of segments.entries()) {
+      if (movement.path && segmentIndex===segments.length-1) {
+        // Trim along the polyline, including short final turns, at the portrait.
+        let remaining = 20;
+        while (points.length > 1 && remaining > 0) {
+          const last=points[points.length-1], prior=points[points.length-2];
+          const length=Math.hypot(last.x-prior.x,last.y-prior.y);
+          if (length <= remaining) { points.pop(); remaining-=length; }
+          else {
+            points[points.length-1]={x:last.x+(prior.x-last.x)*remaining/length,y:last.y+(prior.y-last.y)*remaining/length};
+            remaining=0;
+          }
+        }
+      }
       const line=document.createElementNS('http://www.w3.org/2000/svg','path');
       line.dataset.weekLine=movement.id;
+      line.dataset.segment=String(segmentIndex);
       line.dataset.from=movement.from;line.dataset.to=movement.to;
+      if (movement.path) line.dataset.routeKind='reconstructed';
       line.setAttribute('class',`week-movement${movement.id===ids[selected]?' is-selected':''}`);
-      line.setAttribute('d',`M${a.x},${a.y} L${end.x},${end.y}`);
+      line.setAttribute('d',points.map((p,i)=>`${i?'L':'M'}${p.x},${p.y}`).join(' '));
       line.setAttribute('marker-end','url(#week-arrow)');lines.append(line);
+      }
       const origin=document.createElement('span');
       origin.className=`week-origin${movement.id===ids[selected]?' is-selected':''}`;
       origin.dataset.weekOrigin=movement.id;

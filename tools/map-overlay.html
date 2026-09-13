@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome route · map alignment study</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#252822;color:#eee5d0;font:15px Georgia,serif}header{padding:18px 25px;border-bottom:1px solid #62634f}h1{font-size:22px;font-weight:normal;margin:0}header p{font-size:13px;margin:7px 0 0;color:#c5c1ad}main{display:grid;grid-template-columns:250px 1fr;gap:24px;padding:20px 25px}aside{line-height:1.5}label{display:block;margin:16px 0}label span{display:flex;justify-content:space-between}input{width:100%;accent-color:#c4aa71}output{font:13px monospace;color:#e7d2a3}button{font:13px Georgia,serif;color:#eee5d0;border:1px solid #79755c;background:#383b31;padding:8px 10px;cursor:pointer}button:hover,button[aria-pressed=true]{background:#665b3e}.buttons{display:flex;gap:5px;flex-wrap:wrap}.stage{height:calc(100vh - 130px);min-height:500px;background:#f0e2c4;overflow:hidden;border:1px solid #a88c5e}svg{display:block;width:100%;height:100%}.note{font-size:13px;color:#c5c1ad}.key{font-size:13px;margin-top:20px}.key i{display:inline-block;width:22px;height:3px;background:#a32d27;vertical-align:middle;margin-right:5px}@media(max-width:750px){main{grid-template-columns:1fr;padding:15px}.stage{height:80vh}aside{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}aside>p,aside>.buttons{grid-column:1/-1}label{margin:8px 0}}
+</style>
+<header><h1>The welcome walk · two maps, one route</h1><p id="transformSummary">Original print at 108%, rotated 2.5° clockwise, offset −4 px horizontally. The game geometry and route remain fixed.</p><p><a href="map-overlay-upper.html" style="color:#e7d2a3">Scriptorium and labyrinth comparison →</a></p></header>
+<main><aside>
+<div class="buttons" aria-label="Map layers"><button data-mode="overlay" aria-pressed="true">Overlay</button><button data-mode="print" aria-pressed="false">Printed map</button><button data-mode="grid" aria-pressed="false">Game geometry</button></div>
+<label><span>Rotation <output id="rotationValue"></output></span><input id="rotation" aria-label="Rotation" type="range" min="-5" max="5" step=".1" value="2.5"></label>
+<div class="buttons"><button id="clockwise">2° clockwise</button><button id="counterclockwise">2° anticlockwise</button></div>
+<label><span>Scale <output id="scaleValue"></output></span><input id="scale" aria-label="Scale" type="range" min="95" max="120" step=".5" value="108"></label>
+<label><span>Print opacity <output id="opacityValue"></output></span><input id="opacity" aria-label="Print opacity" type="range" min="0" max="100" step="1" value="60"></label>
+<label><span>Horizontal offset <output id="xValue"></output></span><input id="x" aria-label="Horizontal offset" type="range" min="-80" max="80" step="1" value="-4"></label>
+<label><span>Vertical offset <output id="yValue"></output></span><input id="y" aria-label="Vertical offset" type="range" min="-80" max="80" step="1" value="0"></label>
+<div class="buttons"><button id="reset">Reset to 2.5° / 108% / −4 px</button></div>
+<p class="key"><i></i>Abbot · day I Nona<br>○ Entrance &nbsp; · &nbsp; 1 First stop &nbsp; · &nbsp; 2 Cell door</p>
+<p class="note">Ground floor only. Rotation and scale pivot around (350, 500) on the full image. These controls transform only the printed image; they never stretch the game grid or the route.</p>
+<p class="note">Print: MicroHobby map reproduced in Retro Gamer España 41. Movement geometry: reconstructed VigasocoSDL.</p>
+</aside>
+<div class="stage"><svg viewBox="65 125 625 755" role="img" aria-label="Printed floor plan superposed on the game geometry with the Abbot’s welcome route">
+<defs><clipPath id="view"><rect x="65" y="125" width="625" height="755"/></clipPath><clipPath id="ground"><rect x="0" y="130" width="650" height="745"/></clipPath><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5 0 7" fill="#a32d27"/></marker></defs>
+<g clip-path="url(#view)">
+<image id="geometry" href="../assets/maps/abbey-world-map-en.svg" width="1323" height="982"/>
+<g id="printTransform"><g clip-path="url(#ground)"><image id="print" href="../assets/maps/interactive-retrogamer-map.jpg" width="1323" height="982"/></g></g>
+<path id="route" fill="none" stroke="#a32d27" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<g id="stops" font-family="Georgia,serif" font-size="11" text-anchor="middle"/>
+</g>
+</svg></div></main>
+<script src="../assets/game/abbot-welcome-route.js"></script>
+<script>
+const data=window.ABBOT_WELCOME_ROUTE,panel=data.panels[0];
+const point=([x,y])=>[panel.ox-panel.scale*y,panel.oy+panel.scale*x];
+const points=data.worldPoints.map(point);
+document.querySelector('#route').setAttribute('d',points.map(([x,y],i)=>`${i?'L':'M'}${x} ${y}`).join(' '));
+const stops=[points[0],point([164,88]),points.at(-1)];
+document.querySelector('#stops').innerHTML=stops.map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="${i?7:5}" fill="#f3e7cc" stroke="#a32d27" stroke-width="1.5"/>${i?`<text x="${x}" y="${y+3.6}" fill="#a32d27">${i}</text>`:''}`).join('');
+const controls=Object.fromEntries(['rotation','scale','opacity','x','y'].map(id=>[id,document.getElementById(id)]));
+let mode='overlay';
+function render(){
+ const values=Object.fromEntries(Object.entries(controls).map(([k,e])=>[k,Number(e.value)]));
+ document.querySelector('#transformSummary').textContent=`Original print at ${values.scale}%, rotated ${Math.abs(values.rotation)}° ${values.rotation<0?'anticlockwise':'clockwise'}, offset (${values.x}, ${values.y}) px. The game geometry and route remain fixed.`;
+ for(const [k,v] of Object.entries(values))document.getElementById(k+'Value').textContent=v+({rotation:'°',scale:'%',opacity:'%',x:' px',y:' px'}[k]);
+ document.querySelector('#printTransform').setAttribute('transform',`translate(${values.x} ${values.y}) translate(350 500) rotate(${values.rotation}) scale(${values.scale/100}) translate(-350 -500)`);
+ document.querySelector('#printTransform').setAttribute('opacity',mode==='grid'?0:mode==='print'?1:values.opacity/100);
+ document.querySelector('#geometry').setAttribute('opacity',mode==='print'?0:1);
+ document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+}
+Object.values(controls).forEach(e=>e.addEventListener('input',render));
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;render();}));
+document.querySelector('#clockwise').onclick=()=>{controls.rotation.value=2;render();};
+document.querySelector('#counterclockwise').onclick=()=>{controls.rotation.value=-2;render();};
+document.querySelector('#reset').onclick=()=>{for(const [k,v] of Object.entries({rotation:2.5,scale:108,opacity:60,x:-4,y:0}))controls[k].value=v;mode='overlay';render();};
+render();
+</script>
+</html>

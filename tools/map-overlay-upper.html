@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Upper floors · map alignment study</title>
+<style>
+[hidden]{display:none!important}
+*{box-sizing:border-box}body{margin:0;background:#252822;color:#eee5d0;font:15px Georgia,serif}header{padding:16px 24px;border-bottom:1px solid #62634f}h1{font-size:22px;font-weight:normal;margin:0}header p{font-size:13px;margin:7px 0 0;color:#c5c1ad}a{color:#e7d2a3}main{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;padding:20px 24px}aside{line-height:1.45}label{display:block;margin:13px 0}label>span{display:flex;align-items:center;justify-content:space-between;gap:8px}input[type=range]{width:100%;accent-color:#c4aa71}input[type=number]{width:88px;padding:4px;background:#383b31;color:#eee5d0;border:1px solid #79755c;font:13px monospace}select,button{font:13px Georgia,serif;color:#eee5d0;border:1px solid #79755c;background:#383b31;padding:8px 10px;cursor:pointer}select{width:100%}button:hover,button[aria-pressed=true]{background:#665b3e}.buttons{display:flex;gap:5px;flex-wrap:wrap}.stage{height:calc(100vh - 170px);min-height:440px;background:#f0e2c4;overflow:hidden;border:1px solid #a88c5e;position:sticky;top:16px}.stage svg{display:block;width:100%;height:100%}.note{font-size:13px;color:#c5c1ad}textarea{width:100%;min-height:175px;background:#383b31;color:#eee5d0;border:1px solid #79755c;padding:8px;font:12px/1.4 monospace}output{font:13px monospace;color:#e7d2a3}#error{color:#ffbe9b}#outlines path{fill:none;stroke:#196d9d;stroke-width:1.2;vector-effect:non-scaling-stroke}details{margin-top:14px}summary{cursor:pointer}@media(max-width:760px){main{grid-template-columns:1fr;padding:14px}.stage{height:70vh;position:static;min-height:340px}aside{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}aside>.buttons,aside>.note,aside>details,aside>p,aside>label:first-child{grid-column:1/-1}}
+</style>
+<header><h1>Scriptorium & labyrinth · alignment study</h1><p>Independent printed-map adjustments over the original reference geometry. <a href="map-overlay.html">Ground-floor comparison</a></p><p id="summary" aria-live="polite">Loading geometry…</p></header>
+<main><aside>
+<label>Floor<select id="floor" aria-label="Floor"><option value="1">Scriptorium</option><option value="2">Labyrinth</option></select></label>
+<div class="buttons" aria-label="Map layers"><button data-mode="overlay" aria-pressed="true">Overlay</button><button data-mode="print" aria-pressed="false">Printed map</button><button data-mode="grid" aria-pressed="false">Game geometry</button><button id="edges" aria-pressed="false">Boundary outlines</button></div>
+<label><span>Rotation (clockwise °)<input id="rotationNumber" aria-label="Rotation degrees" type="number" min="-180" max="180" step=".1"></span><input id="rotation" aria-label="Rotation" type="range" min="-180" max="180" step=".1"></label>
+<label id="uniformScale"><span>Scale (%)<input id="scaleNumber" aria-label="Scale percent" type="number" min="40" max="200" step=".1"></span><input id="scale" aria-label="Scale" type="range" min="40" max="200" step=".1"></label>
+<label id="horizontalScale" hidden><span>X scale (%)<input id="scaleXNumber" aria-label="X scale percent" type="number" min="40" max="200" step=".1"></span><input id="scaleX" aria-label="X scale" type="range" min="40" max="200" step=".1"></label>
+<label id="verticalScale" hidden><span>Y scale (%)<input id="scaleYNumber" aria-label="Y scale percent" type="number" min="40" max="200" step=".1"></span><input id="scaleY" aria-label="Y scale" type="range" min="40" max="200" step=".1"></label>
+<label><span>Print opacity <output id="opacityValue"></output></span><input id="opacity" aria-label="Print opacity" type="range" min="0" max="100" step="1"></label>
+<label><span>Horizontal offset (px)<input id="xNumber" aria-label="Horizontal offset pixels" type="number" min="-500" max="500" step=".1"></span><input id="x" aria-label="Horizontal offset" type="range" min="-500" max="500" step=".1"></label>
+<label><span>Vertical offset (px)<input id="yNumber" aria-label="Vertical offset pixels" type="number" min="-500" max="500" step=".1"></span><input id="y" aria-label="Vertical offset" type="range" min="-500" max="500" step=".1"></label>
+<div class="buttons"><button id="flip">Rotate printed layer 180°</button><button id="reset">Restore saved fit</button></div>
+<p class="note" id="pivot"></p>
+<p class="note">Each floor keeps its adjustments while you switch. Only the printed image moves. Boundary outlines show game obstacles; these can differ from drawn walls.</p>
+<details><summary>Settings for both floors</summary><label for="settings" class="note">Settings include both the comparison reference and the converted site matrix.</label><textarea id="settings" readonly spellcheck="false" aria-label="Alignment settings"></textarea><button id="selectSettings">Select settings</button></details>
+<p class="note">Print: MicroHobby / Retro Gamer España 41. Geometry: the site's generated VigasocoSDL floor plans. The saved fit is converted to site coordinates during the map build; slider edits here are previews.</p>
+<p id="error" role="alert"></p>
+</aside><div class="stage"><svg id="map" role="img" aria-label="Printed upper floor superposed on the game geometry"><defs><clipPath id="printCrop"><rect id="crop"/></clipPath></defs><g id="geometry"></g><g id="printTransform"><image href="../assets/maps/interactive-retrogamer-map.jpg" width="1323" height="982" clip-path="url(#printCrop)"/></g><g id="outlines" display="none"></g></svg></div></main>
+<script src="../assets/game/abbot-welcome-route.js?v=20260913-map9"></script>
+<script>
+(() => {
+ 'use strict';
+ const data=window.ABBOT_WELCOME_ROUTE, ns='http://www.w3.org/2000/svg';
+ const floors={1:{name:'Scriptorium',crop:[654,140,276,290],pivot:[792,285]},2:{name:'Labyrinth',crop:[955,132,268,295],pivot:[1089,279.5]}};
+ const base=data.printAlignment, radians=base.rotation*Math.PI/180;
+ const project=([x,y])=>{const u=(x-base.pivot[0])*base.scale,v=(y-base.pivot[1])*base.scale;return [base.pivot[0]+base.x+u*Math.cos(radians)-v*Math.sin(radians),base.pivot[1]+base.y+u*Math.sin(radians)+v*Math.cos(radians)];};
+ // Keep the accepted comparison in its original reference frame.
+ for(const [id,f] of Object.entries(floors)){
+  const saved=data.upperFloorRegistration[id],fit=saved.acceptedPrint;
+  f.pivot=fit.pivot;
+  f.initial={rotation:fit.rotation,scale:fit.scaleX*100,scaleX:fit.scaleX*100,scaleY:fit.scaleY*100,x:fit.x,y:fit.y,opacity:saved.previewOpacity};
+ }
+ for(const f of Object.values(floors))f.state={...f.initial};
+ const $=id=>document.getElementById(id), controls=Object.fromEntries(['rotation','scale','scaleX','scaleY','opacity','x','y'].map(k=>[k,$(k)]));
+ let selected=1,mode='overlay',edges=false,groups=[];
+ function transform(f){const s=f.state,p=f.pivot;return `translate(${s.x} ${s.y}) translate(${p[0]} ${p[1]}) rotate(${s.rotation}) scale(${s.scaleX/100} ${s.scaleY/100}) translate(${-p[0]} ${-p[1]})`;}
+ function render(){
+  const f=floors[selected],s=f.state;
+  $('uniformScale').hidden=selected===2;
+  $('horizontalScale').hidden=$('verticalScale').hidden=selected!==2;
+  for(const [k,input] of Object.entries(controls)){input.value=s[k];if($(k+'Number'))$(k+'Number').value=Number(s[k].toFixed(3));}
+  $('opacityValue').textContent=s.opacity+'%';
+  $('printTransform').setAttribute('transform',transform(f));
+  $('printTransform').setAttribute('opacity',mode==='grid'?0:mode==='print'?1:s.opacity/100);
+  $('geometry').setAttribute('opacity',mode==='print'?0:1);
+  $('outlines').setAttribute('display',edges&&mode==='overlay'?'inline':'none');
+  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+  $('edges').setAttribute('aria-pressed',String(edges));
+  $('summary').textContent=`${f.name}: ${s.rotation.toFixed(1)}° clockwise · X ${s.scaleX.toFixed(1)}% / Y ${s.scaleY.toFixed(1)}% · offsets (${s.x.toFixed(2)}, ${s.y.toFixed(2)}) px`;
+  $('pivot').textContent=`Pivot: (${f.pivot.join(', ')}) on the original 1323 × 982 image. Offsets use original-image pixels and this local pivot. X and Y scaling follow the printed image's axes before rotation. Both floors start at their saved fits.`;
+  $('settings').value=JSON.stringify({imageSize:data.imageSize,transforms:Object.fromEntries(Object.entries(floors).map(([id,v])=>[id,{floor:v.name,pivot:v.pivot,rotation:v.state.rotation,scaleX:v.state.scaleX/100,scaleY:v.state.scaleY/100,x:v.state.x,y:v.state.y,svgTransform:transform(v),referenceGeometryMatrix:data.upperFloorRegistration[id].referenceGeometryMatrix,siteGeometryPanel:data.panels[id]}]))},null,2);
+ }
+ function showFloor(){
+  const f=floors[selected];
+  ['x','y','width','height'].forEach((k,i)=>$('crop').setAttribute(k,f.crop[i]));
+  $('geometry').replaceChildren(groups[selected].cloneNode(true));
+  const outline=groups[selected].cloneNode(true);
+  for(const path of [...outline.querySelectorAll('path')])if(path.getAttribute('stroke')!=='#493d2a')path.remove();
+  $('outlines').replaceChildren(outline);
+  const box=$('geometry').getBBox(),corners=[[f.crop[0],f.crop[1]],[f.crop[0]+f.crop[2],f.crop[1]],[f.crop[0],f.crop[1]+f.crop[3]],[f.crop[0]+f.crop[2],f.crop[1]+f.crop[3]]].map(project);
+  const xs=[box.x,box.x+box.width,...corners.map(p=>p[0])],ys=[box.y,box.y+box.height,...corners.map(p=>p[1])];
+  const x=Math.min(...xs)-28,y=Math.min(...ys)-28;
+  $('map').setAttribute('viewBox',`${x} ${y} ${Math.max(...xs)-x+28} ${Math.max(...ys)-y+28}`);
+  render();
+ }
+ for(const k of Object.keys(controls))for(const input of [controls[k],$(k+'Number')].filter(Boolean))input.addEventListener('input',()=>{
+  if(input.value===''||!Number.isFinite(input.valueAsNumber))return;
+  const state=floors[selected].state;
+  state[k]=Math.max(Number(input.min),Math.min(Number(input.max),input.valueAsNumber));
+  if(k==='scale')state.scaleX=state.scaleY=state.scale;
+  render();
+ });
+ $('floor').addEventListener('change',()=>{selected=Number($('floor').value);if(groups.length)showFloor();});
+ document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;render();}));
+ $('edges').onclick=()=>{edges=!edges;render();};
+ $('flip').onclick=()=>{const s=floors[selected].state;s.rotation=s.rotation>0?s.rotation-180:s.rotation+180;render();};
+ $('reset').onclick=()=>{floors[selected].state={...floors[selected].initial};mode='overlay';render();};
+ $('selectSettings').onclick=()=>{$('settings').focus();$('settings').select();};
+ render();
+ fetch('../assets/maps/abbey-world-map-en.svg?v=20260913-map9').then(r=>{if(!r.ok)throw Error(`Geometry request: ${r.status}`);return r.text();}).then(text=>{
+  const doc=new DOMParser().parseFromString(text,'image/svg+xml');
+  if(doc.querySelector('parsererror'))throw Error('Invalid geometry SVG');
+  for(const item of doc.querySelector('defs').children){if(item.tagName!=='style')$('map').querySelector('defs').append(document.importNode(item,true));}
+  groups=[...doc.documentElement.children].filter(g=>g.tagName==='g'&&g.getAttribute('transform')?.startsWith('matrix(')).map(g=>document.importNode(g,true));
+  if(groups.length!==3)throw Error('Expected three floor geometry groups');
+  for(const id of [1,2])groups[id].setAttribute('transform',`matrix(${data.upperFloorRegistration[id].referenceGeometryMatrix.join(' ')})`);
+  showFloor();
+ }).catch(error=>{$('error').textContent='Could not load the game geometry: '+error.message;});
+})();
+</script>
+</html>

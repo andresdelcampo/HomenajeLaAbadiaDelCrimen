@@ -1,0 +1,254 @@
+{
+  "day": 3,
+  "hour": 3,
+  "character": "jorge",
+  "appliesTo": [
+    "3-3"
+  ],
+  "from": "corridor",
+  "to": "shared",
+  "source": [
+    "Jorge.cpp: posicionesPredef destination 0, monks' cell (DERECHA, 0xbc, 0x15, 0x02)",
+    "Jorge.cpp: Jorge::piensa, day-III PRIMA and TERCIA stationary branches followed by SEXTA destination 0, state reset, and deactivation on arrival",
+    "AccionesDia.cpp: AccionesPrima::ejecuta, day-III action-buffer reset, scripted placement at (0xc8,0x24,0x00) facing DERECHA, activation, and global door mask 0xef",
+    "AccionesDia.cpp: AccionesNona::ejecuta, day-III deactivation and coordinate zeroing after the Sexta walk",
+    "Logica.cpp: Logica::iniciaPersonajes, Jorge initially inactive at zero coordinates with arrival -6",
+    "BuscadorRutas.cpp: buscaCamino and reconstruyeCamino"
+  ],
+  "conditions": "Day-III Sexta walk from Jorge's exact Prima scripted placement to destination 0. Jorge remains stationary through Prima and Tercia, so the placement is the established walking origin; the placement itself is not an incoming route. On arrival he becomes inactive. At Nona a timed action deactivates him again and resets x/y/height to zero; that disappearance/reposition is not a walked segment and is not drawn. Combined character/global search-door mask 0x2f; static floor geometry, no actor or door-leaf collisions.",
+  "integrationStatus": "integrated",
+  "dskSha256": "282d7263c5e0129d5f88b33afe890eb6188b0c79bed9344c4b8562135d49f6f5",
+  "solver": {
+    "start": [
+      0,
+      200,
+      36,
+      0
+    ],
+    "stops": [
+      [
+        0,
+        188,
+        21,
+        2
+      ]
+    ],
+    "doorMask": 47
+  },
+  "note": {
+    "es": "Día III, sexta: Jorge parte de la posición donde aguardó durante la presentación y se dirige a la celda de los monjes. Al llegar queda inactivo; su desaparición posterior no forma parte del recorrido.",
+    "en": "Day III, Sext: Jorge leaves the position where he waited during the introduction and goes to the monks' cell. He becomes inactive on arrival; his later disappearance is not part of the route."
+  },
+  "segments": [
+    {
+      "floor": 0,
+      "worldPoints": [
+        [
+          200,
+          36,
+          0
+        ],
+        [
+          199,
+          36,
+          0
+        ],
+        [
+          198,
+          36,
+          0
+        ],
+        [
+          197,
+          36,
+          0
+        ],
+        [
+          196,
+          36,
+          0
+        ],
+        [
+          195,
+          36,
+          0
+        ],
+        [
+          194,
+          36,
+          0
+        ],
+        [
+          193,
+          36,
+          0
+        ],
+        [
+          192,
+          36,
+          0
+        ],
+        [
+          191,
+          36,
+          0
+        ],
+        [
+          190,
+          36,
+          0
+        ],
+        [
+          189,
+          36,
+          0
+        ],
+        [
+          189,
+          37,
+          0
+        ],
+        [
+          188,
+          37,
+          0
+        ],
+        [
+          187,
+          37,
+          0
+        ],
+        [
+          186,
+          37,
+          0
+        ],
+        [
+          185,
+          37,
+          0
+        ],
+        [
+          185,
+          35,
+          1
+        ],
+        [
+          185,
+          34,
+          2
+        ],
+        [
+          185,
+          33,
+          2
+        ],
+        [
+          184,
+          33,
+          2
+        ],
+        [
+          183,
+          33,
+          2
+        ],
+        [
+          182,
+          33,
+          2
+        ],
+        [
+          182,
+          32,
+          2
+        ],
+        [
+          182,
+          31,
+          2
+        ],
+        [
+          182,
+          30,
+          2
+        ],
+        [
+          182,
+          29,
+          2
+        ],
+        [
+          182,
+          28,
+          2
+        ],
+        [
+          182,
+          27,
+          2
+        ],
+        [
+          182,
+          26,
+          2
+        ],
+        [
+          182,
+          25,
+          2
+        ],
+        [
+          182,
+          24,
+          2
+        ],
+        [
+          182,
+          23,
+          2
+        ],
+        [
+          182,
+          22,
+          2
+        ],
+        [
+          183,
+          22,
+          2
+        ],
+        [
+          184,
+          22,
+          2
+        ],
+        [
+          185,
+          22,
+          2
+        ],
+        [
+          186,
+          22,
+          2
+        ],
+        [
+          187,
+          22,
+          2
+        ],
+        [
+          188,
+          22,
+          2
+        ],
+        [
+          188,
+          21,
+          2
+        ]
+      ]
+    }
+  ]
+}

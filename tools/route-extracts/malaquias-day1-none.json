@@ -1,0 +1,247 @@
+{
+  "day": 1,
+  "hour": 4,
+  "character": "malaquias",
+  "appliesTo": ["1-4"],
+  "integrationStatus": "integrated-conditional",
+  "conditional": true,
+  "from": "corridor",
+  "to": "desk",
+  "source": [
+    "EntidadJuego.cpp: PosicionJuego default orientation DERECHA",
+    "Logica.cpp: Logica::iniciaPersonajes, Malachi initial position (0x26,0x26,0x0f), state 0, and initial global door mask 0xef",
+    "Malaquias.cpp: Malaquias::piensa, state 0 fallback destination 2 when Guillermo is not nearby",
+    "Malaquias.cpp: posicionesPredef destination 2 (scriptorium desk)",
+    "BuscadorRutas.cpp: buscaCamino and reconstruyeCamino"
+  ],
+  "conditions": "Day-I opening movement from the exact initialized position to the desk when Guillermo is not yet nearby. If the player reaches Malachi before he settles, his guard response can alter the movement. Combined character/global search-door mask 0x2f; static floor geometry, no actor or door-leaf collisions.",
+  "dskSha256": "282d7263c5e0129d5f88b33afe890eb6188b0c79bed9344c4b8562135d49f6f5",
+  "solver": {
+    "start": [
+      0,
+      38,
+      38,
+      15
+    ],
+    "stops": [
+      [
+        1,
+        55,
+        56,
+        15
+      ]
+    ],
+    "doorMask": 47
+  },
+  "note": {
+    "es": "Desplazamiento inicial del día I desde la posición de arranque de Malaquías hasta su mesa del scriptorium.",
+    "en": "Day-I opening movement from Malachi's initialized position to his scriptorium desk."
+  },
+  "segments": [
+    {
+      "floor": 1,
+      "worldPoints": [
+        [
+          38,
+          38,
+          15
+        ],
+        [
+          38,
+          39,
+          15
+        ],
+        [
+          38,
+          40,
+          15
+        ],
+        [
+          38,
+          41,
+          15
+        ],
+        [
+          38,
+          42,
+          15
+        ],
+        [
+          38,
+          43,
+          15
+        ],
+        [
+          38,
+          44,
+          15
+        ],
+        [
+          38,
+          45,
+          15
+        ],
+        [
+          39,
+          45,
+          15
+        ],
+        [
+          40,
+          45,
+          15
+        ],
+        [
+          41,
+          45,
+          15
+        ],
+        [
+          42,
+          45,
+          15
+        ],
+        [
+          43,
+          45,
+          15
+        ],
+        [
+          43,
+          46,
+          15
+        ],
+        [
+          43,
+          47,
+          15
+        ],
+        [
+          43,
+          48,
+          15
+        ],
+        [
+          43,
+          49,
+          15
+        ],
+        [
+          44,
+          49,
+          15
+        ],
+        [
+          45,
+          49,
+          15
+        ],
+        [
+          46,
+          49,
+          15
+        ],
+        [
+          47,
+          49,
+          15
+        ],
+        [
+          48,
+          49,
+          15
+        ],
+        [
+          48,
+          50,
+          15
+        ],
+        [
+          49,
+          50,
+          15
+        ],
+        [
+          50,
+          50,
+          15
+        ],
+        [
+          51,
+          50,
+          15
+        ],
+        [
+          52,
+          50,
+          15
+        ],
+        [
+          53,
+          50,
+          15
+        ],
+        [
+          54,
+          50,
+          15
+        ],
+        [
+          55,
+          50,
+          15
+        ],
+        [
+          56,
+          50,
+          15
+        ],
+        [
+          57,
+          50,
+          15
+        ],
+        [
+          57,
+          51,
+          15
+        ],
+        [
+          57,
+          52,
+          15
+        ],
+        [
+          57,
+          53,
+          15
+        ],
+        [
+          57,
+          54,
+          15
+        ],
+        [
+          57,
+          55,
+          15
+        ],
+        [
+          56,
+          55,
+          15
+        ],
+        [
+          55,
+          55,
+          15
+        ],
+        [
+          55,
+          56,
+          15
+        ]
+      ]
+    }
+  ]
+}
