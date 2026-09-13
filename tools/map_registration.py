@@ -47,7 +47,7 @@ def registered_panels():
     return panels
 
 
-def generated_panels():
+def original_generated_panels():
     """Keep the ground registration but restore the upper floors' orientation.
 
     The printed cartography turns both upper plans by 180 degrees.  Rotate each
@@ -64,6 +64,24 @@ def generated_panels():
         matrix[5]+=CONFIG['generatedUpperOffsetY'][str(floor)]
         generated.append({'matrix':matrix})
     return [panels[0], *generated]
+
+
+def generated_panels():
+    """Turn each reconstructed floor left, then place its crop on the sheet.
+
+    Use these same matrices for the artwork and every world-coordinate overlay.
+    The historical printed map retains its separate accepted registration.
+    """
+    result=[]
+    for floor,panel in enumerate(original_generated_panels()):
+        matrix=multiply([0,-1,1,0,0,0],panel_matrix(panel))
+        xmax,ymax=(211.5,151.5) if floor==0 else (127.5,127.5)
+        corners=[project(matrix,[x,y]) for x in (15.5,xmax) for y in (15.5,ymax)]
+        left,top=CONFIG['generatedNorthUpPositions'][floor]
+        matrix[4]+=left-min(p[0] for p in corners)
+        matrix[5]+=top-min(p[1] for p in corners)
+        result.append({'matrix':matrix})
+    return result
 
 
 def project(matrix,point):

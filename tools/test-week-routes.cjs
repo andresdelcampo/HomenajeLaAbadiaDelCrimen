@@ -10,7 +10,7 @@ vm.runInNewContext(fs.readFileSync(path.join(site,'assets/game/abbot-welcome-rou
 const panels=mapContext.window.ABBOT_WELCOME_ROUTE.panels;
 const geometryPanels=mapContext.window.ABBOT_WELCOME_ROUTE.geometryPanels;
 assert.deepEqual(comparable(panels[0]),{scale:3.65,ox:666,oy:73});
-assert.deepEqual(comparable(geometryPanels[0]),comparable(panels[0]));
+assert.notDeepEqual(comparable(geometryPanels[0]),comparable(panels[0]));
 let upperPoints=0;
 for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) {
   if(!row.route)continue;
@@ -27,7 +27,7 @@ for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) 
 }
 assert.ok(upperPoints>0,'No upper-floor points checked');
 current.setMapMode('geometry');
-let changedUpperPoints=0, unchangedGroundPoints=0;
+let changedUpperPoints=0, changedGroundPoints=0;
 for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) {
   if(!row.route)continue;
   row.route.segments.forEach((segment,index)=>{
@@ -41,11 +41,11 @@ for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) 
       assert.ok(Math.abs(plotted.x-expected.x)<1e-8,'Selected generated-map path X');
       assert.ok(Math.abs(plotted.y-expected.y)<1e-8,'Selected generated-map path Y');
       if(segment.floor)changedUpperPoints++;
-      else unchangedGroundPoints++;
+      else changedGroundPoints++;
     });
   });
 }
-assert.ok(changedUpperPoints>0 && unchangedGroundPoints>0,'Both upper and ground generated-map paths checked');
+assert.ok(changedUpperPoints>0 && changedGroundPoints>0,'Both upper and ground generated-map paths checked');
 const printUpper=load().cast(6,0).find(row=>row.route?.segments.some(segment=>segment.floor));
 const geometryUpper=current.cast(6,0).find(row=>row.id===printUpper.id);
 assert.notDeepEqual(comparable(geometryUpper.pathSegments),comparable(printUpper.pathSegments),'Upper-floor routes change with the selected map');

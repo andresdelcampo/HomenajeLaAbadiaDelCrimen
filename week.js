@@ -124,7 +124,7 @@
   };
   // Reviewed reconstructed routes; all other phase transitions remain schematic.
   // Both maps share one world grid. The printed plan keeps its historical
-  // upper-floor rotation; the generated plan restores those floors by 180°.
+  // upper-floor rotation; the reconstructed plan places every floor north-up.
   const welcomeData = window.ABBOT_WELCOME_ROUTE;
   function worldPosition(x,y,floor=0,mode=routeMapMode()) {
     const panels=mode==='geometry'?welcomeData.geometryPanels:welcomeData.panels;
@@ -447,7 +447,7 @@
     if (mode==='geometry') mapCaption.textContent=t('Plano reconstruido con las alturas del juego. Sus plantas superiores recuperan la orientación de la planta principal, en lugar del giro de 180° del mapa impreso. Las zonas bloqueadas simplifican la arquitectura visible. Círculo vacío: inicio · retrato: destino. Los recorridos no simulan las colisiones con otros personajes ni con las hojas de las puertas.','Plan reconstructed from the game’s floor heights. Its upper floors restore the main floor’s orientation instead of retaining the printed map’s 180° turn. Blocked areas simplify the visible architecture. Empty circle: start · portrait: destination. Routes omit collisions with other characters and door leaves.');
     const stylePicker=find('[data-week-map-style]');
     stylePicker.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapStyle===preferredMap)));
-    const mapSource=mode==='geometry'?`../assets/maps/abbey-world-map-${en?'en':'es'}.svg?v=20260913-map17`:'../assets/maps/interactive-retrogamer-map.jpg';
+    const mapSource=mode==='geometry'?`../assets/maps/abbey-world-map-${en?'en':'es'}.svg?v=20260913-map20`:'../assets/maps/interactive-retrogamer-map.jpg';
     if (mapImage.getAttribute('src') !== mapSource) mapImage.setAttribute('src',mapSource);
     mapImage.alt=t('Plano de la abadía y sus plantas superiores','Plan of the abbey and its upper floors');
     find('.week-map').classList.add('week-map--aligned');

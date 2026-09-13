@@ -24,7 +24,7 @@ A bilingual, interactive visual archive devoted to the classic game by Paco Men�
 
 ![Explorador interactivo de los siete días, con horas, personajes y recorridos](assets/readme/preview-seven-days.png)
 
-*La semana, hora a hora: 41 momentos documentados / Inside the week: 41 documented moments*
+*Cada personaje, día a día y hora a hora: 41 momentos documentados / Every character, day by day and hour by hour: 41 documented moments*
 
 ![Reproductor de Ave María y archivo sonoro](assets/readme/preview-ave-maria.png)
 

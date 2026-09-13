@@ -169,17 +169,17 @@ for lang in ['es','en']:
  <pattern id="shrubs" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="3" fill="#a8ab87"/><path d="M0 1Q1 0 2 1T3 2M.5 2.5q1-1 2-.3" fill="none" stroke="#6a7251" stroke-width=".22"/></pattern>
 </defs>
 <image xlink:href="data:image/png;base64,{parchment_background}" width="1323" height="982" preserveAspectRatio="none"/>
-<g transform="translate(330.5 642)">
+<g transform="translate(-205 685)">
  <text class="gregorian" x="661.5" y="87" text-anchor="middle" font-size="58">La Abadía del Crimen</text>
  <text x="661.5" y="116" text-anchor="middle" font-size="13" letter-spacing="2">{subtitle}</text>
  <path d="M452 135h162m95 0h162m-222-5l12 5-12 5m24-10l-12 5 12 5" fill="none" stroke="#937952" stroke-width="1"/>
 </g>
 {floors}
-<g transform="translate(111 187)" stroke="#725c3c" fill="none"><circle r="25" stroke-width=".8"/><circle r="21" stroke-width=".4"/><path d="M-34 0H34M0-34V34M-17-17L17 17M17-17L-17 17" stroke-width=".6"/><path d="M-18 0L0-5 27 0 0 5Z" fill="#725c3c" stroke-width=".5"/><text x="43" y="5" font-size="16" stroke="none">N</text></g>
-<text class="uncial" x="348" y="906" text-anchor="middle" font-size="24">{main}</text>
-<text class="uncial" x="836" y="462" text-anchor="middle" font-size="22">Scriptorium</text>
-<text class="uncial" x="1153" y="462" text-anchor="middle" font-size="22">{library}</text>
-<path d="M690 478h292m30 0h280" stroke="#a28b61" stroke-width=".7"/>
+<g transform="translate(820 760)" stroke="#725c3c" fill="none"><circle r="25" stroke-width=".8"/><circle r="21" stroke-width=".4"/><path d="M-34 0H34M0-34V34M-17-17L17 17M17-17L-17 17" stroke-width=".6"/><path d="M0 18L-5 0 0-27 5 0Z" fill="#725c3c" stroke-width=".5"/><text x="0" y="-43" text-anchor="middle" font-size="16" stroke="none">N</text></g>
+<text class="uncial" x="458" y="661" text-anchor="middle" font-size="24">{main}</text>
+<text class="uncial" x="1030" y="460" text-anchor="middle" font-size="22">Scriptorium</text>
+<text class="uncial" x="1040" y="865" text-anchor="middle" font-size="22">{library}</text>
+<path d="M884 473h292M894 878h292" stroke="#a28b61" stroke-width=".7"/>
 <text x="661.5" y="941" text-anchor="middle" font-size="12" font-style="italic">{note}</text>
 </svg>'''
     (SITE / f'assets/maps/abbey-world-map-{lang}.svg').write_text(svg,encoding='utf-8')
@@ -187,7 +187,10 @@ for lang in ['es','en']:
     # now uses either complete map; both share the registered panel positions.
     picture=base64.b64encode((SITE/'assets/maps/interactive-retrogamer-map.jpg').read_bytes()).decode()
     printed_ground=f'<defs><clipPath id="printed-ground"><rect x="0" y="130" width="650" height="745"/></clipPath></defs><g transform="translate(-4 0) translate(350 500) rotate(2.5) scale(1.08) translate(-350 -500)"><image href="data:image/jpeg;base64,{picture}" width="1323" height="982" clip-path="url(#printed-ground)"/></g>'
-    hybrid=svg.replace(draw_floor(0,grids[0]),printed_ground)
+    from map_registration import multiply, inverse
+    ground_layout=multiply(panel_matrix(PANELS[0]),inverse(panel_matrix(PRINT_PANELS[0])))
+    ground_transform=' '.join(str(value) for value in ground_layout)
+    hybrid=svg.replace(draw_floor(0,grids[0]),f'<g transform="matrix({ground_transform})">{printed_ground}</g>')
     (SITE / f'assets/maps/abbey-route-map-{lang}.svg').write_text(hybrid,encoding='utf-8')
 
 data=json.loads((BUILD/'trace.json').read_text())

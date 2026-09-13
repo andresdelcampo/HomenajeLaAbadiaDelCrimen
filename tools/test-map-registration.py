@@ -3,7 +3,7 @@ import json
 import math
 from pathlib import Path
 import xml.etree.ElementTree as ET
-from map_registration import CONFIG, generated_panels, registered_panels, project
+from map_registration import CONFIG, generated_panels, registered_panels, original_generated_panels, panel_matrix, project
 
 site = Path(__file__).resolve().parents[1]
 panels = registered_panels()
@@ -44,21 +44,21 @@ assert data['upperFloorRegistration'] == CONFIG['upperFloors']
 for lang in ('en','es'):
     root = ET.parse(site/f'assets/maps/abbey-world-map-{lang}.svg').getroot()
     groups = {int(g.attrib['data-floor']):g for g in root if 'data-floor' in g.attrib}
-    for floor in (1,2):
+    for floor in (0,1,2):
         actual = list(map(float, groups[floor].attrib['transform'][7:-1].split()))
         close(actual, geometry_panels[floor]['matrix'])
-for floor in (1,2):
-    # The generated floor is the printed projection turned 180 degrees about
-    # the centre of the world-coordinate crop, then lowered as a unit.
+# A left turn maps each displacement (dx,dy) to (dy,-dx), with no rescaling.
+for floor, old in enumerate(original_generated_panels()):
+    before=panel_matrix(old)
+    after=panel_matrix(geometry_panels[floor])
+    origin=project(before,[72,72]); turned_origin=project(after,[72,72])
     for point in ([16,16],[16,128],[128,16],[128,128],[72,72]):
-        turned = [144-point[0],144-point[1]]
-        expected=project(panels[floor]['matrix'],turned)
-        expected[1]+=CONFIG['generatedUpperOffsetY'][str(floor)]
-        close(project(geometry_panels[floor]['matrix'],point),expected)
-assert CONFIG['generatedUpperOffsetY'] == {
-    '1':105.21649484536086,
-    '2':115.34339585720764,
-}
+        a=project(before,point); b=project(after,point)
+        close([b[0]-turned_origin[0],b[1]-turned_origin[1]],
+              [a[1]-origin[1],origin[0]-a[0]])
+    # World north (decreasing Y) now points up on the page.
+    close([after[2],after[3]],[before[3],-before[2]])
+    assert after[3] > 0
 lab = CONFIG['upperFloors']['2']['acceptedPrint']
 assert (lab['scaleX'],lab['scaleY'],lab['x'],lab['y']) == (1.117,.973,65.9,21.4)
 print(f'PASS: {count} floor-wide print registrations; generated upper floors and both SVGs agree.')
