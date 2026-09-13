@@ -8,7 +8,7 @@ function load({language='en',routes,source}={}) {
   const script=source??fs.readFileSync(path.join(site,'week.js'),'utf8');
   const boundary=script.indexOf('  let mapMovements');
   if(boundary<0)throw Error('week.js model boundary changed; update this helper');
-  vm.runInNewContext(script.slice(0,boundary)+'this.model={cast,movements,phases,routeMapMode,markerPosition};})();',context);
+  vm.runInNewContext(script.slice(0,boundary)+'this.model={cast,movements,phases,routeMapMode,setMapMode,markerPosition};})();',context);
   return context.model;
 }
 module.exports={load,site};

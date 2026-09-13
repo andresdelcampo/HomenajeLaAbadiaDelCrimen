@@ -6,14 +6,15 @@ image-derived geometry: decoration is independent of the exact cell paths.
 from pathlib import Path
 import base64
 import json
-from map_registration import CONFIG, registered_panels, panel_matrix
+from map_registration import CONFIG, generated_panels, registered_panels, panel_matrix
 
 SITE = Path(__file__).resolve().parents[1]
 BUILD = SITE.parent / 'tmp/abbot-welcome'
 rom = (BUILD / 'heights.bin').read_bytes()
 SIZE = [1323, 982]
 # SVG matrix: imageX = ox - scale * worldY; imageY = oy + scale * worldX.
-PANELS = registered_panels()
+PRINT_PANELS = registered_panels()
+PANELS = generated_panels()
 
 
 def decode(offset):
@@ -195,7 +196,8 @@ assert all(grids[0][y][x] < 14 for x,y,h in data['worldPoints'])
 assert max(abs(a[0]-b[0])+abs(a[1]-b[1])
            for a,b in zip(data['worldPoints'],data['worldPoints'][1:])) == 2
 data['imageSize']=SIZE
-data['panels']=PANELS
+data['panels']=PRINT_PANELS
+data['geometryPanels']=PANELS
 data['printAlignment']=CONFIG['sitePrint']
 data['upperFloorRegistration']=CONFIG['upperFloors']
 data['sampleCount']=len(data['worldPoints'])

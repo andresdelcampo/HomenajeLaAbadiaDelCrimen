@@ -37,6 +37,7 @@ def panel_matrix(panel):
 
 
 def registered_panels():
+    """Project every floor onto the orientations used by the printed map."""
     site_print=print_matrix(CONFIG['sitePrint'])
     panels=[CONFIG['groundPanel']]
     for floor in ('1','2'):
@@ -44,6 +45,25 @@ def registered_panels():
         matrix=multiply(multiply(site_print,inverse(print_matrix(fit['acceptedPrint']))),fit['referenceGeometryMatrix'])
         panels.append({'matrix':matrix})
     return panels
+
+
+def generated_panels():
+    """Keep the ground registration but restore the upper floors' orientation.
+
+    The printed cartography turns both upper plans by 180 degrees.  Rotate each
+    registered upper panel around the centre of its 16..128 world-coordinate
+    crop so the generated plan reads in the same orientation as the ground
+    floor while retaining its size and horizontal position.  Floor-specific
+    vertical offsets preserve the visible top alignment of the printed plans.
+    """
+    panels=registered_panels()
+    turn=[-1,0,0,-1,144,144]
+    generated=[]
+    for floor,panel in enumerate(panels[1:],1):
+        matrix=multiply(panel['matrix'],turn)
+        matrix[5]+=CONFIG['generatedUpperOffsetY'][str(floor)]
+        generated.append({'matrix':matrix})
+    return [panels[0], *generated]
 
 
 def project(matrix,point):

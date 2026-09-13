@@ -8,7 +8,9 @@ vm.runInNewContext(fs.readFileSync(path.join(site,'assets/game/week-routes.js'),
 const mapContext={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(site,'assets/game/abbot-welcome-route.js'),'utf8'),mapContext);
 const panels=mapContext.window.ABBOT_WELCOME_ROUTE.panels;
+const geometryPanels=mapContext.window.ABBOT_WELCOME_ROUTE.geometryPanels;
 assert.deepEqual(comparable(panels[0]),{scale:3.65,ox:666,oy:73});
+assert.deepEqual(comparable(geometryPanels[0]),comparable(panels[0]));
 let upperPoints=0;
 for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) {
   if(!row.route)continue;
@@ -24,6 +26,30 @@ for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) 
   });
 }
 assert.ok(upperPoints>0,'No upper-floor points checked');
+current.setMapMode('geometry');
+let changedUpperPoints=0, unchangedGroundPoints=0;
+for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) {
+  if(!row.route)continue;
+  row.route.segments.forEach((segment,index)=>{
+    const panel=geometryPanels[segment.floor];
+    const matrix=panel.matrix;
+    segment.worldPoints.forEach(([x,y],i)=>{
+      const plotted=row.pathSegments[index][i];
+      const expected=matrix
+        ? {x:(matrix[0]*x+matrix[2]*y+matrix[4])*100/1323,y:(matrix[1]*x+matrix[3]*y+matrix[5])*100/982}
+        : {x:(panel.ox-panel.scale*y)*100/1323,y:(panel.oy+panel.scale*x)*100/982};
+      assert.ok(Math.abs(plotted.x-expected.x)<1e-8,'Selected generated-map path X');
+      assert.ok(Math.abs(plotted.y-expected.y)<1e-8,'Selected generated-map path Y');
+      if(segment.floor)changedUpperPoints++;
+      else unchangedGroundPoints++;
+    });
+  });
+}
+assert.ok(changedUpperPoints>0 && unchangedGroundPoints>0,'Both upper and ground generated-map paths checked');
+const printUpper=load().cast(6,0).find(row=>row.route?.segments.some(segment=>segment.floor));
+const geometryUpper=current.cast(6,0).find(row=>row.id===printUpper.id);
+assert.notDeepEqual(comparable(geometryUpper.pathSegments),comparable(printUpper.pathSegments),'Upper-floor routes change with the selected map');
+current.setMapMode('print');
 const preservedEntries=Object.entries(catalogContext.window.WEEK_ROUTES)
   .filter(([key])=>/(abad|malaquias|berengario|severino)$/.test(key)).sort(([a],[b])=>a.localeCompare(b));
 assert.equal(preservedEntries.length,69,'Existing Abbot, Malachi, Berengario, and Severino route counts changed');

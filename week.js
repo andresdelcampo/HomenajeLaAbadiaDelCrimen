@@ -123,11 +123,12 @@
     bernardo: {church:[140,72,0],refectory:[50,53,0],shared:[188,21,0]}
   };
   // Reviewed reconstructed routes; all other phase transitions remain schematic.
-  // The new plan and the trace share one world grid. Each panel owns the same
-  // orientation and scale used to draw its floor in the generated SVG.
+  // Both maps share one world grid. The printed plan keeps its historical
+  // upper-floor rotation; the generated plan restores those floors by 180°.
   const welcomeData = window.ABBOT_WELCOME_ROUTE;
-  function worldPosition(x,y,floor=0) {
-    const panel=welcomeData.panels[floor];
+  function worldPosition(x,y,floor=0,mode=routeMapMode()) {
+    const panels=mode==='geometry'?welcomeData.geometryPanels:welcomeData.panels;
+    const panel=panels[floor];
     if (panel.matrix) {
       const [a,b,c,d,e,f]=panel.matrix;
       return {x:100*(a*x+c*y+e)/welcomeData.imageSize[0],
@@ -140,9 +141,10 @@
   }
   const routeCatalog = window.WEEK_ROUTES || {};
   let preferredMap='print';
-  // Map choice is independent of the selected phase. Routes and portraits use
-  // the same registered coordinates on the complete print and geometry maps.
+  // Map choice is independent of the selected phase, but it selects the floor
+  // projection used by routes and portraits as well as the background image.
   function routeMapMode() { return preferredMap; }
+  function setMapMode(mode) { preferredMap=mode; }
   // Calibrate the printed artwork to the fixed route, about the same pivot
   // used in the comparison. Other portraits retain their schematic anchors.
   function printPosition(x,y) {
@@ -433,7 +435,7 @@
   find('[data-week-map-style]').addEventListener('click',event=>{
     const choice=event.target.closest('[data-map-style]');
     if (!choice) return;
-    preferredMap=choice.dataset.mapStyle;
+    setMapMode(choice.dataset.mapStyle);
     renderMap();
   });
   function renderMap() {
@@ -442,10 +444,10 @@
     const mode=routeMapMode(), traced=rows.some(row=>row.path);
     mapIntro.textContent=traced?t('Las líneas continuas muestran recorridos reconstruidos con el código del juego; las discontinuas conectan destinos aproximados. Selecciona un retrato para destacar al personaje. En móvil, desliza el mapa horizontalmente.','Solid lines show routes reconstructed from the game code; dashed lines connect approximate destinations. Select a portrait to highlight a character. On mobile, scroll the map sideways.'):schematicIntro;
     mapCaption.textContent=traced?t('Mapa de MicroHobby reproducido por Retro Gamer España 41, ajustado al recorrido reconstruido con VigasocoSDL. Círculo vacío: inicio · retrato: destino. Las imperfecciones del dibujo impreso dejan pequeñas diferencias de alineación. No se simulan las colisiones con otros personajes ni con las hojas de las puertas.','MicroHobby map reproduced by Retro Gamer España 41, aligned to the route reconstructed with VigasocoSDL. Empty circle: start · portrait: destination. Imperfections in the printed drawing leave small alignment differences. Collisions with other characters and door leaves are not simulated.'):schematicCaption;
-    if (mode==='geometry') mapCaption.textContent=t('Plano reconstruido con las alturas del juego, registrado con el mapa impreso. Las zonas bloqueadas simplifican la arquitectura visible. Círculo vacío: inicio · retrato: destino. Los recorridos no simulan las colisiones con otros personajes ni con las hojas de las puertas.','Plan reconstructed from the game’s floor heights and registered with the printed map. Blocked areas simplify the visible architecture. Empty circle: start · portrait: destination. Routes omit collisions with other characters and door leaves.');
+    if (mode==='geometry') mapCaption.textContent=t('Plano reconstruido con las alturas del juego. Sus plantas superiores recuperan la orientación de la planta principal, en lugar del giro de 180° del mapa impreso. Las zonas bloqueadas simplifican la arquitectura visible. Círculo vacío: inicio · retrato: destino. Los recorridos no simulan las colisiones con otros personajes ni con las hojas de las puertas.','Plan reconstructed from the game’s floor heights. Its upper floors restore the main floor’s orientation instead of retaining the printed map’s 180° turn. Blocked areas simplify the visible architecture. Empty circle: start · portrait: destination. Routes omit collisions with other characters and door leaves.');
     const stylePicker=find('[data-week-map-style]');
     stylePicker.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mapStyle===preferredMap)));
-    const mapSource=mode==='geometry'?`../assets/maps/abbey-world-map-${en?'en':'es'}.svg?v=20260913-map13`:'../assets/maps/interactive-retrogamer-map.jpg';
+    const mapSource=mode==='geometry'?`../assets/maps/abbey-world-map-${en?'en':'es'}.svg?v=20260913-map17`:'../assets/maps/interactive-retrogamer-map.jpg';
     if (mapImage.getAttribute('src') !== mapSource) mapImage.setAttribute('src',mapSource);
     mapImage.alt=t('Plano de la abadía y sus plantas superiores','Plan of the abbey and its upper floors');
     find('.week-map').classList.add('week-map--aligned');

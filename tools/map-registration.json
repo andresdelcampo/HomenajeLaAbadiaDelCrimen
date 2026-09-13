@@ -1,5 +1,6 @@
 {
   "imageSize": [1323, 982],
+  "generatedUpperOffsetY": {"1": 105.21649484536086, "2": 115.34339585720764},
   "sitePrint": {"rotation": 2.5, "scale": 1.08, "x": -4, "y": 0, "pivot": [350, 500]},
   "groundPanel": {"scale": 3.65, "ox": 666, "oy": 73},
   "upperFloors": {

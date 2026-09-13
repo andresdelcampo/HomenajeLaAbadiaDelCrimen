@@ -167,13 +167,13 @@ World positions must remain continuous across segment boundaries as well (at mos
 
 ## Map projection — ready for all three floors
 
-All original coordinates remain intact. Ground retains `(666 - 3.65*y, 73 + 3.65*x)`. Upper floors use generated `panel.matrix=[a,b,c,d,e,f]`: `(a*x+c*y+e, b*x+d*y+f)`. Divide by `(1323,982)` and multiply by 100 for display percentages. SVG floor groups and every path/portrait share these matrices. Validate with `python tools/test-map-registration.py` and `node tools/test-week-routes.cjs`.
+All original coordinates remain intact. Ground retains `(666 - 3.65*y, 73 + 3.65*x)`. Upper floors use `panel.matrix=[a,b,c,d,e,f]`: `(a*x+c*y+e, b*x+d*y+f)`. `panels` contains the printed orientations; `geometryPanels` rotates each upper floor 180 degrees in place for the generated plan and applies its floor-specific `generatedUpperOffsetY` value to preserve the printed plan's visible top alignment. Divide by `(1323,982)` and multiply by 100 for display percentages. The selected map's floor groups, paths, and portraits share its matrices. Validate with `python tools/test-map-registration.py` and `node tools/test-week-routes.cjs`.
 
 The print is transformed to the ground-floor route; **never apply its 2.5°/1.08 adjustment to the route points again**. Renderer behavior:
 
 - Ground-floor reviewed paths: approved transformed original JPEG.
-- A reviewed path uses an upper floor: keep its segments separate, but project them through the same registered panel coordinates on both complete map choices. The generated upper floors use the printed map's rotated scale and horizontal positions; do not substitute a phase-specific hybrid map.
-- User chooses Reconstructed map: full exact geometry plan for all three floors (`abbey-world-map-*.svg`). Paths use the same projections and do not change.
+- A reviewed path uses an upper floor: keep its segments separate and project each through the selected map's panel coordinates. Printed-map routes retain the rotated upper-floor registration.
+- User chooses Reconstructed map: full exact geometry plan for all three floors (`abbey-world-map-*.svg`). Its upper floors and their route segments turn 180 degrees in place; ground-floor segments do not change.
 - No reviewed paths in a phase: the same complete transformed print or reconstructed map remains selected; schematic anchors keep their shared registered positions and the map-style picker stays visible.
 
 Upper-floor desk markers use the known source positions in config. Jorge's mirror/light-room anchors use AccionesNoche and Jorge's destination table. Ground-floor untraced portraits are still approximate printed-map anchors. Do not claim these schematic portraits are engine coordinates.
