@@ -1,4 +1,4 @@
-import { systems } from './systems.js?v=20260914-7';
+import { systems } from './systems.js?v=20260914-8';
 
 const params = new URLSearchParams(location.search);
 const es = params.get('lang') !== 'en';
@@ -8,11 +8,11 @@ const start = document.querySelector('#start');
 const status = document.querySelector('#status');
 const cover = document.querySelector('#cover');
 const copy = es ? {
-  play: 'Jugar', loading: 'Cargando la abadía…', idle: 'Amstrad CPC 6128 · Juego en español',
+  play: 'Jugar', loading: 'Cargando la abadía…', idle: system?.idle.es || 'Amstrad CPC · Juego en español',
   error: 'No se pudo iniciar. Comprueba la conexión y vuelve a intentarlo.', retry: 'Reintentar',
   unsupported: 'Necesitas un navegador de escritorio con WebGL 2 y audio web, mediante HTTPS o localhost.'
 } : {
-  play: 'Play', loading: 'Loading the abbey…', idle: 'Amstrad CPC 6128 · Game in Spanish',
+  play: 'Play', loading: 'Loading the abbey…', idle: system?.idle.en || 'Amstrad CPC · Game in Spanish',
   error: 'Could not start. Check your connection and try again.', retry: 'Try again',
   unsupported: 'Use a desktop browser with WebGL 2 and web audio, over HTTPS or localhost.'
 };

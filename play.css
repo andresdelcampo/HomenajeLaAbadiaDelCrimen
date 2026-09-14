@@ -38,6 +38,8 @@
   .play-masthead { padding-top: 1.7rem; }
   .play-notes { grid-template-columns: 1fr; gap: 1.5rem; }
   .play-heading { align-items: flex-start; flex-direction: column; }
+  .play-heading label { display: grid; width: 100%; gap: .35rem; }
+  .play-heading select { width: 100%; margin-left: 0; }
   .play-screen { border-width: 2px; }
   .play-notes dl > div { grid-template-columns: 7rem 1fr; gap: .5rem; }
 }

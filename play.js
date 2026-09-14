@@ -1,4 +1,4 @@
-import { systems } from './assets/emulation/systems.js';
+import { systems } from './assets/emulation/systems.js?v=20260914-8';
 
 const es = document.documentElement.lang === 'es';
 const select = document.querySelector('#play-system');
@@ -33,7 +33,7 @@ let pointerPauseAction;
 for (const system of systems) {
   const option = document.createElement('option');
   option.value = system.id;
-  option.textContent = system.name;
+  option.textContent = system.name[es ? 'es' : 'en'];
   select.append(option);
 }
 const requested = new URLSearchParams(location.search).get('system');
@@ -59,7 +59,7 @@ function mount() {
   next.title = copy.frame;
   next.allow = 'autoplay; fullscreen; gamepad';
   const url = new URL('../assets/emulation/player.html', location.href);
-  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260914-7' });
+  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260914-8' });
   next.src = url.href;
   frame = next;
   screen.replaceChildren(next); // Removing the old browsing context stops audio/workers.

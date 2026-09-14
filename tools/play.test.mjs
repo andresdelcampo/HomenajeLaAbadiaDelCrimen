@@ -47,7 +47,7 @@ test('nested deployment paths resolve to local media/player and controls start d
   const h = host();
   assert.equal(new URL(h.frame().src).pathname, '/tribute/assets/emulation/player.html');
   assert.equal(new URL(h.frame().src).searchParams.get('system'), 'amstrad-cpc');
-  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260914-7');
+  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260914-8');
   assert.equal(h.element('[data-play="pause"]').disabled, true);
 });
 
@@ -90,9 +90,20 @@ test('cancel preserves the session; confirmed restart replaces it and rejects st
   assert.equal(h.element('[data-play="pause"]').disabled, true);
 });
 
-test('the configured CPC disk is an extended CPC image with a system boot sector', () => {
+test('the configured 128K CPC disk is an extended image with a system boot sector', () => {
   const disk = readFileSync(new URL('../assets/emulation/media/abadia-cpc.dsk', import.meta.url));
   assert.equal(disk.subarray(0, 21).toString(), 'EXTENDED CPC DSK File');
   assert.equal(disk[0x11a], 0x41); // System format sector ID: boot using |CPM.
   assert.equal(disk[0x200], 0xf3); // DI: preserved boot loader, not a raw DOS disk.
+});
+
+test('the second playable system is the reduced 64K CPC 464/664 edition', () => {
+  const system = systems[1];
+  const disk = readFileSync(new URL(`../assets/emulation/${system.media.slice(2)}`, import.meta.url));
+  assert.equal(system.id, 'amstrad-cpc-64k');
+  assert.equal(system.adapter, 'rvm-cpc');
+  assert.equal(system.command, 'run"abadia64.bas"\n');
+  assert.equal(disk.length, 194816);
+  assert.equal(disk.subarray(0, 18).toString(), 'MV - CPC Disk-File');
+  assert.ok(disk.includes(Buffer.from('ABADIA64BAS')));
 });

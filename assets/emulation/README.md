@@ -2,17 +2,19 @@
 
 ## Español
 
-`es/jugar.html` ofrece la versión CPC en una página propia, enlazada desde El juego.
-El disco arranca automáticamente con `|cpm` y carga acelerada; no hace falta crear
-una instantánea. Se conserva el manuscrito original: mantén Espacio para saltarlo.
+`es/jugar.html` ofrece las dos ediciones originales de CPC en una página propia,
+enlazada desde El juego: la abadía completa de 128K para CPC 6128 y la abadía
+reducida de 64K para CPC 464/664. Los discos arrancan automáticamente; no hace falta
+crear una instantánea. Se conserva el manuscrito original: mantén Espacio para saltarlo.
 Se requiere un navegador de escritorio, teclado, WebGL 2 y AudioWorklet.
 La partida se pausa al perder el foco; no hay guardado persistente.
 
 ## English
 
-`en/play.html` offers the CPC version on its own page, linked from The game.
-The disk boots automatically with `|cpm` and accelerated loading; no prepared
-snapshot is required. The original manuscript remains available: hold Space to skip it.
+`en/play.html` offers both original CPC editions on its own page, linked from The game:
+the full 128K abbey for CPC 6128 and the reduced 64K abbey for CPC 464/664. Both
+disks boot automatically; no prepared snapshot is required. The original manuscript
+remains available: hold Space to skip it.
 A desktop browser, keyboard, WebGL 2 and AudioWorklet are required.
 Play pauses on focus loss; persistent saves are not implemented.
 
@@ -29,6 +31,9 @@ Play pauses on focus loss; persistent saves are not implemented.
   2026-09-14. License and integration documentation:
   https://retrovirtualmachine.org/rvmplayer/ . Upstream does not support mobile,
   cartridges, tapes or snapshots in this release. This page uses a bootable DSK.
+- RVMPlayer 0.1.1 emulates a CPC 6128 only. The 64K CPC 464/664 program therefore
+  runs here in the 6128's compatible mode; the selectable edition and its reduced
+  map are authentic, but the surrounding emulated machine is not a native 464 or 664.
 - Runtime SHA-256: `7fbbd9de86a9d58da28a5fee6b22c6d5c5697c7b9c7f1bd2d9e4cc1fdfbe1cf7`.
 - Disk: byte-for-byte copy of the existing local
   `Fuentes/ibaca-la-abadia-del-crimen-master/la-abadia-del-crimen-master/src/main/resources/abadia.dsk`.
@@ -36,6 +41,14 @@ Play pauses on focus loss; persistent saves are not implemented.
   Extended CPC DSK, 160,768 bytes; SHA-256:
   `282d7263c5e0129d5f88b33afe890eb6188b0c79bed9344c4b8562135d49f6f5`.
   The similarly named `Roms/abadia.dsk` is a different, raw disk format.
+- 64K disk: `media/abadia-cpc-64k.dsk`, supplied as the 64K edition by the archived
+  Amstrad.es preservation page at
+  `http://ftpmirror1.infania.net/sites/www.amstrad-esp.com/juegosamstrad/decargajuegos/laabadiadelcrimen.php`.
+  The page distinguishes a cassette image, this 64K DSK and a 128K DSK; its DSK
+  header identifies CNGSOFT's LZ2PACKER. Standard CPC DSK, 194,816 bytes; SHA-256:
+  `5dc9a38b81649518761ab4bff2215deb8bd8c57e0724ebdde49c6e1ca781cd26`.
+  It boots with `run"abadia64.bas"` and reaches the original manuscript, title and
+  reduced-map game under the pinned player.
   Game media remains separately copyrighted; the emulator license does not
   license the game. See the site's RIGHTS.md.
 - `systems.js` is the playable-system registry, independent of `app.js`'s visual
