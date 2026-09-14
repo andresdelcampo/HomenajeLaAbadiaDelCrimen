@@ -288,6 +288,7 @@
     scriptorium: [[1,1,69],[2,1,68],[4,1,72],[5,1,73],[2,2,67],[3,2,71],[4,2,74],[2,3,66],[4,3,75],[2,4,65],[3,4,64],[4,4,76],[1,5,63],[2,5,70],[4,5,77],[5,5,78]],
     library: [[1,1,103],[2,1,102],[4,1,101],[5,1,100],[2,2,106],[3,2,105],[4,2,104],[2,3,108],[4,3,107],[2,4,111],[3,4,110],[4,4,109],[1,5,115],[2,5,114],[4,5,113],[5,5,112]]
   };
+  const reducedCpcEmptyRooms = new Set(['17', '27', '32', '33', '35', '36', '3a', '3b', '4b']);
   $$('[data-abbey-map]').forEach(atlas => {
     const isSpanish = document.documentElement.lang === 'es';
     $$('[data-room-grid]', atlas).forEach(grid => {
@@ -346,7 +347,9 @@
       const cpcEditionControl = $('[data-cpc-edition-control]', atlas);
       if (cpcEditionControl) cpcEditionControl.hidden = !useCpc;
       $$('.abbey-room', atlas).forEach(button => {
-        const source = `../assets/maps/abbey-rooms/${assetSet}/room-${button.dataset.roomId}.png`;
+        button.hidden = useReducedCpc && reducedCpcEmptyRooms.has(button.dataset.roomId);
+        const assetVersion = useReducedCpc ? '?v=20260914-cpc64depth4' : '';
+        const source = `../assets/maps/abbey-rooms/${assetSet}/room-${button.dataset.roomId}.png${assetVersion}`;
         const roomHex = button.dataset.roomId.toUpperCase();
         const label = `${isSpanish ? 'Estancia' : 'Room'} ${roomHex}, ${edition}`;
         const image = $('img', button);
@@ -902,6 +905,7 @@
     const targetColumn = Number(lightboxTrigger.dataset.mapColumn) + columnDelta;
     const targetRow = Number(lightboxTrigger.dataset.mapRow) + rowDelta;
     return grid ? $$('.abbey-room', grid).find(button => (
+      !button.hidden &&
       Number(button.dataset.mapColumn) === targetColumn && Number(button.dataset.mapRow) === targetRow
     )) : null;
   };

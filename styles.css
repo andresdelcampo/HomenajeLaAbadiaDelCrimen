@@ -1303,6 +1303,7 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .abbey-room-grid--main { grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(10, auto); }
 .abbey-room-grid--upper { grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-rows: repeat(5, auto); }
 .abbey-room { position: relative; z-index: 0; display: block; min-width: 0; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,85,.38); background: #000; box-shadow: 0 2px 8px rgba(0,0,0,.7); cursor: zoom-in; isolation: isolate; }
+.abbey-room[hidden] { display: none; }
 .abbey-room img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; image-rendering: pixelated; transition: transform .18s ease, filter .18s ease; }
 .abbey-room span { position: absolute; right: .2rem; bottom: .15rem; padding: .14rem .22rem; color: #ffff55; background: rgba(0,0,0,.82); font: 700 clamp(.38rem, .6vw, .58rem)/1 var(--mono); }
 .abbey-room:hover, .abbey-room:focus-visible { z-index: 3; overflow: visible; border-color: #ffff55; outline: 2px solid #ffff55; outline-offset: 1px; }
