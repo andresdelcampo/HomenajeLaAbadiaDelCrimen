@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
+  <link rel="stylesheet" href="../play.css?v=20260914-5">
   <link rel="stylesheet" href="../week.css?v=20260913-routes1">
 </head>
 <body data-page="game">
@@ -42,8 +43,8 @@
       <p class="eyebrow">Interactive tribute · Route 2 of 5</p>
       <h1>The game</h1>
       <p>Characters, rules, spaces, objects, and seven days of investigation under the discipline of the bells.</p>
-      <a class="page-cue" href="#manuscript">Open the manuscript ↓</a>
-      <nav class="game-quick-links" aria-label="Quick reference"><a href="#controls">Controls</a><a href="#objects">Objects</a><a href="#scoring">Scoring</a></nav>
+      <a class="page-cue" href="#manuscript">Enter the chapter ↓</a>
+      <a class="graphics-guide-link play-entry-link" href="play.html"><span class="graphics-guide-kicker">Or play it now</span><strong>Enter the abbey</strong><span class="graphics-guide-description">The Amstrad CPC version, with automatic loading and the original controls.</span><span class="graphics-guide-action" aria-hidden="true">Play <b>→</b></span></a>
     </div>
   </header>
 
@@ -95,25 +96,9 @@
       </div>
     </section>
 
-    <section class="chapter paper-warm controls-chapter" id="controls" aria-labelledby="controls-title">
-      <div class="chapter-header reveal">
-        <div><span class="chapter-number">IV · The controls</span><h2 id="controls-title">Classic controls</h2></div>
-        <p class="chapter-intro">First turn William, then walk. Adso and the objects follow rules of their own.</p>
-      </div>
-      <div class="controls-guide reveal">
-        <dl class="controls-list">
-          <div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> Move William</dt><dd>Left and right turn; up walks forward. You can also use <kbd>L</kbd>, <kbd>K</kbd>, and <kbd>A</kbd>.</dd></div>
-          <div><dt><kbd>↓</kbd> Direct Adso</dt><dd>Turn William and hold down —or <kbd>Z</kbd>— to move Adso in that direction. Release it and he follows again.</dd></div>
-          <div><dt>Objects</dt><dd>Move the carrier close to collect automatically. <kbd>Space</kbd> drops William’s leftmost item if there is room ahead.</dd></div>
-          <div><dt><kbd>S</kbd> / <kbd>N</kbd> Sleep</dt><dd>Answer Adso in your cell: <kbd>S</kbd> (Spanish <i>sí</i>) advances to prime; <kbd>N</kbd> keeps you awake.</dd></div>
-        </dl>
-        <p class="guide-source">Reference: <a href="https://worldofspectrum.net/pub/sinclair/games-info/a/AbadiaDelCrimen%2BSirFredLa.pdf">preserved original manual</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Adso.java">reconstructed Adso routine</a>. Remakes and emulator mappings may differ.</p>
-      </div>
-    </section>
-
     <section class="chapter dark" id="characters">
       <div class="chapter-header reveal">
-        <div><span class="chapter-number">V · The characters</span><h2>Eight lives, seven days</h2></div>
+        <div><span class="chapter-number">IV · The characters</span><h2>Eight lives, seven days</h2></div>
         <div class="chapter-intro-stack">
           <p class="chapter-intro">Choose a portrait. Each dossier combines what players see with the genuine routines described by the reconstructed code.</p>
           <p class="spoiler-notice" role="note"><span>Spoilers</span><strong>This chapter reveals characters and events from the story.</strong></p>
@@ -151,7 +136,7 @@
     </section>
 
     <section class="chapter paper-light" id="hours">
-      <div class="chapter-header reveal"><div><span class="chapter-number">VI · The rule</span><h2>The bells command</h2></div><p class="chapter-intro">Here the day is measured in prime, terce, sext, none, vespers, and compline. Select a phase and watch one bell redistribute the entire community.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">V · The rule</span><h2>The bells command</h2></div><p class="chapter-intro">Here the day is measured in prime, terce, sext, none, vespers, and compline. Select a phase and watch one bell redistribute the entire community.</p></div>
       <div class="clock-shell reveal">
         <div class="clock-face" aria-label="Clock of canonical hours">
           <div class="clock-interface-head"><span>Abbey clock</span><small>7 phases of the day</small></div>
@@ -194,7 +179,7 @@
     </section>
 
     <section class="chapter dark" id="labyrinth">
-      <div class="chapter-header reveal"><div><span class="chapter-number">VII · The labyrinth</span><h2>The abbey under suspicion</h2></div><p class="chapter-intro">Isometric perspective hides doors behind walls, reverses instinct, and demands a memory for height. Losing one’s way is part of the investigation, not a detour from it.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">VI · The labyrinth</span><h2>The abbey under suspicion</h2></div><p class="chapter-intro">Isometric perspective hides doors behind walls, reverses instinct, and demands a memory for height. Losing one’s way is part of the investigation, not a detour from it.</p></div>
       <div class="labyrinth-layout reveal">
         <div class="map-frame" aria-label="Retro Gamer España map with interactive locations">
           <img class="map-source" src="../assets/maps/interactive-retrogamer-map.jpg" alt="Abbey map published in Retro Gamer España 41" loading="lazy">
@@ -245,7 +230,7 @@
     </section>
 
     <section class="chapter" id="objects">
-      <div class="chapter-header reveal"><div><span class="chapter-number">VIII · Evidence locker</span><h2>Eight objects, no accidents</h2></div><p class="chapter-intro">The inventory is tiny and choreographed. Objects change hands, appear only on selected days, or open routes the game never explains.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">VII · Evidence locker</span><h2>Eight objects, no accidents</h2></div><p class="chapter-intro">The inventory is tiny and choreographed. Objects change hands, appear only on selected days, or open routes the game never explains.</p></div>
       <p class="sprite-credit reveal">Original Amstrad CPC patterns, shown in a real three-slot tray from the status panel.</p>
       <div class="object-grid reveal">
         <article class="object-card" data-symbol="B"><img class="object-sprite" src="../assets/items/libro.png" alt="CPC sprite of the book"><small>01 · Investigation</small><h3>Book</h3><p>A book connected to the investigation.</p></article>
@@ -281,7 +266,7 @@
     </section>
 
     <section class="chapter paper-light" id="week">
-      <div class="chapter-header reveal"><div><span class="chapter-number">IX · The week</span><h2>Seven days to the <em>Finis Africae</em></h2></div><p class="chapter-intro">First the spoiler-light version; then, if you choose, the full machinery. The cards scroll horizontally on small screens.</p></div>
+      <div class="chapter-header reveal"><div><span class="chapter-number">VIII · The week</span><h2>Seven days to the <em>Finis Africae</em></h2></div><p class="chapter-intro">First the spoiler-light version; then, if you choose, the full machinery. The cards scroll horizontally on small screens.</p></div>
       <button class="days-control spoiler-inline-control spoiler-button reveal" type="button" aria-pressed="false" aria-controls="seven-day-secrets" data-show="Show the secrets of all seven days" data-hide="Hide the secrets of all seven days"><span class="spoiler-kicker">Spoilers</span><strong class="spoiler-action" data-spoiler-action>Show the secrets of all seven days</strong></button>
       <div class="days-grid reveal" id="seven-day-secrets">
         <article class="day-card"><span class="day-no">Day I</span><h3>Arrival</h3><p>The Abbot guides us in, explains the crime, and lays down the rules. The west wing is forbidden.</p><p class="spoiler-text" aria-hidden="true" data-cover="Secret of the day">Architecture and routine are learned while the case still appears manageable.</p></article>
@@ -297,7 +282,7 @@
 
     <section class="chapter paper-warm scoring-chapter" id="scoring" aria-labelledby="score-title">
       <div class="chapter-header reveal">
-        <div><span class="chapter-number">X · The score</span><h2 id="score-title">How the percentage works</h2></div>
+        <div><span class="chapter-number">IX · The score</span><h2 id="score-title">How the percentage works</h2></div>
         <p class="chapter-intro">When the investigation remains incomplete, the game sums up your progress as a percentage.</p>
       </div>
       <div class="scoring-guide reveal">
@@ -317,7 +302,7 @@
 
     <section class="chapter parchment-chapter parchment-ending" id="ending-manuscript">
       <div class="chapter-header reveal">
-        <div><span class="chapter-number">XI · The ending</span><h2>The final pages</h2></div>
+        <div><span class="chapter-number">X · The ending</span><h2>The final pages</h2></div>
         <p class="chapter-intro">When the investigation is complete, the game returns to the parchment so Adso can close his account. Its text reveals the entire ending.</p>
       </div>
 

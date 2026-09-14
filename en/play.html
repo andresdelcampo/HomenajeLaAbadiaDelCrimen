@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Enter the abbey. The original Amstrad CPC version, with its graphics, sounds and the rhythm of its seven days.">
+  <title>Play in your browser · La Abadía del Crimen</title>
+  <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
+  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
+  <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
+  <link rel="stylesheet" href="../play.css?v=20260914-6">
+</head>
+<body data-page="play">
+  <a class="skip-link" href="#contenido">Skip to the game</a>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="nav-mark" href="index.html"><span>A Tribute to La Abadía del Crimen</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">History</a>
+      <a href="game.html">The game</a>
+      <a href="technology.html">Programming</a>
+      <a href="press.html">Press & adverts</a>
+      <a href="legacy.html">Legacy</a>
+      <a href="play.html" aria-current="page">Play</a>
+    </div>
+    <div class="nav-actions">
+      <a class="language-link" href="../es/jugar.html" lang="es" data-language="es" aria-label="Switch to Spanish">Language · ES</a>
+    </div>
+  </nav>
+  <header class="play-masthead" id="inicio">
+    <p class="eyebrow">The abbey, in your hands</p>
+    <h1>Play in your browser</h1>
+    <p>Enter the abbey. The original Amstrad CPC version, with its graphics, sounds and the rhythm of its seven days.</p>
+  </header>
+  <main class="play-layout" id="contenido">
+    <div class="play-heading">
+      <label for="play-system">System <select id="play-system"></select></label>
+      <p>First available version · Amstrad CPC</p>
+    </div>
+    <div class="play-screen"></div>
+    <noscript><p>Enable JavaScript to play in your browser.</p></noscript>
+    <div class="play-toolbar" role="group" aria-label="Emulator controls">
+      <button type="button" data-play="pause" disabled>Pause</button>
+      <button type="button" data-play="mute" aria-pressed="false" disabled>Mute</button>
+      <button type="button" data-play="fullscreen">Full screen</button>
+      <button type="button" class="play-restart" data-play="restart" aria-expanded="false" aria-controls="restart-confirm" disabled>Restart game…</button>
+    </div>
+    <div class="restart-confirm" id="restart-confirm" role="group" aria-label="Confirm restart" hidden>
+      <p>Your current progress will be lost. Start again?</p>
+      <button type="button" class="restart-confirm-action" data-play="confirm">Yes, start again</button>
+      <button type="button" data-play="cancel">Cancel</button>
+    </div>
+    <p class="play-status" id="play-status" role="status">Preparing the player…</p>
+    <div class="play-notes">
+      <section aria-labelledby="play-controls-title">
+        <h2 id="play-controls-title">The keys to the abbey</h2>
+        <dl><div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd></dt><dd>Left and right turn Guillermo; up walks forward.</dd></div>
+          <div><dt><kbd>↓</kbd></dt><dd>Turn Guillermo and hold to direct Adso. Release it and he follows again.</dd></div>
+          <div><dt><kbd>Space</kbd></dt><dd>Hold to skip the manuscript. In the game, drop the first object if there is room ahead.</dd></div>
+          <div><dt><kbd>S</kbd> / <kbd>N</kbd></dt><dd>Answer Adso in your cell: <kbd>S</kbd> sleeps until prime; <kbd>N</kbd> keeps you awake.</dd></div>
+          <div><dt><kbd>Tab</kbd></dt><dd>Pause and return to the page controls.</dd></div></dl>
+      </section>
+      <section aria-labelledby="play-notes-title">
+        <h2 id="play-notes-title">Before you enter</h2>
+        <p>Use a computer with a keyboard and an up-to-date browser. This first player version is not ready for phones or tablets.</p>
+        <p>The disk loads automatically. The game is in Spanish, including when you view this page in English.</p>
+        <p>Leaving the game screen pauses play. Your progress is not saved when you close or reload the page.</p>
+        <p><a href="game.html">Explore the game →</a></p>
+      </section>
+    </div>
+    <p class="play-credit">Emulation: <a href="https://retrovirtualmachine.org/rvmplayer/">RVMPlayer 0.1.1</a> · Juan Carlos González Amestoy · <a href="../assets/emulation/rvmplayer/LICENSE.txt">BSD-3-Clause</a>. Game: Opera Soft, 1987 · Paco Menéndez &amp; Juan Delcán.</p>
+  </main>
+
+  <nav class="page-pagination" aria-label="Continue reading">
+    <a class="page-previous" href="game.html"><span>Previous route</span><strong>← The game</strong></a>
+    <a class="page-next" href="technology.html"><span>Next route</span><strong>Programming →</strong></a>
+  </nav>
+
+  <footer class="site-footer">
+    <div><strong>Finis?</strong><p>The investigation continues in <a href="game.html">The game</a>.</p><p><a href="#inicio">Top</a> · <a href="legacy.html#sources">Sources</a> · <a href="../index.html">Entrance</a> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">GitHub</a> · <a href="../es/jugar.html" lang="es">Edición española</a></p><p class="project-credit"><span class="credit-role">Author</span>: Andrés del Campo Novales <span>with GPT 5.6 Sol and GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role">Technical review of the previous version dated 5 September 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
+    <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
+  </footer>
+  <script src="../app.js?v=20260912-spoilers1"></script>
+  <script type="module" src="../play.js?v=20260914-8"></script>
+</body>
+</html>

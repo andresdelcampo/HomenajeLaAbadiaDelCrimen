@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Entra en la abadía. La versión original de Amstrad CPC, con sus gráficos, sus sonidos y el ritmo de sus siete días.">
+  <title>Jugar en el navegador · La Abadía del Crimen</title>
+  <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
+  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
+  <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
+  <link rel="stylesheet" href="../play.css?v=20260914-6">
+</head>
+<body data-page="play">
+  <a class="skip-link" href="#contenido">Saltar al juego</a>
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a class="nav-mark" href="index.html"><span>Homenaje a La Abadía del Crimen</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menú</button>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html">Historia</a>
+      <a href="juego.html">El juego</a>
+      <a href="tecnica.html">Programación</a>
+      <a href="prensa.html">Prensa y anuncios</a>
+      <a href="legado.html">Legado</a>
+      <a href="jugar.html" aria-current="page">Jugar</a>
+    </div>
+    <div class="nav-actions">
+      <a class="language-link" href="../en/play.html" lang="en" data-language="en" aria-label="Cambiar al inglés">Idioma · EN</a>
+    </div>
+  </nav>
+  <header class="play-masthead" id="inicio">
+    <p class="eyebrow">La abadía, en tus manos</p>
+    <h1>Jugar en el navegador</h1>
+    <p>Entra en la abadía. La versión original de Amstrad CPC, con sus gráficos, sus sonidos y el ritmo de sus siete días.</p>
+  </header>
+  <main class="play-layout" id="contenido">
+    <div class="play-heading">
+      <label for="play-system">Sistema <select id="play-system"></select></label>
+      <p>Primera versión disponible · Amstrad CPC</p>
+    </div>
+    <div class="play-screen"></div>
+    <noscript><p>Activa JavaScript para jugar en el navegador.</p></noscript>
+    <div class="play-toolbar" role="group" aria-label="Controles del emulador">
+      <button type="button" data-play="pause" disabled>Pausar</button>
+      <button type="button" data-play="mute" aria-pressed="false" disabled>Silenciar</button>
+      <button type="button" data-play="fullscreen">Pantalla completa</button>
+      <button type="button" class="play-restart" data-play="restart" aria-expanded="false" aria-controls="restart-confirm" disabled>Reiniciar partida…</button>
+    </div>
+    <div class="restart-confirm" id="restart-confirm" role="group" aria-label="Confirmar reinicio" hidden>
+      <p>Se perderá la partida actual. ¿Volver a empezar?</p>
+      <button type="button" class="restart-confirm-action" data-play="confirm">Sí, volver a empezar</button>
+      <button type="button" data-play="cancel">Cancelar</button>
+    </div>
+    <p class="play-status" id="play-status" role="status">Preparando el reproductor…</p>
+    <div class="play-notes">
+      <section aria-labelledby="play-controls-title">
+        <h2 id="play-controls-title">Las llaves de la abadía</h2>
+        <dl><div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd></dt><dd>Izquierda y derecha giran a Guillermo; arriba avanza.</dd></div>
+          <div><dt><kbd>↓</kbd></dt><dd>Orienta a Guillermo y mantén pulsado para dirigir a Adso. Al soltar, vuelve a seguirte.</dd></div>
+          <div><dt><kbd>Espacio</kbd></dt><dd>Mantén pulsado para saltar el manuscrito. Durante el juego, deja el primer objeto si hay sitio delante.</dd></div>
+          <div><dt><kbd>S</kbd> / <kbd>N</kbd></dt><dd>Responde a Adso en vuestra celda: <kbd>S</kbd> duerme hasta prima; <kbd>N</kbd> permite seguir despierto.</dd></div>
+          <div><dt><kbd>Tab</kbd></dt><dd>Pausa y vuelve a los controles de la página.</dd></div></dl>
+      </section>
+      <section aria-labelledby="play-notes-title">
+        <h2 id="play-notes-title">Antes de entrar</h2>
+        <p>Usa un ordenador con teclado y un navegador actualizado. Esta primera versión del reproductor no está preparada para móviles o tabletas.</p>
+        <p>El disco se carga automáticamente. El juego está en español, también al consultar esta página en inglés.</p>
+        <p>Al salir de la pantalla del juego se activa la pausa. La partida no se guarda al cerrar o recargar la página.</p>
+        <p><a href="juego.html">Conoce el juego →</a></p>
+      </section>
+    </div>
+    <p class="play-credit">Emulación: <a href="https://retrovirtualmachine.org/rvmplayer/">RVMPlayer 0.1.1</a> · Juan Carlos González Amestoy · <a href="../assets/emulation/rvmplayer/LICENSE.txt">BSD-3-Clause</a>. Juego: Opera Soft, 1987 · Paco Menéndez &amp; Juan Delcán.</p>
+  </main>
+
+  <nav class="page-pagination" aria-label="Continuar leyendo">
+    <a class="page-previous" href="juego.html"><span>Ruta anterior</span><strong>← El juego</strong></a>
+    <a class="page-next" href="tecnica.html"><span>Siguiente ruta</span><strong>Programación →</strong></a>
+  </nav>
+
+  <footer class="site-footer">
+    <div><strong>Finis?</strong><p>La investigación continúa en <a href="juego.html">El juego</a>.</p><p><a href="#inicio">Arriba</a> · <a href="legado.html#fuentes">Fuentes</a> · <a href="../index.html">Entrada</a> · <a href="https://github.com/andresdelcampo/HomenajeLaAbadiaDelCrimen">GitHub</a> · <a href="../en/play.html" lang="en">English edition</a></p><p class="project-credit"><span class="credit-role">Autor</span>: Andrés del Campo Novales <span>con GPT 5.6 Sol y GPT 6 Astra</span><span class="technical-reviewers"><span class="credit-role">Revisión técnica de la versión previa del 5 de septiembre de 2026</span>: Rafael Corrales Pulido · Manuel Pazos · Jesús Martínez del Vas · José Manuel Braña Álvarez</span></p></div>
+    <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
+  </footer>
+  <script src="../app.js?v=20260912-spoilers1"></script>
+  <script type="module" src="../play.js?v=20260914-8"></script>
+</body>
+</html>

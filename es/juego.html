@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
+  <link rel="stylesheet" href="../play.css?v=20260914-5">
   <link rel="stylesheet" href="../week.css?v=20260913-routes1">
 </head>
 <body data-page="game">
@@ -42,8 +43,8 @@
       <p class="eyebrow">Homenaje interactivo · Ruta 2 de 5</p>
       <h1>El juego</h1>
       <p>Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.</p>
-      <a class="page-cue" href="#manuscrito">Abrir el manuscrito ↓</a>
-      <nav class="game-quick-links" aria-label="Consulta rápida"><a href="#controles">Controles</a><a href="#objetos">Objetos</a><a href="#puntuacion">Puntuación</a></nav>
+      <a class="page-cue" href="#manuscrito">Entrar en el capítulo ↓</a>
+      <a class="graphics-guide-link play-entry-link" href="jugar.html"><span class="graphics-guide-kicker">También puedes jugar</span><strong>Entra en la abadía</strong><span class="graphics-guide-description">La versión de Amstrad CPC, con carga automática y los controles originales.</span><span class="graphics-guide-action" aria-hidden="true">Jugar <b>→</b></span></a>
     </div>
   </header>
 
@@ -99,26 +100,10 @@
       </div>
     </section>
 
-    <section class="chapter paper-warm controls-chapter" id="controles" aria-labelledby="controls-title">
-      <div class="chapter-header reveal">
-        <div><span class="chapter-number">IV · Los controles</span><h2 id="controls-title">Controles clásicos</h2></div>
-        <p class="chapter-intro">Primero orientas a Guillermo y después avanzas. Adso y los objetos obedecen sus propias reglas.</p>
-      </div>
-      <div class="controls-guide reveal">
-        <dl class="controls-list">
-          <div><dt><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> Mover a Guillermo</dt><dd>Izquierda y derecha giran; arriba avanza. También puedes usar <kbd>L</kbd>, <kbd>K</kbd> y <kbd>A</kbd>.</dd></div>
-          <div><dt><kbd>↓</kbd> Dirigir a Adso</dt><dd>Orienta a Guillermo y mantén abajo —o <kbd>Z</kbd>— para mover a Adso en esa dirección. Al soltar, vuelve a seguirte.</dd></div>
-          <div><dt>Objetos</dt><dd>Se recogen automáticamente al acercar al portador. <kbd>Espacio</kbd> deja el objeto de Guillermo situado más a la izquierda, si hay sitio delante.</dd></div>
-          <div><dt><kbd>S</kbd> / <kbd>N</kbd> Dormir</dt><dd>Responde a Adso en vuestra celda: <kbd>S</kbd> avanza hasta prima; <kbd>N</kbd> permite seguir despierto.</dd></div>
-        </dl>
-        <p class="guide-source">Consulta: <a href="https://worldofspectrum.net/pub/sinclair/games-info/a/AbadiaDelCrimen%2BSirFredLa.pdf">manual original conservado</a> · <a href="https://github.com/ibaca/la-abadia-del-crimen/blob/master/src/main/java/com/lavacablasa/ladc/abadia/Adso.java">rutina de Adso reconstruida</a>. Los remakes y las asignaciones del emulador pueden variar.</p>
-      </div>
-    </section>
-
     <section class="chapter dark" id="personajes">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">V · Los personajes</span>
+          <span class="chapter-number">IV · Los personajes</span>
           <h2>Ocho vidas, siete días</h2>
         </div>
         <div class="chapter-intro-stack">
@@ -234,7 +219,7 @@
     <section class="chapter paper-light" id="horas">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">VI · La regla</span>
+          <span class="chapter-number">V · La regla</span>
           <h2>Las campanas mandan</h2>
         </div>
         <p class="chapter-intro">Aquí el día se mide en prima, tercia, sexta, nona, vísperas y completas. Selecciona una fase y observa cómo una campanada pone en movimiento a toda la comunidad.</p>
@@ -296,7 +281,7 @@
     <section class="chapter dark" id="laberinto">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">VII · El laberinto</span>
+          <span class="chapter-number">VI · El laberinto</span>
           <h2>La abadía bajo sospecha</h2>
         </div>
         <p class="chapter-intro">La perspectiva isométrica oculta puertas tras los muros, confunde el sentido de la orientación y obliga a recordar los desniveles. Aquí perderse también forma parte de la investigación.</p>
@@ -389,7 +374,7 @@
     <section class="chapter" id="objetos">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">VIII · El armario de pruebas</span>
+          <span class="chapter-number">VII · El armario de pruebas</span>
           <h2>Ocho objetos, cada uno a su hora</h2>
         </div>
         <p class="chapter-intro">El inventario es pequeño, pero cada objeto tiene su momento. Cambian de dueño, aparecen sólo ciertos días o abren rutas que el juego nunca explica directamente.</p>
@@ -431,7 +416,7 @@
     <section class="chapter paper-light" id="semana">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">IX · La semana</span>
+          <span class="chapter-number">VIII · La semana</span>
           <h2>Siete días hacia el <em>Finis Africae</em></h2>
         </div>
         <p class="chapter-intro">Las primeras tarjetas evitan revelar a los culpables. Si quieres conocer todos los detalles, despliega después los textos ocultos. En pantallas pequeñas, las tarjetas se desplazan horizontalmente.</p>
@@ -452,7 +437,7 @@
     <section class="chapter paper-warm scoring-chapter" id="puntuacion" aria-labelledby="score-title">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">X · La puntuación</span>
+          <span class="chapter-number">IX · La puntuación</span>
           <h2 id="score-title">Cómo funciona el porcentaje</h2>
         </div>
         <p class="chapter-intro">Cuando la investigación queda incompleta, el juego resume cuánto has avanzado con un porcentaje.</p>
@@ -475,7 +460,7 @@
     <section class="chapter parchment-chapter parchment-ending" id="manuscrito-final">
       <div class="chapter-header reveal">
         <div>
-          <span class="chapter-number">XI · El desenlace</span>
+          <span class="chapter-number">X · El desenlace</span>
           <h2>Las últimas páginas</h2>
         </div>
         <p class="chapter-intro">Al completar la investigación, el juego vuelve al pergamino para que Adso cierre su relato. El texto revela por completo el desenlace.</p>

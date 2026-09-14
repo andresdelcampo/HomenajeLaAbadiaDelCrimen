@@ -36,6 +36,8 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
 ### Qué puedes hacer
 
+- **Jugar en el navegador.** Como extra, [Jugar](es/jugar.html) abre la versión Amstrad CPC con carga automática, pausa y pantalla completa. Para ordenador con teclado; el juego está en español.
+
 - **Recorrer la abadía estancia a estancia.** El atlas sitúa 93 estancias en su posición real: 61 en la planta principal, 16 en el scriptorium y 16 en la biblioteca. Puedes abrir cualquiera a tamaño completo, desplazarte espacialmente a las contiguas con teclado, controles en pantalla o gestos, alternar día y noche y comparar CPC, ZX Spectrum, MSX, PC CGA y el remake PC VGA. Y, como extra, el capítulo de [Legado](es/legado.html#extensum) abre el mapa ampliado de *Extensum*: 140 estancias cartografiadas, distribuidas por plantas y explorables de día y de noche.
 - **Construir una estancia desde el principio hasta el último píxel.** La demostración interactiva de la estancia 17 reproduce sus 32 colocaciones una a una, aísla la receta arquitectónica activa y explica qué tiles y celdas modifica. Una segunda fase sigue la copia documentada de las 320 celdas visibles a la pantalla CGA. Todo puede avanzarse manualmente o reproducirse, de día y de noche.
 - **Revivir los pergaminos de apertura y final.** No son textos que simplemente aparecen: cada letra se traza píxel a píxel, con sus pausas y pasos de página. Los controles permiten reproducir, pausar, completar la página, reiniciar y cambiar la velocidad. La versión gráfica seleccionada transforma el manuscrito y activa su música correspondiente en CPC, ZX Spectrum, MSX, PC CGA o VGA.
@@ -62,6 +64,8 @@ La cabecera mantiene la versión gráfica elegida mientras cambias de ruta. Pant
 This tribute does more than tell the story of *La Abadía del Crimen*: it lets you walk through it, listen to it, and take it apart piece by piece. The game, its creators and ports, the abbey’s architecture, character routines, the seven-day investigation, sound, contemporary press, code archaeology, and its legacy all meet in an editorial experience designed for exploration.
 
 ### What you can do
+
+- **Play in your browser.** As a bonus, [Play](en/play.html) opens the Amstrad CPC version with automatic loading, pause and full screen. For computers with a keyboard; the game is in Spanish.
 
 - **Explore the abbey room by room.** The atlas places 93 rooms in their real positions: 61 on the main floor, 16 in the scriptorium, and 16 in the library. Open any room at full size, move spatially to its neighbours with the keyboard, on-screen controls, or gestures, switch between day and night, and compare CPC, ZX Spectrum, MSX, PC CGA, and the PC VGA remake. As a bonus, the [Legacy](en/legacy.html#extensum) chapter opens *Extensum*'s expanded map: 140 mapped rooms across its floors, explorable by day and night.
 - **Build a room from its first instruction to its final pixel.** The interactive room-17 demonstration replays all 32 placements, isolates the active architectural recipe, and explains which tiles and cells it changes. A second phase follows the documented transfer of all 320 visible cells to the CGA screen. Step through it manually or press play, by day or by night.

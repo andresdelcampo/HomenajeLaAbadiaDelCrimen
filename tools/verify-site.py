@@ -10,6 +10,8 @@ PAGES = [
     ROOT / "index.html",
     *(ROOT / "es" / name for name in ("index.html", "juego.html", "tecnica.html", "graficos.html", "prensa.html", "legado.html")),
     *(ROOT / "en" / name for name in ("index.html", "game.html", "technology.html", "graphics.html", "press.html", "legacy.html")),
+    ROOT / "es" / "jugar.html",
+    ROOT / "en" / "play.html",
 ]
 PLATFORMS = ("cpc", "pc", "vga", "spectrum", "msx")
 CHARACTERS = ("guillermo", "adso", "abad", "malaquias", "berengario", "severino", "jorge", "bernardo")
@@ -93,7 +95,8 @@ def main() -> None:
     expected_parchment_instances = {"es/juego.html": 2, "en/game.html": 2}
     if (
         missing
-        or platform_controls != [5] * len(PAGES)
+        # Playable systems have their own extensible selector, not edition buttons.
+        or platform_controls != [5] * (len(PAGES) - 2) + [0, 0]
         or parchment_pages != expected_parchment_pages
         or parchment_instances != expected_parchment_instances
         or parchment_editions != list(PLATFORMS)

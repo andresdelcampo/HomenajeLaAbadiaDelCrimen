@@ -1,0 +1,15 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #080b10; color: #f6edd8; }
+#machine, #cover { position: absolute; inset: 0; }
+#cover { display: grid; place-items: center; }
+#cover[hidden] { display: none; }
+#cover > img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; opacity: .55; }
+.launch-panel { position: absolute; bottom: 7%; text-align: center; width: 100%; padding: 0 1rem; }
+button { padding: .7rem 1.6rem; background: #e9dbb9; color: #171512; border: 1px solid #cbb889; font: bold 1.1rem Georgia, serif; cursor: pointer; }
+button:hover { background: #f6edd8; }
+button:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+button:disabled { cursor: wait; opacity: .75; }
+#status { position: fixed; left: 1rem; right: 1rem; bottom: 2.2%; margin: 0; font: .9rem/1.5 Georgia, serif; text-align: center; text-shadow: 0 1px 4px #000; }
+/* The host provides accessible, translated controls and engine attribution. */
+.rvmBar, .rvmLogo { display: none !important; }
+.rvmContainer { width: 100% !important; height: 100% !important; }
