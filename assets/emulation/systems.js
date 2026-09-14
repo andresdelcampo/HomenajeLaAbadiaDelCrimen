@@ -12,6 +12,7 @@ export const systems = [{
   },
   adapter: 'rvm-cpc',
   media: './media/abadia-cpc.dsk',
+  cover: '../platforms/cpc/title-screen.png',
   command: '|cpm\n',
   warpFrames: 842,
   language: 'es'
@@ -27,7 +28,32 @@ export const systems = [{
   },
   adapter: 'rvm-cpc',
   media: './media/abadia-cpc-64k.dsk',
+  cover: '../platforms/cpc/title-screen.png',
   command: 'run"abadia64.bas"\n',
   warpFrames: 0,
+  language: 'es'
+}, {
+  id: 'zx-spectrum-plus3',
+  name: {
+    es: 'ZX Spectrum +3 · 128K',
+    en: 'ZX Spectrum +3 · 128K'
+  },
+  idle: {
+    es: 'ZX Spectrum +3 · 128K · Español',
+    en: 'ZX Spectrum +3 · 128K · Spanish game'
+  },
+  adapter: 'rvm-spectrum-plus3',
+  media: './media/abadia-spectrum-plus3.dsk',
+  cover: '../platforms/spectrum/title-screen.png',
+  command: '\n',
+  // Avoid RVM's unstable native cursor-key path for this Spectrum title.
+  keyMap: {
+    ArrowUp: 'KeyA',
+    ArrowDown: 'KeyZ',
+    ArrowLeft: 'KeyK',
+    ArrowRight: 'KeyL'
+  },
+  // Fast-forward the +3 disk load, then return to normal speed before play.
+  warpFrames: 3600,
   language: 'es'
 }];

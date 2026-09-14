@@ -1,4 +1,4 @@
-import { systems } from './systems.js?v=20260914-8';
+import { systems } from './systems.js?v=20260914-12';
 
 const params = new URLSearchParams(location.search);
 const es = params.get('lang') !== 'en';
@@ -7,6 +7,23 @@ const system = systems.find(item => item.id === params.get('system'));
 const start = document.querySelector('#start');
 const status = document.querySelector('#status');
 const cover = document.querySelector('#cover');
+const coverImage = document.querySelector('#cover-image');
+const adapters = {
+  'rvm-cpc': {
+    runtime: './rvmplayer/rvmplayer.cpc6128.0.1.1.min.js',
+    factory: 'rvmPlayer_cpc6128',
+    screen: { es: 'Pantalla del Amstrad CPC', en: 'Amstrad CPC screen' }
+  },
+  'rvm-spectrum-plus3': {
+    runtime: './rvmplayer/rvmplayer.plus3.0.1.1.min.js',
+    factory: 'rvmPlayer_plus3',
+    screen: { es: 'Pantalla del ZX Spectrum +3', en: 'ZX Spectrum +3 screen' }
+  }
+};
+const adapter = system && adapters[system.adapter];
+const requestedWarpFrames = Number(params.get('warpFrames'));
+const warpFrames = system?.id === 'zx-spectrum-plus3' && Number.isInteger(requestedWarpFrames)
+  ? Math.min(10000, Math.max(0, requestedWarpFrames)) : system?.warpFrames;
 const copy = es ? {
   play: 'Jugar', loading: 'Cargando la abadía…', idle: system?.idle.es || 'Amstrad CPC · Juego en español',
   error: 'No se pudo iniciar. Comprueba la conexión y vuelve a intentarlo.', retry: 'Reintentar',
@@ -18,8 +35,11 @@ const copy = es ? {
 };
 start.textContent = copy.play;
 status.textContent = copy.idle;
+if (system?.cover) coverImage.src = system.cover;
+if (system) document.title = `La Abadía del Crimen · ${system.name[es ? 'es' : 'en']}`;
 let player;
 let timer;
+let coverTimer;
 let failed = false;
 let running = false;
 let muted = false;
@@ -34,6 +54,7 @@ function fail(message = copy.error) {
   failed = true;
   running = false;
   clearTimeout(timer);
+  clearTimeout(coverTimer);
   player?.worker?.terminate();
   player?.audioContext?.close().catch(() => {});
   cover.hidden = false;
@@ -53,11 +74,16 @@ function releaseKeys() {
   pressedAt.clear();
 }
 
-function pause(value) {
-  if (!running || player.isPaused === value) return;
-  releaseKeys();
-  player.togglePause(new Event('click'));
+function reportState() {
   send('state', { paused: player.isPaused, muted });
+}
+
+function pause(value) {
+  if (!running) return;
+  releaseKeys();
+  if (player.isPaused === value) { reportState(); return; }
+  player.togglePause(new Event('click'));
+  reportState();
 }
 
 // Intercept Tab before the emulator's global keyboard handler to avoid trapping
@@ -69,7 +95,25 @@ window.addEventListener('keydown', event => {
     pause(true);
     send('escape-focus');
     event.preventDefault();
-  } else if (running) heldKeys.set(event.code, { code: event.code });
+  } else if (running) {
+    const code = system.keyMap?.[event.code] || event.code;
+    heldKeys.set(code, { code });
+    if (code !== event.code) {
+      // Do not also pass RVM its native Spectrum cursor code: with this title
+      // that path can halt execution, while the original A/Z/K/L keys are safe.
+      event.stopImmediatePropagation();
+      event.preventDefault();
+      player.keydown({ code, preventDefault() {} });
+    }
+  }
+}, true);
+window.addEventListener('keyup', event => {
+  if (!running) return;
+  const code = system.keyMap?.[event.code];
+  if (!code) return;
+  event.stopImmediatePropagation();
+  event.preventDefault();
+  player.keyup({ code });
 }, true);
 window.addEventListener('blur', () => { releaseKeys(); pause(true); });
 document.addEventListener('visibilitychange', () => { if (document.hidden) pause(true); });
@@ -80,7 +124,7 @@ start.addEventListener('click', async () => {
   if (failed) { location.reload(); return; }
   const probe = document.createElement('canvas');
   const gl = probe.getContext('webgl2');
-  if (!system || system.adapter !== 'rvm-cpc' || !window.isSecureContext || !gl || !window.AudioWorkletNode) {
+  if (!system || !adapter || !window.isSecureContext || !gl || !window.AudioWorkletNode) {
     gl?.getExtension('WEBGL_lose_context')?.loseContext();
     fail(copy.unsupported);
     return;
@@ -90,18 +134,21 @@ start.addEventListener('click', async () => {
   status.textContent = copy.loading;
   send('loading');
   timer = setTimeout(() => fail(), 60000);
+  // Keep the branded cover long enough to acknowledge the click, then reveal
+  // RVM's real startup frames while the accelerated disk boot finishes.
+  coverTimer = setTimeout(() => { if (!failed) cover.hidden = true; }, 1000);
   try {
     await new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src = './rvmplayer/rvmplayer.cpc6128.0.1.1.min.js';
+      script.src = adapter.runtime;
       script.onload = resolve;
       script.onerror = reject;
       document.head.append(script);
     });
     if (failed) return;
-    player = window.rvmPlayer_cpc6128(document.querySelector('#machine'), {
+    player = window[adapter.factory](document.querySelector('#machine'), {
       disk: { type: 'dsk', url: new URL(system.media, location.href).href },
-      command: system.command, warpFrames: system.warpFrames, videoMode: 'hd'
+      command: system.command, warpFrames, videoMode: 'hd'
     });
     player.worker.addEventListener('error', () => fail());
     // The audio worklet advances the machine in batches. Keep very short taps
@@ -133,7 +180,7 @@ start.addEventListener('click', async () => {
         player.canvas.focus();
       }
     }, true);
-    player.canvas.setAttribute('aria-label', es ? 'Pantalla del Amstrad CPC' : 'Amstrad CPC screen');
+    player.canvas.setAttribute('aria-label', adapter.screen[es ? 'es' : 'en']);
     player.canvas.tabIndex = 0;
     player.canvas.addEventListener('webglcontextlost', () => fail());
     player.addEventListener('diskLoaded', () => {
@@ -145,6 +192,7 @@ start.addEventListener('click', async () => {
         if (failed) return;
         if (player.port && player.ready) {
           clearTimeout(timer);
+          clearTimeout(coverTimer);
           running = true;
           cover.hidden = true;
           player.canvas.focus();
@@ -170,7 +218,7 @@ window.addEventListener('message', event => {
     case 'mute':
       muted = !muted;
       player.sVolume.setValue(muted ? 0 : .8);
-      send('state', { paused: player.isPaused, muted });
+      reportState();
       break;
   }
 });

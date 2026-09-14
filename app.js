@@ -316,6 +316,7 @@
     });
     let currentAtlasPlatform = document.documentElement.dataset.platform;
     let currentAtlasLight = 'day';
+    let currentCpcEdition = 'full';
     const updateAtlasEdition = () => {
       const platform = currentAtlasPlatform;
       const light = currentAtlasLight;
@@ -324,20 +325,26 @@
       const useSpectrum = platform === 'spectrum';
       const useMsx = platform === 'msx';
       const mapPlatform = useVga ? 'vga' : (useCpc ? 'cpc' : (useSpectrum ? 'spectrum' : (useMsx ? 'msx' : 'cga')));
-      const assetSet = `${mapPlatform}-${light}`;
+      const useReducedCpc = useCpc && currentCpcEdition === 'reduced';
+      const assetSet = useReducedCpc ? `cpc-reduced-${light}` : `${mapPlatform}-${light}`;
       const lightLabel = light === 'night'
         ? (isSpanish ? 'paleta nocturna' : 'night palette')
         : (isSpanish ? 'paleta diurna' : 'daytime palette');
       const platformLabel = useVga
         ? (isSpanish ? 'Remake VGA · 256 colores' : 'VGA remake · 256 colours')
         : (useCpc
-          ? (isSpanish ? 'Amstrad CPC · 4 colores' : 'Amstrad CPC · 4 colours')
+          ? (useReducedCpc
+            ? (isSpanish ? 'Amstrad CPC 64 KB · abadía reducida' : 'Amstrad CPC 64 KB · reduced abbey')
+            : (isSpanish ? 'Amstrad CPC 128 KB · abadía completa' : 'Amstrad CPC 128 KB · complete abbey'))
           : (useSpectrum
             ? (isSpanish ? 'ZX Spectrum · 2 colores' : 'ZX Spectrum · 2 colours')
             : (useMsx ? (isSpanish ? 'MSX · 2 colores' : 'MSX · 2 colours') : 'PC CGA')));
       const edition = `${platformLabel} · ${lightLabel}`;
       atlas.dataset.mapPlatform = mapPlatform;
       atlas.dataset.mapPalette = light;
+      atlas.dataset.mapEdition = useReducedCpc ? 'reduced' : 'full';
+      const cpcEditionControl = $('[data-cpc-edition-control]', atlas);
+      if (cpcEditionControl) cpcEditionControl.hidden = !useCpc;
       $$('.abbey-room', atlas).forEach(button => {
         const source = `../assets/maps/abbey-rooms/${assetSet}/room-${button.dataset.roomId}.png`;
         const roomHex = button.dataset.roomId.toUpperCase();
@@ -355,6 +362,16 @@
     lightButtons.forEach(button => button.addEventListener('click', () => {
       currentAtlasLight = button.dataset.abbeyLight;
       lightButtons.forEach(item => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      updateAtlasEdition();
+    }));
+    const cpcEditionButtons = $$('[data-abbey-cpc-edition]', atlas);
+    cpcEditionButtons.forEach(button => button.addEventListener('click', () => {
+      currentCpcEdition = button.dataset.abbeyCpcEdition;
+      cpcEditionButtons.forEach(item => {
         const active = item === button;
         item.classList.toggle('is-active', active);
         item.setAttribute('aria-pressed', String(active));

@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <meta name="description" content="Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.">
   <title>El juego · La Abadía del Crimen</title>
-  <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
+  <link rel="stylesheet" href="../styles.css?v=20260914-cpc64map1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
   <link rel="stylesheet" href="../game-guide.css?v=20260911-guide2">
   <link rel="stylesheet" href="../play.css?v=20260914-5">
@@ -44,7 +44,7 @@
       <h1>El juego</h1>
       <p>Personajes, reglas, espacios, objetos y siete días de investigación bajo la disciplina de las campanas.</p>
       <a class="page-cue" href="#manuscrito">Entrar en el capítulo ↓</a>
-      <a class="graphics-guide-link play-entry-link" href="jugar.html"><span class="graphics-guide-kicker">También puedes jugar</span><strong>Entra en la abadía</strong><span class="graphics-guide-description">La versión de Amstrad CPC, con carga automática y los controles originales.</span><span class="graphics-guide-action" aria-hidden="true">Jugar <b>→</b></span></a>
+      <a class="graphics-guide-link play-entry-link" href="jugar.html"><span class="graphics-guide-kicker">También puedes jugar</span><strong>Entra en la abadía</strong><span class="graphics-guide-description">Las ediciones de Amstrad CPC y ZX Spectrum, con carga automática y los controles originales.</span><span class="graphics-guide-action" aria-hidden="true">Jugar <b>→</b></span></a>
     </div>
   </header>
 
@@ -339,9 +339,9 @@
       <div class="abbey-screen-map reveal" data-abbey-map data-map-platform="cga" data-map-palette="day">
         <div class="abbey-map-heading">
           <div><span class="source-tag">Mapa interactivo</span><h3>La abadía completa, estancia a estancia</h3></div>
-          <p>Cada pantalla aparece en su lugar dentro de la abadía. PC, Spectrum y MSX usan sus propios datos; CPC y VGA comparten la arquitectura recuperada, con los gráficos de cada versión. El selector «Versión» permite comparar las pantallas de las cinco versiones; el control «Luz» alterna entre día y noche. El nivel superior reúne los dos pisos del <i>aedificium</i>: scriptorium y biblioteca.</p>
+          <p>Cada pantalla aparece en su lugar dentro de la abadía. PC, Spectrum y MSX usan sus propios datos; el CPC permite además comparar la abadía completa de 128 KB con el trazado reducido de 64 KB extraído de la versión jugable. El selector «Versión» compara las cinco plataformas y «Luz» alterna entre día y noche. El nivel superior reúne los dos pisos del <i>aedificium</i>: scriptorium y biblioteca.</p>
         </div>
-        <div class="abbey-map-variantbar"><span>Luz</span><div class="abbey-light-tabs" role="group" aria-label="Iluminación de las estancias"><button class="is-active" type="button" aria-pressed="true" data-abbey-light="day">Día</button><button type="button" aria-pressed="false" data-abbey-light="night">Noche</button></div></div>
+        <div class="abbey-map-controls"><div class="abbey-map-variantbar abbey-map-cpc-edition" data-cpc-edition-control hidden><span>Abadía CPC</span><div class="abbey-edition-tabs" role="group" aria-label="Versión de la abadía para Amstrad CPC"><button class="is-active" type="button" aria-pressed="true" data-abbey-cpc-edition="full">Completa · 128 KB</button><button type="button" aria-pressed="false" data-abbey-cpc-edition="reduced">Reducida · 64 KB</button></div></div><div class="abbey-map-variantbar"><span>Luz</span><div class="abbey-light-tabs" role="group" aria-label="Iluminación de las estancias"><button class="is-active" type="button" aria-pressed="true" data-abbey-light="day">Día</button><button type="button" aria-pressed="false" data-abbey-light="night">Noche</button></div></div></div>
         <div class="abbey-floor-tabs" role="tablist" aria-label="Nivel de la abadía"><button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="abbey-main-es" data-abbey-floor="main">Planta principal <span>61 estancias</span></button><button type="button" role="tab" aria-selected="false" aria-controls="abbey-upper-es" data-abbey-floor="upper">Aedificium <span>Scriptorium + biblioteca</span></button></div>
         <section class="abbey-floor-panel is-active" id="abbey-main-es" role="tabpanel" data-abbey-panel="main"><div class="abbey-room-grid abbey-room-grid--main" data-room-grid="ground" aria-label="Planta principal formada con 61 pantallas diurnas"></div></section>
         <section class="abbey-floor-panel" id="abbey-upper-es" role="tabpanel" data-abbey-panel="upper" hidden><div class="abbey-upper-level"><figure><figcaption><strong>Scriptorium</strong><span>Primer piso · 16 estancias</span></figcaption><div class="abbey-room-grid abbey-room-grid--upper" data-room-grid="scriptorium" aria-label="Scriptorium formado con 16 pantallas diurnas"></div></figure><figure><figcaption><strong>Biblioteca</strong><span>Piso superior · 16 estancias</span></figcaption><div class="abbey-room-grid abbey-room-grid--upper" data-room-grid="library" aria-label="Biblioteca formada con 16 pantallas diurnas"></div></figure></div></section>
@@ -531,7 +531,7 @@
   </div>
   <script src="../assets/game/parchment-data.js?v=20260908-w1"></script>
   <script src="../parchment.js?v=20260908-platform1"></script>
-  <script src="../app.js?v=20260912-spoilers1"></script>
+  <script src="../app.js?v=20260914-cpc64map1"></script>
   <script src="../assets/game/week-dialogue.js?v=20260911-1"></script>
   <script src="../assets/game/abbot-welcome-route.js?v=20260913-map20"></script>
   <script src="../assets/game/week-routes.js?v=20260913-routes6"></script>

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Entra en la abadía. La versión original de Amstrad CPC, con sus gráficos, sus sonidos y el ritmo de sus siete días.">
+  <meta name="description" content="Entra en la abadía. Las ediciones de Amstrad CPC y ZX Spectrum, con sus gráficos, sus sonidos y el ritmo de sus siete días.">
   <title>Jugar en el navegador · La Abadía del Crimen</title>
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
   <link rel="stylesheet" href="../editorial.css?v=20260906-editorial1">
-  <link rel="stylesheet" href="../play.css?v=20260914-7">
+  <link rel="stylesheet" href="../play.css?v=20260914-9">
 </head>
 <body data-page="play">
   <a class="skip-link" href="#contenido">Saltar al juego</a>
@@ -30,12 +30,12 @@
   <header class="play-masthead" id="inicio">
     <p class="eyebrow">La abadía, en tus manos</p>
     <h1>Jugar en el navegador</h1>
-    <p>Entra en la abadía. La versión original de Amstrad CPC, con sus gráficos, sus sonidos y el ritmo de sus siete días.</p>
+    <p>Entra en la abadía. Las ediciones de Amstrad CPC y ZX Spectrum, con sus gráficos, sus sonidos y el ritmo de sus siete días.</p>
   </header>
   <main class="play-layout" id="contenido">
     <div class="play-heading">
       <label for="play-system">Sistema <select id="play-system"></select></label>
-      <p>Dos ediciones originales · la abadía completa de 128K y la reducida de 64K</p>
+      <p>Tres ediciones jugables · CPC 128K, CPC 64K y ZX Spectrum +3</p>
     </div>
     <div class="play-screen"></div>
     <noscript><p>Activa JavaScript para jugar en el navegador.</p></noscript>
@@ -44,6 +44,11 @@
       <button type="button" data-play="mute" aria-pressed="false" disabled>Silenciar</button>
       <button type="button" data-play="fullscreen">Pantalla completa</button>
       <button type="button" class="play-restart" data-play="restart" aria-expanded="false" aria-controls="restart-confirm" disabled>Reiniciar partida…</button>
+    </div>
+    <div class="play-boot-tuning" hidden>
+      <label for="spectrum-warp-frames">Fotogramas de arranque</label>
+      <input id="spectrum-warp-frames" type="number" min="0" max="10000" step="25" inputmode="numeric">
+      <span>Se aplica al reiniciar la máquina.</span>
     </div>
     <div class="restart-confirm" id="restart-confirm" role="group" aria-label="Confirmar reinicio" hidden>
       <p>Se perderá la partida actual. ¿Volver a empezar?</p>
@@ -65,6 +70,8 @@
         <p>Usa un ordenador con teclado y un navegador actualizado. Este reproductor no está preparado para móviles o tabletas.</p>
         <p>El disco se carga automáticamente. El juego está en español, también al consultar esta página en inglés.</p>
         <p>La edición de 64K es la versión para CPC 464/664, con la abadía reducida para caber en esos modelos. Aquí se ejecuta bajo la emulación compatible del CPC 6128 disponible en RVMPlayer.</p>
+        <p>La edición ZX Spectrum es el port de 128K conservado en la reedición en disco para Spectrum +3 de MCM Software.</p>
+        <p>En Spectrum, las flechas se traducen internamente a las teclas originales A, Z, K y L. También puedes usar esas cuatro teclas directamente.</p>
         <p>Al salir de la pantalla del juego se activa la pausa. La partida no se guarda al cerrar o recargar la página.</p>
         <p><a href="juego.html">Conoce el juego →</a></p>
       </section>
@@ -82,6 +89,6 @@
     <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
   </footer>
   <script src="../app.js?v=20260912-spoilers1"></script>
-  <script type="module" src="../play.js?v=20260914-10"></script>
+  <script type="module" src="../play.js?v=20260914-21"></script>
 </body>
 </html>

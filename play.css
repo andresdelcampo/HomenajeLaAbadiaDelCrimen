@@ -18,6 +18,11 @@
 .play-toolbar .play-restart:hover, .play-toolbar .play-restart[aria-expanded="true"] { border-color: #7c2f24; background: #7c2f240d; }
 .play-toolbar button:disabled { opacity: .45; cursor: default; }
 .play-toolbar button:focus-visible, .restart-confirm button:focus-visible, .play-heading select:focus-visible { outline: 3px solid var(--ink-soft); outline-offset: 3px; }
+.play-boot-tuning { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .45rem .7rem; margin: .2rem 0 .65rem; color: var(--ink-soft); font-size: .84rem; }
+.play-boot-tuning[hidden] { display: none; }
+.play-boot-tuning label { color: var(--ink); font-weight: 600; }
+.play-boot-tuning input { width: 6.8rem; padding: .38rem .5rem; border: 1px solid var(--rule); border-radius: 2px; background: var(--paper-light); color: var(--ink); font: .9rem var(--mono); }
+.play-boot-tuning input:focus-visible { outline: 3px solid var(--ink-soft); outline-offset: 3px; }
 .play-status { text-align: center; margin: .5rem 0; font-size: .95rem; }
 .restart-confirm { max-width: 38rem; margin: .55rem auto 0; text-align: center; padding: .85rem 1rem .95rem; border: 1px solid color-mix(in srgb, #7c2f24 42%, var(--rule)); border-left: 4px solid #7c2f24; background: color-mix(in srgb, var(--paper-light) 82%, transparent); box-shadow: 0 4px 14px #17151212; }
 .restart-confirm[hidden] { display: none; }

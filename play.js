@@ -1,4 +1,4 @@
-import { systems } from './assets/emulation/systems.js?v=20260914-8';
+import { systems } from './assets/emulation/systems.js?v=20260914-12';
 
 const es = document.documentElement.lang === 'es';
 const select = document.querySelector('#play-system');
@@ -8,6 +8,8 @@ const pause = document.querySelector('[data-play="pause"]');
 const mute = document.querySelector('[data-play="mute"]');
 const restart = document.querySelector('[data-play="restart"]');
 const fullscreen = document.querySelector('[data-play="fullscreen"]');
+const bootTuning = document.querySelector('.play-boot-tuning');
+const bootFrames = document.querySelector('#spectrum-warp-frames');
 const confirmation = document.querySelector('.restart-confirm');
 const confirmRestart = document.querySelector('[data-play="confirm"]');
 const cancelRestart = document.querySelector('[data-play="cancel"]');
@@ -30,6 +32,13 @@ let frame;
 let paused = false;
 let active = false;
 let pointerPauseAction;
+const spectrumId = 'zx-spectrum-plus3';
+// Keep the tuning control ready for future systems without exposing it now.
+const bootTuningEnabled = false;
+const storedBootFrames = localStorage.getItem('abbey-spectrum-startup-frames');
+const savedBootFrames = Number(storedBootFrames);
+bootFrames.value = bootTuningEnabled && storedBootFrames !== null && Number.isInteger(savedBootFrames) && savedBootFrames >= 0 && savedBootFrames <= 10000
+  ? String(savedBootFrames) : String(systems.find(system => system.id === spectrumId).warpFrames);
 for (const system of systems) {
   const option = document.createElement('option');
   option.value = system.id;
@@ -46,6 +55,9 @@ function showRestartConfirmation(show) {
   confirmation.hidden = !show;
   restart.setAttribute('aria-expanded', String(show));
 }
+function updateBootTuning() {
+  bootTuning.hidden = !bootTuningEnabled || select.value !== spectrumId;
+}
 function mount() {
   active = false;
   paused = false;
@@ -59,18 +71,26 @@ function mount() {
   next.title = copy.frame;
   next.allow = 'autoplay; fullscreen; gamepad';
   const url = new URL('../assets/emulation/player.html', location.href);
-  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260914-8' });
+  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260914-20' });
+  if (select.value === spectrumId) url.searchParams.set('warpFrames', bootFrames.value);
   next.src = url.href;
   frame = next;
   screen.replaceChildren(next); // Removing the old browsing context stops audio/workers.
 }
 mount();
+updateBootTuning();
 select.addEventListener('change', () => {
+  updateBootTuning();
   if (active) {
     send('pause');
     showRestartConfirmation(true);
     confirmRestart.focus();
   } else mount();
+});
+bootFrames.addEventListener('change', () => {
+  const value = Math.min(10000, Math.max(0, Math.round(Number(bootFrames.value) || 0)));
+  bootFrames.value = String(value);
+  localStorage.setItem('abbey-spectrum-startup-frames', String(value));
 });
 window.addEventListener('message', event => {
   if (event.origin !== location.origin || event.source !== frame?.contentWindow || event.data?.source !== 'abbey-player') return;
@@ -115,6 +135,7 @@ restart.addEventListener('click', () => {
 confirmRestart.addEventListener('click', () => { mount(); frame.focus(); });
 cancelRestart.addEventListener('click', () => {
   select.value = new URL(frame.src).searchParams.get('system');
+  updateBootTuning();
   showRestartConfirmation(false);
   pause.focus();
 });

@@ -5,7 +5,7 @@ import { runInNewContext } from 'node:vm';
 import { systems } from '../assets/emulation/systems.js';
 
 const source = readFileSync(new URL('../play.js', import.meta.url), 'utf8').replace(/^import .*;\n/, '');
-function host() {
+function host({ search = '', storedFrames = null } = {}) {
   const listeners = new Map();
   class Element {
     constructor() { this.events = new Map(); this.children = []; this.attributes = {}; this.value = ''; }
@@ -31,9 +31,10 @@ function host() {
       return item;
     }
   };
-  const location = { href: 'https://example.test/tribute/en/play.html', origin: 'https://example.test', search: '' };
+  const location = { href: `https://example.test/tribute/en/play.html${search}`, origin: 'https://example.test', search };
+  const localStorage = { getItem() { return storedFrames; }, setItem(_key, value) { storedFrames = value; } };
   runInNewContext(source, {
-    document, location, systems, URL, URLSearchParams,
+    document, location, localStorage, systems, URL, URLSearchParams,
     window: { addEventListener: (name, callback) => listeners.set(name, callback) }
   });
   const frame = () => element('.play-screen').children[0];
@@ -47,12 +48,19 @@ test('nested deployment paths resolve to local media/player and controls start d
   const h = host();
   assert.equal(new URL(h.frame().src).pathname, '/tribute/assets/emulation/player.html');
   assert.equal(new URL(h.frame().src).searchParams.get('system'), 'amstrad-cpc');
-  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260914-8');
+  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260914-20');
   assert.equal(h.element('[data-play="pause"]').disabled, true);
 });
 
 test('CPC startup warp stops on the title screen instead of entering the manuscript', () => {
   assert.equal(systems[0].warpFrames, 842);
+});
+
+test('hidden Spectrum tuning ignores old saved values and uses the fixed startup', () => {
+  const h = host({ search: '?system=zx-spectrum-plus3', storedFrames: '1800' });
+  const url = new URL(h.frame().src);
+  assert.equal(url.searchParams.get('warpFrames'), '3600');
+  assert.equal(h.element('.play-boot-tuning').hidden, true);
 });
 
 test('only the current same-origin player can enable playback controls', () => {
@@ -106,4 +114,18 @@ test('the second playable system is the reduced 64K CPC 464/664 edition', () => 
   assert.equal(disk.length, 194816);
   assert.equal(disk.subarray(0, 18).toString(), 'MV - CPC Disk-File');
   assert.ok(disk.includes(Buffer.from('ABADIA64BAS')));
+});
+
+test('the third playable system is the preserved 128K Spectrum +3 disk edition', () => {
+  const system = systems[2];
+  const disk = readFileSync(new URL(`../assets/emulation/${system.media.slice(2)}`, import.meta.url));
+  assert.equal(system.id, 'zx-spectrum-plus3');
+  assert.equal(system.adapter, 'rvm-spectrum-plus3');
+  assert.equal(system.command, '\n');
+  assert.equal(system.warpFrames, 3600);
+  assert.deepEqual(system.keyMap, {
+    ArrowUp: 'KeyA', ArrowDown: 'KeyZ', ArrowLeft: 'KeyK', ArrowRight: 'KeyL'
+  });
+  assert.equal(disk.length, 191744);
+  assert.equal(disk.subarray(0, 21).toString(), 'EXTENDED CPC DSK File');
 });

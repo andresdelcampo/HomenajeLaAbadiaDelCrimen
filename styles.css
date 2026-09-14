@@ -1285,11 +1285,14 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .abbey-map-heading { display: grid; grid-template-columns: minmax(0, .9fr) minmax(300px, 1.1fr); gap: 2rem 4rem; align-items: end; }
 .abbey-map-heading h3 { max-width: 720px; margin: .7rem 0 0; font: 400 clamp(2.5rem, 5vw, 5.5rem)/.86 var(--display); }
 .abbey-map-heading p { margin: 0; color: rgba(255,255,255,.63); }
+.abbey-map-controls { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .8rem 1.2rem; margin-top: 2.2rem; }
+.abbey-map-controls .abbey-map-variantbar { margin-top: 0; }
+.abbey-map-cpc-edition[hidden] { display: none; }
 .abbey-map-variantbar { display: flex; align-items: center; justify-content: flex-end; gap: .8rem; margin-top: 2.2rem; color: rgba(255,255,255,.45); font: 700 .57rem/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
-.abbey-light-tabs { display: flex; padding: 3px; border: 1px solid rgba(255,255,255,.16); background: rgba(0,0,0,.32); }
-.abbey-light-tabs button { min-width: 4.5rem; padding: .55rem .75rem; border: 0; color: rgba(255,255,255,.58); background: transparent; cursor: pointer; font: 700 .62rem/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
-.abbey-light-tabs button:hover, .abbey-light-tabs button.is-active { color: #050708; background: var(--gold); }
-.abbey-light-tabs button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.abbey-light-tabs, .abbey-edition-tabs { display: flex; padding: 3px; border: 1px solid rgba(255,255,255,.16); background: rgba(0,0,0,.32); }
+.abbey-light-tabs button, .abbey-edition-tabs button { min-width: 4.5rem; padding: .55rem .75rem; border: 0; color: rgba(255,255,255,.58); background: transparent; cursor: pointer; font: 700 .62rem/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.abbey-light-tabs button:hover, .abbey-light-tabs button.is-active, .abbey-edition-tabs button:hover, .abbey-edition-tabs button.is-active { color: #050708; background: var(--gold); }
+.abbey-light-tabs button:focus-visible, .abbey-edition-tabs button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .abbey-floor-tabs { display: flex; gap: .5rem; margin: .8rem 0 1.4rem; border-bottom: 1px solid rgba(255,255,255,.16); }
 .abbey-floor-tabs button { display: flex; align-items: baseline; gap: .7rem; padding: .85rem 1rem; border: 0; border-bottom: 3px solid transparent; color: rgba(255,255,255,.55); background: transparent; cursor: pointer; font: 400 1.25rem/1 var(--display); }
 .abbey-floor-tabs button span { font: 700 .57rem/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
@@ -2567,6 +2570,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .map-panel { min-height: 320px; }
   .map-hotspot::after { display: none; }
   .abbey-map-heading { grid-template-columns: 1fr; gap: 1rem; }
+  .abbey-map-controls { justify-content: flex-start; }
   .abbey-upper-level { grid-template-columns: 1fr; }
   .abbey-map-legend { align-items: flex-start; flex-direction: column; }
   .abbey-map-legend p { text-align: left; }
