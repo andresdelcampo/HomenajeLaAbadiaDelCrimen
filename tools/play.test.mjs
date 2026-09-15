@@ -177,26 +177,31 @@ test('clicking sound preserves the running state even when focus loss arrives be
   assert.deepEqual(pausedHost.messages.slice(-1).map(message => message.action), ['mute']);
 });
 
-test('clicking Full screen preserves the running state while keeping a paused game paused', async () => {
+test('Full screen is available only while an active game is running', async () => {
   const h = host();
+  const fullscreen = h.element('[data-play="fullscreen"]');
+  assert.equal(fullscreen.disabled, true);
+
   h.report('running', { paused: false, muted: false });
   assert.equal(h.messages.at(-1).action, 'fullscreen');
   assert.equal(h.messages.at(-1).value, false);
-  const fullscreen = h.element('[data-play="fullscreen"]');
+  assert.equal(fullscreen.disabled, false);
   let prevented = false;
   fullscreen.fire('pointerdown', { preventDefault() { prevented = true; } });
   assert.equal(prevented, true);
-  h.report('state', { paused: true, muted: false });
   await fullscreen.fire('click');
-  assert.equal(h.messages.at(-1).action, 'resume');
+  const fullscreenMessage = h.messages.filter(message => message.action === 'fullscreen').at(-1);
+  assert.equal(fullscreenMessage.action, 'fullscreen');
+  assert.equal(fullscreenMessage.value, true);
 
   const pausedHost = host();
   pausedHost.report('running', { paused: true, muted: false });
   const pausedFullscreen = pausedHost.element('[data-play="fullscreen"]');
+  assert.equal(pausedFullscreen.disabled, true);
   pausedFullscreen.fire('pointerdown');
   await pausedFullscreen.fire('click');
   assert.equal(pausedHost.messages.at(-1).action, 'fullscreen');
-  assert.equal(pausedHost.messages.at(-1).value, true);
+  assert.equal(pausedHost.messages.at(-1).value, false);
 });
 
 test('cancel preserves the session; confirmed restart replaces it and rejects stale messages', () => {

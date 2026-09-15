@@ -58,6 +58,9 @@ function showRestartConfirmation(show) {
   confirmation.hidden = !show;
   restart.setAttribute('aria-expanded', String(show));
 }
+function updateFullscreenControl() {
+  fullscreen.disabled = !document.fullscreenEnabled || !active || paused;
+}
 function updateBootTuning() {
   bootTuning.hidden = !bootTuningEnabled || select.value !== spectrumId;
 }
@@ -66,6 +69,7 @@ function mount() {
   paused = false;
   showRestartConfirmation(false);
   pause.disabled = mute.disabled = restart.disabled = true;
+  updateFullscreenControl();
   pause.textContent = copy.pause;
   mute.textContent = copy.mute;
   mute.setAttribute('aria-pressed', 'false');
@@ -105,6 +109,7 @@ window.addEventListener('message', event => {
     active = false;
     pause.disabled = mute.disabled = true;
     restart.disabled = false;
+    updateFullscreenControl();
   }
   if (data.type === 'running' || data.type === 'state') {
     active = true;
@@ -114,6 +119,7 @@ window.addEventListener('message', event => {
     mute.textContent = data.muted ? copy.sound : copy.mute;
     mute.setAttribute('aria-pressed', String(data.muted));
     status.textContent = paused ? copy.paused : copy.running;
+    updateFullscreenControl();
     if (data.type === 'running') send('fullscreen', { value: Boolean(document.fullscreenElement) });
   }
   if (data.type === 'escape-focus') {
@@ -157,7 +163,6 @@ cancelRestart.addEventListener('click', () => {
   showRestartConfirmation(false);
   pause.focus();
 });
-fullscreen.disabled = !document.fullscreenEnabled;
 fullscreen.addEventListener('pointerdown', event => {
   // Keep focus in the emulator frame; its blur handler pauses the machine.
   event.preventDefault();
@@ -167,6 +172,7 @@ fullscreen.addEventListener('pointercancel', () => { pointerFullscreenWasPaused 
 fullscreen.addEventListener('click', async () => {
   const wasPaused = pointerFullscreenWasPaused ?? paused;
   pointerFullscreenWasPaused = undefined;
+  if (!active || (paused && wasPaused !== false)) return;
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
     else await screen.requestFullscreen();
@@ -176,6 +182,7 @@ fullscreen.addEventListener('click', async () => {
 });
 document.addEventListener('fullscreenchange', () => {
   fullscreen.textContent = document.fullscreenElement ? copy.exit : copy.full;
+  updateFullscreenControl();
   send('fullscreen', { value: Boolean(document.fullscreenElement) });
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden) send('pause'); });
