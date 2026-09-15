@@ -507,7 +507,7 @@
       msx: 'MSX'
     };
     const subjectLabels = isSpanish
-      ? { tiles: 'Atlas de 256 tiles', blocks: 'Atlas de 87 bloques', block: 'Bloque arquitectónico', room: 'Estancia 17 reconstruida' }
+      ? { tiles: 'Atlas de 256 teselas', blocks: 'Atlas de 87 bloques', block: 'Bloque arquitectónico', room: 'Estancia 17 reconstruida' }
       : { tiles: 'Atlas of 256 tiles', blocks: 'Atlas of 87 blocks', block: 'Architectural block', room: 'Reconstructed room 17' };
     const updateGraphicsExplorer = () => {
       const paletteLabel = currentLight === 'night'
@@ -639,7 +639,7 @@
           if (recipePreview) recipePreview.hidden = true;
           if (kicker) kicker.textContent = isSpanish ? 'Preparación' : 'Preparation';
           if (title) title.textContent = isSpanish ? 'Se aplica el color de fondo a la estancia' : 'The room area receives its background colour';
-          if (copy) copy.textContent = isSpanish ? 'Todavía no se ha ejecutado ninguna colocación. Donde la máscara de un tile conserve la imagen anterior, seguirá viéndose este fondo.' : 'No placement has run yet. Wherever a tile\'s mask preserves the existing image, this background remains visible.';
+          if (copy) copy.textContent = isSpanish ? 'Todavía no se ha ejecutado ninguna colocación. Donde la máscara de una tesela conserve la imagen anterior, seguirá viéndose este fondo.' : 'No placement has run yet. Wherever a tile\'s mask preserves the existing image, this background remains visible.';
           setDetails([[isSpanish ? 'Estancia' : 'Room', isSpanish ? '17 hexadecimal' : '17 hexadecimal'], [isSpanish ? 'Colocaciones' : 'Placements', `0 / ${placementTotal}`]]);
         } else if (!placement) {
           if (recipePreview) recipePreview.hidden = true;
@@ -662,11 +662,11 @@
           if (copy) {
             if (changed === 0) {
               copy.textContent = isSpanish
-                ? `Desde (${placement.origin.join(', ')}), la receta ejecuta ${placement.commands} instrucciones, pero no altera el resultado visible: sus tiles quedan fuera de la rejilla o no cambian su estado final.`
+                ? `Desde (${placement.origin.join(', ')}), la receta ejecuta ${placement.commands} instrucciones, pero no altera el resultado visible: sus teselas quedan fuera de la rejilla o no cambian su estado final.`
                 : `From (${placement.origin.join(', ')}), the recipe executes ${placement.commands} instructions but does not alter the visible result: its tiles fall outside the grid or leave its final state unchanged.`;
             } else {
               copy.textContent = isSpanish
-                ? `Desde (${placement.origin.join(', ')}), la receta ejecuta ${placement.commands} instrucciones y escribe ${placement.tile_writes} tiles en la rejilla. Cambia ${changed} celdas: ${added} nuevas y ${updated} que ya contenían arquitectura. Tras este paso hay ${placement.occupied_cells} celdas ocupadas.`
+                ? `Desde (${placement.origin.join(', ')}), la receta ejecuta ${placement.commands} instrucciones y escribe ${placement.tile_writes} teselas en la rejilla. Cambia ${changed} celdas: ${added} nuevas y ${updated} que ya contenían arquitectura. Tras este paso hay ${placement.occupied_cells} celdas ocupadas.`
                 : `From (${placement.origin.join(', ')}), the recipe executes ${placement.commands} instructions and writes ${placement.tile_writes} tiles into the grid. It changes ${changed} cells: ${added} new and ${updated} that already held architecture. After this step, ${placement.occupied_cells} cells are occupied.`;
             }
           }
@@ -679,7 +679,7 @@
         drawScreen(value);
         if (kicker) kicker.textContent = isSpanish ? 'Transferencia a pantalla' : 'Screen transfer';
         if (title) title.textContent = value === 0 ? (isSpanish ? 'Primero se dibuja el fondo' : 'The screen begins with its background') : value === 320 ? (isSpanish ? 'Las 320 celdas ya son visibles' : 'All 320 cells are now visible') : (isSpanish ? 'La imagen se completa desde el centro' : 'The picture grows from the centre');
-        if (copy) copy.textContent = isSpanish ? 'El programa copia franjas hacia abajo, derecha, arriba e izquierda. En cada celda compone primero el tile posterior y después el anterior.' : 'The program copies strips down, right, up, and left. In each cell it composites the rear tile before the front tile.';
+        if (copy) copy.textContent = isSpanish ? 'El programa copia franjas hacia abajo, derecha, arriba e izquierda. En cada celda compone primero la tesela posterior y después la anterior.' : 'The program copies strips down, right, up, and left. In each cell it composites the rear tile before the front tile.';
         setDetails([[isSpanish ? 'Sistema' : 'System', 'PC CGA'], [isSpanish ? 'Celda visible' : 'Visible cell', `${value} / 320`], [isSpanish ? 'Orden' : 'Order', isSpanish ? 'Espiral rectangular' : 'Rectangular spiral']]);
       }
     };

@@ -73,7 +73,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
   ![Reconstrucción paso a paso de una estancia](assets/readme/preview-room-construction-cropped.png)
 
-  La demostración interactiva de la estancia 17 reproduce sus 32 colocaciones una a una, aísla la receta arquitectónica activa y explica qué tiles y celdas modifica. Una segunda fase sigue la copia documentada de las 320 celdas visibles a la pantalla CGA. Todo puede avanzarse manualmente o reproducirse, de día y de noche.
+  La demostración interactiva de la estancia 17 reproduce sus 32 colocaciones una a una, aísla la receta arquitectónica activa y explica qué teselas gráficas (tiles) y celdas modifica. Una segunda fase sigue la copia documentada de las 320 celdas visibles a la pantalla CGA. Todo puede avanzarse manualmente o reproducirse, de día y de noche.
   </details>
 
 - **Leer los pergaminos.** Cada letra aparece trazo a trazo, con sus pausas y su música.
@@ -103,13 +103,13 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   El archivo sonoro permite reproducir la muestra digital original de *Ave María* del PC, la acusación «pirata», melodías reconstruidas desde el ejecutable DOS, pasos y efectos, además de recreaciones del sonido del Amstrad CPC conservado por Vigasoco.
   </details>
 
-- **Entender el motor.** Del mundo de coordenadas a la piedra isométrica: tiles, máscaras, capas y luz.
+- **Entender el motor.** Del mundo de coordenadas a la piedra isométrica: teselas, máscaras, capas y luz.
   <details style="margin-top: -0.75em; color: #555;">
   <summary style="color: #0969da; font-weight: 400;">Conocer más sobre la guía gráfica</summary>
 
-  ![Atlas de tiles gráficos del motor](assets/readme/preview-graphics-tiles.png)
+  ![Atlas de teselas gráficas del motor](assets/readme/preview-graphics-tiles.png)
 
-  Las descripciones recuperadas de 116 estancias, 2.497 colocaciones arquitectónicas, 87 recetas y 256 tiles explican cómo una posición del mundo termina convertida en una pantalla isométrica. El recorrido continúa por máscaras, capas de profundidad, paletas, iluminación, objetos, puertas, rutas, estados de los personajes y trucos de cámara.
+  Las descripciones recuperadas de 116 estancias, 2.497 colocaciones arquitectónicas, 87 recetas y 256 teselas explican cómo una posición del mundo termina convertida en una pantalla isométrica. El recorrido continúa por máscaras, capas de profundidad, paletas, iluminación, objetos, puertas, rutas, estados de los personajes y trucos de cámara.
   </details>
 
 - **Investigar el legado.** Versiones, fuentes, prensa, remakes y *Extensum*, reunidos en un archivo vivo.
@@ -128,7 +128,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 | [Historia](es/index.html) | Paco Menéndez, Juan Delcán, el origen del proyecto, las adaptaciones y su compleja historia editorial. |
 | [El juego](es/juego.html) | Pergaminos interactivos, personajes, objetos, siete jornadas con cronología hora a hora, mapas y el atlas completo de estancias. |
 | [Programación](es/tecnica.html) | Versiones, sonido, *Ave María*, protección anticopia, inteligencia de los personajes y acceso a la guía gráfica completa. |
-| [Guía del motor gráfico](es/graficos.html) | De coordenadas, descripciones y recetas a tiles, capas, máscaras y la construcción interactiva de una estancia. |
+| [Guía del motor gráfico](es/graficos.html) | De coordenadas, descripciones y recetas a teselas, capas, máscaras y la construcción interactiva de una estancia. |
 | [Prensa y anuncios](es/prensa.html) | Publicidad y páginas históricas españolas y británicas, examinables con el visor y sus controles de zoom. |
 | [Legado](es/legado.html) | Recuperaciones, remakes, influencia, preservación y memoria del juego. |
 
