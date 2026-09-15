@@ -20,7 +20,7 @@
 .play-screen iframe { position: relative; z-index: 1; display: block; width: 100%; height: 100%; border: 0; }
 .play-screen:fullscreen { width: 100%; max-width: none; height: 100%; display: grid; place-items: center; background: #080b10; }
 .play-screen:fullscreen iframe { flex: none; }
-.play-toolbar { display: flex; flex-wrap: wrap; gap: .55rem; padding: 1rem 0 .35rem; justify-content: center; }
+.play-toolbar { display: flex; flex-wrap: wrap; gap: .55rem; padding: 1.5rem 0 .35rem; justify-content: center; }
 .play-toolbar button, .restart-confirm button { min-height: 2.65rem; background: color-mix(in srgb, var(--paper-light) 86%, white); border: 1px solid var(--rule); border-radius: 2px; box-shadow: 0 2px 0 #1715121f; color: var(--ink); padding: .58rem 1rem; font: 600 .92rem/1.15 var(--body); cursor: pointer; transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
 .play-toolbar button:hover, .restart-confirm button:hover { background: var(--paper-dark); border-color: var(--ink-soft); box-shadow: 0 3px 0 #1715122b; transform: translateY(-1px); }
 .play-toolbar button:active, .restart-confirm button:active { box-shadow: none; transform: translateY(1px); }

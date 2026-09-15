@@ -11,6 +11,7 @@ const panels=mapContext.window.ABBOT_WELCOME_ROUTE.panels;
 const geometryPanels=mapContext.window.ABBOT_WELCOME_ROUTE.geometryPanels;
 assert.deepEqual(comparable(panels[0]),{scale:3.65,ox:666,oy:73});
 assert.notDeepEqual(comparable(geometryPanels[0]),comparable(panels[0]));
+current.setMapMode('print');
 let upperPoints=0;
 for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) {
   if(!row.route)continue;
@@ -46,7 +47,8 @@ for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) 
   });
 }
 assert.ok(changedUpperPoints>0 && changedGroundPoints>0,'Both upper and ground generated-map paths checked');
-const printUpper=load().cast(6,0).find(row=>row.route?.segments.some(segment=>segment.floor));
+const printModel=load(); printModel.setMapMode('print');
+const printUpper=printModel.cast(6,0).find(row=>row.route?.segments.some(segment=>segment.floor));
 const geometryUpper=current.cast(6,0).find(row=>row.id===printUpper.id);
 assert.notDeepEqual(comparable(geometryUpper.pathSegments),comparable(printUpper.pathSegments),'Upper-floor routes change with the selected map');
 current.setMapMode('print');
@@ -100,6 +102,13 @@ for(const [id,place,x,y] of [
   ['malaquias','shared',188,24],['berengario','shared',188,21],['jorge','shared',188,21],['bernardo','shared',188,21]
 ]) {
   assert.deepEqual(comparable(current.markerPosition(id,place,current.cast(4,3))),fixedGroundPosition(x,y),`${id} keeps the exact ${place} position`);
+}
+for(const [day,hour] of [[3,1],[3,2]]) {
+  const jorge=current.cast(day,hour).find(row=>row.id==='jorge');
+  const position=current.markerPosition('jorge','corridor',current.cast(day,hour));
+  const expected=fixedGroundPosition(200,36);
+  assert.deepEqual(comparable(position),expected,`Jorge Day-III ${hour===1?'Prime':'Terce'} uses the scripted presentation position`);
+  assert.equal(jorge.to,'corridor');
 }
 assert.deepEqual(comparable(current.markerPosition('malaquias','shared',current.cast(2,6))),comparable(current.markerPosition('malaquias','shared',current.cast(3,0))),'A stationary night position must not shift between phases');
 
@@ -275,6 +284,7 @@ const record={from:'desk',to:'desk',note:{es:'Prueba de tramos.',en:'Segment fix
   {floor:2,worldPoints:[[55,56,26],[56,56,26]]}
 ]};
 const injected=load({routes:{'2-4:malaquias':record,'4-4:berengario':record,'7-2:abad':record}});
+injected.setMapMode('print');
 const rows=injected.cast(2,4),journey=injected.movements(2,4,rows).find(m=>m.id==='malaquias');
 assert.equal(journey.segments.length,2);
 assert.equal(journey.path.length,4);

@@ -119,7 +119,7 @@
     malaquias: {church:[132,72,0],refectory:[47,55,0],shared:[188,24,0],severinus:[104,82,0]},
     berengario: {church:[140,72,0],refectory:[50,53,0],shared:[188,21,0],severinus:[104,87,0]},
     severino: {church:[140,75,0],refectory:[54,53,0],severinus:[104,85,0]},
-    jorge: {shared:[188,21,0]},
+    jorge: {corridor:[200,36,0],shared:[188,21,0]},
     bernardo: {church:[140,72,0],refectory:[50,53,0],shared:[188,21,0]}
   };
   // Reviewed reconstructed routes; all other phase transitions remain schematic.

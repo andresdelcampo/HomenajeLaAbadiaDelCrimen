@@ -71,7 +71,33 @@ start.addEventListener('click', async () => {
       MEDIA_CHANGE_DISABLED: true, JOYKEYS_MODE: -1, TOUCH_MODE: -1,
       SERVER_KEEPALIVE: 0
     });
+    const isRoutineOSD = message =>
+      typeof message === 'string' &&
+      /^(?:Drive [A-Z]:|Cassette:|AUTO: (?:PAL|NTSC) \d+Hz)/.test(message);
+    const hideRoutineOSD = () => {
+      const osd = document.querySelector('#wmsx-osd');
+      if (!osd || !isRoutineOSD(osd.textContent?.trim())) return;
+      osd.style.transition = 'none';
+      osd.style.top = '-29px';
+      osd.style.opacity = '0';
+    };
+    const osdObserver = new MutationObserver(hideRoutineOSD);
+    osdObserver.observe(document.querySelector('#wmsx-screen'), {
+      childList: true, subtree: true, characterData: true
+    });
     WMSX.start();
+    // The game already has its own visible tape/disk choice, so keep useful
+    // errors and controls but suppress WebMSX's routine startup descriptions.
+    const suppressMediaInsertionOSD = target => {
+      const showOSD = target.showOSD.bind(target);
+      target.showOSD = (message, ...args) => {
+        if (isRoutineOSD(message)) return;
+        return showOSD(message, ...args);
+      };
+    };
+    suppressMediaInsertionOSD(WMSX.room.screen);
+    suppressMediaInsertionOSD(WMSX.room.machine);
+    hideRoutineOSD();
     const poll = () => {
       if (failed) return;
       if (WMSX.room?.machine.powerIsOn && !WMSX.room.isLoading) {
