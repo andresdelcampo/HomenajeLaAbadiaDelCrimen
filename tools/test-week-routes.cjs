@@ -37,8 +37,8 @@ for(const [day,hour] of current.phases)for(const row of current.cast(day,hour)) 
     segment.worldPoints.forEach(([x,y],i)=>{
       const plotted=row.pathSegments[index][i];
       const expected=matrix
-        ? {x:(matrix[0]*x+matrix[2]*y+matrix[4])*100/1323,y:(matrix[1]*x+matrix[3]*y+matrix[5])*100/982}
-        : {x:(panel.ox-panel.scale*y)*100/1323,y:(panel.oy+panel.scale*x)*100/982};
+        ? {x:(matrix[0]*x+matrix[2]*y+matrix[4])*100/1323,y:(matrix[1]*x+matrix[3]*y+matrix[5])*100/882}
+        : {x:(panel.ox-panel.scale*y)*100/1323,y:(panel.oy+panel.scale*x)*100/882};
       assert.ok(Math.abs(plotted.x-expected.x)<1e-8,'Selected generated-map path X');
       assert.ok(Math.abs(plotted.y-expected.y)<1e-8,'Selected generated-map path Y');
       if(segment.floor)changedUpperPoints++;

@@ -157,7 +157,7 @@ for lang in ['es','en']:
     library='Library' if en else 'Biblioteca'
     subtitle='A plan drawn from the spaces of the game' if en else 'Un plano trazado desde los espacios del juego'
     note='Stone, courtyards and stairs · the original proportions' if en else 'Piedra, patios y escaleras · las proporciones originales'
-    svg=f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1323" height="982" viewBox="0 0 1323 982">
+    svg=f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1323" height="882" viewBox="0 0 1323 882">
 <title>La Abadía del Crimen · {main}</title>
 <desc>{subtitle}. {note}.</desc>
 <defs>
@@ -168,19 +168,19 @@ for lang in ['es','en']:
  <pattern id="grass" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="3" fill="#d0ccaa"/><path d="M.6 1.1l.3-.5.2.4M2 2.5l.2-.6.4.5" fill="none" stroke="#91916d" stroke-width=".12"/></pattern>
  <pattern id="shrubs" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height="3" fill="#a8ab87"/><path d="M0 1Q1 0 2 1T3 2M.5 2.5q1-1 2-.3" fill="none" stroke="#6a7251" stroke-width=".22"/></pattern>
 </defs>
-<image xlink:href="data:image/png;base64,{parchment_background}" width="1323" height="982" preserveAspectRatio="none"/>
-<g transform="translate(-205 685)">
+<image xlink:href="data:image/png;base64,{parchment_background}" width="1323" height="882" preserveAspectRatio="none"/>
+<g transform="translate(-205 651)">
  <text class="gregorian" x="661.5" y="87" text-anchor="middle" font-size="58">La Abadía del Crimen</text>
  <text x="661.5" y="116" text-anchor="middle" font-size="13" letter-spacing="2">{subtitle}</text>
  <path d="M452 135h162m95 0h162m-222-5l12 5-12 5m24-10l-12 5 12 5" fill="none" stroke="#937952" stroke-width="1"/>
 </g>
 {floors}
-<g transform="translate(820 760)" stroke="#725c3c" fill="none"><circle r="25" stroke-width=".8"/><circle r="21" stroke-width=".4"/><path d="M-34 0H34M0-34V34M-17-17L17 17M17-17L-17 17" stroke-width=".6"/><path d="M0 18L-5 0 0-27 5 0Z" fill="#725c3c" stroke-width=".5"/><text x="0" y="-43" text-anchor="middle" font-size="16" stroke="none">N</text></g>
-<text class="uncial" x="458" y="661" text-anchor="middle" font-size="24">{main}</text>
-<text class="uncial" x="1030" y="460" text-anchor="middle" font-size="22">Scriptorium</text>
-<text class="uncial" x="1040" y="865" text-anchor="middle" font-size="22">{library}</text>
-<path d="M884 473h292M894 878h292" stroke="#a28b61" stroke-width=".7"/>
-<text x="661.5" y="941" text-anchor="middle" font-size="12" font-style="italic">{note}</text>
+<g transform="translate(800 705)" stroke="#725c3c" fill="none"><circle r="25" stroke-width=".8"/><circle r="21" stroke-width=".4"/><path d="M-34 0H34M0-34V34M-17-17L17 17M17-17L-17 17" stroke-width=".6"/><path d="M0 18L-5 0 0-27 5 0Z" fill="#725c3c" stroke-width=".5"/><text x="0" y="-43" text-anchor="middle" font-size="16" stroke="none">N</text></g>
+<text class="uncial" x="458" y="627" text-anchor="middle" font-size="24">{main}</text>
+<text class="uncial" x="1030" y="396" text-anchor="middle" font-size="22">Scriptorium</text>
+<text class="uncial" x="1040" y="765" text-anchor="middle" font-size="22">{library}</text>
+<path d="M884 409h292M894 778h292" stroke="#a28b61" stroke-width=".7"/>
+<text x="661.5" y="841" text-anchor="middle" font-size="12" font-style="italic">{note}</text>
 </svg>'''
     (SITE / f'assets/maps/abbey-world-map-{lang}.svg').write_text(svg,encoding='utf-8')
     # Retain the mixed comparison artifact for development. The live explorer
@@ -201,6 +201,7 @@ assert max(abs(a[0]-b[0])+abs(a[1]-b[1])
 data['imageSize']=SIZE
 data['panels']=PRINT_PANELS
 data['geometryPanels']=PANELS
+data['geometryImageSize']=CONFIG['geometryImageSize']
 data['printAlignment']=CONFIG['sitePrint']
 data['upperFloorRegistration']=CONFIG['upperFloors']
 data['sampleCount']=len(data['worldPoints'])
