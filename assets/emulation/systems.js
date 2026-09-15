@@ -7,6 +7,18 @@ const spectrumKeyboardRemap = {
   ArrowRight: 'KeyL'
 };
 
+// The host frame follows the visible emulator surface, not one universal
+// browser aspect ratio. These include deliberately emulated borders.
+const frameDisplays = Object.freeze({
+  cpc: Object.freeze({ width: 4, height: 3, maxWidth: 704 }),
+  pc: Object.freeze({ width: 4, height: 3 }),
+  msxTape: Object.freeze({ width: 4, height: 3, maxWidth: 704 }),
+  msxDisk: Object.freeze({ width: 4, height: 3, maxWidth: 704 }),
+  spectrumTape: Object.freeze({ width: 352, height: 311, maxWidth: 704 }),
+  spectrumPlus3: Object.freeze({ width: 4, height: 3, maxWidth: 704 }),
+  pcw: Object.freeze({ width: 720, height: 512 })
+});
+
 export const systems = [{
   id: 'amstrad-cpc',
   name: {
@@ -18,6 +30,7 @@ export const systems = [{
     en: 'Amstrad CPC 6128 · 128K · Spanish game'
   },
   adapter: 'rvm-cpc',
+  display: frameDisplays.cpc,
   media: './media/abadia-cpc.dsk',
   cover: '../platforms/cpc/title-screen.png',
   command: '|cpm\n',
@@ -34,6 +47,7 @@ export const systems = [{
     en: 'Amstrad CPC 464/664 · 64K · Spanish game'
   },
   adapter: 'rvm-cpc',
+  display: frameDisplays.cpc,
   media: './media/abadia-cpc-64k.dsk',
   cover: '../platforms/cpc/title-screen.png',
   command: 'run"abadia64.bas"\n',
@@ -44,6 +58,7 @@ export const systems = [{
   name: { es: 'PC CGA · original', en: 'PC CGA · original' },
   idle: { es: 'PC CGA · Original · Español', en: 'PC CGA · Original · Spanish game' },
   adapter: 'dosbox',
+  display: frameDisplays.pc,
   player: 'pc-player.html',
   media: './media/abadia-pc.ima',
   cover: '../platforms/pc/title-screen.png',
@@ -53,6 +68,7 @@ export const systems = [{
   name: { es: 'PC CGA · pirata', en: 'PC CGA · pirate' },
   idle: { es: 'PC CGA · Pirata · Español', en: 'PC CGA · Pirate · Spanish game' },
   adapter: 'dosbox',
+  display: frameDisplays.pc,
   player: 'pc-player.html',
   media: './media/abadia-pc-pirata.ima',
   cover: '../platforms/pc/title-screen.png',
@@ -62,6 +78,7 @@ export const systems = [{
   name: { es: 'MSX · cinta', en: 'MSX · tape' },
   idle: { es: 'MSX · Cinta · Español', en: 'MSX · Tape · Spanish game' },
   adapter: 'webmsx',
+  display: frameDisplays.msxTape,
   player: 'msx-player.html',
   media: './media/abadia-msx.cas',
   mediaType: 'tape',
@@ -72,6 +89,7 @@ export const systems = [{
   name: { es: 'MSX · disco', en: 'MSX · disk' },
   idle: { es: 'MSX · Español', en: 'MSX · Spanish game' },
   adapter: 'webmsx',
+  display: frameDisplays.msxDisk,
   player: 'msx-player.html',
   media: './media/abadia-msx.dsk',
   cover: '../platforms/msx/title-screen.png',
@@ -87,6 +105,7 @@ export const systems = [{
     en: 'ZX Spectrum 128K · original tape · Spanish game'
   },
   adapter: 'zxm8-spectrum-tape',
+  display: frameDisplays.spectrumTape,
   player: 'spectrum-tape-player.html',
   media: './media/abadia-spectrum-original.tzx',
   cover: '../platforms/spectrum/title-screen.png',
@@ -106,6 +125,7 @@ export const systems = [{
     en: 'ZX Spectrum 128K · MCM tape · Spanish game'
   },
   adapter: 'zxm8-spectrum-tape',
+  display: frameDisplays.spectrumTape,
   player: 'spectrum-tape-player.html',
   media: './media/abadia-spectrum-mcm.tzx',
   cover: '../platforms/spectrum/title-screen.png',
@@ -122,6 +142,7 @@ export const systems = [{
     en: 'ZX Spectrum +3 · 128K · Spanish game'
   },
   adapter: 'rvm-spectrum-plus3',
+  display: frameDisplays.spectrumPlus3,
   media: './media/abadia-spectrum-plus3.dsk',
   cover: '../platforms/spectrum/title-screen.png',
   command: '\n',
@@ -135,6 +156,7 @@ export const systems = [{
   name: { es: 'Amstrad PCW 8256 · Habisoft 1.2', en: 'Amstrad PCW 8256 · Habisoft 1.2' },
   idle: { es: 'Amstrad PCW · Habisoft 1.2 · Español', en: 'Amstrad PCW · Habisoft 1.2 · Spanish game' },
   adapter: '1985',
+  display: frameDisplays.pcw,
   player: 'pcw-player.html',
   media: './media/abadia-pcw.dsk',
   cover: './1985/title-screen.png',

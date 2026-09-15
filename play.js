@@ -1,4 +1,4 @@
-import { systems } from './assets/emulation/systems.js?v=20260915-spectrum-tape4';
+import { systems } from './assets/emulation/systems.js?v=20260915-frame8';
 
 const es = document.documentElement.lang === 'es';
 const select = document.querySelector('#play-system');
@@ -64,6 +64,27 @@ function updateFullscreenControl() {
 function updateBootTuning() {
   bootTuning.hidden = !bootTuningEnabled || select.value !== spectrumId;
 }
+function updateDisplayFrame(system) {
+  const display = system.display || { width: 4, height: 3, accent: '#b08342' };
+  screen.dataset.system = system.id;
+  screen.style.setProperty('--play-aspect', `${display.width} / ${display.height}`);
+  screen.style.setProperty('--play-max-width', `${display.maxWidth || 860}px`);
+  screen.dataset.playRatio = String(display.width / display.height);
+}
+function resizeFullscreenFrame() {
+  if (!document.fullscreenElement || !frame) {
+    frame?.style.removeProperty('width');
+    frame?.style.removeProperty('height');
+    return;
+  }
+  const ratio = Number(screen.dataset.playRatio) || 4 / 3;
+  const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const width = Math.min(viewportWidth, viewportHeight * ratio);
+  const height = width / ratio;
+  frame.style.width = `${Math.floor(width)}px`;
+  frame.style.height = `${Math.floor(height)}px`;
+}
 function mount() {
   active = false;
   paused = false;
@@ -74,16 +95,18 @@ function mount() {
   mute.textContent = copy.mute;
   mute.setAttribute('aria-pressed', 'false');
   status.textContent = copy.idle;
+  const system = systems.find(item => item.id === select.value);
+  updateDisplayFrame(system);
   const next = document.createElement('iframe');
   next.title = copy.frame;
   next.allow = 'autoplay; fullscreen; gamepad';
-  const system = systems.find(item => item.id === select.value);
   const url = new URL(`../assets/emulation/${system.player || 'player.html'}`, location.href);
-  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260915-fullscreen3' });
+  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260915-frame8' });
   if (select.value === spectrumId) url.searchParams.set('warpFrames', bootFrames.value);
   next.src = url.href;
   frame = next;
   screen.replaceChildren(next); // Removing the old browsing context stops audio/workers.
+  resizeFullscreenFrame();
 }
 mount();
 updateBootTuning();
@@ -182,7 +205,9 @@ fullscreen.addEventListener('click', async () => {
 });
 document.addEventListener('fullscreenchange', () => {
   fullscreen.textContent = document.fullscreenElement ? copy.exit : copy.full;
+  resizeFullscreenFrame();
   updateFullscreenControl();
   send('fullscreen', { value: Boolean(document.fullscreenElement) });
 });
+window.addEventListener('resize', resizeFullscreenFrame);
 document.addEventListener('visibilitychange', () => { if (document.hidden) send('pause'); });

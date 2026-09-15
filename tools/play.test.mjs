@@ -9,7 +9,10 @@ const source = readFileSync(new URL('../play.js', import.meta.url), 'utf8').repl
 function host({ search = '', storedFrames = null, lang = 'en' } = {}) {
   const listeners = new Map();
   class Element {
-    constructor() { this.events = new Map(); this.children = []; this.attributes = {}; this.value = ''; }
+    constructor() {
+      this.events = new Map(); this.children = []; this.attributes = {}; this.dataset = {}; this.value = '';
+      this.style = { setProperty: (name, value) => { this.style[name] = value; }, removeProperty: name => { delete this.style[name]; } };
+    }
     addEventListener(name, callback) { this.events.set(name, callback); }
     fire(name, event = { preventDefault() {} }) { return this.events.get(name)?.(event); }
     requestFullscreen() {
@@ -47,7 +50,7 @@ function host({ search = '', storedFrames = null, lang = 'en' } = {}) {
   const localStorage = { getItem() { return storedFrames; }, setItem(_key, value) { storedFrames = value; } };
   runInNewContext(source, {
     document, location, localStorage, systems, URL, URLSearchParams,
-    window: { addEventListener: (name, callback) => listeners.set(name, callback) }
+    window: { innerWidth: 1280, innerHeight: 720, addEventListener: (name, callback) => listeners.set(name, callback) }
   });
   const frame = () => element('.play-screen').children[0];
   const report = (type, extra = {}, origin = location.origin, sender = frame().contentWindow) => listeners.get('message')({
@@ -60,8 +63,25 @@ test('nested deployment paths resolve to local media/player and controls start d
   const h = host();
   assert.equal(new URL(h.frame().src).pathname, '/tribute/assets/emulation/player.html');
   assert.equal(new URL(h.frame().src).searchParams.get('system'), 'amstrad-cpc');
-  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260915-fullscreen3');
+  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260915-frame8');
   assert.equal(h.element('[data-play="pause"]').disabled, true);
+});
+
+test('the host frame follows the selected display shape', () => {
+  const spectrum = host({ search: '?system=zx-spectrum-original-tape' });
+  assert.equal(spectrum.element('.play-screen').dataset.playRatio, String(352 / 311));
+  assert.equal(spectrum.element('.play-screen').style['--play-max-width'], '704px');
+  const cpc = host({ search: '?system=amstrad-cpc' });
+  assert.equal(cpc.element('.play-screen').style['--play-max-width'], '704px');
+  const msx = host({ search: '?system=msx-tape' });
+  assert.equal(msx.element('.play-screen').style['--play-max-width'], '704px');
+  const msxDisk = host({ search: '?system=msx' });
+  assert.equal(msxDisk.element('.play-screen').style['--play-max-width'], '704px');
+  const spectrumPlus3 = host({ search: '?system=zx-spectrum-plus3' });
+  assert.equal(spectrumPlus3.element('.play-screen').style['--play-max-width'], '704px');
+  const pcw = host({ search: '?system=amstrad-pcw' });
+  assert.equal(pcw.element('.play-screen').dataset.playRatio, String(720 / 512));
+  assert.equal(pcw.element('.play-screen').style['--play-max-width'], '860px');
 });
 
 test('CPC startup warp stops on the title screen instead of entering the manuscript', () => {
