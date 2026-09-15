@@ -2046,6 +2046,9 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .remakes-chapter .chapter-header { grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); align-items: start; gap: clamp(2.5rem, 5vw, 6rem); margin-bottom: clamp(3rem, 4vw, 4.5rem); }
 .remakes-chapter h2 { max-width: 900px; font-size: clamp(3.5rem, 5.4vw, 5.6rem); }
 .remakes-chapter .chapter-intro { margin-top: 2rem; }
+.remake-play-note { display: grid; grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; margin-bottom: clamp(2.5rem, 4vw, 4rem); padding: 1.35rem 0; border-top: 1px solid rgba(26,23,19,.28); border-bottom: 1px solid rgba(26,23,19,.28); }
+.remake-play-note h3 { margin: .65rem 0 0; font: 400 clamp(1.9rem, 3.2vw, 3.1rem)/.95 var(--display); }
+.remake-play-note p { margin: 0; color: var(--ink-soft); line-height: 1.65; }
 .remake-feature { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 4vw, 4.5rem); align-items: start; }
 .remake-feature .prose { max-width: none; }
 .remake-feature h3, .extensum-feature h3 { margin: .8rem 0 1rem; font: 400 clamp(2.5rem, 4.25vw, 4.25rem)/.92 var(--display); }
@@ -2594,7 +2597,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
   .press-cover-stack { min-height: 480px; }
   .press-grid { grid-template-columns: 1fr 1fr; }
   .press-card:nth-child(n) { transform: none; }
-  .remake-feature, .extensum-feature { grid-template-columns: 1fr; }
+  .remake-play-note, .remake-feature, .extensum-feature { grid-template-columns: 1fr; }
   .remakes-chapter .chapter-header { grid-template-columns: 1fr; }
   .remakes-chapter .chapter-intro { margin-top: 0; }
   .extensum-visual-stack { padding-right: 1.6rem; padding-bottom: clamp(12rem, 48vw, 17rem); }

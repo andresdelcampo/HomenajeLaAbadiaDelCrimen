@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Enter the abbey. The Amstrad CPC and ZX Spectrum editions, with their graphics, sounds and the rhythm of their seven days.">
+  <meta name="description" content="Enter the abbey. The Amstrad CPC, PCW, MSX, PC CGA and ZX Spectrum editions, with their graphics, sounds and the rhythm of their seven days.">
   <title>Play in your browser · La Abadía del Crimen</title>
   <link rel="icon" type="image/png" href="../assets/game/guillermo-favicon.png">
   <link rel="stylesheet" href="../styles.css?v=20260912-guidecard1">
@@ -30,12 +30,12 @@
   <header class="play-masthead" id="inicio">
     <p class="eyebrow">The abbey, in your hands</p>
     <h1>Play in your browser</h1>
-    <p>Enter the abbey. The Amstrad CPC and ZX Spectrum editions, with their graphics, sounds and the rhythm of their seven days.</p>
+    <p>Enter the abbey. The Amstrad CPC, PCW, MSX, PC CGA and ZX Spectrum editions, with their graphics, sounds and the rhythm of their seven days.</p>
   </header>
   <main class="play-layout" id="contenido">
     <div class="play-heading">
       <label for="play-system">System <select id="play-system"></select></label>
-      <p>Three playable editions · CPC 128K, CPC 64K and ZX Spectrum +3</p>
+      <p>Ten playable editions · CPC 64K, CPC 128K, PCW, MSX disk and tape, original and pirate PC CGA, Spectrum original and MCM tapes, and ZX Spectrum +3</p>
     </div>
     <div class="play-screen"></div>
     <noscript><p>Enable JavaScript to play in your browser.</p></noscript>
@@ -68,15 +68,18 @@
       <section aria-labelledby="play-notes-title">
         <h2 id="play-notes-title">Before you enter</h2>
         <p>Use a computer with a keyboard and an up-to-date browser. This player is not ready for phones or tablets.</p>
-        <p>The disk loads automatically. The game is in Spanish, including when you view this page in English.</p>
+        <p>Each selected disk or tape loads automatically. The game is in Spanish, including when you view this page in English.</p>
         <p>The 64K edition is the CPC 464/664 version, with a reduced abbey made to fit those machines. Here it runs under the compatible CPC 6128 emulation available in RVMPlayer.</p>
-        <p>The ZX Spectrum edition is the 128K port preserved on MCM Software's Spectrum +3 disk re-release.</p>
+        <p>MSX tape uses black and yellow; MSX disk uses blue and yellow. Tape loading is accelerated automatically. <a href="https://computeremuzone.com/ficha/166/la-abadia-del-crimen?sec=msx">Source</a>.</p>
+        <p>The ZX Spectrum entries include the original 128K tape release, the MCM Software tape re-release, and MCM's Spectrum +3 disk re-release. The tape entries retain their original TZX loaders.</p>
         <p>On Spectrum, the arrow keys are translated internally to the original A, Z, K and L keys. You can also use those four keys directly.</p>
+        <p>PC CGA offers the two preserved disk images: <strong>original</strong> and <strong>pirate</strong>. At boot, choose <kbd>F1</kbd> for a colour monitor or <kbd>F2</kbd> for a monochrome monitor.</p>
         <p>Leaving the game screen pauses play. Your progress is not saved when you close or reload the page.</p>
+        <p>PCW uses Habisoft’s conversion, version 1.2, on a PCW 8256 with a green display and the DK’tronics sound expansion. <a href="https://www.habisoft.com/">Habisoft</a>.</p>
         <p><a href="game.html">Explore the game →</a></p>
       </section>
     </div>
-    <p class="play-credit">Emulation: <a href="https://retrovirtualmachine.org/rvmplayer/">RVMPlayer 0.1.1</a> · Juan Carlos González Amestoy · <a href="../assets/emulation/rvmplayer/LICENSE.txt">BSD-3-Clause</a>. Game: Opera Soft, 1987 · Paco Menéndez &amp; Juan Delcán.</p>
+    <p class="play-credit">Emulation: <a href="https://retrovirtualmachine.org/rvmplayer/">RVMPlayer 0.1.1</a> · Juan Carlos González Amestoy · <a href="../assets/emulation/rvmplayer/LICENSE.txt">BSD-3-Clause</a>; PC CGA with <a href="../assets/emulation/js-dos/LICENSE.txt">js-dos emulators 8.4.2</a> · GPL-2.0; MSX with <a href="https://github.com/ppeccin/WebMSX">WebMSX 6.0.8</a> · Paulo Augusto Peccin; Spectrum tapes with <a href="https://github.com/Bedazzle/ZX-M8XXX">ZX-M8XXX 0.16.3</a> · GPL-3.0; PCW with <a href="https://github.com/salvogendut/1985">1985 0.4.10</a> · <a href="../assets/emulation/1985/LICENSE.txt">GPL-2.0</a> · <a href="../assets/emulation/1985/source-v0.4.10.zip">Source</a>. Game: Opera Soft, 1987 · Paco Menéndez &amp; Juan Delcán.</p>
   </main>
 
   <nav class="page-pagination" aria-label="Continue reading">
@@ -89,6 +92,6 @@
     <div class="footer-labyrinth" aria-hidden="true"><img src="../assets/maps/library-labyrinth-plan.png" alt=""></div>
   </footer>
   <script src="../app.js?v=20260912-spoilers1"></script>
-  <script type="module" src="../play.js?v=20260914-21"></script>
+  <script type="module" src="../play.js?v=20260915-fullscreen3"></script>
 </body>
 </html>

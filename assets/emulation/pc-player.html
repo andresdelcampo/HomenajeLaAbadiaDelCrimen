@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La AbadÃƒÆ’Ã‚Â­a del Crimen Ãƒâ€šÃ‚Â· PC CGA</title>
+  <link rel="stylesheet" href="player.css?v=20260914-2">
+  <style>
+    #machine { display: grid; place-items: center; background: #000; }
+    /* The host reserves a 4:3 CRT viewport; stretch CGA's 320x200 pixels to
+       that display shape instead of adding a second set of letterbox bars. */
+    canvas { width: 100%; height: 100%; object-fit: fill; image-rendering: pixelated; }
+    canvas:focus { outline: none; }
+  </style>
+</head>
+<body>
+  <div id="machine"><canvas tabindex="0"></canvas></div>
+  <div id="cover">
+    <img id="cover-image" src="../platforms/pc/title-screen.png" alt="" draggable="false">
+    <div class="launch-panel">
+      <button id="start" type="button">Jugar</button>
+      <p id="status" role="status">PC CGA</p>
+    </div>
+  </div>
+  <script type="module" src="pc-player.js?v=20260915-xt1"></script>
+</body>
+</html>

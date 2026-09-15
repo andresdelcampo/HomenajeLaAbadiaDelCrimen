@@ -36,7 +36,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
 ### Qué puedes hacer
 
-- **Jugar en el navegador.** Como extra, [Jugar](es/jugar.html) ofrece las dos ediciones Amstrad CPC —la abadía completa de 128K y la reducida de 64K— y el port de 128K para ZX Spectrum +3, con carga automática, pausa y pantalla completa. Para ordenador con teclado; el juego está en español.
+- **Jugar en el navegador.** Como extra, [Jugar](es/jugar.html) ofrece la imagen original y la pirata de PC CGA, las dos ediciones Amstrad CPC —la abadía completa de 128K y la reducida de 64K—, la conversión PCW de Habisoft, las ediciones MSX en cinta y disco, las cintas original y MCM de ZX Spectrum 128K y la reedición en disco para Spectrum +3, con carga automática, pausa y pantalla completa. Para ordenador con teclado; el juego está en español.
 
 - **Recorrer la abadía estancia a estancia.** El atlas sitúa 93 estancias en su posición real: 61 en la planta principal, 16 en el scriptorium y 16 en la biblioteca. Puedes abrir cualquiera a tamaño completo, desplazarte espacialmente a las contiguas con teclado, controles en pantalla o gestos, alternar día y noche y comparar CPC, ZX Spectrum, MSX, PC CGA y el remake PC VGA. Y, como extra, el capítulo de [Legado](es/legado.html#extensum) abre el mapa ampliado de *Extensum*: 140 estancias cartografiadas, distribuidas por plantas y explorables de día y de noche.
 - **Construir una estancia desde el principio hasta el último píxel.** La demostración interactiva de la estancia 17 reproduce sus 32 colocaciones una a una, aísla la receta arquitectónica activa y explica qué tiles y celdas modifica. Una segunda fase sigue la copia documentada de las 320 celdas visibles a la pantalla CGA. Todo puede avanzarse manualmente o reproducirse, de día y de noche.
@@ -65,7 +65,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
 
 ### What you can do
 
-- **Play in your browser.** As a bonus, [Play](en/play.html) offers both Amstrad CPC editions—the complete 128K abbey and the reduced 64K version—and the 128K ZX Spectrum +3 port, with automatic loading, pause and full screen. For computers with a keyboard; the game is in Spanish.
+- **Play in your browser.** As a bonus, [Play](en/play.html) offers the original and pirate PC CGA disk images, both Amstrad CPC editions—the complete 128K abbey and the reduced 64K version—, Habisoft’s PCW conversion, the MSX tape and disk editions, the original and MCM ZX Spectrum 128K tapes, and the Spectrum +3 disk re-release, with automatic loading, pause and full screen. For computers with a keyboard; the game is in Spanish.
 
 - **Explore the abbey room by room.** The atlas places 93 rooms in their real positions: 61 on the main floor, 16 in the scriptorium, and 16 in the library. Open any room at full size, move spatially to its neighbours with the keyboard, on-screen controls, or gestures, switch between day and night, and compare CPC, ZX Spectrum, MSX, PC CGA, and the PC VGA remake. As a bonus, the [Legacy](en/legacy.html#extensum) chapter opens *Extensum*'s expanded map: 140 mapped rooms across its floors, explorable by day and night.
 - **Build a room from its first instruction to its final pixel.** The interactive room-17 demonstration replays all 32 placements, isolates the active architectural recipe, and explains which tiles and cells it changes. A second phase follows the documented transfer of all 320 visible cells to the CGA screen. Step through it manually or press play, by day or by night.

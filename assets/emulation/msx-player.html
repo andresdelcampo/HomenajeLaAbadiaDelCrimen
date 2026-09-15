@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Abadía del Crimen · MSX</title>
+  <link rel="stylesheet" href="player.css?v=20260914-2">
+  <style>
+    #machine { display: flex; align-items: center; justify-content: center; }
+    html.wmsx-full-screen #wmsx-screen-fs-center { display: grid; place-items: center; }
+    #wmsx-screen { border: 0 !important; }
+    #wmsx-bar { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="machine"><div id="wmsx-screen"></div></div>
+  <div id="cover">
+    <img id="cover-image" src="../platforms/msx/title-screen.png" alt="" draggable="false">
+    <div class="launch-panel">
+      <button id="start" type="button">Jugar</button>
+      <p id="status" role="status">MSX · Español</p>
+    </div>
+  </div>
+  <script type="module" src="msx-player.js?v=20260915-msx3"></script>
+</body>
+</html>

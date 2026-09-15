@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Abadía del Crimen · Amstrad PCW</title>
+  <link rel="stylesheet" href="player.css?v=20260914-2">
+  <style>
+    #machine { display: flex; align-items: center; justify-content: center; }
+    canvas { width: 100%; height: 100%; object-fit: contain; aspect-ratio: 720 / 512; image-rendering: pixelated; }
+    @media (max-height: 350px) { .launch-panel { bottom: 16%; } }
+  </style>
+</head>
+<body>
+  <div id="machine"><canvas id="screen" width="720" height="512" tabindex="0" aria-label="Amstrad PCW"></canvas></div>
+  <div id="cover">
+    <img src="1985/title-screen.png" alt="" draggable="false">
+    <div class="launch-panel">
+      <button id="start" type="button">Jugar</button>
+      <p id="status" role="status">Amstrad PCW · Habisoft 1.2</p>
+    </div>
+  </div>
+  <script type="module" src="pcw-player.js?v=20260915-pcw1"></script>
+</body>
+</html>

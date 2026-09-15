@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Abadía del Crimen · Spectrum tape</title>
+  <link rel="stylesheet" href="player.css?v=20260915-spectrum-tape4">
+  <style>
+    #machine { display:grid; place-items:center; background:#080b10; }
+    #machine canvas { width:min(100%, 768px); height:auto; max-height:100%; object-fit:contain; image-rendering:pixelated; outline:none; }
+    html.host-fullscreen #machine canvas { max-width:none; max-height:none; }
+  </style>
+</head>
+<body>
+  <div id="machine"><canvas id="screen" tabindex="0"></canvas></div>
+  <div id="cover">
+    <img id="cover-image" src="../platforms/spectrum/title-screen.png" alt="" draggable="false">
+    <div class="launch-panel">
+      <button id="start" type="button">Jugar</button>
+      <p id="status" role="status">ZX Spectrum 128K · cinta · Español</p>
+    </div>
+  </div>
+  <script src="pako.min.js"></script>
+  <script type="module" src="spectrum-tape-player.js?v=20260915-spectrum-tape6"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import { systems } from './assets/emulation/systems.js?v=20260914-12';
+import { systems } from './assets/emulation/systems.js?v=20260915-spectrum-tape4';
 
 const es = document.documentElement.lang === 'es';
 const select = document.querySelector('#play-system');
@@ -32,6 +32,8 @@ let frame;
 let paused = false;
 let active = false;
 let pointerPauseAction;
+let pointerMuteWasPaused;
+let pointerFullscreenWasPaused;
 const spectrumId = 'zx-spectrum-plus3';
 // Keep the tuning control ready for future systems without exposing it now.
 const bootTuningEnabled = false;
@@ -46,10 +48,11 @@ for (const system of systems) {
   select.append(option);
 }
 const requested = new URLSearchParams(location.search).get('system');
+select.value = 'amstrad-cpc';
 if (systems.some(system => system.id === requested)) select.value = requested;
 
-function send(action) {
-  frame?.contentWindow.postMessage({ source: 'abbey-host', action }, location.origin);
+function send(action, extra = {}) {
+  frame?.contentWindow.postMessage({ source: 'abbey-host', action, ...extra }, location.origin);
 }
 function showRestartConfirmation(show) {
   confirmation.hidden = !show;
@@ -70,8 +73,9 @@ function mount() {
   const next = document.createElement('iframe');
   next.title = copy.frame;
   next.allow = 'autoplay; fullscreen; gamepad';
-  const url = new URL('../assets/emulation/player.html', location.href);
-  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260914-20' });
+  const system = systems.find(item => item.id === select.value);
+  const url = new URL(`../assets/emulation/${system.player || 'player.html'}`, location.href);
+  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260915-fullscreen3' });
   if (select.value === spectrumId) url.searchParams.set('warpFrames', bootFrames.value);
   next.src = url.href;
   frame = next;
@@ -110,6 +114,7 @@ window.addEventListener('message', event => {
     mute.textContent = data.muted ? copy.sound : copy.mute;
     mute.setAttribute('aria-pressed', String(data.muted));
     status.textContent = paused ? copy.paused : copy.running;
+    if (data.type === 'running') send('fullscreen', { value: Boolean(document.fullscreenElement) });
   }
   if (data.type === 'escape-focus') {
     if (document.fullscreenElement) document.exitFullscreen().then(() => pause.focus());
@@ -126,7 +131,20 @@ pause.addEventListener('click', () => {
   if (action === 'resume') frame.focus();
   send(action);
 });
-mute.addEventListener('click', () => send('mute'));
+// Sound controls also move focus out of the frame. Remember whether the game
+// was running before that focus loss so changing sound does not pause it.
+mute.addEventListener('pointerdown', event => {
+  // Keep focus in the emulator frame; its blur handler pauses the machine.
+  event.preventDefault();
+  pointerMuteWasPaused = paused;
+});
+mute.addEventListener('pointercancel', () => { pointerMuteWasPaused = undefined; });
+mute.addEventListener('click', () => {
+  const wasPaused = pointerMuteWasPaused ?? paused;
+  pointerMuteWasPaused = undefined;
+  send('mute');
+  if (!wasPaused) send('resume');
+});
 restart.addEventListener('click', () => {
   send('pause');
   showRestartConfirmation(true);
@@ -140,14 +158,24 @@ cancelRestart.addEventListener('click', () => {
   pause.focus();
 });
 fullscreen.disabled = !document.fullscreenEnabled;
+fullscreen.addEventListener('pointerdown', event => {
+  // Keep focus in the emulator frame; its blur handler pauses the machine.
+  event.preventDefault();
+  pointerFullscreenWasPaused = paused;
+});
+fullscreen.addEventListener('pointercancel', () => { pointerFullscreenWasPaused = undefined; });
 fullscreen.addEventListener('click', async () => {
+  const wasPaused = pointerFullscreenWasPaused ?? paused;
+  pointerFullscreenWasPaused = undefined;
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
     else await screen.requestFullscreen();
     frame.focus();
+    if (!wasPaused) send('resume');
   } catch (_) { status.textContent = copy.fullscreenError; }
 });
 document.addEventListener('fullscreenchange', () => {
   fullscreen.textContent = document.fullscreenElement ? copy.exit : copy.full;
+  send('fullscreen', { value: Boolean(document.fullscreenElement) });
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden) send('pause'); });
