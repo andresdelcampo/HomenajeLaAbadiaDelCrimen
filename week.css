@@ -56,6 +56,7 @@
 .week-map-style button { font: .75rem var(--mono); padding: .45rem .7rem; color: var(--ink); background: var(--paper-light); border: 1px solid var(--rule); cursor: pointer; }
 .week-map-style button[aria-pressed="true"] { background: #e4d3ad; color: var(--ink); border-color: var(--ink-soft); }
 .week-map { position: relative; min-width: 620px; isolation: isolate; }
+.week-map-crop { overflow: hidden; min-width: 620px; }
 .week-map > img { width: 100%; }
 .week-map--aligned { overflow: hidden; }
 .week-map svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }

@@ -441,7 +441,22 @@
   function renderMap() {
     const rows = cast(day,hour), pins = find('[data-week-pins]'), roster = find('.week-roster');
     const mapImage=find('.week-map > img');
+    const map=mapImage.parentElement;
     const mode=routeMapMode(), traced=rows.some(row=>row.path);
+    // Crop after artwork rotation. Moving the complete map keeps all overlay
+    // coordinates aligned; percentages scale the 50 source pixels with width.
+    if (mode==='print') {
+      if (!map.parentElement.classList.contains('week-map-crop')) {
+        const crop=document.createElement('div');
+        crop.className='week-map-crop';
+        map.before(crop);
+        crop.append(map);
+      }
+      map.style.marginTop=`${-100*50/welcomeData.imageSize[0]}%`;
+    } else {
+      map.style.marginTop='';
+      if (map.parentElement.classList.contains('week-map-crop')) map.parentElement.replaceWith(map);
+    }
     mapIntro.textContent=traced?t('Las líneas continuas muestran recorridos reconstruidos con el código del juego; las discontinuas conectan destinos aproximados. Selecciona un retrato para destacar al personaje. En móvil, desliza el mapa horizontalmente.','Solid lines show routes reconstructed from the game code; dashed lines connect approximate destinations. Select a portrait to highlight a character. On mobile, scroll the map sideways.'):schematicIntro;
     mapCaption.textContent=traced?t('Mapa de MicroHobby reproducido por Retro Gamer España 41, ajustado al recorrido reconstruido con VigasocoSDL. Círculo vacío: inicio · retrato: destino. Las imperfecciones del dibujo impreso dejan pequeñas diferencias de alineación. No se simulan las colisiones con otros personajes ni con las hojas de las puertas.','MicroHobby map reproduced by Retro Gamer España 41, aligned to the route reconstructed with VigasocoSDL. Empty circle: start · portrait: destination. Imperfections in the printed drawing leave small alignment differences. Collisions with other characters and door leaves are not simulated.'):schematicCaption;
     if (mode==='geometry') mapCaption.textContent=t('Plano reconstruido con las alturas del juego. Sus plantas superiores recuperan la orientación de la planta principal, en lugar del giro de 180° del mapa impreso. Las zonas bloqueadas simplifican la arquitectura visible. Círculo vacío: inicio · retrato: destino. Los recorridos no simulan las colisiones con otros personajes ni con las hojas de las puertas.','Plan reconstructed from the game’s floor heights. Its upper floors restore the main floor’s orientation instead of retaining the printed map’s 180° turn. Blocked areas simplify the visible architecture. Empty circle: start · portrait: destination. Routes omit collisions with other characters and door leaves.');
