@@ -13,3 +13,7 @@ button:disabled { cursor: wait; opacity: .75; }
 /* The host provides accessible, translated controls and engine attribution. */
 .rvmBar, .rvmLogo { display: none !important; }
 .rvmContainer { width: 100% !important; height: 100% !important; }
+/* The host exposes the attribution outside the frame. Keeping RVM's hidden
+   about panel in the tab order lets Shift+Tab focus its off-screen link and
+   horizontally scroll the game surface. */
+.rvmAboutBackground { display: none !important; }

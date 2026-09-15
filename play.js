@@ -101,7 +101,7 @@ function mount() {
   next.title = copy.frame;
   next.allow = 'autoplay; fullscreen; gamepad';
   const url = new URL(`../assets/emulation/${system.player || 'player.html'}`, location.href);
-  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260915-frame8' });
+  url.search = new URLSearchParams({ system: select.value, lang: es ? 'es' : 'en', v: '20260915-focusfix2' });
   if (select.value === spectrumId) url.searchParams.set('warpFrames', bootFrames.value);
   next.src = url.href;
   frame = next;

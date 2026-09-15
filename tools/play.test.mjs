@@ -63,7 +63,7 @@ test('nested deployment paths resolve to local media/player and controls start d
   const h = host();
   assert.equal(new URL(h.frame().src).pathname, '/tribute/assets/emulation/player.html');
   assert.equal(new URL(h.frame().src).searchParams.get('system'), 'amstrad-cpc');
-  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260915-frame8');
+  assert.equal(new URL(h.frame().src).searchParams.get('v'), '20260915-focusfix2');
   assert.equal(h.element('[data-play="pause"]').disabled, true);
 });
 
