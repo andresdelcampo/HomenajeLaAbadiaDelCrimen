@@ -36,9 +36,8 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
 ### Qué puedes hacer
 
-- **Jugar en el navegador.** Diez ediciones preservadas, cargadas directamente en tu navegador.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Ver las ediciones y los detalles del reproductor</summary>
+- <details>
+  <summary><strong>Jugar en el navegador.</strong> Diez ediciones preservadas, cargadas directamente en tu navegador. <a href="es/jugar.html">Ver las ediciones y los detalles del reproductor</a></summary>
 
   ![Reproductor del juego en el navegador](assets/readme/preview-player.png)
 
@@ -58,63 +57,56 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   Cada disco o cinta se carga automáticamente y el reproductor incluye pausa, silencio, reinicio y pantalla completa. Está pensado para ordenadores con teclado; el juego está en español y la partida no se guarda al cerrar o recargar la página. La edición CPC de 64K se ejecuta mediante la emulación compatible de CPC 6128 en RVMPlayer.
   </details>
 
-- **Recorrer la abadía.** Las 93 estancias aparecen en su lugar real: explora plantas, luz y versiones.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre el atlas</summary>
+- <details>
+  <summary><strong>Recorrer la abadía.</strong> Las 93 estancias aparecen en su lugar real: explora plantas, luz y versiones. <a href="es/legado.html#extensum">Conocer más sobre el atlas</a></summary>
 
   ![Atlas de las estancias de la abadía](assets/readme/preview-room-atlas-cropped.png)
 
   El atlas sitúa 93 estancias en su posición real: 61 en la planta principal, 16 en el scriptorium y 16 en la biblioteca. Puedes abrir cualquiera a tamaño completo, desplazarte espacialmente a las contiguas con teclado, controles en pantalla o gestos, alternar día y noche y comparar CPC, ZX Spectrum, MSX, PC CGA y el remake PC VGA. El mapa ampliado de *Extensum* añade 140 estancias cartografiadas, distribuidas por plantas y explorables de día y de noche.
   </details>
 
-- **Ver nacer una estancia.** Sigue sus 32 colocaciones y el viaje de cada píxel hasta la pantalla.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre la reconstrucción</summary>
+- <details>
+  <summary><strong>Ver nacer una estancia.</strong> Sigue sus 32 colocaciones y el viaje de cada píxel hasta la pantalla. <a href="es/graficos.html#estancia">Conocer más sobre la reconstrucción</a></summary>
 
   ![Reconstrucción paso a paso de una estancia](assets/readme/preview-room-construction-cropped.png)
 
   La demostración interactiva de la estancia 17 reproduce sus 32 colocaciones una a una, aísla la receta arquitectónica activa y explica qué teselas gráficas (tiles) y celdas modifica. Una segunda fase sigue la copia documentada de las 320 celdas visibles a la pantalla CGA. Todo puede avanzarse manualmente o reproducirse, de día y de noche.
   </details>
 
-- **Leer los pergaminos.** Cada letra aparece trazo a trazo, con sus pausas y su música.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre los manuscritos</summary>
+- <details>
+  <summary><strong>Leer los pergaminos.</strong> Cada letra aparece trazo a trazo, con sus pausas y su música. <a href="es/juego.html#manuscrito">Conocer más sobre los manuscritos</a></summary>
 
   ![Manuscrito reconstruido trazo a trazo](assets/readme/preview-manuscript-cropped.png)
 
   No son textos que simplemente aparecen: cada letra se traza píxel a píxel, con sus pausas y pasos de página. Los controles permiten reproducir, pausar, completar la página, reiniciar y cambiar la velocidad. La versión gráfica seleccionada transforma el manuscrito y activa su música correspondiente en CPC, ZX Spectrum, MSX, PC CGA o VGA.
   </details>
 
-- **Seguir los siete días.** 41 momentos documentados, personajes en movimiento y secretos protegidos por spoilers.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre la semana</summary>
+- <details>
+  <summary><strong>Seguir los siete días.</strong> 41 momentos documentados, personajes en movimiento y secretos protegidos por spoilers. <a href="es/juego.html#semana">Conocer más sobre la semana</a></summary>
 
   ![Explorador de los siete días](assets/readme/preview-seven-days-cropped.png)
 
   El explorador recorre 41 momentos desde nona del día I hasta tercia del VII. Primero ofrece una crónica sin spoilers; después permite abrir las pistas, los sucesos, qué hacer y los diálogos correspondientes. El mapa sitúa a los ocho personajes y muestra sus desplazamientos esperados entre horas o dentro de escenas documentadas, con retratos seleccionables, orígenes, destinos y estados de presencia. Es una lectura editorial de la lógica reconstruida del juego —no un emulador ni una repetición de una partida— y señala cuándo los encuentros pueden variar por cercanía, inventario o acciones anteriores.
   </details>
 
-- **Escuchar la abadía.** *Ave María*, la acusación «pirata», pasos, efectos y la huella sonora de cada máquina.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre el archivo sonoro</summary>
+- <details>
+  <summary><strong>Escuchar la abadía.</strong> <em>Ave María</em>, la acusación «pirata», pasos, efectos y la huella sonora de cada máquina. <a href="es/tecnica.html#sonido">Conocer más sobre el archivo sonoro</a></summary>
 
   ![Archivo sonoro de La Abadía](assets/readme/preview-ave-maria-cropped.png)
 
   El archivo sonoro permite reproducir la muestra digital original de *Ave María* del PC, la acusación «pirata», melodías reconstruidas desde el ejecutable DOS, pasos y efectos, además de recreaciones del sonido del Amstrad CPC conservado por Vigasoco.
   </details>
 
-- **Entender el motor.** Del mundo de coordenadas a la piedra isométrica: teselas, máscaras, capas y luz.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre la guía gráfica</summary>
+- <details>
+  <summary><strong>Entender el motor.</strong> Del mundo de coordenadas a la piedra isométrica: teselas, máscaras, capas y luz. <a href="es/graficos.html#idea">Conocer más sobre la guía gráfica</a></summary>
 
   ![Atlas de teselas gráficas del motor](assets/readme/preview-graphics-tiles.png)
 
   Las descripciones recuperadas de 116 estancias, 2.497 colocaciones arquitectónicas, 87 recetas y 256 teselas explican cómo una posición del mundo termina convertida en una pantalla isométrica. El recorrido continúa por máscaras, capas de profundidad, paletas, iluminación, objetos, puertas, rutas, estados de los personajes y trucos de cámara.
   </details>
 
-- **Investigar el legado.** Versiones, fuentes, prensa, remakes y *Extensum*, reunidos en un archivo vivo.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Conocer más sobre el archivo</summary>
+- <details>
+  <summary><strong>Investigar el legado.</strong> Versiones, fuentes, prensa, remakes y <em>Extensum</em>, reunidos en un archivo vivo. <a href="es/legado.html#legado">Conocer más sobre el archivo</a></summary>
 
   ![Seis revistas y páginas históricas](assets/readme/preview-magazines-cropped.png)
 
@@ -140,9 +132,8 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
 
 ### What you can do
 
-- **Play in your browser.** Ten preserved editions, loaded directly in your browser.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">See the editions and player details</summary>
+- <details>
+  <summary><strong>Play in your browser.</strong> Ten preserved editions, loaded directly in your browser. <a href="en/play.html">See the editions and player details</a></summary>
 
   ![Browser player for the preserved editions](assets/readme/preview-player.png)
 
@@ -162,63 +153,56 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   Each disk or tape loads automatically, and the player provides pause, mute, restart, and full screen. It is designed for computers with a keyboard; the game is in Spanish, and progress is not saved when you close or reload the page. The 64K CPC edition runs through the compatible CPC 6128 emulation in RVMPlayer.
   </details>
 
-- **Walk the abbey.** All 93 rooms in their real positions—explore floors, light, and versions.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the atlas</summary>
+- <details>
+  <summary><strong>Walk the abbey.</strong> All 93 rooms in their real positions—explore floors, light, and versions. <a href="en/legacy.html#extensum">Learn more about the atlas</a></summary>
 
   ![Atlas of the abbey rooms](assets/readme/preview-room-atlas-cropped.png)
 
   The atlas places 93 rooms in their real positions: 61 on the main floor, 16 in the scriptorium, and 16 in the library. Open any room at full size, move spatially to its neighbours with the keyboard, on-screen controls, or gestures, switch between day and night, and compare CPC, ZX Spectrum, MSX, PC CGA, and the PC VGA remake. The expanded *Extensum* map adds 140 mapped rooms across its floors, explorable by day and night.
   </details>
 
-- **Watch a room take shape.** Follow its 32 placements and every pixel’s journey to the screen.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the reconstruction</summary>
+- <details>
+  <summary><strong>Watch a room take shape.</strong> Follow its 32 placements and every pixel’s journey to the screen. <a href="en/graphics.html#room">Learn more about the reconstruction</a></summary>
 
   ![Step-by-step room reconstruction](assets/readme/preview-room-construction-cropped.png)
 
   The interactive room-17 demonstration replays all 32 placements, isolates the active architectural recipe, and explains which tiles and cells it changes. A second phase follows the documented transfer of all 320 visible cells to the CGA screen. Step through it manually or press play, by day or by night.
   </details>
 
-- **Read the manuscripts.** Every letter appears stroke by stroke, with its pauses and music.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the manuscripts</summary>
+- <details>
+  <summary><strong>Read the manuscripts.</strong> Every letter appears stroke by stroke, with its pauses and music. <a href="en/game.html#manuscript">Learn more about the manuscripts</a></summary>
 
   ![Manuscript reconstructed stroke by stroke](assets/readme/preview-manuscript-cropped.png)
 
   These are not blocks of text that simply appear: every letter is drawn pixel by pixel, with the original pauses and page turns. Play, pause, complete a page, restart, or change speed. The selected graphical version transforms the manuscript and supplies its matching CPC, ZX Spectrum, MSX, PC CGA, or VGA music.
   </details>
 
-- **Follow seven days.** 41 documented moments, moving characters, and spoiler-gated secrets.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the week</summary>
+- <details>
+  <summary><strong>Follow seven days.</strong> 41 documented moments, moving characters, and spoiler-gated secrets. <a href="en/game.html#week">Learn more about the week</a></summary>
 
   ![Seven-day explorer](assets/readme/preview-seven-days-cropped.png)
 
   The explorer covers 41 moments from none on day I to terce on day VII. It begins with a spoiler-free chronicle, then lets you open the clues, events, suggested actions, and relevant dialogue. The map places all eight characters and shows their expected movements between hours or across documented scenes, with selectable portraits, origins, destinations, and presence states. This is an editorial reading of the reconstructed game logic—not an emulator or recorded playthrough—and it identifies encounters that may change with proximity, inventory, or earlier actions.
   </details>
 
-- **Hear the abbey.** *Ave Maria*, the “pirata” accusation, footsteps, effects, and each machine’s sonic fingerprint.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the sound archive</summary>
+- <details>
+  <summary><strong>Hear the abbey.</strong> <em>Ave Maria</em>, the “pirata” accusation, footsteps, effects, and each machine’s sonic fingerprint. <a href="en/technology.html#sound">Learn more about the sound archive</a></summary>
 
   ![The abbey's sound archive](assets/readme/preview-ave-maria-cropped.png)
 
   The sound archive plays the PC version’s original digital *Ave Maria* sample, the “pirata” accusation, melodies reconstructed from the DOS executable, footsteps and effects, alongside recreations of the Amstrad CPC sound preserved by Vigasoco.
   </details>
 
-- **Understand the engine.** From world coordinates to isometric stone: tiles, masks, layers, and light.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the graphics guide</summary>
+- <details>
+  <summary><strong>Understand the engine.</strong> From world coordinates to isometric stone: tiles, masks, layers, and light. <a href="en/graphics.html#idea">Learn more about the graphics guide</a></summary>
 
   ![Graphics engine tile atlas](assets/readme/preview-graphics-tiles.png)
 
   The 116 recovered room descriptions, 2,497 architectural placements, 87 recipes, and 256 tiles show how a position in the world becomes an isometric screen. The journey continues through masks, depth layers, palettes, lighting, objects, doors, routes, character states, and camera tricks.
   </details>
 
-- **Investigate the legacy.** Versions, sources, press, remakes, and *Extensum*—all in one living archive.
-  <details style="margin-top: -0.75em; color: #555;">
-  <summary style="color: #0969da; font-weight: 400;">Learn more about the archive</summary>
+- <details>
+  <summary><strong>Investigate the legacy.</strong> Versions, sources, press, remakes, and <em>Extensum</em>—all in one living archive. <a href="en/legacy.html#legacy">Learn more about the archive</a></summary>
 
   ![Six magazines and historical pages](assets/readme/preview-magazines-cropped.png)
 
