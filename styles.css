@@ -2495,6 +2495,7 @@ html[data-platform="msx"] .gate-title-art { background-image: url("assets/platfo
 .project-credit .credit-role { color: var(--gold); }
 .project-credit .technical-reviewers { display: inline; color: var(--white); }
 .project-credit .technical-reviewers::before { content: " · "; color: var(--gold); }
+.gate-credits .technical-reviewers::before { content: none; }
 .site-footer .technical-reviewers { display: block; margin-top: .35rem; }
 .site-footer .technical-reviewers::before { content: none; }
 
