@@ -37,7 +37,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 ### Qué puedes hacer
 
 - <details>
-  <summary><strong>Jugar en el navegador.</strong> Diez ediciones preservadas, cargadas directamente en tu navegador. <a href="es/jugar.html">Ver las ediciones y los detalles del reproductor</a></summary>
+  <summary><strong>Jugar en el navegador.</strong> Diez ediciones preservadas, cargadas directamente en tu navegador.</summary>
 
   ![Reproductor del juego en el navegador](assets/readme/preview-player.png)
 
@@ -58,7 +58,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Recorrer la abadía.</strong> Las 93 estancias aparecen en su lugar real: explora plantas, luz y versiones. <a href="es/legado.html#extensum">Conocer más sobre el atlas</a></summary>
+  <summary><strong>Recorrer la abadía.</strong> Las 93 estancias aparecen en su lugar real: explora plantas, luz y versiones.</summary>
 
   ![Atlas de las estancias de la abadía](assets/readme/preview-room-atlas-cropped.png)
 
@@ -66,7 +66,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Ver nacer una estancia.</strong> Sigue sus 32 colocaciones y el viaje de cada píxel hasta la pantalla. <a href="es/graficos.html#estancia">Conocer más sobre la reconstrucción</a></summary>
+  <summary><strong>Ver nacer una estancia.</strong> Sigue sus 32 colocaciones y el viaje de cada píxel hasta la pantalla.</summary>
 
   ![Reconstrucción paso a paso de una estancia](assets/readme/preview-room-construction-cropped.png)
 
@@ -74,7 +74,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Leer los pergaminos.</strong> Cada letra aparece trazo a trazo, con sus pausas y su música. <a href="es/juego.html#manuscrito">Conocer más sobre los manuscritos</a></summary>
+  <summary><strong>Leer los pergaminos.</strong> Cada letra aparece trazo a trazo, con sus pausas y su música.</summary>
 
   ![Manuscrito reconstruido trazo a trazo](assets/readme/preview-manuscript-cropped.png)
 
@@ -82,7 +82,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Seguir los siete días.</strong> 41 momentos documentados, personajes en movimiento y secretos protegidos por spoilers. <a href="es/juego.html#semana">Conocer más sobre la semana</a></summary>
+  <summary><strong>Seguir los siete días.</strong> 41 momentos documentados, personajes en movimiento y secretos protegidos por spoilers.</summary>
 
   ![Explorador de los siete días](assets/readme/preview-seven-days-cropped.png)
 
@@ -90,7 +90,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Escuchar la abadía.</strong> <em>Ave María</em>, la acusación «pirata», pasos, efectos y la huella sonora de cada máquina. <a href="es/tecnica.html#sonido">Conocer más sobre el archivo sonoro</a></summary>
+  <summary><strong>Escuchar la abadía.</strong> <em>Ave María</em>, la acusación «pirata», pasos, efectos y la huella sonora de cada máquina.</summary>
 
   ![Archivo sonoro de La Abadía](assets/readme/preview-ave-maria-cropped.png)
 
@@ -98,7 +98,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Entender el motor.</strong> Del mundo de coordenadas a la piedra isométrica: teselas, máscaras, capas y luz. <a href="es/graficos.html#idea">Conocer más sobre la guía gráfica</a></summary>
+  <summary><strong>Entender el motor.</strong> Del mundo de coordenadas a la piedra isométrica: teselas, máscaras, capas y luz.</summary>
 
   ![Atlas de teselas gráficas del motor](assets/readme/preview-graphics-tiles.png)
 
@@ -106,7 +106,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
   </details>
 
 - <details>
-  <summary><strong>Investigar el legado.</strong> Versiones, fuentes, prensa, remakes y <em>Extensum</em>, reunidos en un archivo vivo. <a href="es/legado.html#legado">Conocer más sobre el archivo</a></summary>
+  <summary><strong>Investigar el legado.</strong> Versiones, fuentes, prensa, remakes y <em>Extensum</em>, reunidos en un archivo vivo.</summary>
 
   ![Seis revistas y páginas históricas](assets/readme/preview-magazines-cropped.png)
 
@@ -133,7 +133,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
 ### What you can do
 
 - <details>
-  <summary><strong>Play in your browser.</strong> Ten preserved editions, loaded directly in your browser. <a href="en/play.html">See the editions and player details</a></summary>
+  <summary><strong>Play in your browser.</strong> Ten preserved editions, loaded directly in your browser.</summary>
 
   ![Browser player for the preserved editions](assets/readme/preview-player.png)
 
@@ -154,7 +154,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Walk the abbey.</strong> All 93 rooms in their real positions—explore floors, light, and versions. <a href="en/legacy.html#extensum">Learn more about the atlas</a></summary>
+  <summary><strong>Walk the abbey.</strong> All 93 rooms in their real positions—explore floors, light, and versions.</summary>
 
   ![Atlas of the abbey rooms](assets/readme/preview-room-atlas-cropped.png)
 
@@ -162,7 +162,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Watch a room take shape.</strong> Follow its 32 placements and every pixel’s journey to the screen. <a href="en/graphics.html#room">Learn more about the reconstruction</a></summary>
+  <summary><strong>Watch a room take shape.</strong> Follow its 32 placements and every pixel’s journey to the screen.</summary>
 
   ![Step-by-step room reconstruction](assets/readme/preview-room-construction-cropped.png)
 
@@ -170,7 +170,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Read the manuscripts.</strong> Every letter appears stroke by stroke, with its pauses and music. <a href="en/game.html#manuscript">Learn more about the manuscripts</a></summary>
+  <summary><strong>Read the manuscripts.</strong> Every letter appears stroke by stroke, with its pauses and music.</summary>
 
   ![Manuscript reconstructed stroke by stroke](assets/readme/preview-manuscript-cropped.png)
 
@@ -178,7 +178,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Follow seven days.</strong> 41 documented moments, moving characters, and spoiler-gated secrets. <a href="en/game.html#week">Learn more about the week</a></summary>
+  <summary><strong>Follow seven days.</strong> 41 documented moments, moving characters, and spoiler-gated secrets.</summary>
 
   ![Seven-day explorer](assets/readme/preview-seven-days-cropped.png)
 
@@ -186,7 +186,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Hear the abbey.</strong> <em>Ave Maria</em>, the “pirata” accusation, footsteps, effects, and each machine’s sonic fingerprint. <a href="en/technology.html#sound">Learn more about the sound archive</a></summary>
+  <summary><strong>Hear the abbey.</strong> <em>Ave Maria</em>, the “pirata” accusation, footsteps, effects, and each machine’s sonic fingerprint.</summary>
 
   ![The abbey's sound archive](assets/readme/preview-ave-maria-cropped.png)
 
@@ -194,7 +194,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Understand the engine.</strong> From world coordinates to isometric stone: tiles, masks, layers, and light. <a href="en/graphics.html#idea">Learn more about the graphics guide</a></summary>
+  <summary><strong>Understand the engine.</strong> From world coordinates to isometric stone: tiles, masks, layers, and light.</summary>
 
   ![Graphics engine tile atlas](assets/readme/preview-graphics-tiles.png)
 
@@ -202,7 +202,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
   </details>
 
 - <details>
-  <summary><strong>Investigate the legacy.</strong> Versions, sources, press, remakes, and <em>Extensum</em>—all in one living archive. <a href="en/legacy.html#legacy">Learn more about the archive</a></summary>
+  <summary><strong>Investigate the legacy.</strong> Versions, sources, press, remakes, and <em>Extensum</em>—all in one living archive.</summary>
 
   ![Six magazines and historical pages](assets/readme/preview-magazines-cropped.png)
 
