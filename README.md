@@ -34,7 +34,7 @@ A bilingual, interactive visual archive devoted to the classic game by Paco Men�
 
 Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: permite recorrerla, escucharla y desmontarla pieza a pieza. Reúne el juego, sus creadores, sus versiones, la arquitectura de la abadía, los personajes y sus rutinas, los siete días de la investigación, el sonido, la prensa, la arqueología del código y su legado en una experiencia editorial concebida para explorar.
 
-### Qué puedes hacer
+### Qué puedes hacer (abre cada sección para saber más)
 
 - <details>
   <summary><strong>Jugar en el navegador.</strong> Diez ediciones preservadas, cargadas directamente en tu navegador.</summary>
@@ -130,7 +130,7 @@ La cabecera mantiene la versión gráfica elegida mientras cambias de ruta. Pant
 
 This tribute does more than tell the story of *La Abadía del Crimen*: it lets you walk through it, listen to it, and take it apart piece by piece. The game, its creators and ports, the abbey’s architecture, character routines, the seven-day investigation, sound, contemporary press, code archaeology, and its legacy all meet in an editorial experience designed for exploration.
 
-### What you can do
+### What you can do (open each section to learn more)
 
 - <details>
   <summary><strong>Play in your browser.</strong> Ten preserved editions, loaded directly in your browser.</summary>
