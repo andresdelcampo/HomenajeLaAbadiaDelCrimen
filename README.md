@@ -62,7 +62,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
   ![Atlas de las estancias de la abadía](assets/readme/preview-room-atlas-cropped.png)
 
-  El atlas sitúa 93 estancias en su posición real: 61 en la planta principal, 16 en el scriptorium y 16 en la biblioteca. Puedes abrir cualquiera a tamaño completo, desplazarte espacialmente a las contiguas con teclado, controles en pantalla o gestos, alternar día y noche y comparar CPC, ZX Spectrum, MSX, PC CGA y el remake PC VGA. El mapa ampliado de *Extensum* añade 140 estancias cartografiadas, distribuidas por plantas y explorables de día y de noche.
+  El atlas sitúa 93 estancias en su posición real: 61 en la planta principal, 16 en el scriptorium y 16 en la biblioteca. Puedes abrir cualquiera a tamaño completo, desplazarte espacialmente a las contiguas con teclado, controles en pantalla o gestos, alternar día y noche y comparar CPC, ZX Spectrum, MSX, PC CGA, PCW y el remake PC VGA. El mapa ampliado de *Extensum* añade 140 estancias cartografiadas, distribuidas por plantas y explorables de día y de noche.
   </details>
 
 - <details>
@@ -78,7 +78,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
   ![Manuscrito reconstruido trazo a trazo](assets/readme/preview-manuscript-cropped.png)
 
-  No son textos que simplemente aparecen: cada letra se traza píxel a píxel, con sus pausas y pasos de página. Los controles permiten reproducir, pausar, completar la página, reiniciar y cambiar la velocidad. La versión gráfica seleccionada transforma el manuscrito y activa su música correspondiente en CPC, ZX Spectrum, MSX, PC CGA o VGA.
+  No son textos que simplemente aparecen: cada letra se traza píxel a píxel, con sus pausas y pasos de página. Los controles permiten reproducir, pausar, completar la página, reiniciar y cambiar la velocidad. La versión gráfica seleccionada transforma el manuscrito y activa su música correspondiente en CPC, ZX Spectrum, MSX, PC CGA, PCW o remake VGA.
   </details>
 
 - <details>
@@ -94,7 +94,7 @@ Este homenaje no se limita a contar la historia de *La Abadía del Crimen*: perm
 
   ![Archivo sonoro de La Abadía](assets/readme/preview-ave-maria-cropped.png)
 
-  El archivo sonoro permite reproducir la muestra digital original de *Ave María* del PC, la acusación «pirata», melodías reconstruidas desde el ejecutable DOS, pasos y efectos, además de recreaciones del sonido del Amstrad CPC conservado por Vigasoco.
+  El archivo sonoro permite reproducir la muestra digital original de *Ave María* del PC, la acusación «pirata», melodías reconstruidas desde el ejecutable DOS, pasos y efectos, además de recreaciones del sonido del Amstrad CPC y del PCW.
   </details>
 
 - <details>
@@ -158,7 +158,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
 
   ![Atlas of the abbey rooms](assets/readme/preview-room-atlas-cropped.png)
 
-  The atlas places 93 rooms in their real positions: 61 on the main floor, 16 in the scriptorium, and 16 in the library. Open any room at full size, move spatially to its neighbours with the keyboard, on-screen controls, or gestures, switch between day and night, and compare CPC, ZX Spectrum, MSX, PC CGA, and the PC VGA remake. The expanded *Extensum* map adds 140 mapped rooms across its floors, explorable by day and night.
+  The atlas places 93 rooms in their real positions: 61 on the main floor, 16 in the scriptorium, and 16 in the library. Open any room at full size, move spatially to its neighbours with the keyboard, on-screen controls, or gestures, switch between day and night, and compare CPC, ZX Spectrum, MSX, PC CGA, PCW, and the PC VGA remake. The expanded *Extensum* map adds 140 mapped rooms across its floors, explorable by day and night.
   </details>
 
 - <details>
@@ -174,7 +174,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
 
   ![Manuscript reconstructed stroke by stroke](assets/readme/preview-manuscript-cropped.png)
 
-  These are not blocks of text that simply appear: every letter is drawn pixel by pixel, with the original pauses and page turns. Play, pause, complete a page, restart, or change speed. The selected graphical version transforms the manuscript and supplies its matching CPC, ZX Spectrum, MSX, PC CGA, or VGA music.
+  These are not blocks of text that simply appear: every letter is drawn pixel by pixel, with the original pauses and page turns. Play, pause, complete a page, restart, or change speed. The selected graphical version transforms the manuscript and supplies its matching CPC, ZX Spectrum, MSX, PC CGA, PCW, or VGA remake music.
   </details>
 
 - <details>
@@ -190,7 +190,7 @@ This tribute does more than tell the story of *La Abadía del Crimen*: it lets y
 
   ![The abbey's sound archive](assets/readme/preview-ave-maria-cropped.png)
 
-  The sound archive plays the PC version’s original digital *Ave Maria* sample, the “pirata” accusation, melodies reconstructed from the DOS executable, footsteps and effects, alongside recreations of the Amstrad CPC sound preserved by Vigasoco.
+  The sound archive plays the PC version’s original digital *Ave Maria* sample, the “pirata” accusation, melodies reconstructed from the DOS executable, footsteps and effects, alongside recreations of the Amstrad CPC and PCW sound.
   </details>
 
 - <details>
