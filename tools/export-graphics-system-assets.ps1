@@ -11,7 +11,9 @@ $sets = @(
   @{ Platform='spectrum'; Variant='day'; Root='analysis\spectrum-map-graphics\assets'; Tile='tile-atlas-day.png'; Atlas='block-atlas-day.png'; Blocks='blocks-day' },
   @{ Platform='spectrum'; Variant='night'; Root='analysis\spectrum-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' },
   @{ Platform='msx'; Variant='day'; Root='analysis\msx-map-graphics\assets'; Tile='tile-atlas-day.png'; Atlas='block-atlas-day.png'; Blocks='blocks-day' },
-  @{ Platform='msx'; Variant='night'; Root='analysis\msx-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' }
+  @{ Platform='msx'; Variant='night'; Root='analysis\msx-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' },
+  @{ Platform='pcw'; Variant='day'; Root='analysis\pcw-map-graphics\assets'; Tile='tile-atlas-day.png'; Atlas='block-atlas-day.png'; Blocks='blocks-day' },
+  @{ Platform='pcw'; Variant='night'; Root='analysis\pcw-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' }
 )
 
 foreach ($set in $sets) {
@@ -22,6 +24,15 @@ foreach ($set in $sets) {
   Copy-Item -LiteralPath (Join-Path $source $set.Tile) -Destination (Join-Path $destination 'tile-atlas.png')
   Copy-Item -LiteralPath (Join-Path $source $set.Atlas) -Destination (Join-Path $destination 'block-atlas.png')
   Copy-Item -Path (Join-Path (Join-Path $source $set.Blocks) '*.png') -Destination $blockDestination
+  if ($set.Platform -eq 'pcw') {
+    $tileDestination = Join-Path $destination 'tiles'
+    New-Item -ItemType Directory -Force -Path $tileDestination | Out-Null
+    Copy-Item -Path (Join-Path (Join-Path $source "tiles-$($set.Variant)") '*.png') -Destination $tileDestination
+    Copy-Item -LiteralPath (Join-Path $source 'tile-mask-atlas.png') -Destination $destination
+    foreach ($manifest in @('tile-manifest.json', 'block-manifest.json', 'room-manifest.json')) {
+      Copy-Item -LiteralPath (Join-Path $source $manifest) -Destination $destination
+    }
+  }
 }
 
 Write-Host "Exported $($sets.Count) graphics-system sets to $output"

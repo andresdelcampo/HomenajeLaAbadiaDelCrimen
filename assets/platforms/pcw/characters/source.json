@@ -1,0 +1,118 @@
+{
+  "source": "Habisoft PCW 8256 v1.2 gameplay RAM",
+  "ram_sha256": "c29975670c61f07f7474b4ece094990d6d39ee910a4a9cd5df51cd801564508b",
+  "data_table": "0x9d00",
+  "mask_table": "0x9e00",
+  "display_scale": [
+    4,
+    8
+  ],
+  "characters": {
+    "guillermo": {
+      "physical_ram_addresses": [
+        "0xa3b4"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "adso": {
+      "physical_ram_addresses": [
+        "0xa78a"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "abad": {
+      "physical_ram_addresses": [
+        "0xb167",
+        "0xab59"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "malaquias": {
+      "physical_ram_addresses": [
+        "0xb1cb",
+        "0xab59"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "berengario": {
+      "physical_ram_addresses": [
+        "0xb22f",
+        "0xab59"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "severino": {
+      "physical_ram_addresses": [
+        "0xb103",
+        "0xab59"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "jorge": {
+      "physical_ram_addresses": [
+        "0xb2f7",
+        "0xab59"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "bernardo": {
+      "physical_ram_addresses": [
+        "0xb293",
+        "0xab59"
+      ],
+      "packed_bytes": 170,
+      "native_dimensions": [
+        40,
+        34
+      ]
+    },
+    "guillermo-church": {
+      "physical_ram_addresses": [
+        "0xa666"
+      ],
+      "packed_bytes": 132,
+      "native_dimensions": [
+        32,
+        33
+      ]
+    },
+    "adso-church": {
+      "physical_ram_addresses": [
+        "0xa8c5"
+      ],
+      "packed_bytes": 120,
+      "native_dimensions": [
+        32,
+        30
+      ]
+    }
+  }
+}

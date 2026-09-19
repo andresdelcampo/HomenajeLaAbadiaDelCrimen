@@ -1,4 +1,4 @@
-// Playable machines are independent of the site's five visual editions.
+// Playable machines are independent of the site's six visual editions.
 // Each entry owns its adapter and media; future systems may use another engine.
 const spectrumKeyboardRemap = {
   ArrowUp: 'KeyA',

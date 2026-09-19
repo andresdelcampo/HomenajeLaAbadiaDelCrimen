@@ -1,8 +1,10 @@
 {
-  "platforms": ["pc", "cpc", "vga", "spectrum", "msx"],
+  "platforms": ["pc", "cpc", "vga", "spectrum", "msx", "pcw"],
   "variants": ["day", "night"],
   "tile_count_per_set": 256,
   "tile_native_size": [16, 8],
+  "tile_native_size_overrides": {"pcw": [32, 8]},
+  "pcw_display_scaling": [1, 2],
   "block_count_per_set": 87,
   "block_ids": "even hexadecimal IDs 02-AE for non-zero pointer-table entries",
   "layout": "<platform>/<variant>/{tile-atlas.png,block-atlas.png,blocks/block-XX.png}",
@@ -11,6 +13,7 @@
     "cpc": "DOS scene programs with CPC artwork resource",
     "vga": "DOS scene programs with VGA remake artwork resource and tile remap",
     "spectrum": "ZX Spectrum native",
-    "msx": "MSX native"
+    "msx": "MSX native",
+    "pcw": "Habisoft 1.2 PCW native; identical day/night monochrome graphics"
   }
 }

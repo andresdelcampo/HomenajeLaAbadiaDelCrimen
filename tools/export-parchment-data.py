@@ -136,7 +136,7 @@ def main() -> None:
             glyphs[character] = read_reconstructed_glyph(character, cpp_glyphs)
 
     data = {
-        "version": 4,
+        "version": 9,
         "width": 320,
         "height": 200,
         "editions": {
@@ -172,6 +172,14 @@ def main() -> None:
                 "label": {"es": "MSX · paleta adaptada", "en": "MSX · adapted palette"},
                 "inherits": "cpc",
                 "palette": ["#dcdc9c", "#000000", "#000000", "#000000"],
+            },
+            "pcw": {
+                "label": {"es": "Amstrad PCW · Habisoft 1.2", "en": "Amstrad PCW · Habisoft 1.2"},
+                "inherits": "cpc",
+                # PCW has a monochrome phosphor display. Its special
+                # The special manuscript strokes stay black on PCW; the
+                # PCW-only vertical-bar raster is applied in parchment.js.
+                "palette": ["#72e39a", "#000000", "#000000", "#000000"],
             },
         },
         "texts": texts,

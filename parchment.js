@@ -91,6 +91,7 @@
       palette = unpackPalette(edition.palette);
       root.dataset.parchmentPlatform = editionKey;
       if (editionLabel) editionLabel.textContent = edition.label[language] || edition.label.es;
+      rebuildWrittenPage();
       dirty = true;
     }
 
@@ -115,7 +116,7 @@
     };
     const platformNames = {
       cpc: 'CPC', pc: 'PC CGA', vga: language === 'es' ? 'remake VGA' : 'VGA remake',
-      spectrum: 'ZX Spectrum', msx: 'MSX'
+      spectrum: 'ZX Spectrum', msx: 'MSX', pcw: 'Amstrad PCW'
     };
 
     function setPixel(x, y, color) {
@@ -241,6 +242,7 @@
     let elapsed = 0;
     let wait = 0;
     let action = null;
+    let drawnPointCount = 0;
     let dirty = true;
     let previousTime = performance.now();
 
@@ -272,8 +274,41 @@
     function drawGlyph(character, x, y) {
       const glyph = glyphFor(character);
       const color = ((character.codePointAt(0) & 0x60) === 0x40) ? 3 : 2;
-      glyph.points.forEach(point => setPixel(x + (point & 0x0f), y + (point >> 4), color));
+      glyph.points.forEach(point => setGlyphPixel(x + (point & 0x0f), y + (point >> 4), color));
       return glyph.advance;
+    }
+
+    function setGlyphPixel(x, y, color) {
+      if (editionKey === 'pcw' && color === 3 && (x & 1)) return;
+      setPixel(x, y, color);
+    }
+
+    function rebuildWrittenPage() {
+      if (!basePixels.length || !pages?.[pageIndex]) return;
+      pixels.set(basePixels);
+      const page = pages[pageIndex];
+      let x = 76;
+      let y = 16;
+      for (let index = 0; index < characterIndex; index++) {
+        const character = page.text[index];
+        if (character === '\r') {
+          x = 76;
+          y += 16;
+        } else if (character === ' ') {
+          x += 10;
+        } else {
+          x += drawGlyph(character, x, y);
+        }
+      }
+      const current = page.text[characterIndex];
+      if (drawnPointCount && current && current !== '\r' && current !== ' ') {
+        const glyph = glyphFor(current);
+        const color = ((current.codePointAt(0) & 0x60) === 0x40) ? 3 : 2;
+        for (let point = 0; point < drawnPointCount; point++) {
+          const packed = glyph.points[point];
+          setGlyphPixel(x + (packed & 0x0f), y + (packed >> 4), color);
+        }
+      }
     }
 
     function queueCharacter() {
@@ -291,6 +326,7 @@
 
       const character = page.text[characterIndex];
       if (character === '\r') {
+        drawnPointCount = 0;
         characterIndex++;
         posX = 76;
         posY += 16;
@@ -298,6 +334,7 @@
         return;
       }
       if (character === ' ') {
+        drawnPointCount = 0;
         characterIndex++;
         posX += 10;
         schedule(30, queueCharacter);
@@ -310,13 +347,15 @@
       const drawPoint = () => {
         if (pointIndex < glyph.points.length) {
           const point = glyph.points[pointIndex++];
-          setPixel(posX + (point & 0x0f), posY + (point >> 4), color);
+          drawnPointCount = pointIndex;
+          setGlyphPixel(posX + (point & 0x0f), posY + (point >> 4), color);
           dirty = true;
           schedule(8, drawPoint);
           return;
         }
         posX += glyph.advance;
         characterIndex++;
+        drawnPointCount = 0;
         queueCharacter();
       };
       schedule(8, drawPoint);
@@ -375,6 +414,7 @@
           pixels.set(basePixels);
           pageIndex++;
           characterIndex = 0;
+          drawnPointCount = 0;
           posX = 76;
           posY = 16;
           dirty = true;
@@ -411,6 +451,7 @@
         }
       }
       characterIndex = pages[pageIndex].text.length;
+      drawnPointCount = 0;
       posX = x;
       posY = y;
       dirty = true;
@@ -425,6 +466,7 @@
       pixels.set(basePixels);
       pageIndex = 0;
       characterIndex = 0;
+      drawnPointCount = 0;
       posX = 76;
       posY = 16;
       elapsed = 0;

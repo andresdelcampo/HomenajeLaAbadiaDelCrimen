@@ -222,6 +222,7 @@ html[data-platform="pc"] .hero { --hero-image: url("assets/platforms/pc/title-sc
 html[data-platform="vga"] .hero { --hero-image: url("assets/platforms/vga/title-screen.png"); }
 html[data-platform="spectrum"] .hero { --hero-image: url("assets/platforms/spectrum/title-screen.png"); }
 html[data-platform="msx"] .hero { --hero-image: url("assets/platforms/msx/title-screen.png"); }
+html[data-platform="pcw"] .hero { --hero-image: url("assets/platforms/pcw/title-screen.png?v=20260919-pcw-title1"); }
 
 .hero {
   position: relative;
@@ -381,6 +382,7 @@ html[data-platform="pc"] .page-masthead { --hero-image: url("assets/platforms/pc
 html[data-platform="vga"] .page-masthead { --hero-image: url("assets/platforms/vga/title-screen.png"); }
 html[data-platform="spectrum"] .page-masthead { --hero-image: url("assets/platforms/spectrum/title-screen.png"); }
 html[data-platform="msx"] .page-masthead { --hero-image: url("assets/platforms/msx/title-screen.png"); }
+html[data-platform="pcw"] .page-masthead { --hero-image: url("assets/platforms/pcw/title-screen.png?v=20260919-pcw-title1"); }
 .scroll-cue::after { content: ""; height: 3.3rem; width: 1px; background: var(--gold); }
 
 main { overflow: clip; }
@@ -812,6 +814,9 @@ main { overflow: clip; }
 .case-map-scrap img { height: 100%; object-fit: cover; object-position: 10% 30%; filter: sepia(.25) contrast(1.05); }
 .case-edition { z-index: 3; left: 38%; top: 41%; width: 56%; transform: rotate(1.5deg); }
 .case-edition img { aspect-ratio: 4 / 3; object-fit: contain; image-rendering: pixelated; background: #090909; }
+/* The PCW's 720×256 raster uses tall physical pixels. Present it in the
+   board's 4:3 screen area instead of letterboxing it as a wide image. */
+html[data-platform="pcw"] .case-edition img { object-fit: fill; }
 .case-suspect { z-index: 4; left: 2%; top: 53%; width: 25%; transform: rotate(3deg); background: #ead7ad; }
 .case-suspect img { height: 184px; object-fit: contain; image-rendering: pixelated; background: #221b18; }
 .case-objects {
@@ -1050,6 +1055,9 @@ html[data-platform="spectrum"] .clock-status-current,
 html[data-platform="msx"] .clock-status-current { top: 54.8%; right: 12.5%; bottom: 16.1%; left: 0; }
 html[data-platform="spectrum"] .clock-status-current img,
 html[data-platform="msx"] .clock-status-current img { filter: invert(87%) sepia(98%) saturate(1678%) hue-rotate(128deg) brightness(103%) contrast(101%); }
+html[data-platform="pcw"] .clock-status-viewport { aspect-ratio: 128 / 64; }
+html[data-platform="pcw"] .clock-status-current { top: 60%; right: 8%; bottom: 8%; left: 8%; }
+html[data-platform="pcw"] .clock-status-current img { filter: none; }
 html[data-platform="vga"] .clock-status-viewport { aspect-ratio: 56 / 28; }
 html[data-platform="vga"] .clock-status-current { top: 64.29%; right: 7.15%; bottom: 10.71%; left: 7.15%; }
 html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none; }
@@ -1305,6 +1313,9 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .abbey-room { position: relative; z-index: 0; display: block; min-width: 0; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,85,.38); background: #000; box-shadow: 0 2px 8px rgba(0,0,0,.7); cursor: zoom-in; isolation: isolate; }
 .abbey-room[hidden] { display: none; }
 .abbey-room img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: cover; image-rendering: pixelated; transition: transform .18s ease, filter .18s ease; }
+/* Average PCW's fine monochrome raster when shrinking rooms: nearest-neighbour
+   sampling drops green pixels and makes daytime thumbnails appear dark. */
+.abbey-screen-map[data-map-platform="pcw"] .abbey-room img { image-rendering: auto; }
 .abbey-room span { position: absolute; right: .2rem; bottom: .15rem; padding: .14rem .22rem; color: #ffff55; background: rgba(0,0,0,.82); font: 700 clamp(.38rem, .6vw, .58rem)/1 var(--mono); }
 .abbey-room:hover, .abbey-room:focus-visible { z-index: 3; overflow: visible; border-color: #ffff55; outline: 2px solid #ffff55; outline-offset: 1px; }
 .abbey-room:hover img, .abbey-room:focus-visible img { transform: scale(1.08); filter: brightness(1.08); }
@@ -1419,6 +1430,11 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
   object-fit: contain;
   image-rendering: pixelated;
   filter: drop-shadow(0 13px 8px rgba(0,0,0,.55));
+}
+html[data-platform="pcw"] .object-sprite {
+  height: 60px;
+  margin-top: 2rem;
+  margin-bottom: 1.8rem;
 }
 .object-card::before {
   content: attr(data-symbol);
@@ -2447,12 +2463,14 @@ html[data-platform="pc"] .gate-art { background-image: url("assets/platforms/pc/
 html[data-platform="vga"] .gate-art { background-image: url("assets/platforms/vga/title-screen.png"); }
 html[data-platform="spectrum"] .gate-art { background-image: url("assets/platforms/spectrum/title-screen.png"); }
 html[data-platform="msx"] .gate-art { background-image: url("assets/platforms/msx/title-screen.png"); }
+html[data-platform="pcw"] .gate-art { background-image: url("assets/platforms/pcw/title-screen.png?v=20260919-pcw-title1"); }
 html[data-platform="cpc"] .gate-title-art { background-image: url("assets/platforms/cpc/title-logo.png"); }
 html[data-platform="pc"] .gate-title-art { background-image: url("assets/platforms/pc/title-logo.png"); }
 html[data-platform="vga"] .gate-title-art { background-image: url("assets/platforms/vga/title-logo.png"); }
 html[data-platform="spectrum"] .gate-title-art { background-image: url("assets/platforms/spectrum/title-logo.png"); }
 html[data-platform="msx"] .gate-title-art { background-image: url("assets/platforms/msx/title-logo.png"); }
-.platform-picker--gate { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(.25rem, 1vw, 1rem); width: 100%; margin: 1rem 0 2rem; }
+html[data-platform="pcw"] .gate-title-art { background-image: url("assets/platforms/pcw/title-logo.png?v=20260919-pcw-title1"); }
+.platform-picker--gate { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(.25rem, 1vw, 1rem); width: 100%; margin: 1rem 0 2rem; }
 .platform-picker--gate button { padding-inline: .25rem; font-size: .72rem; white-space: nowrap; }
 .gate-copy p { max-width: 560px; color: rgba(255,255,255,.7); }
 .gate-intro { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 760px; }

@@ -15,6 +15,10 @@
     image.dataset.platformSrcVga = cpcSource.replace('/platforms/cpc/', '/platforms/vga/');
     image.dataset.platformSrcSpectrum = cpcSource.replace('/platforms/cpc/', '/platforms/spectrum/');
     image.dataset.platformSrcMsx = cpcSource.replace('/platforms/cpc/', '/platforms/msx/');
+    const pcwSource = cpcSource.replace('/platforms/cpc/', '/platforms/pcw/');
+    image.dataset.platformSrcPcw = pcwSource.includes('/items/')
+      ? `${pcwSource}?v=20260919-pcw-native-items2`
+      : pcwSource;
     image.src = cpcSource;
 
     const alt = image.getAttribute('alt');
@@ -36,6 +40,10 @@
         .replace('Sprite original CPC de', 'Sprite MSX diurno de')
         .replace('CPC sprite of', 'MSX daytime sprite of')
         .replace('Sprite CPC', 'Sprite MSX');
+      image.dataset.platformAltPcw = alt
+        .replace('Sprite original CPC de', 'Sprite PCW monocromo de')
+        .replace('CPC sprite of', 'PCW monochrome sprite of')
+        .replace('Sprite CPC', 'Sprite PCW');
     }
   });
 
@@ -47,6 +55,7 @@
     caption.dataset.platformTextVga = spanish ? 'VGA · redibujado a 256 colores' : 'VGA · redrawn in 256 colours';
     caption.dataset.platformTextSpectrum = spanish ? 'ZX Spectrum · tinta diurna' : 'ZX Spectrum · daytime ink';
     caption.dataset.platformTextMsx = spanish ? 'MSX · tinta diurna' : 'MSX · daytime ink';
+    caption.dataset.platformTextPcw = spanish ? 'Amstrad PCW · trama monocroma' : 'Amstrad PCW · monochrome raster';
   });
 
   $$('.sprite-credit').forEach(credit => {
@@ -63,13 +72,16 @@
     credit.dataset.platformTextMsx = document.documentElement.lang === 'es'
       ? 'Máscaras originales verificadas en capturas MSX, en tinta diurna negra y crema y dentro de su marcador real.'
       : 'Original masks verified against MSX captures, using its black-and-cream daytime ink and real status-panel frame.';
+    credit.dataset.platformTextPcw = document.documentElement.lang === 'es'
+      ? 'Bandeja nativa del marcador PCW 8256, reconstruida con capturas del panel de Habisoft 1.2 y sus tres casillas reales.'
+      : 'Native PCW 8256 status tray, reconstructed from Habisoft 1.2 panel captures with its three real item slots.';
   });
 
   const platformButtons = $$('[data-platform-choice]');
   const platformImages = $$('[data-platform-src-cpc]');
   const platformTexts = $$('[data-platform-text-cpc]');
-  const supportedPlatforms = new Set(['cpc', 'pc', 'vga', 'spectrum', 'msx']);
-  const platformSuffix = { cpc: 'Cpc', pc: 'Pc', vga: 'Vga', spectrum: 'Spectrum', msx: 'Msx' };
+  const supportedPlatforms = new Set(['cpc', 'pc', 'vga', 'spectrum', 'msx', 'pcw']);
+  const platformSuffix = { cpc: 'Cpc', pc: 'Pc', vga: 'Vga', spectrum: 'Spectrum', msx: 'Msx', pcw: 'Pcw' };
   let rememberedPlatform = 'cpc';
   try {
     const storedPlatform = localStorage.getItem('reportaje-platform');
@@ -305,7 +317,10 @@
         button.setAttribute('aria-label', `${isSpanish ? 'Ampliar estancia' : 'Enlarge room'} ${roomHex}`);
         const image = document.createElement('img');
         image.alt = '';
-        image.loading = 'lazy';
+        // The second floor starts hidden, but its thumbnails still belong to
+        // the selected map palette. Lazy loading left them black until the
+        // floor was selected or a room was hovered.
+        image.loading = 'eager';
         image.width = 512;
         image.height = 320;
         const number = document.createElement('span');
@@ -325,7 +340,8 @@
       const useCpc = platform === 'cpc';
       const useSpectrum = platform === 'spectrum';
       const useMsx = platform === 'msx';
-      const mapPlatform = useVga ? 'vga' : (useCpc ? 'cpc' : (useSpectrum ? 'spectrum' : (useMsx ? 'msx' : 'cga')));
+      const usePcw = platform === 'pcw';
+      const mapPlatform = useVga ? 'vga' : (useCpc ? 'cpc' : (useSpectrum ? 'spectrum' : (useMsx ? 'msx' : (usePcw ? 'pcw' : 'cga'))));
       const useReducedCpc = useCpc && currentCpcEdition === 'reduced';
       const assetSet = useReducedCpc ? `cpc-reduced-${light}` : `${mapPlatform}-${light}`;
       const lightLabel = light === 'night'
@@ -339,7 +355,9 @@
             : (isSpanish ? 'Amstrad CPC 128 KB · abadía completa' : 'Amstrad CPC 128 KB · complete abbey'))
           : (useSpectrum
             ? (isSpanish ? 'ZX Spectrum · 2 colores' : 'ZX Spectrum · 2 colours')
-            : (useMsx ? (isSpanish ? 'MSX · 2 colores' : 'MSX · 2 colours') : 'PC CGA')));
+            : (useMsx
+              ? (isSpanish ? 'MSX · 2 colores' : 'MSX · 2 colours')
+              : (usePcw ? (isSpanish ? 'Amstrad PCW 8256 · monocromo' : 'Amstrad PCW 8256 · monochrome') : 'PC CGA'))));
       const edition = `${platformLabel} · ${lightLabel}`;
       atlas.dataset.mapPlatform = mapPlatform;
       atlas.dataset.mapPalette = light;
@@ -504,7 +522,8 @@
       pc: 'PC CGA',
       vga: isSpanish ? 'Remake VGA' : 'VGA remake',
       spectrum: 'ZX Spectrum',
-      msx: 'MSX'
+      msx: 'MSX',
+      pcw: 'Amstrad PCW'
     };
     const subjectLabels = isSpanish
       ? { tiles: 'Atlas de 256 teselas', blocks: 'Atlas de 87 bloques', block: 'Bloque arquitectónico', room: 'Estancia 17 reconstruida' }

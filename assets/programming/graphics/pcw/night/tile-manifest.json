@@ -1,0 +1,14 @@
+{
+  "count": 256,
+  "native_dimensions": [
+    32,
+    8
+  ],
+  "image_dimensions": [
+    32,
+    16
+  ],
+  "tile_00": "Included in the atlas; skipped when constructing rooms.",
+  "mask_atlas": "Lit bits preserve the destination; dark bits clear it before ORing tile data.",
+  "backing": "Native 0x55 dither prefill, also used for block previews."
+}

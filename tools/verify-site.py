@@ -1,4 +1,4 @@
-"""Check local media references and the five visual-edition controls."""
+"""Check local media references and the six visual-edition controls."""
 
 from pathlib import Path
 import json
@@ -13,11 +13,11 @@ PAGES = [
     ROOT / "es" / "jugar.html",
     ROOT / "en" / "play.html",
 ]
-PLATFORMS = ("cpc", "pc", "vga", "spectrum", "msx")
+PLATFORMS = ("cpc", "pc", "vga", "spectrum", "msx", "pcw")
 CHARACTERS = ("guillermo", "adso", "abad", "malaquias", "berengario", "severino", "jorge", "bernardo")
 ITEMS = ("libro", "guantes", "gafas", "pergamino", "llave", "lampara")
 ATTRIBUTES = re.compile(
-    r'(?:src|href|data-lightbox|data-platform-src-(?:cpc|pc|vga|spectrum|msx))="([^"#]+)"'
+    r'(?:src|href|data-lightbox|data-platform-src-(?:cpc|pc|vga|spectrum|msx|pcw))="([^"#]+)"'
 )
 
 
@@ -96,7 +96,7 @@ def main() -> None:
     if (
         missing
         # Playable systems have their own extensible selector, not edition buttons.
-        or platform_controls != [5] * (len(PAGES) - 2) + [0, 0]
+        or platform_controls != [6] * (len(PAGES) - 2) + [0, 0]
         or parchment_pages != expected_parchment_pages
         or parchment_instances != expected_parchment_instances
         or parchment_editions != list(PLATFORMS)
