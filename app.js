@@ -532,15 +532,16 @@
       const paletteLabel = currentLight === 'night'
         ? (isSpanish ? 'paleta nocturna' : 'night palette')
         : (isSpanish ? 'paleta diurna' : 'daytime palette');
+      const assetVersion = currentPlatform === 'pcw' ? '?v=20260920-pcw-atlas1' : '';
       $$('[data-graphics-kind]', explorer).forEach(button => {
         const kind = button.dataset.graphicsKind;
         const blockId = button.dataset.graphicsBlock;
         const assetPlatform = kind === 'room' && currentPlatform === 'pc' ? 'cga' : currentPlatform;
         const source = blockId
-          ? `../assets/programming/graphics/${currentPlatform}/${currentLight}/blocks/block-${blockId}.png`
+          ? `../assets/programming/graphics/${currentPlatform}/${currentLight}/blocks/block-${blockId}.png${assetVersion}`
           : (kind === 'room'
             ? `../assets/maps/abbey-rooms/${assetPlatform}-${currentLight}/room-17.png`
-            : `../assets/programming/graphics/${currentPlatform}/${currentLight}/${kind.slice(0, -1)}-atlas.png`);
+            : `../assets/programming/graphics/${currentPlatform}/${currentLight}/${kind.slice(0, -1)}-atlas.png${assetVersion}`);
         const subject = blockId ? `${subjectLabels.block} ${blockId.toUpperCase()}` : subjectLabels[kind];
         const description = `${subject} · ${platformLabels[currentPlatform]} · ${paletteLabel}`;
         const image = $('img', button);
