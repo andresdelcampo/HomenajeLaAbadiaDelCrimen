@@ -93,6 +93,7 @@ a:hover { color: var(--blue); }
   height: 4px;
   background: rgba(255,255,255,.1);
   z-index: 150;
+  transition: opacity .2s ease;
 }
 .progress-rail span {
   display: block;
@@ -116,7 +117,11 @@ a:hover { color: var(--blue); }
   background: rgba(16, 21, 27, .94);
   border-bottom: 1px solid rgba(212,154,46,.5);
   backdrop-filter: blur(12px);
+  transition: transform .22s ease;
+  will-change: transform;
 }
+body.chrome-bars-hidden .site-nav { transform: translateY(-100%); }
+body.chrome-bars-hidden .progress-rail { opacity: 0; }
 .nav-mark {
   position: relative;
   display: inline-flex;

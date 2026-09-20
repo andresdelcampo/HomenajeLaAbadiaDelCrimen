@@ -189,14 +189,50 @@
 
   const navToggle = $('.nav-toggle');
   const navLinks = $('.nav-links');
+  const siteNav = $('.site-nav');
+  if (siteNav) {
+    let lastScrollY = Math.max(0, window.scrollY);
+    let scrollFramePending = false;
+
+    const setChromeBarsHidden = hidden => {
+      document.body.classList.toggle('chrome-bars-hidden', hidden);
+    };
+
+    const updateChromeBars = () => {
+      const currentScrollY = Math.max(0, window.scrollY);
+      const delta = currentScrollY - lastScrollY;
+      const menuOpen = navToggle && navToggle.getAttribute('aria-expanded') === 'true';
+      const activeElement = document.activeElement;
+      const navHasKeyboardFocus = siteNav.contains(activeElement)
+        && typeof activeElement.matches === 'function'
+        && activeElement.matches(':focus-visible');
+
+      if (currentScrollY <= 8 || menuOpen || navHasKeyboardFocus) {
+        setChromeBarsHidden(false);
+      } else if (Math.abs(delta) >= 4) {
+        setChromeBarsHidden(delta > 0);
+      }
+
+      lastScrollY = currentScrollY;
+      scrollFramePending = false;
+    };
+
+    addEventListener('scroll', () => {
+      if (scrollFramePending) return;
+      scrollFramePending = true;
+      requestAnimationFrame(updateChromeBars);
+    }, { passive: true });
+  }
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       const open = navLinks.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('chrome-bars-hidden', false);
     });
     $$('a', navLinks).forEach(link => link.addEventListener('click', () => {
       navLinks.classList.remove('is-open');
       navToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.toggle('chrome-bars-hidden', false);
     }));
   }
 
