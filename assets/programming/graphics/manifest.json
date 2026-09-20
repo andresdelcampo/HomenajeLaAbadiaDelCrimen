@@ -1,5 +1,5 @@
 {
-  "platforms": ["pc", "cpc", "vga", "spectrum", "msx", "pcw"],
+  "platforms": ["pc", "cpc", "vga", "spectrum", "msx", "msx-disk", "pcw"],
   "variants": ["day", "night"],
   "tile_count_per_set": 256,
   "tile_native_size": [16, 8],
@@ -14,6 +14,7 @@
     "vga": "DOS scene programs with VGA remake artwork resource and tile remap",
     "spectrum": "ZX Spectrum native",
     "msx": "MSX native",
+    "msx-disk": "MSX disk native; disk room stream and live day/night colour states",
     "pcw": "Habisoft 1.2 PCW native; identical day/night monochrome graphics"
   }
 }

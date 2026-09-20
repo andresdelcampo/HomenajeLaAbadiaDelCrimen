@@ -171,7 +171,7 @@ def main() -> None:
             "msx": {
                 "label": {"es": "MSX · paleta adaptada", "en": "MSX · adapted palette"},
                 "inherits": "cpc",
-                "palette": ["#dcdc9c", "#000000", "#000000", "#000000"],
+                "palette": ["#CBC25F", "#000000", "#000000", "#000000"],
             },
             "pcw": {
                 "label": {"es": "Amstrad PCW · Habisoft 1.2", "en": "Amstrad PCW · Habisoft 1.2"},

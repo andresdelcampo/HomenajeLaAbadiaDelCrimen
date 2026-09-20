@@ -369,6 +369,7 @@
     let currentAtlasPlatform = document.documentElement.dataset.platform;
     let currentAtlasLight = 'day';
     let currentCpcEdition = 'full';
+    let currentMsxEdition = 'tape';
     const updateAtlasEdition = () => {
       const platform = currentAtlasPlatform;
       const light = currentAtlasLight;
@@ -376,10 +377,13 @@
       const useCpc = platform === 'cpc';
       const useSpectrum = platform === 'spectrum';
       const useMsx = platform === 'msx';
+      const useMsxDisk = useMsx && currentMsxEdition === 'disk';
       const usePcw = platform === 'pcw';
       const mapPlatform = useVga ? 'vga' : (useCpc ? 'cpc' : (useSpectrum ? 'spectrum' : (useMsx ? 'msx' : (usePcw ? 'pcw' : 'cga'))));
       const useReducedCpc = useCpc && currentCpcEdition === 'reduced';
-      const assetSet = useReducedCpc ? `cpc-reduced-${light}` : `${mapPlatform}-${light}`;
+      const assetSet = useReducedCpc
+        ? `cpc-reduced-${light}`
+        : (useMsxDisk ? `msx-disk-${light}` : `${mapPlatform}-${light}`);
       const lightLabel = light === 'night'
         ? (isSpanish ? 'paleta nocturna' : 'night palette')
         : (isSpanish ? 'paleta diurna' : 'daytime palette');
@@ -392,14 +396,18 @@
           : (useSpectrum
             ? (isSpanish ? 'ZX Spectrum · 2 colores' : 'ZX Spectrum · 2 colours')
             : (useMsx
-              ? (isSpanish ? 'MSX · 2 colores' : 'MSX · 2 colours')
+              ? (useMsxDisk
+                ? (isSpanish ? 'MSX · disco · 2 colores' : 'MSX · disk · 2 colours')
+                : (isSpanish ? 'MSX · cinta · 2 colores' : 'MSX · tape · 2 colours'))
               : (usePcw ? (isSpanish ? 'Amstrad PCW 8256 · monocromo' : 'Amstrad PCW 8256 · monochrome') : 'PC CGA'))));
       const edition = `${platformLabel} · ${lightLabel}`;
       atlas.dataset.mapPlatform = mapPlatform;
       atlas.dataset.mapPalette = light;
-      atlas.dataset.mapEdition = useReducedCpc ? 'reduced' : 'full';
+      atlas.dataset.mapEdition = useReducedCpc ? 'reduced' : (useMsxDisk ? 'disk' : 'full');
       const cpcEditionControl = $('[data-cpc-edition-control]', atlas);
       if (cpcEditionControl) cpcEditionControl.hidden = !useCpc;
+      const msxEditionControl = $('[data-msx-edition-control]', atlas);
+      if (msxEditionControl) msxEditionControl.hidden = !useMsx;
       $$('.abbey-room', atlas).forEach(button => {
         button.hidden = useReducedCpc && reducedCpcEmptyRooms.has(button.dataset.roomId);
         const assetVersion = useReducedCpc ? '?v=20260914-cpc64depth4' : '';
@@ -429,6 +437,16 @@
     cpcEditionButtons.forEach(button => button.addEventListener('click', () => {
       currentCpcEdition = button.dataset.abbeyCpcEdition;
       cpcEditionButtons.forEach(item => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      updateAtlasEdition();
+    }));
+    const msxEditionButtons = $$('[data-abbey-msx-edition]', atlas);
+    msxEditionButtons.forEach(button => button.addEventListener('click', () => {
+      currentMsxEdition = button.dataset.abbeyMsxEdition;
+      msxEditionButtons.forEach(item => {
         const active = item === button;
         item.classList.toggle('is-active', active);
         item.setAttribute('aria-pressed', String(active));

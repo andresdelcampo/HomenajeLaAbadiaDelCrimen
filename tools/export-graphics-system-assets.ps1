@@ -12,6 +12,8 @@ $sets = @(
   @{ Platform='spectrum'; Variant='night'; Root='analysis\spectrum-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' },
   @{ Platform='msx'; Variant='day'; Root='analysis\msx-map-graphics\assets'; Tile='tile-atlas-day.png'; Atlas='block-atlas-day.png'; Blocks='blocks-day' },
   @{ Platform='msx'; Variant='night'; Root='analysis\msx-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' },
+  @{ Platform='msx-disk'; Variant='day'; Root='analysis\msx-disk-map-graphics\assets'; Tile='tile-atlas-day.png'; Atlas='block-atlas-day.png'; Blocks='blocks-day' },
+  @{ Platform='msx-disk'; Variant='night'; Root='analysis\msx-disk-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' },
   @{ Platform='pcw'; Variant='day'; Root='analysis\pcw-map-graphics\assets'; Tile='tile-atlas-day.png'; Atlas='block-atlas-day.png'; Blocks='blocks-day' },
   @{ Platform='pcw'; Variant='night'; Root='analysis\pcw-map-graphics\assets'; Tile='tile-atlas-night.png'; Atlas='block-atlas-night.png'; Blocks='blocks-night' }
 )
@@ -34,5 +36,17 @@ foreach ($set in $sets) {
     }
   }
 }
+
+$diskRoomSource = Join-Path $workspace 'analysis\msx-disk-map-graphics\assets'
+$diskRoomOutput = Join-Path $workspace 'Homenaje\assets\maps\abbey-rooms'
+foreach ($variant in @('day', 'night')) {
+  $destination = Join-Path $diskRoomOutput "msx-disk-$variant"
+  New-Item -ItemType Directory -Force -Path $destination | Out-Null
+  Copy-Item -Path (Join-Path $diskRoomSource "rooms-$variant\*.png") -Destination $destination
+}
+
+# Retain the original single-room URL used by the comparison plate.
+Copy-Item -LiteralPath (Join-Path $diskRoomSource 'rooms-day\room-17.png') `
+  -Destination (Join-Path $diskRoomOutput 'msx-disk\room-17.png')
 
 Write-Host "Exported $($sets.Count) graphics-system sets to $output"

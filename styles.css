@@ -1300,7 +1300,7 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .abbey-map-heading p { margin: 0; color: rgba(255,255,255,.63); }
 .abbey-map-controls { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .8rem 1.2rem; margin-top: 2.2rem; }
 .abbey-map-controls .abbey-map-variantbar { margin-top: 0; }
-.abbey-map-cpc-edition[hidden] { display: none; }
+.abbey-map-cpc-edition[hidden], .abbey-map-msx-edition[hidden] { display: none; }
 .abbey-map-variantbar { display: flex; align-items: center; justify-content: flex-end; gap: .8rem; margin-top: 2.2rem; color: rgba(255,255,255,.45); font: 700 .57rem/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
 .abbey-light-tabs, .abbey-edition-tabs { display: flex; padding: 3px; border: 1px solid rgba(255,255,255,.16); background: rgba(0,0,0,.32); }
 .abbey-light-tabs button, .abbey-edition-tabs button { min-width: 4.5rem; padding: .55rem .75rem; border: 0; color: rgba(255,255,255,.58); background: transparent; cursor: pointer; font: 700 .62rem/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
@@ -1339,6 +1339,8 @@ html[data-platform="vga"] .clock-status-current img { height: 62%; filter: none;
 .abbey-screen-map[data-map-platform="spectrum"][data-map-palette="night"] .abbey-map-legend i { border-color: #cd00cd; background: #000; }
 .abbey-screen-map[data-map-platform="msx"][data-map-palette="day"] .abbey-map-legend i { border-color: #dcdc9c; background: #000; }
 .abbey-screen-map[data-map-platform="msx"][data-map-palette="night"] .abbey-map-legend i { border-color: #dccc5c; background: #5c5cfc; }
+.abbey-screen-map[data-map-platform="msx"][data-map-edition="disk"][data-map-palette="day"] .abbey-map-legend i { border-color: #dcdc9c; background: #5c5cfc; }
+.abbey-screen-map[data-map-platform="msx"][data-map-edition="disk"][data-map-palette="night"] .abbey-map-legend i { border-color: #dcdc9c; background: #000; }
 .abbey-screen-map[data-map-platform="vga"] .abbey-map-legend i { border-color: #f2e5cf; background: #bda998; }
 .abbey-map-legend p { max-width: 640px; margin: 0; text-align: right; }
 .map-evidence {
