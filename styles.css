@@ -1658,7 +1658,7 @@ html[data-platform="pcw"] .object-sprite {
 }
 .waveform::before { content: "AVE MARIA · PC SPEAKER · 1988"; color: var(--gold); font: 700 .64rem/1 var(--mono); letter-spacing: .11em; }
 .waveform::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, rgba(212,154,46,.85), rgba(212,154,46,0)); }
-.audio-story { margin-top: 4rem; align-items: center; }
+.audio-story { margin-top: 0; align-items: center; }
 .audio-story h3, .machine-copy h3 { margin: 0 0 1rem; font: 400 clamp(2.2rem, 4vw, 4rem)/.95 var(--display); }
 .machine-copy { margin-top: 4rem; align-items: center; }
 .machine-copy code { padding: .1em .3em; color: var(--cyan); background: rgba(0,0,0,.32); font-family: var(--mono); }
@@ -2095,6 +2095,7 @@ html[data-platform="pcw"] .object-sprite {
   padding: .65rem;
   background: var(--night);
 }
+.remake-feature .prose .vga-sprite-strip { margin-top: 5.75rem; }
 .vga-sprite-strip > span { align-self: center; color: var(--gold); font: 700 .55rem/1.35 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
 .vga-sprite-strip img { width: 100%; height: 5rem; object-fit: contain; image-rendering: pixelated; }
 .remake-credit { margin: .8rem 0 0; text-align: left; }
@@ -2232,8 +2233,24 @@ html[data-platform="pcw"] .object-sprite {
 .source-group h3 { margin: 0 0 .6rem; color: var(--gold); font: 400 1.65rem/1 var(--display); }
 .source-group ul { margin: 0; padding-left: 1.1rem; }
 .source-group li { margin: .42rem 0; color: rgba(255,255,255,.72); font-size: .86rem; line-height: 1.45; }
+.source-group-note { margin: .9rem 0 0; color: rgba(255,255,255,.62); font: .76rem/1.55 var(--mono); }
 .source-group a { color: var(--cyan); }
 .source-note { margin-top: 3rem; padding: 1.4rem; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.62); font: .76rem/1.55 var(--mono); }
+
+@media (min-width: 761px) {
+  body[data-page="legacy"] .sources-grid {
+    grid-template-areas:
+      "publications archaeology"
+      "code archives"
+      "legacy archives";
+    align-items: start;
+  }
+  body[data-page="legacy"] .source-group:nth-child(1) { grid-area: publications; }
+  body[data-page="legacy"] .source-group:nth-child(2) { grid-area: archaeology; }
+  body[data-page="legacy"] .source-group:nth-child(3) { grid-area: code; }
+  body[data-page="legacy"] .source-group:nth-child(4) { grid-area: archives; }
+  body[data-page="legacy"] .source-group:nth-child(5) { grid-area: legacy; }
+}
 
 .page-pagination {
   display: grid;
@@ -2627,6 +2644,7 @@ html[data-platform="pcw"] .gate-title-art { background-image: url("assets/platfo
   .press-grid { grid-template-columns: 1fr 1fr; }
   .press-card:nth-child(n) { transform: none; }
   .remake-play-note, .remake-feature, .extensum-feature { grid-template-columns: 1fr; }
+  .remake-feature .prose .vga-sprite-strip { margin-top: 1.35rem; }
   .remakes-chapter .chapter-header { grid-template-columns: 1fr; }
   .remakes-chapter .chapter-intro { margin-top: 0; }
   .extensum-visual-stack { padding-right: 1.6rem; padding-bottom: clamp(12rem, 48vw, 17rem); }

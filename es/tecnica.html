@@ -70,7 +70,7 @@
             <div class="system-copy"><h3>La versión original</h3><p>El juego se desarrolló primero para el CPC 6128. Sus cuatro colores sirvieron de base para adaptar después los gráficos a otras máquinas. Es la edición de referencia: mapa completo, abundante detalle arquitectónico y una paleta azul turquesa, naranja, crema y negra.</p><ul><li>128 KB y disquete.</li><li>Planta completa, incluidos pasillos sin función argumental.</li><li>Detalles como cruces en ventanales y ornamento que desaparecerían en 64 KB.</li><li>Música de inicio y efectos mediante el hardware del CPC.</li></ul></div>
           </article>
           <article class="system-panel" data-system="cpc64">
-            <div class="system-score"><div><strong>64</strong><span>KB obligan a reformar el edificio</span></div><img src="../assets/ports/cpc-5.png" alt="Captura de la arquitectura CPC" loading="lazy"></div>
+            <div class="system-score"><div><strong>64</strong><span>KB obligan a reformar el edificio</span></div><img src="../assets/maps/abbey-rooms/cpc-reduced-day/room-30.png" alt="Pantalla nativa de la estancia 30h de la edición CPC 464/664 reducida de 64K, con un muro en lugar del pasillo de la edición completa" loading="lazy"></div>
             <div class="system-copy"><h3>Una abadía recortada</h3><p>Las versiones para CPC 464 en cinta y 664 en disco no podían alojar todo el diseño del 6128. Se eliminaron habitaciones y pasillos que no afectaban directamente a la trama y se simplificaron elementos gráficos.</p><ul><li>El misterio esencial y las rutas necesarias permanecen.</li><li>Menos barroquismo: algunos ventanales pierden las cruces.</li><li>La reducción de memoria obligó a recortar tanto el código como la arquitectura.</li></ul></div>
           </article>
           <article class="system-panel" data-system="spectrum">
@@ -144,7 +144,7 @@
           <span class="chapter-number">XII · La cámara sonora</span>
           <h2><cite>Ave María</cite> y los sonidos de la abadía</h2>
         </div>
-        <p class="chapter-intro">El <cite>Ave María</cite> digitalizado —exclusivo de la versión original para PC— ocupa el lugar principal. La acusación «pirata» y las melodías de apertura y fondo proceden también de esa versión. Las demás pistas son recreaciones en WAV del sonido de Amstrad CPC conservado por Vigasoco; el PCW añade aquí sus dos capturas nativas de manuscrito.</p>
+        <p class="chapter-intro">El <cite>Ave María</cite> digitalizado —exclusivo de la versión original para PC— ocupa el lugar principal. La acusación «pirata» y las melodías de apertura y fondo proceden también de esa versión. Las demás pistas son recreaciones en WAV del sonido de Amstrad CPC conservado por Vigasoco.</p>
       </div>
       <div class="waveform" aria-hidden="true"></div>
       <div class="audio-console reveal">
@@ -158,6 +158,10 @@
             <button class="audio-button pc-digital" type="button"><span class="audio-icon">!</span><b>«Pirata, pirata»</b><small>PC · secuencia original ×10 · tono descendente</small><audio preload="none" src="../assets/audio/pirata-pc-original.wav"></audio></button>
           </div>
         </section>
+        <div class="creator-grid audio-story reveal">
+          <div class="prose"><h3>El truco del altavoz</h3><p>El altavoz interno del PC estaba pensado para producir pitidos sencillos. La versión DOS lo lleva mucho más lejos: manipula el temporizador programable a gran velocidad y convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos digitales y dos reconstrucciones en ensamblador: una para el <cite>Ave María</cite> y otra para el aviso antipiratería. Las notas de ingeniería permiten localizar ambos bloques dentro del ejecutable original y reconstruir también las distintas melodías de apertura y fondo.</p></div>
+          <blockquote class="pullquote">La protección anticopia tenía un castigo muy concreto: sustituía el <cite>Ave María</cite> por una voz que decía «pirata».</blockquote>
+        </div>
         <section class="audio-platform audio-platform--cpc" aria-labelledby="audio-cpc-title-es">
           <div class="audio-platform-heading"><div><span>Amstrad CPC · Vigasoco</span><h3 id="audio-cpc-title-es">El sonido de la versión original</h3></div><p>Recreaciones WAV del PSG del CPC, conservadas por el proyecto Vigasoco.</p></div>
           <div class="audio-grid">
@@ -168,10 +172,6 @@
             <button class="audio-button" type="button"><span class="audio-icon">Ω</span><b>Final</b><small>CPC · recreación Vigasoco · tema del desenlace</small><audio preload="none" src="../assets/audio/final.wav"></audio></button>
           </div>
         </section>
-      </div>
-      <div class="creator-grid audio-story reveal">
-        <div class="prose"><h3>El truco del altavoz</h3><p>El altavoz interno del PC estaba pensado para producir pitidos sencillos. La versión DOS lo lleva mucho más lejos: manipula el temporizador programable a gran velocidad y convierte una secuencia de bits en una onda rudimentaria. El resultado es tosco, pero en 1988 parecía que la abadía había aprendido a cantar.</p><p>El archivo local conserva los datos digitales y dos reconstrucciones en ensamblador: una para el <cite>Ave María</cite> y otra para el aviso antipiratería. Las notas de ingeniería permiten localizar ambos bloques dentro del ejecutable original y reconstruir también las distintas melodías de apertura y fondo.</p></div>
-        <blockquote class="pullquote">La protección anticopia tenía un castigo muy concreto: sustituía el <cite>Ave María</cite> por una voz que decía «pirata».</blockquote>
       </div>
     </section>
 

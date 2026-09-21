@@ -56,6 +56,11 @@ CHARACTERS = {
     "bernardo": (68508, 61108),
 }
 
+# Adso's standing frame is two native rows shorter than the other portrait
+# frames. Reading the shared 34-row slot would include the next character's
+# head at its lower edge.
+CHARACTER_HEIGHTS = {"adso": 32}
+
 GUILLERMO_CHURCH_FRAME = 57240
 ADSO_CHURCH_FRAME = 59668
 
@@ -168,9 +173,9 @@ def source_sprite(data: bytes, offset: int, width: int, height: int) -> Image.Im
     return image
 
 
-def character_sprite(data: bytes, head_or_frame: int, body: int | None) -> Image.Image:
+def character_sprite(data: bytes, head_or_frame: int, body: int | None, height: int) -> Image.Image:
     if body is None:
-        return source_sprite(data, head_or_frame, 20, 34)
+        return source_sprite(data, head_or_frame, 20, height)
     result = Image.new("L", (20, 34), 255)
     result.paste(source_sprite(data, head_or_frame, 20, 10), (0, 0))
     result.paste(source_sprite(data, body, 20, 24), (0, 10))
@@ -274,7 +279,7 @@ def build_sprites() -> None:
     }
 
     for name, (head_or_frame, body) in CHARACTERS.items():
-        source = character_sprite(data, head_or_frame, body)
+        source = character_sprite(data, head_or_frame, body, CHARACTER_HEIGHTS.get(name, 34))
         for target, colours in (
             (spectrum_target, spectrum_character_colours),
             (msx_target, msx_character_colours),

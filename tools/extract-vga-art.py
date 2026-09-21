@@ -43,6 +43,11 @@ CHARACTERS = {
     "bernardo": (68508, 61108),
 }
 
+# Adso's standing frame is two native rows shorter than the other portrait
+# frames. Reading the shared 34-row slot would include the next character's
+# head at its lower edge.
+CHARACTER_HEIGHTS = {"adso": 32}
+
 # Guillermo's second standing axis, used when he faces away from the camera
 # toward the altar. The catalogue portrait above uses the nearer-facing axis.
 GUILLERMO_CHURCH_FRAME = 57240
@@ -336,8 +341,9 @@ def main() -> None:
         platform_output = OUTPUT / "platforms" / platform
 
         for name, (head_or_frame, body) in CHARACTERS.items():
+            character_height = CHARACTER_HEIGHTS.get(name, 34)
             if body is None:
-                sprite = indexed_image(data, colours, head_or_frame, 20, 34)
+                sprite = indexed_image(data, colours, head_or_frame, 20, character_height)
             else:
                 head = indexed_image(data, colours, head_or_frame, 20, 10)
                 habit = indexed_image(data, colours, body, 20, 24)

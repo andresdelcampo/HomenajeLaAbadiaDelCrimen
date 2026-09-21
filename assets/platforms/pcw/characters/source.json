@@ -22,10 +22,10 @@
       "physical_ram_addresses": [
         "0xa78a"
       ],
-      "packed_bytes": 170,
+      "packed_bytes": 160,
       "native_dimensions": [
         40,
-        34
+        32
       ]
     },
     "abad": {

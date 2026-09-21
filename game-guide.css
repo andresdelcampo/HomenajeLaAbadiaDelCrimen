@@ -27,9 +27,27 @@
 .reference-body > p { max-width: 85ch; }
 .reference-table { width: 100%; border-collapse: collapse; font-size: .85rem; line-height: 1.5; }
 .reference-table caption { text-align: left; padding-bottom: 1rem; font-weight: 700; }
-.reference-table th, .reference-table td { text-align: left; vertical-align: top; border-bottom: 1px solid #c6bca8; padding: .9rem .65rem; }
+.reference-table th, .reference-table td { text-align: left; vertical-align: middle; border-bottom: 1px solid #c6bca8; padding: .9rem .65rem; }
 .reference-table thead th { font: 700 .68rem/1.4 var(--mono); text-transform: uppercase; color: #74372b; }
+.reference-table thead th:nth-child(-n+2) { text-align: center; }
 .reference-table tbody th { min-width: 6rem; }
+.reference-identity { display: inline-flex; align-items: center; flex-direction: column; gap: .35rem; min-width: 7.5rem; text-align: center; }
+.reference-icon { flex: 0 0 auto; object-fit: contain; image-rendering: pixelated; }
+.reference-item-icon {
+  width: 4.5rem;
+  height: 5.25rem;
+  margin-bottom: -.95rem;
+  object-fit: cover;
+  object-position: center;
+}
+/* PCW's native tray crop fills the raster vertically. Scale it uniformly, but
+   widen its layout box so the visible horizontal size remains consistent. */
+html[data-platform="pcw"] .reference-item-icon {
+  width: 7.03rem;
+  transform: scale(.64);
+  transform-origin: center;
+}
+.reference-character-icon { width: 4.4rem; height: 5.5rem; }
 .reference-table tbody tr:last-child > * { border-bottom: 0; }
 .score-formula { padding: 1rem 1.25rem; margin: 1.25rem 0; border-left: 3px solid #943b29; background: #e8dfca; font: 700 clamp(.95rem, 2vw, 1.2rem)/1.6 var(--mono); }
 .score-bonuses { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; padding: 0; list-style: none; counter-reset: bonus; }
@@ -42,6 +60,7 @@
   .reference-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
   .reference-table tbody tr { display: block; padding: 1rem 0; border-top: 2px solid #b5ab95; }
   .reference-table tbody th { display: block; padding: .25rem 0 .75rem; border: 0; font-size: 1.2rem; }
+  .reference-identity { min-width: 0; }
   .reference-table tbody td { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .75rem; padding: .6rem 0; border: 0; }
   .reference-table td::before { content: attr(data-label); color: #74372b; font-weight: 700; }
 }
