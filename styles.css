@@ -2177,10 +2177,10 @@ html[data-platform="pcw"] .object-sprite {
 .preservation-lineage-header h3 { margin: .8rem 0 1.25rem; font: 400 clamp(2.2rem, 4vw, 4.2rem)/.92 var(--display); }
 .preservation-lineage-header p { margin: 0; color: var(--ink-soft); line-height: 1.7; }
 .preservation-steps { position: relative; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
-.preservation-steps::before { content: ""; position: absolute; top: .65rem; bottom: .65rem; left: 3.7rem; width: 1px; background: rgba(26,23,19,.32); }
-.preservation-steps li { position: relative; display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); gap: 1.3rem; padding: 0 0 2rem; }
+.preservation-steps::before { content: ""; position: absolute; top: .65rem; bottom: .65rem; left: 5.4rem; width: 1px; background: rgba(26,23,19,.32); }
+.preservation-steps li { position: relative; display: grid; grid-template-columns: 6.4rem minmax(0, 1fr); gap: 1.3rem; padding: 0 0 2rem; }
 .preservation-steps li:last-child { padding-bottom: 0; }
-.preservation-steps li::before { content: ""; position: absolute; top: .35rem; left: 3.38rem; width: .7rem; aspect-ratio: 1; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px var(--paper-light); }
+.preservation-steps li::before { content: ""; position: absolute; top: .35rem; left: 5.08rem; width: .7rem; aspect-ratio: 1; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 5px var(--paper-light); }
 .preservation-steps time { padding-top: .18rem; color: var(--red); font: 700 .72rem/1 var(--mono); }
 .preservation-steps h4 { margin: 0 0 .45rem; font: 700 .82rem/1.35 var(--mono); letter-spacing: .015em; }
 .preservation-steps p { margin: 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.6; }
